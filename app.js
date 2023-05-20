@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { config } from "./src/config/index.js";
 
+import { router as userRouter } from "./src/router/user.route.js";
+
 // configuring environment variables
 dotenv.config();
 
@@ -16,11 +18,17 @@ mongoose
     console.log(err.message);
   });
 
-  // Configuring the port
+// Configuring the port
 const port = config.port || 5000;
 
 // In-built Middleware to gain access to the body
-app.use(express.json()); 
+app.use(express.json());
+
+app.use('/api/user', userRouter)
+
+app.get('/api', (req, res) => {
+  res.send('Welcome to NoDebt App')
+})
 
 // Listening for the express server
 app.listen(port, () => console.log(`Listening on port ${port}`)); // logging "Listening on port 4000" to the console.

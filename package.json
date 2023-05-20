@@ -10,7 +10,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Loan-App-Omega/Server.git"
+    "url": "git+https://github.com/NoDebt-App-Backend/Loan_Prediction_App.git"
   },
   "keywords": [
     "Loan",
@@ -22,9 +22,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Loan-App-Omega/Server/issues"
+    "url": "https://github.com/NoDebt-App-Backend/Loan_Prediction_App/issues"
   },
-  "homepage": "https://github.com/Loan-App-Omega/Server#readme",
+  "homepage": "https://github.com/NoDebt-App-Backend/Loan_Prediction_App#readme",
   "dependencies": {
     "express": "^4.18.2",
     "joi": "^17.9.2",
