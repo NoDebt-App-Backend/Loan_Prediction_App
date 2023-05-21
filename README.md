@@ -1,6 +1,6 @@
 # Loan Prediction App (Backend)
 
-Welcome to the Loan App Omega codebase! This repository contains the source code for the Loan Prediction Application.
+Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
 The server itself is implemented in node using express.
 Follow the instructions below to set up the codebase on your local machine.
 
@@ -16,12 +16,12 @@ Before setting up the codebase, make sure you have the following prerequisites i
 
 1. Clone the repository using Git:
    ```bash
-   git clone https://github.com/Loan-App-Omega/Server.git
+   git clone https://github.com/NoDebt-App-Backend/Loan_Prediction_App.git
    ```
 2. Change into the project directory:
 
 ```bash
-   cd Loan-App-Omega/Server
+   cd Loan_Prediction_App
 ```
 
 3. Install the required dependencies:
@@ -38,7 +38,7 @@ The codebase requires the following environment configurations:
 2. Open the `.env` file and add the following configurations:
 
 ```bash
-   DATABASE_URL=mongodb://localhost/app-core
+   DATABASE_URL=mongodb://localhost:27017/{your-database-name}
    API_KEY=your-api-key
    PORT=your-port-number
 ```
@@ -64,7 +64,7 @@ NoDebt-App-Backend/Loan_Prediction_App/
 
 ## Usage
 
-To start the Loan-app-omega application, run the following command:
+To start the Loan_Prediction_App application, run the following command:
 
 npm start
 
@@ -85,7 +85,7 @@ This codebase is released under the GNU General Public License(GPL). Please see 
 
 ## Credits
 
-The Loan App Omega codebase is being developed by the following individuals:
+The Loan Prediction App codebase is being developed by the following individuals:
 
 - [Stephanie Okpomfon](https://github.com/StephanieMfon)
 - [Perpetual Meninwa](https://github.com/Perpy-del)
