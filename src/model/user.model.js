@@ -1,32 +1,29 @@
 import { Schema, model } from "mongoose";
 
 // Setting up our user model
-const UserSchema = new Schema({
+const UserSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        // lowercase: true,
-        min: 3,
-        max: 50,
+      type: String,
+      required: true,
+      min: 3,
+      max: 255,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
-        immutable: true,
-        lowercase: true,
-        validators: {
-            match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Please enter a valid email address"]
-        }
+      type: String,
+      required: true,
+      unique: true,
+      immutable: true,
     },
     password: {
-        type: String,
-        required: true,
-        validators: {
-            match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Please enter a valid email address"]
-        }
-    }
-},
-{timestamps: true});
+      type: String,
+      required: true,
+    },
+    confirmPassword: {
+      type: String,
+      required: true,
+    },
+  }, {timestamps: true}
+);
 
-export default model('User', UserSchema);
+export default model("User", UserSchema);

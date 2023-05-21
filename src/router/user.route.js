@@ -1,8 +1,11 @@
-import express from 'express';
-import UserController from '../controllers/user.controller.js';
+// import express from 'express';
+// import UserController from '../controllers/user.controller.js';
+import { tryCatchHandler } from '../utils/tryCatchHandler.js';
 
-const router = new express.Router();
+import express from "express";
+const router = express.Router();
+import UserController from "../controllers/user.controller.js";
 
-router.post("/create", UserController.createUser)
+router.post("/", tryCatchHandler(UserController.createUser));
 
-export { router };
+export default router;
