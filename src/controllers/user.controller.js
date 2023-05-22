@@ -13,8 +13,8 @@ export default class UserController {
     const validateEmail = await User.find({ email: req.body.email });
     if (validateEmail.length > 0)
       throw new BadUserRequestError("An account with this email already exists");
-    // const saltRounds = config.bcrypt_saltRound;
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    const saltRounds = config.bcrypt_saltRound;
+    const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
 
     // Create new user account
     const user = new User({
