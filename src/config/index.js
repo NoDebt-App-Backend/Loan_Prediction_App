@@ -1,28 +1,22 @@
-const express = require("express");
-const mongoose = require("moongose");
-const dotenv = require("dotenv");
-const userRoutes = require('../router/user.route');
-const { authMiddlware } = require('../middlewares/auth');
+
+import dotenv from "dotenv";
 dotenv.config();
-const port = process.env.PORT||4000;
-const app = express();
-app.use(express.json());
+import { development } from "./development.js";
+// import { production } from "./production.js";
 
-// Routes
-app.use('/user', userRoutes);
+const environment = process.env.NODE_ENV;
 
-// Middleware: Authentication
-app.use(authMiddlware);
+let config;
 
-mongoose.connect('mongodb://127.0.0.1:27017/movie-store').then(function(){
-    console.log("database already connected")
-    app.listen (
-        port, ()=>{
-             console.log(`listening on port ${port}`)
-         }
-     )
+if (!environment) throw new Error("No environment setup");
 
-}).catch(error=>{
-    console.log("failed to connect", error)
-})
-    
+// Logging to the console to indicate the environment
+console.log(`server setup to ${environment}`);
+
+if (environment.trim() === "development") {
+  config = {...development};
+} else {
+    config = {...production};
+}
+
+export { config };

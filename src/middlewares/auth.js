@@ -1,26 +1,23 @@
-const jwt = require("jsonwebtoken");
-const User = require('../model/user.model');
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const authMiddleware = async (req, res, next)=>{
-    try{
-        const token = req.headers.authourization;
-        if (!token){
-            return res.status(401).json({error:"Provide a token"})
+dotenv.config();
+    function authMiddleWare(req, res, next){
+        const tokenArray = req.headers?.authorization?.split(" ");
+        const bearer = tokenArray?.[0];
+        const tokenValue = tokenArray?.[1];
+        console.log(tokenArray);
+    try {
+        if(!tokenValue){
+            return res.json("You must provide an authorization token.")
         }
-        const decoded = jwt.verify(token, "secet-key");
-        const user = await User.findById({userid:decoded.user._id});
-        if (!user){
-            return res.status(401).json({error: "invalid token"})
-        }
-        req.user = user;
-        next();
+      const payload = jwt.verify(tokenValue, process.env.JWT_KEY)
+      req.user = payload
+      next()
+    }catch (err){
+      return res.json("Access denied, invalid token.")
     }
-    catch(error){
-        res.status(500).json({error:"failed to authenticate"})
-
-    }
-};
-
-module.exports = authMiddleware;
+}
 
 
+export default authMiddleWare;
