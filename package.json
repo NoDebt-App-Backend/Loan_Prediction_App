@@ -1,8 +1,8 @@
 {
   "name": "loan_prediction_app",
   "version": "1.0.0",
-  "description": "This is a loan prediction app",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "startDev": "set NODE_ENV=development && nodemon app.js",
     "startProd": "set NODE_ENV=production && node app.js"
