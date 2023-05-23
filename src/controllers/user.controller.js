@@ -35,7 +35,10 @@ export default class UserController {
       message: "Account created successfully",
       status: "Success",
       data: {
-        user: user,
+        user: {
+          name: req.body.name,
+          email: req.body.email
+        },
       },
     });
   }

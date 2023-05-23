@@ -6,12 +6,20 @@ class BadUserRequestError extends Error {
     }
 }
 
-// class NotFoundError extends Error {
-//     constructor(message) {
-//         super(message);
-//         this.status = 404;
-//         this.errorType = "NotFoundError";
-//     }
-// }
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.status = 404;
+        this.errorType = "NotFoundError";
+    }
+}
 
-export { BadUserRequestError };
+class UnAuthorizedError extends Error {
+    constructor(message){
+      super(message)
+      this.status = 401;
+      this.errorType = "UnAuthorizedError";
+    }
+}
+
+export { BadUserRequestError, NotFoundError, UnAuthorizedError };

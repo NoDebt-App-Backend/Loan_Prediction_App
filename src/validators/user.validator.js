@@ -20,11 +20,13 @@ const createUserValidator = Joi.object({
         "Password must be more than 8 characters long with at least one number, one alphanumeric character, one uppercase letter",
     }),
   confirmPassword: Joi.any()
-    .valid(Joi.ref("password"))
+    .equal(Joi.ref("password"))
     .required()
-    .messages({
-        "string.pattern.base": "Password must match"
-    })
+    // .messages({
+    //     "string.pattern.base": "Password must match"
+    // })
+    .label("Passwords")
+    .messages({ "any.only": "{{#label}} do not match. Please check again" })
 }).strict();
 
 const loginSchema = Joi.object({
