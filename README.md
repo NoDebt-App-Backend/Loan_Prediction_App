@@ -4,9 +4,7 @@ Welcome to the Loan Prediction App codebase! This repository contains the source
 The server itself is implemented in node using express.
 Follow the instructions below to set up the codebase on your local machine.
 
-# API Documentation
-
-Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation)
+### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation)
 
 ## Prerequisites
 
