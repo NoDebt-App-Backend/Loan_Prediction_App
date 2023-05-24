@@ -6,6 +6,30 @@ Follow the instructions below to set up the codebase on your local machine.
 
 ### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation)
 
+# Table of Contents
+
+- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#prerequisites)
+
+- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#installation)
+
+- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#configuration)
+
+- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#directory-structure)
+
+- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#usage)
+
+- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation)
+
+  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#users-routes)
+
+- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#troubleshooting)
+
+### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status)
+
+### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license)
+
+### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits)
+
 ## Prerequisites
 
 Before setting up the codebase, make sure you have the following prerequisites installed:
@@ -58,6 +82,7 @@ NoDebt-App-Backend/Loan_Prediction_App/
     ├───middlewares
     ├───model
     ├───router
+    ├───utils
     └───validators
 ```
 
