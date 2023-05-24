@@ -34,17 +34,25 @@ export default class UserController {
     // save to mongoose database
     await user.save();
 
+    // This is to exclude the password property returning in the response object
+    const { _id, createdAt, updatedAt } = user;
+
     // Return a response to the client
     res.status(200).json({
       message: "Account created successfully",
       status: "Success",
       data: {
-        user: user,
+        name: req.body.name,
+        email: req.body.email,
+        id: _id,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
       },
     });
   }
 
   static async Login(req, res) {
+    // Catching all the errors and handling them as they are returned in the response body
     const { value, error } = loginUserValidator.validate(req.body);
     if (error) throw error;
 
@@ -63,18 +71,32 @@ export default class UserController {
       user.password
     );
     if (!PasswordMatch)
-      throw new BadUserRequestError("Email or Password is not correct");
+      throw new BadUserRequestError(
+        "Please provide a valid email address and password before you can login."
+      );
+
+    // This is to exclude the password property returning in the response object
+    const { _id, createdAt, updatedAt } = user;
+
+    // Returning a response to the client
     res.status(200).json({
       message: "User found successfully",
       status: "Success",
       data: {
-        user,
+        name: req.body.name,
+        email: req.body.email,
+        id: _id,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
         access_token: newToken(user),
       },
     });
   }
   static async protectedRoute(req, res) {
     // Route logic for authenticated users only
-    res.status(400).json("Protected route accessed successfully");
+    res.status(200).json({
+      message: "Protected route accessed successfully",
+      status: "Success",
+    });
   }
 }

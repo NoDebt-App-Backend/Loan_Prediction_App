@@ -1,4 +1,4 @@
-import jwt, { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { config } from "../config/index.js";
 
 export function newToken(user) {
@@ -7,8 +7,4 @@ export function newToken(user) {
     expiresIn: 60 * 60 * 24,
   });
   return token;
-}
-
-export function verifyToken(token) {
-    return jwt, verify(token, config.jwt_access)
 }
