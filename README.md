@@ -64,11 +64,15 @@ NoDebt-App-Backend/Loan_Prediction_App/
 
 ## Usage
 
-To start the Loan_Prediction_App application, run the following command:
+To start the Loan_Prediction_App application on your local environment, run the following command:
 
 npm start
 
 Visit `http://localhost:PORT` in your web browser to access the application.
+
+## API Documentation
+
+
 
 ## Troubleshooting
 

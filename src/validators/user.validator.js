@@ -27,8 +27,14 @@ const createUserValidator = Joi.object({
 }).strict();
 
 const loginUserValidator = Joi.object({
-  email: Joi.string().required(),
-  password: Joi.string().required()
+  email: Joi.string().required().messages({
+    "string.pattern.base":
+      "Not a valid email address or password",
+  }),
+  password: Joi.string().required().messages({
+    "string.pattern.base":
+      "Not a valid email address or password",
+  })
 });
 
 

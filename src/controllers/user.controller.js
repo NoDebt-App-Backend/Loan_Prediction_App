@@ -45,47 +45,36 @@ export default class UserController {
   }
 
   static async Login(req, res) {
-    // const { email, password } = req.body;
-    try {
-      const { error } = loginUserValidator.validate(req.body);
-      if (error) 
-      {
-        return res.status(401).json({
-          error: error.details[0].message,
-        });
-      }
-      if (!req.body?.email && !req.body?.password)
-        throw new BadUserRequestError(
-          "Please provide an email before you can login."
-        );
+    const { value, error } = loginUserValidator.validate(req.body);
+    if (error) throw error;
 
-      const user = await User.findOne({ email: req.body.email });
-      if (!user)
-        throw new BadUserRequestError(
-          "Please provide a valid email address before you can login."
-        );
-
-      const PasswordMatch = await bcrypt.compare(
-        req.body.password,
-        user.password
+    const user = await User.findOne({ email: req.body.email });
+    if (!req.body?.email && !req.body?.password)
+      throw new BadUserRequestError(
+        "Please input your valid email address before you log in."
       );
-      if (!PasswordMatch)
-        throw new BadUserRequestError("Password is not correct");
-      res.status(200).json({
-        message: "User found successfully",
-        status: "Success",
-        data: {
-          user,
-          access_token: newToken(user),
-        },
-      });
-    } catch (err) {
-      console.log(err);
-      return res.json(err.message);
-    }
+    if (!user)
+      throw new BadUserRequestError(
+        "Please provide a valid email address and password before you can login."
+      );
+
+    const PasswordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!PasswordMatch)
+      throw new BadUserRequestError("Email or Password is not correct");
+    res.status(200).json({
+      message: "User found successfully",
+      status: "Success",
+      data: {
+        user,
+        access_token: newToken(user),
+      },
+    });
   }
   static async protectedRoute(req, res) {
     // Route logic for authenticated users only
-    res.json({ message: "Protected route accessed successfully" });
+    res.status(400).json("Protected route accessed successfully");
   }
 }
