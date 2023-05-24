@@ -24,11 +24,11 @@ Follow the instructions below to set up the codebase on your local machine.
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#troubleshooting)
 
-### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status)
+- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status)
 
-### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license)
+- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license)
 
-### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits)
+- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits)
 
 ## Prerequisites
 
