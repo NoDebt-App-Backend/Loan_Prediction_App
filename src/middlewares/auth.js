@@ -12,7 +12,6 @@ function authMiddleWare(req, res, next) {
   try {
     if (!tokenValue) {
         throw new UnAuthorizedError("You must provide an authorization token.");
-    //   return res.json("You must provide an authorization token.");
     }
     const jwt_secret = config.jwt_access;
     const payload = jwt.verify(tokenValue, jwt_secret);
@@ -20,7 +19,6 @@ function authMiddleWare(req, res, next) {
     next();
   } catch (err) {
     throw new UnAuthorizedError("Access denied, invalid token.")
-    // return res.json("Access denied, invalid token.");
   }
 }
 

@@ -22,17 +22,14 @@ const createUserValidator = Joi.object({
   confirmPassword: Joi.any()
     .equal(Joi.ref("password"))
     .required()
-    // .messages({
-    //     "string.pattern.base": "Password must match"
-    // })
     .label("Passwords")
     .messages({ "any.only": "{{#label}} do not match. Please check again" })
 }).strict();
 
-const loginSchema = Joi.object({
-  identifier: Joi.string().required(),
+const loginUserValidator = Joi.object({
+  email: Joi.string().required(),
   password: Joi.string().required()
 });
 
 
-export { createUserValidator, loginSchema };
+export { createUserValidator, loginUserValidator };
