@@ -1,3 +1,6 @@
+# Loan Prediction App (No Debt App)
+This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
+
 # Loan Prediction App (Backend)
 
 Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
