@@ -51,6 +51,23 @@ export default class UserController {
     });
   }
 
+  static async findUser(req, res,) {
+    const { id } = req.query
+    const { error } = mongoIdValidator.validate(req.query)
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId")
+    // if(!id) throw new BadUserRequestError("Please pass in a valid userId in the request query")
+    const user = await User.findById(id)
+    if (!user) throw new NotFoundError('User not found')
+
+    res.status(200).json({
+      message: "User found successfully",
+      status: "Success",
+      data: {
+        user
+      }
+    })
+  }
+
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
     const { error } = loginUserValidator.validate(req.body);

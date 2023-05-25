@@ -7,6 +7,8 @@ import authMiddleware  from '../middlewares/auth.js';
 // route to create a new user
 router.post("/create", tryCatchHandler(UserController.createUser));
 
+router.get("/", tryCatchHandler(UserController.findUser));
+
 //route to login and get jwt token
 router.post('/login', tryCatchHandler(UserController.Login));
 
