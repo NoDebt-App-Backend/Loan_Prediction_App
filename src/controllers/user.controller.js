@@ -44,7 +44,7 @@ export default class UserController {
       data: {
         name: req.body.name,
         email: req.body.email,
-        id: _id,
+        user_id: _id,
         createdAt: createdAt,
         updatedAt: updatedAt,
       },

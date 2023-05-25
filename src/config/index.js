@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import { development } from "./development.js";
-// import { production } from "./production.js";
+import { production } from "./production.js";
 
 const environment = process.env.NODE_ENV;
 
