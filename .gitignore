@@ -1,3 +1,4 @@
 /node_modules/
-# .env
-package-lock.json
+.env.examle.PasswordReset
+/.env/
+/package-lock.json/
