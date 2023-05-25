@@ -1,4 +1,5 @@
 # Loan Prediction App (No Debt App)
+
 This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
 
 # Loan Prediction App (Backend)
@@ -301,6 +302,39 @@ Response
 }
 ```
 
+- EXAMPLE: Search User - Wrong ID
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Please pass in a valid mongoId",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Search User - User Not Found
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d114f8b047d379' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User not found",
+    "status": "Failed"
+}
+```
 
 **POST Method(Login User): /users/login**
 
@@ -506,4 +540,3 @@ The Loan Prediction App codebase is being developed by the following individuals
 - [Stephanie Okpomfon](https://github.com/StephanieMfon)
 - [Perpetual Meninwa](https://github.com/Perpy-del)
 - [Edikan Akpan](https://github.com/Edidiva)
-
