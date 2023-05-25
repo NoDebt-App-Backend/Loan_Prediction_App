@@ -268,6 +268,40 @@ Response
 }
 ```
 
+**GET Method(Search for User): /users?id={mongodbID}**
+
+Parameters: user's id as a request parameter
+
+- EXAMPLE: Search User - Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646fd36c0cbaaeabea3b1381' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User found successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "646fd36c0cbaaeabea3b1381",
+            "name": "Karen Nwachukwu",
+            "email": "karen@gmail.com",
+            "password": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
+            "confirmPassword": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
+            "createdAt": "2023-05-25T21:30:20.766Z",
+            "updatedAt": "2023-05-25T21:30:20.766Z",
+            "__v": 0
+        }
+    }
+}
+```
+
+
 **POST Method(Login User): /users/login**
 
 Parameters: email, password

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { BadUserRequestError } from "../error/error.js";
+import { BadUserRequestError, NotFoundError } from "../error/error.js";
 import User from "../model/user.model.js";
 import {
   createUserValidator,
