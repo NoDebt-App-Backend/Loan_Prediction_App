@@ -4,6 +4,7 @@ import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
+  mongoIdValidator,
 } from "../validators/user.validator.js";
 import { config } from "../config/index.js";
 import { newToken } from "../utils/jwtHandler.js";
@@ -51,21 +52,20 @@ export default class UserController {
     });
   }
 
-  static async findUser(req, res,) {
-    const { id } = req.query
-    const { error } = mongoIdValidator.validate(req.query)
-    if (error) throw new BadUserRequestError("Please pass in a valid mongoId")
-    // if(!id) throw new BadUserRequestError("Please pass in a valid userId in the request query")
-    const user = await User.findById(id)
-    if (!user) throw new NotFoundError('User not found')
+  static async findUser(req, res) {
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const user = await User.findById(id);
+    if (!user) throw new NotFoundError("User not found");
 
     res.status(200).json({
       message: "User found successfully",
       status: "Success",
       data: {
-        user
-      }
-    })
+        user,
+      },
+    });
   }
 
   static async Login(req, res) {
