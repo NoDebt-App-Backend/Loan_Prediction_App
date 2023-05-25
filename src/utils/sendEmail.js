@@ -1,30 +1,28 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import nodemailer from "nodemailer";
+import handlebars from "handlebars";
+import path from "path";
+import fs from "fs";
 
-import  nodemailer from "nodemailer";
-import  handlebars from "handlebars";
-import  path from "path";
-import fs from 'fs'
-
-
-import * as url from 'url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 const sendEmail = async (email, subject, payload, template) => {
   try {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
-            service: process.env.SERVICE,
-            port: 587,
-            secure: false,
-            debug: true,
-            auth: {
-              user: process.env.USER,
-              pass: process.env.PASS,
-            },
-            from: process.env.USER,
+      service: process.env.SERVICE,
+      port: 587,
+      secure: false,
+      debug: true,
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASS,
+      },
+      from: process.env.USER,
     });
 
     const source = fs.readFileSync(path.join(__dirname, template), "utf8");
@@ -41,7 +39,7 @@ const sendEmail = async (email, subject, payload, template) => {
     // Send email
     transporter.sendMail(options(), (error, info) => {
       if (error) {
-        console.log(error) ;
+        console.log(error);
       } else {
         return res.status(200).json({
           success: true,
@@ -49,7 +47,7 @@ const sendEmail = async (email, subject, payload, template) => {
       }
     });
   } catch (error) {
-    console.log(error) ;
+    console.log(error);
   }
 };
 
@@ -58,8 +56,8 @@ Example:
 sendEmail(
   "youremail@gmail.com,
   "Email subject",
-  { name: "Eze" },
-  "./templates/layouts/main.handlebars"
+  { name: "Steph" },
+  "./utils/template/resetPassword.handlebars"
 );
 */
 export default sendEmail;
