@@ -1,8 +1,8 @@
-import { User } from "./../models/user.model.js";
-import { Token } from "./../models/token.js";
+import User from "../model/user.model.js";
+import { Token } from "../model/token.model.js";
 import crypto from "crypto";
 import Joi from "joi";
-import sendEmail from "./../utils/sendEmail.js";
+import sendEmail from "../utils/sendEmail.js";
 
 /**
  * Controller class for managing password-related operations.

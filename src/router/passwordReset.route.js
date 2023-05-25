@@ -1,5 +1,5 @@
 import express from "express";
-import PasswordController from "./../controllers/password.controller.js";
+import PasswordController from "../controllers/resetPassword.controllers.js"
 const router = express.Router();
 
 /*Routes for password-related operations*/
@@ -11,7 +11,6 @@ router.get("/", PasswordController.changePassword);
 router.post("/:id", PasswordController.sendToken);
 
 /*Description: Input New Password request*/
-
 router.put("/:id", PasswordController.updateNewPassword);
 
 export default router;

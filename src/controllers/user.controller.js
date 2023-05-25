@@ -53,7 +53,7 @@ export default class UserController {
 
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
-    const { value, error } = loginUserValidator.validate(req.body);
+    const { error } = loginUserValidator.validate(req.body);
     if (error) throw error;
 
     const user = await User.findOne({ email: req.body.email });
