@@ -6,6 +6,7 @@ import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
 
 import router from "./src/router/user.route.js";
+import {router as resetPasswordRouter} from "./src/router/passwordReset.route.js"
 
 // configuring environment variables
 dotenv.config();
@@ -33,7 +34,7 @@ app.get("/api", (req, res) => {
 
 // defining the routes
 app.use("/api/users", router);
-
+app.use("/api/password-reset", passwordRoute)
 // Handling errors sent to the response body
 app.use(globalErrorHandler);
 
