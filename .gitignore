@@ -1,4 +1,4 @@
 node_modules
-.env.examle.PasswordReset
 .env
 package-lock.json
+.env.examle.PasswordReset
