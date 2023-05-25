@@ -105,7 +105,7 @@ Visit `http://localhost:PORT` in your web browser to access the application.
 API Documentation for NoDebt App (Loan Prediction application)
 
 **Base URL**
-http://localhost:4000/api
+https://nodebt-application.onrender.com/api
 
 **NOTE**
 
@@ -128,7 +128,7 @@ Parameters: name, email, password, confirmPassword
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze@gmail.com",
@@ -162,7 +162,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Emmanuella Pius",
     "email": "emmanuella@gmail.com",
@@ -190,7 +190,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data '{}'
 
 Response
@@ -207,7 +207,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze@gmail.com",
@@ -229,7 +229,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze",
@@ -251,7 +251,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Cameroon Johnson",
     "email": "camjohnson@gmail.com",
@@ -278,7 +278,7 @@ Parameters: email, password
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing456@"
@@ -311,7 +311,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing456@"
@@ -337,7 +337,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data '{ }'
 
 Response
@@ -354,7 +354,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
     "password": "Amazing456@"
@@ -373,7 +373,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing45"
@@ -392,7 +392,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing45"
@@ -416,7 +416,7 @@ Parameters: email, password, authToken
 
 ```json
 Request
-curl --location --request GET 'localhost:4000/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJEPpKEYtpkBUyPS-k' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
@@ -437,7 +437,7 @@ Response
 
 ```json
 Request
-curl --location --request GET 'localhost:4000/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJ' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
