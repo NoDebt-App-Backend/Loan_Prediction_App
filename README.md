@@ -469,3 +469,4 @@ The Loan Prediction App codebase is being developed by the following individuals
 - [Stephanie Okpomfon](https://github.com/StephanieMfon)
 - [Perpetual Meninwa](https://github.com/Perpy-del)
 - [Edikan Akpan](https://github.com/Edidiva)
+
