@@ -4,8 +4,8 @@ import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
-  mongoIdValidator,
 } from "../validators/user.validator.js";
+import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import { newToken } from "../utils/jwtHandler.js";
 import dotenv from "dotenv";
