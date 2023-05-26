@@ -17,7 +17,7 @@ const app = express();
 
 // Local database connection
 mongoose
-  .connect(config.database_url)
+  .connect("mongodb+srv://edikanakpan5:edikanakpan123@cluster0.ejemmzz.mongodb.net/NoDebtApp?retryWrites=true&w=majority")
   .then(() => console.log("Database connected successfully")) // logging "Database connected successfully" to the console
   .catch((err) => {
     console.log(err.message);
