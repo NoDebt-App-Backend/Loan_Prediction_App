@@ -119,6 +119,7 @@ export default class PasswordController {
 
     if (!req.body.secret_key)
       throw new BadUserRequestError("Invalid Password change request");
+    
     if (req.body.secret_key == updatePasswordSecretKey) {
       user.password = req.body.password;
       await user.save();
