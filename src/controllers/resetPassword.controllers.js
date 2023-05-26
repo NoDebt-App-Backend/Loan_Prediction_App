@@ -123,14 +123,14 @@ export default class PasswordController {
       user.password = req.body.password;
       await user.save();
       await token.deleteOne();
-      // await sendEmail(
-      //   user.email,
-      //   "Password Change Succesful",
-      //   {
-      //     name: user.name,
-      //   },
-      //   "./template/passwordUpdated.handlebars"
-      // );
+      await sendEmail(
+        user.email,
+        "Password Change Succesful",
+        {
+          name: user.name,
+        },
+        "./template/passwordUpdated.handlebars"
+      );
 
       return res.status(200).send("Your password has been changed");
     }
