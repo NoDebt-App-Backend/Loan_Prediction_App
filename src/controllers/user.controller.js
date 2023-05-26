@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
-import { BadUserRequestError } from "../error/error.js";
+import { BadUserRequestError, NotFoundError } from "../error/error.js";
 import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
 } from "../validators/user.validator.js";
+import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import { newToken } from "../utils/jwtHandler.js";
 import dotenv from "dotenv";
@@ -47,6 +48,22 @@ export default class UserController {
         user_id: _id,
         createdAt: createdAt,
         updatedAt: updatedAt,
+      },
+    });
+  }
+
+  static async findUser(req, res) {
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const user = await User.findById(id);
+    if (!user) throw new NotFoundError("User not found");
+
+    res.status(200).json({
+      message: "User found successfully",
+      status: "Success",
+      data: {
+        user,
       },
     });
   }

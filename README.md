@@ -1,10 +1,14 @@
+# Loan Prediction App (No Debt App)
+
+This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
+
 # Loan Prediction App (Backend)
 
 Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
 The server itself is implemented in node using express.
 Follow the instructions below to set up the codebase on your local machine.
 
-### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation)
+### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
 
 # Table of Contents
 
@@ -102,7 +106,7 @@ Visit `http://localhost:PORT` in your web browser to access the application.
 API Documentation for NoDebt App (Loan Prediction application)
 
 **Base URL**
-http://localhost:4000/api
+https://nodebt-application.onrender.com/api
 
 **NOTE**
 
@@ -125,7 +129,7 @@ Parameters: name, email, password, confirmPassword
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze@gmail.com",
@@ -159,7 +163,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Emmanuella Pius",
     "email": "emmanuella@gmail.com",
@@ -187,7 +191,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data '{}'
 
 Response
@@ -204,7 +208,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze@gmail.com",
@@ -226,7 +230,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Buchi Nwabueze",
     "email": "buchieze",
@@ -248,7 +252,7 @@ Response
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'localhost:4000/api/users/create' \
+curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 --data-raw '{
     "name": "Cameroon Johnson",
     "email": "camjohnson@gmail.com",
@@ -265,6 +269,73 @@ Response
 }
 ```
 
+**GET Method(Search for User): /users?id={mongodbID}**
+
+Parameters: user's id as a request parameter
+
+- EXAMPLE: Search User - Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646fd36c0cbaaeabea3b1381' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User found successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "646fd36c0cbaaeabea3b1381",
+            "name": "Karen Nwachukwu",
+            "email": "karen@gmail.com",
+            "password": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
+            "confirmPassword": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
+            "createdAt": "2023-05-25T21:30:20.766Z",
+            "updatedAt": "2023-05-25T21:30:20.766Z",
+            "__v": 0
+        }
+    }
+}
+```
+
+- EXAMPLE: Search User - Wrong ID
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Please pass in a valid mongoId",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Search User - User Not Found
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d114f8b047d379' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User not found",
+    "status": "Failed"
+}
+```
+
 **POST Method(Login User): /users/login**
 
 Parameters: email, password
@@ -275,7 +346,7 @@ Parameters: email, password
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing456@"
@@ -308,7 +379,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing456@"
@@ -334,7 +405,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data '{ }'
 
 Response
@@ -351,7 +422,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
     "password": "Amazing456@"
@@ -370,7 +441,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing45"
@@ -389,7 +460,7 @@ Response
 
 ```json
 Request
-curl --location 'localhost:4000/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/users/login' \
 --data-raw '{
     "email": "kennedybrown@gmail.com",
     "password": "Amazing45"
@@ -413,7 +484,7 @@ Parameters: email, password, authToken
 
 ```json
 Request
-curl --location --request GET 'localhost:4000/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJEPpKEYtpkBUyPS-k' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
@@ -434,7 +505,7 @@ Response
 
 ```json
 Request
-curl --location --request GET 'localhost:4000/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJ' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
@@ -469,4 +540,3 @@ The Loan Prediction App codebase is being developed by the following individuals
 - [Stephanie Okpomfon](https://github.com/StephanieMfon)
 - [Perpetual Meninwa](https://github.com/Perpy-del)
 - [Edikan Akpan](https://github.com/Edidiva)
-
