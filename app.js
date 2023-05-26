@@ -9,15 +9,15 @@ import router from "./src/router/user.route.js";
 
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
 
-
 // configuring environment variables
 dotenv.config();
 
 const app = express();
 
+mongoose.set("strictQuery", false);
 // Local database connection
 mongoose
-  .connect("mongodb+srv://edikanakpan5:edikanakpan123@cluster0.ejemmzz.mongodb.net/NoDebtApp?retryWrites=true&w=majority")
+  .connect(config.database_url)
   .then(() => console.log("Database connected successfully")) // logging "Database connected successfully" to the console
   .catch((err) => {
     console.log(err.message);
