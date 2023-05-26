@@ -17,7 +17,7 @@ const createUserValidator = Joi.object({
     .required()
     .messages({
       "string.pattern.base":
-        "Password must be more than 8 characters long with at least one number, one alphanumeric character, one uppercase letter",
+        "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter",
     }),
   confirmPassword: Joi.any()
     .equal(Joi.ref("password"))

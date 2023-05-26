@@ -3,6 +3,7 @@ import { Token } from "../model/token.model.js";
 import crypto from "crypto";
 import Joi from "joi";
 import sendEmail from "../utils/sendEmail.js";
+import { config } from "../config/index.js";
 import {
   BadUserRequestError,
   NotFoundError,
@@ -54,7 +55,7 @@ export default class PasswordController {
       });
     }
     // Generate the password reset link
-    const link = `${process.env.BASE_URL}/password-reset/${user._id}`;
+    const link = `${config.base_url}/password-reset/${user._id}`;
 
     await sendEmail(
       email,
@@ -114,7 +115,7 @@ export default class PasswordController {
       throw new BadUserRequestError("Password field cannot be empty");
     let token = await Token.findOne({ userId: user._id });
 
-    const updatePasswordSecretKey = process.env.UPDATE_PASSWORD_SECRET_KEY;
+    const updatePasswordSecretKey = config.password_secretkey;
 
     if (!req.body.secret_key)
       throw new BadUserRequestError("Invalid Password change request");
@@ -122,14 +123,14 @@ export default class PasswordController {
       user.password = req.body.password;
       await user.save();
       await token.deleteOne();
-      await sendEmail(
-        user.email,
-        "Password Change Succesful",
-        {
-          name: user.name,
-        },
-        "./template/passwordUpdated.handlebars"
-      );
+      // await sendEmail(
+      //   user.email,
+      //   "Password Change Succesful",
+      //   {
+      //     name: user.name,
+      //   },
+      //   "./template/passwordUpdated.handlebars"
+      // );
 
       return res.status(200).send("Your password has been changed");
     }

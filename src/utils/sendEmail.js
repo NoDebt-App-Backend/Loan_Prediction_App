@@ -3,6 +3,7 @@ dotenv.config();
 
 import nodemailer from "nodemailer";
 import handlebars from "handlebars";
+import { config } from "../config/index.js";
 import path from "path";
 import fs from "fs";
 
@@ -13,23 +14,23 @@ const sendEmail = async (email, subject, payload, template) => {
   try {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: process.env.HOST,
-      service: process.env.SERVICE,
+      host: config.nodemailer_host,
+      service: config.nodemailer_service,
       port: 587,
       secure: false,
       debug: true,
       auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
+        user: config.nodemailer_user,
+        pass: config.nodemailer_pass,
       },
-      from: process.env.USER,
+      from: config.nodemailer_user,
     });
 
     const source = fs.readFileSync(path.join(__dirname, template), "utf8");
     const compiledTemplate = handlebars.compile(source);
     const options = () => {
       return {
-        from: process.env.USER,
+        from: config.nodemailer_user,
         to: email,
         subject: subject,
         html: compiledTemplate(payload),
