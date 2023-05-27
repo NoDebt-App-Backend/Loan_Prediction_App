@@ -6,7 +6,7 @@ const emailValidator = Joi.object({
     .required()
     .messages({
       "any.required": "Email is required",
-      "string.email": "Invalid email format",
+      "string.pattern.base": "Invalid email format",
     }),
 }).strict();
 
