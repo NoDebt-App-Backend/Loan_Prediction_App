@@ -4,6 +4,7 @@ import crypto from "crypto";
 import Joi from "joi";
 import sendEmail from "../utils/sendEmail.js";
 import { config } from "../config/index.js";
+import { resetPasswordValidator } from "../validators/resetPasswordValidator.js";
 import {
   BadUserRequestError,
   NotFoundError,
@@ -21,13 +22,13 @@ export default class PasswordController {
    */
   static async changePassword(req, res) {
     const { email } = req.query;
-    const passwordSchema = Joi.object({
-      email: Joi.string().email().required(),
-    }).messages({
-      "any.required": "Email is required",
-      "string.email": "Invalid email format",
-    });
-    const { error } = passwordSchema.validate(req.query, {
+    // const passwordSchema = Joi.object({
+    //   email: Joi.string().email().required(),
+    // }).messages({
+    //   "any.required": "Email is required",
+    //   "string.email": "Invalid email format",
+    // });
+    const { error } = resetPasswordValidator.validate(req.query, {
       abortEarly: false,
     });
 
@@ -77,10 +78,10 @@ export default class PasswordController {
    */
   static async sendToken(req, res) {
     const id = req.params.id;
-    const schema = Joi.object({
-      fiveDigitToken: Joi.string().required(),
-    });
-    const { error } = schema.validate(req.body);
+    // const schema = Joi.object({
+    //   fiveDigitToken: Joi.number().required(),
+    // });
+    const { error } = resetPasswordValidator.validate(req.body);
 
     if (error) throw error;
     // Find the user by email
@@ -119,21 +120,26 @@ export default class PasswordController {
 
     if (!req.body.secret_key)
       throw new BadUserRequestError("Invalid Password change request");
-    
+    const { error } = resetPasswordValidator.validate(req.body);
+    if (error) throw error;
     if (req.body.secret_key == updatePasswordSecretKey) {
       user.password = req.body.password;
+      user.confirmPassword = req.body.confirmPassword;
       await user.save();
       await token.deleteOne();
       await sendEmail(
         user.email,
-        "Password Change Succesful",
+        "Password Change Successful",
         {
           name: user.name,
         },
         "./template/passwordUpdated.handlebars"
       );
 
-      return res.status(200).send("Your password has been changed");
+      return res.status(200).send({
+        status: "Success",
+        message: "Your password has been changed",
+      });
     }
     if (req.body.secret_key !== updatePasswordSecretKey)
       throw new UnAuthorizedError("Invalid Password change request");
