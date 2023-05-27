@@ -148,7 +148,7 @@ Response
             "email": "buchieze@gmail.com",
             "password": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
             "confirmPassword": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
-            "_id": "646e5ccda8413b6801ef0fca",
+            "user_id": "646e5ccda8413b6801ef0fca",
             "createdAt": "2023-05-24T18:51:57.017Z",
             "updatedAt": "2023-05-24T18:51:57.017Z",
             "__v": 0
@@ -179,7 +179,7 @@ Response
     "data": {
         "name": "Emmanuella Pius",
         "email": "emmanuella@gmail.com",
-        "id": "646e5ef538d114f8b047d379",
+        "user_id": "646e5ef538d114f8b047d379",
         "createdAt": "2023-05-24T19:01:09.582Z",
         "updatedAt": "2023-05-24T19:01:09.582Z"
     }

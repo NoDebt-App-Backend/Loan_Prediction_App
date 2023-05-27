@@ -1,14 +1,20 @@
 import Joi from "joi";
 
-const resetPasswordValidator = Joi.object({
+const emailValidator = Joi.object({
   email: Joi.string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .required()
     .messages({
         "any.required": "Email is required",
         "string.email": "Invalid email format",
-    }), 
+    }),
+}).strict();
+
+const tokenValidator = Joi.object({
   fiveDigitToken: Joi.number().required(),
+}).strict();
+
+const resetPasswordValidator = Joi.object({
   password: Joi.string()
     .regex(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/
@@ -25,4 +31,4 @@ const resetPasswordValidator = Joi.object({
     .messages({ "any.only": "{{#label}} do not match. Please check again" }),
 }).strict();
 
-export { resetPasswordValidator };
+export { emailValidator, tokenValidator, resetPasswordValidator };
