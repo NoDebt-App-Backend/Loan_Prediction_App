@@ -5,13 +5,13 @@ const emailValidator = Joi.object({
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .required()
     .messages({
-        "any.required": "Email is required",
-        "string.email": "Invalid email format",
+      "any.required": "Email is required",
+      "string.email": "Invalid email format",
     }),
 }).strict();
 
 const tokenValidator = Joi.object({
-  fiveDigitToken: Joi.number().required(),
+  fiveDigitToken: Joi.string().required(),
 }).strict();
 
 const resetPasswordValidator = Joi.object({
