@@ -11,7 +11,7 @@ const emailValidator = Joi.object({
 }).strict();
 
 const tokenValidator = Joi.object({
-  fiveDigitToken: Joi.number().required(),
+  fiveDigitToken: Joi.string().required(),
 }).strict();
 
 const resetPasswordValidator = Joi.object({
