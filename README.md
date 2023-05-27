@@ -1,38 +1,36 @@
-# Loan Prediction App (No Debt App)
+# Loan Prediction App (No Debt App - Backend)
+
+Welcome to the Loan Prediction App codebase!
 
 This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
 
-# Loan Prediction App (Backend)
+This repository contains the source code for the Loan Prediction Application. The server itself is implemented in node using express. Follow the instructions below to set up the codebase on your local machine.
 
-Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
-The server itself is implemented in node using express.
-Follow the instructions below to set up the codebase on your local machine.
-
-### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
 # Table of Contents
 
-- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#prerequisites-1)
+- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#prerequisites-1)
 
-- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#installation-1)
+- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#installation-1)
 
-- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#configuration-1)
+- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#configuration-1)
 
-- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#directory-structure-1)
+- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#directory-structure-1)
 
-- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#usage-1)
+- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#usage-1)
 
-- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
-  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#users-routes)
+  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
 
-- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#troubleshooting-1)
+- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
-- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status-1)
+- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
 
-- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license-1)
+- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#license-1)
 
-- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits-1)
+- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#credits-1)
 
 ## Prerequisites
 
