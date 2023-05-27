@@ -520,6 +520,242 @@ Response
 }
 ```
 
+**GET Method(Reset Password): /password-reset**
+
+Parameters: email
+
+- EXAMPLE: Reset Password Link sent
+
+**_STATUS: 200 OK_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(html)
+password reset link sent to your email account
+```
+
+When the link has been sent successfully, the user gets a mail with a link and a five digit token as seen in the screenshot below.
+
+[Password Request Sent Successfully](./images/PRS.png)
+
+- EXAMPLE: Reset Password Link (When the user requests two times in a row)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "A password reset request has already been made, Try again in 1 hour",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Reset Password Link (Invalid Email Format)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=murdugopsi' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Invalid email format",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email Field Empty)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=' \
+--data ''
+
+Response
+(json)
+{
+    "message": "\"email\" is not allowed to be empty",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email/User Does not Exist)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=peryhigh%40gmail.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User with given email does not exist",
+    "status": "Failed"
+}
+```
+
+**POST Method(Reset Password-Five Digit Token): /password-reset**
+
+Parameters: fiveDigitToken
+
+- EXAMPLE: Reset Password(Token Validated)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65721
+}'
+
+Response
+(html)
+Token Validated
+```
+
+- EXAMPLE: Reset Password(Invalid/Expired Token)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65123
+}'
+
+Response
+(json)
+{
+    "message": "Invalid token link or expired",
+    "status": "Failed"
+}
+```
+
+**PUT Method(Reset Password-Password Change): /password-reset**
+
+Parameters: secret_key, password, confirmPassword
+
+- EXAMPLE: Reset Password(Password Changed Successfully)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}''
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Your password has been changed"
+}
+```
+
+The user gets a mail with a message as seen below.
+
+[Password Request Sent Successfully](./images/PCS.png)
+
+- EXAMPLE: Reset Password(Invalid Password Format)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "secret_key": 12345,
+    "password": "H23"
+}'
+
+Response
+(json)
+{
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Passwords Mismatch-when password and confirmPassword are different)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "H"
+}'
+
+Response
+(json)
+{
+    "message": "\"Passwords\" do not match. Please check again",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Invalid Secret Key)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12347,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}'
+
+Response
+(json)
+{
+    "message": "Invalid Password change request",
+    "status": "Failed"
+}
+```
+
 ## Troubleshooting
 
 - If you encounter any issues during the setup process, please ensure that you have the latest versions of Node.js and MongoDB installed.
