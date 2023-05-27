@@ -15,6 +15,7 @@ const tokenValidator = Joi.object({
 }).strict();
 
 const resetPasswordValidator = Joi.object({
+  secret_key: Joi.number().required(),
   password: Joi.string()
     .regex(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/
