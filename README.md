@@ -538,7 +538,7 @@ password reset link sent to your email account
 
 When the link has been sent successfully, the user gets a mail with a link and a five digit token as seen in the screenshot below.
 
-[Password Request Sent Successfully](./images/PRS.png)
+![Password Request Sent Successfully](./images/PRS.png)
 
 - EXAMPLE: Reset Password Link (When the user requests two times in a row)
 
@@ -682,7 +682,7 @@ Response
 
 The user gets a mail with a message as seen below.
 
-[Password Request Sent Successfully](./images/PCS.png)
+![Password Request Sent Successfully](./images/PCS.png)
 
 - EXAMPLE: Reset Password(Invalid Password Format)
 
