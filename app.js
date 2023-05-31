@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import dotenv from "dotenv";
 import { config } from "./src/config/index.js";
 import logger from "morgan";
@@ -33,6 +34,8 @@ app.use(logger("tiny"));
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");
 });
+
+app.use(cors());
 
 // defining the routes
 app.use("/api/users", router);

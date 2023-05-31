@@ -1,9 +1,14 @@
 import bcrypt from "bcrypt";
-import { BadUserRequestError, NotFoundError } from "../error/error.js";
+import {
+  BadUserRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../error/error.js";
 import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
+  updateUserValidator,
 } from "../validators/user.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
@@ -68,6 +73,50 @@ export default class UserController {
     });
   }
 
+  static async updateUser(req, res) {
+    const { id } = req.params;
+    const { error } = mongoIdValidator.validate(id);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+
+    const updateValidatorResponse = updateUserValidator.validate(req.body);
+    const updateUserError = updateValidatorResponse.error;
+    if (error) throw updateUserError;
+
+    const updatedUser = User.findByIdAndUpdate(
+      id,
+      {
+        name: req.body.name,
+        organisationName: req.body.organisationName,
+        organisationEmail: req.body.organisationEmail,
+        numberOfStaffs: req.body.numberOfStaffs,
+        staffID: req.body.staffID,
+        organisationType: req.body.organisationType,
+        website: req.body.website,
+        position: req.body.position,
+        phoneNumber: req.body.phoneNumber,
+        profileImage: req.body.image,
+      },
+      { new: true }
+    );
+    if (req.file) {
+      profileImage = req.file.filename;
+    }
+    if (!updatedUser) throw new InternalServerError("Failed to update profile");
+
+    // This is to exclude the password property returning in the response object
+    // const { _id, createdAt, updatedAt } = updatedUser;
+    console.log(updatedUser);
+
+    // Return a response to the client
+    res.status(200).json({
+      message: "Profile updated successfully",
+      status: "Success",
+      data: {
+        user: updatedUser,
+      },
+    });
+  }
+
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
     const { error } = loginUserValidator.validate(req.body);
@@ -102,7 +151,7 @@ export default class UserController {
       data: {
         name: req.body.name,
         email: req.body.email,
-        id: _id,
+        user_id: _id,
         createdAt: createdAt,
         updatedAt: updatedAt,
         access_token: newToken(user),

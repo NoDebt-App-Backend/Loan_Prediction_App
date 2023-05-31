@@ -37,5 +37,23 @@ const loginUserValidator = Joi.object({
   })
 });
 
+const updateUserValidator = Joi.object({
+  name: Joi.string(),
+  organisationName: Joi.string(),
+  organisationEmail: Joi.string()
+  .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+  .messages({
+    "string.pattern.base":
+      "Not a valid email address. Please input a valid email address.",
+  }),
+  numberOfStaffs: Joi.number(),
+  staffID: Joi.string(),
+  organisationType: Joi.string(),
+  website: Joi.string(),
+  position: Joi.string(),
+  phoneNumber: Joi.number(),
+  profileImage: Joi.string(),
+});
 
-export { createUserValidator, loginUserValidator };
+
+export { createUserValidator, loginUserValidator, updateUserValidator };

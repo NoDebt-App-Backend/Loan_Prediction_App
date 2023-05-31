@@ -22,4 +22,12 @@ class UnAuthorizedError extends Error {
     }
 }
 
-export { BadUserRequestError, NotFoundError, UnAuthorizedError };
+class InternalServerError extends Error {
+    constructor(message){
+        super(message)
+        this.status = 500;
+        this.errorType = "InternalServerError";
+    }
+}
+
+export { BadUserRequestError, NotFoundError, UnAuthorizedError, InternalServerError };
