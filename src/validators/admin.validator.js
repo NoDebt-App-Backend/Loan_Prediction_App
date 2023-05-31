@@ -1,8 +1,9 @@
 import Joi from "joi";
 
 // using Joi to create validation for the user being created before sent to database
-const createUserValidator = Joi.object({
-  name: Joi.string().required(),
+const createCompanyValidator = Joi.object({
+  companyName: Joi.string().required(),
+  firstName: Joi.string().required(),
   email: Joi.string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .required()
@@ -26,16 +27,20 @@ const createUserValidator = Joi.object({
     .messages({ "any.only": "{{#label}} do not match. Please check again" })
 }).strict();
 
-const loginUserValidator = Joi.object({
-  email: Joi.string().required().messages({
-    "string.pattern.base":
-      "Not a valid email address or password",
-  }),
-  password: Joi.string().required().messages({
-    "string.pattern.base":
-      "Not a valid email address or password",
-  })
-}).strict();
+const loginAdminValidator = Joi.object(
+  {
+    email: Joi.string()
+    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Not a valid email address. Please input a valid email address.",
+    }),
+    password: Joi.string().required().messages({
+      "string.pattern.base":
+        "Not a valid email address or password",
+    })
+  }
+)
 
-
-export { createUserValidator, loginUserValidator };
+export  {createCompanyValidator, loginAdminValidator} ;

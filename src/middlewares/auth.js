@@ -15,7 +15,7 @@ function authMiddleWare(req, res, next) {
     }
     const jwt_secret = config.jwt_access;
     const payload = jwt.verify(tokenValue, jwt_secret);
-    req.user = payload;
+    req.admin = payload;
     next();
   } catch (err) {
     throw new UnAuthorizedError("Access denied, invalid token.")
