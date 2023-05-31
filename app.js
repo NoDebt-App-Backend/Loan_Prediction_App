@@ -29,24 +29,14 @@ const port = config.port || 5000;
 
 // In-built Middleware to gain access to the body
 app.use(express.json());
+
+// External Middlewares installed
 app.use(logger("tiny"));
+app.use(cors());
 
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");
 });
-
-app.use(cors());
-
-// app.use((req, res, next) => {
-//   const origin = req.headers.origin;
-//   // if (allowedOrigins.includes(origin)) {
-//   //   res.setHeader("Access-Control-Allow-Origin", origin);
-//   // }
-//   // res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
-//   // res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   // res.header("Access-Control-Allow-Credentials", true);
-//   // return next();
-// });
 
 // defining the routes
 app.use("/api/users", router);
