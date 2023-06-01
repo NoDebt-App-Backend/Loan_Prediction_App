@@ -17,25 +17,40 @@ const createUserValidator = Joi.object({
     .required()
     .messages({
       "string.pattern.base":
-        "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter",
+        "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
     }),
   confirmPassword: Joi.any()
     .equal(Joi.ref("password"))
     .required()
     .label("Passwords")
-    .messages({ "any.only": "{{#label}} do not match. Please check again" })
+    .messages({ "any.only": "{{#label}} do not match. Please check again" }),
 }).strict();
 
 const loginUserValidator = Joi.object({
   email: Joi.string().required().messages({
-    "string.pattern.base":
-      "Not a valid email address or password",
+    "string.pattern.base": "Not a valid email address or password",
   }),
   password: Joi.string().required().messages({
-    "string.pattern.base":
-      "Not a valid email address or password",
-  })
+    "string.pattern.base": "Not a valid email address or password",
+  }),
 });
 
+const updateUserValidator = Joi.object({
+  name: Joi.string(),
+  organisationName: Joi.string(),
+  organisationEmail: Joi.string()
+    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+    .messages({
+      "string.pattern.base":
+        "Not a valid email address. Please input a valid email address.",
+    }),
+  numberOfStaffs: Joi.number(),
+  staffID: Joi.string(),
+  organisationType: Joi.string(),
+  website: Joi.string(),
+  position: Joi.string(),
+  phoneNumber: Joi.number(),
+  profileImage: Joi.string(),
+});
 
-export { createUserValidator, loginUserValidator };
+export { createUserValidator, loginUserValidator, updateUserValidator };

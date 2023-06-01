@@ -23,6 +23,34 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    organisationName: {
+      type: String,
+    },
+    organisationEmail: {
+      type: String,
+      unique: true,
+    },
+    numberOfStaffs: {
+      type: Number,
+    },
+    staffID: {
+      type: String,
+    },
+    organisationType: {
+      type: String,
+    },
+    website: {
+      type: String,
+    },
+    position: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    profileImage: {
+      type: String,
+    },
   }, {timestamps: true}
 );
 

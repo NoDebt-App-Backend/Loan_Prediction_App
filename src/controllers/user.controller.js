@@ -1,9 +1,14 @@
 import bcrypt from "bcrypt";
-import { BadUserRequestError, NotFoundError } from "../error/error.js";
+import {
+  BadUserRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../error/error.js";
 import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
+  updateUserValidator,
 } from "../validators/user.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
@@ -146,7 +151,7 @@ export default class UserController {
       data: {
         name: req.body.name,
         email: req.body.email,
-        id: _id,
+        user_id: _id,
         createdAt: createdAt,
         updatedAt: updatedAt,
         access_token: newToken(user),
