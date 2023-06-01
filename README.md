@@ -261,7 +261,7 @@ curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 Response
 (json)
 {
-    "message": "Password must be more than 8 characters long with at least one number, one alphanumeric character, one uppercase letter",
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
     "status": "Failed",
     "errorType": "ValidationError"
 }
