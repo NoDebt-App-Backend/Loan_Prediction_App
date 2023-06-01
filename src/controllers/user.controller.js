@@ -68,6 +68,19 @@ export default class UserController {
     });
   }
 
+  static async updateUser(req, res) {
+    const { id } = req.query;
+    const user = await User.findByIdAndUpdate(id);
+    if (!user) throw new NotFoundError("User not found");
+
+    const { error } = updateUserValidator.validate(req.body);
+    if (error) throw error;
+
+    const user = {
+      
+    }
+  }
+
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
     const { error } = loginUserValidator.validate(req.body);
