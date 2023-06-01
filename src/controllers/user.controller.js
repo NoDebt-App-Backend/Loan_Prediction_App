@@ -68,18 +68,49 @@ export default class UserController {
     });
   }
 
-  static async updateUser(req, res) {
-    const { id } = req.query;
-    const user = await User.findByIdAndUpdate(id);
-    if (!user) throw new NotFoundError("User not found");
+  // static async updateUser(req, res) {
+  //   const { id } = req.params;
+  //   const { error } = mongoIdValidator.validate(id);
+  //   if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
 
-    const { error } = updateUserValidator.validate(req.body);
-    if (error) throw error;
+  //   const updateValidatorResponse = updateUserValidator.validate(req.body);
+  //   const updateUserError = updateValidatorResponse.error;
+  //   if (error) throw updateUserError;
 
-    const user = {
-      
-    }
-  }
+  //   const updatedUser = User.findByIdAndUpdate(
+  //     id,
+  //     {
+  //       name: req.body.name,
+  //       organisationName: req.body.organisationName,
+  //       organisationEmail: req.body.organisationEmail,
+  //       numberOfStaffs: req.body.numberOfStaffs,
+  //       staffID: req.body.staffID,
+  //       organisationType: req.body.organisationType,
+  //       website: req.body.website,
+  //       position: req.body.position,
+  //       phoneNumber: req.body.phoneNumber,
+  //       profileImage: req.body.image,
+  //     },
+  //     { new: true }
+  //   );
+  //   if (req.file) {
+  //     profileImage = req.file.filename;
+  //   }
+  //   if (!updatedUser) throw new InternalServerError("Failed to update profile");
+
+  //   // This is to exclude the password property returning in the response object
+  //   // const { _id, createdAt, updatedAt } = updatedUser;
+  //   console.log(updatedUser);
+
+  //   // Return a response to the client
+  //   res.status(200).json({
+  //     message: "Profile updated successfully",
+  //     status: "Success",
+  //     data: {
+  //       user: updatedUser,
+  //     },
+  //   });
+  // }
 
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
