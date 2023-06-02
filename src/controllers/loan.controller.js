@@ -1,7 +1,11 @@
 import { Loan } from "../models/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
 import { User } from "../models/user.model.js";
-import { BadUserRequestError, NotFoundError } from "../error/error.js";
+import {
+  BadUserRequestError,
+  NotFoundError,
+  UnAuthorizedError,
+} from "../error/error.js";
 
 /**
  * Controller class for managing loan/borrowers-related operations
@@ -29,6 +33,20 @@ export default class loanControllers {
       status: "success",
       data: {
         loan,
+      },
+    });
+  }
+
+  static async findBorrower(req, res) {
+    const { id } = req.query;
+    if (!id) throw new UnAuthorizedError("Unauthorized user");
+    const borrower = await Loan.findById(id);
+    if (!borrower) throw new NotFoundError("Invalid link or details");
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        borrower,
       },
     });
   }

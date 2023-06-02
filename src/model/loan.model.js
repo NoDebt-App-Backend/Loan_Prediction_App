@@ -21,6 +21,10 @@ const loanSchema = Schema({
     ],
     required: true,
   },
+  loanAmount: {
+    type: Number,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -131,6 +135,12 @@ const loanSchema = Schema({
     type: Number,
     default: undefined,
     required: true,
+  },
+  reasonForEligibilityStatusResult: {
+    type: String,
+  },
+  financialAdvise: {
+    type: String,
   },
   guarantor: {
     fullname: {
