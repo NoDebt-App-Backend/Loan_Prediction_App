@@ -1,14 +1,5 @@
-// import multer from "multer";
+import multer from "multer";
 
-// const storage = multer.memoryStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, "./profileImage");
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname);
-//     },
-// });
+const storage = multer.memoryStorage();
 
-// upload.single('image')
-
-// export const upload = multer({ storage: storage });
+export const upload = multer({ storage: storage });
