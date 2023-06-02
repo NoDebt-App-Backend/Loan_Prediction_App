@@ -6,5 +6,7 @@ export const development = {
   database_url: process.env.DEV_MONGODB_CONNECTION_URL,
   bcrypt_saltRound: +process.env.DEV_BCRYPT_SALT_ROUND,
   port: process.env.PORT,
-  jwt_access: process.env.DEV_JWT_KEY
+  jwt_access: process.env.DEV_JWT_KEY,
+  nodemailerUser: process.env.DEV_NODEMAILER_USER,
+  nodemailerPassword:process.env.DEV_NODEMAILER_PASS
 };

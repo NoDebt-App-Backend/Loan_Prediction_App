@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { config } from "../config/index.js";
+import dotenv from "dotenv"
+dotenv.config()
 
 export function newToken(admin) {
   const payload = { adminId: admin._id, email: admin.email };

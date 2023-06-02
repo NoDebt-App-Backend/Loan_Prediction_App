@@ -4,7 +4,7 @@ function generateRandomPassword() {
   const length = 8;
   const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
   const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const specialChars = '!@#$%^&*()_+=-{}[]\\|:;\'\"<>,.?/~`';
+  const specialChars = '!@#$%^&*()_+=-{}[]|:;<>,.?~`';
   const numberChars = '0123456789';
 
   let password = '';

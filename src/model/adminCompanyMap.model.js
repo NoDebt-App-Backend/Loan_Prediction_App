@@ -1,11 +1,15 @@
+
 import mongoose from "mongoose";
 
 const adminCompanyMapSchema = new mongoose.Schema({
-    adminName: {
+    adminFisrtName: {
     type: String,
     required: true,
   },
-
+    adminLastName:{
+      type:String,
+      required: false,
+    },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Admin",
@@ -18,7 +22,7 @@ const adminCompanyMapSchema = new mongoose.Schema({
   },
   companyName:{
     type:String,
-    required:true,
+    required:false,
   }
 });
 

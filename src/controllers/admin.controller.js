@@ -8,6 +8,7 @@ import Company from "../model/company.model.js";
 import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
+import nodemailer from "nodemailer"
 dotenv.config();
 
 export default class AdminController {
@@ -21,7 +22,6 @@ export default class AdminController {
         throw new InternalServerError(
            'Internal Server Error'
         )
-      
     }
   }
    //get all admins
@@ -48,6 +48,35 @@ export default class AdminController {
       
     }
   };
+  //get an admin
+  static async getAdmin(req, res) {
+    try {
+      const { email } = req.query;
+  
+      const admin = await Admin.findOne({ email });
+  
+      if (!admin) {
+        return res.status(404).json({
+          message: 'Admin not found',
+          status: 'Error',
+        });
+      }
+  
+      res.status(200).json({
+        message: 'Admin found',
+        status: 'Success',
+        data: {
+          admin,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Internal Server Error',
+        status: 'Error',
+      });
+    }
+  }
+  
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
@@ -95,7 +124,7 @@ export default class AdminController {
       adminId: admin._id,
       companyId: company._id,
       companyName: req.body.companyName,
-      adminName: req.body.firstName,
+      adminFisrtName: req.body.firstName,
     });
    
    // Save admin to the Admin collection
@@ -159,11 +188,17 @@ export default class AdminController {
       const adminCompanyMap = await AdminCompanyMap.findOne({ adminId: req.admin.adminId }).populate('companyId', ' companyName');
   
       if (!adminCompanyMap) {
-        throw new Error('AdminCompanyMap not found for the specified admin');
+        throw new UnAuthorizedError('Admin is not found and cannot perform this operation.');
       }
   
       const companyId = adminCompanyMap.companyId._id;
       const companyName = adminCompanyMap.companyId.companyName;
+
+
+      const newpassword = generateRandomPassword();
+      const saltRounds = config.bcrypt_saltRound;
+      const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
+      console.log(newpassword)
   
       const newAdmin = new Admin({
         firstName,
@@ -171,20 +206,53 @@ export default class AdminController {
         email,
         phoneNumber,
         role,
-        password: generateRandomPassword(),
+        password: hashedPassword,
         companyId,
         companyName,
       });
   
+      
+
+      const newAdminCompanyMap = new AdminCompanyMap(
+        {
+        adminId: newAdmin._id,
+        companyId: companyId,
+        companyName: companyName,
+        adminFisrtName: firstName,
+        adminLastName:lastName
+        }
+      )
+      await newAdminCompanyMap.save();
       await newAdmin.save();
+
+ // Send email to new admin
+  // Configurations for email
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, 
+    auth: {
+      user: config.nodemailerUser, //  Gmail email address
+      pass: config.nodemailerPassword //  Gmail password or an application-specific password
+    }
+  });
   
-      res.status(200).json({
-        message: 'Protected route accessed successfully',
-        status: 'Success',
-        data: {
-          newAdmin,
-        },
-      });
+
+const mailOptions = {
+  from: 'nodebtapplication@gmail.com',
+  to: newAdmin.email,
+  subject: 'Welcome to Nodebt',
+  text: `Hello ${newAdmin.firstName},\n\nWelcome to our company!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: https://localhost:4000/api/admin/login\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,};
+
+await transporter.sendMail(mailOptions);
+
+res.status(200).json({
+  message: 'Protected route accessed successfully',
+  status: 'Success',
+  data: {
+    newAdmin, newpassword
+  }
+});
     } catch (error) {
       res.status(error.status || 500).json({
         message: error.message || 'Internal Server Error',
