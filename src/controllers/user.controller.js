@@ -12,6 +12,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default class UserController {
+
+ 
   static async createUser(req, res) {
     // Validation with Joi before it gets to the database
     const { value, error } = createUserValidator.validate(req.body);

@@ -20,6 +20,14 @@ class UnAuthorizedError extends Error {
       this.status = 401;
       this.errorType = "UnAuthorizedError";
     }
+   
 }
 
-export { BadUserRequestError, NotFoundError, UnAuthorizedError };
+class InternalServerError extends Error {
+    constructor(message){
+      super(message)
+      this.status = 500;
+      this.errorType = "InternalServerError";
+    }}
+
+export { BadUserRequestError, NotFoundError, UnAuthorizedError, InternalServerError };
