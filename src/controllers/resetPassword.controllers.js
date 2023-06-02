@@ -1,10 +1,14 @@
 import User from "../model/user.model.js";
 import { Token } from "../model/token.model.js";
 import crypto from "crypto";
-import Joi from "joi";
+// import Joi from "joi";
 import sendEmail from "../utils/sendEmail.js";
 import { config } from "../config/index.js";
-import { resetPasswordValidator } from "../validators/resetPasswordValidator.js";
+import {
+  emailValidator,
+  tokenValidator,
+  resetPasswordValidator,
+} from "../validators/resetPasswordValidator.js";
 import {
   BadUserRequestError,
   NotFoundError,
@@ -28,7 +32,7 @@ export default class PasswordController {
     //   "any.required": "Email is required",
     //   "string.email": "Invalid email format",
     // });
-    const { error } = resetPasswordValidator.validate(req.query, {
+    const { error } = emailValidator.validate(req.query, {
       abortEarly: false,
     });
 
@@ -81,7 +85,7 @@ export default class PasswordController {
     // const schema = Joi.object({
     //   fiveDigitToken: Joi.number().required(),
     // });
-    const { error } = resetPasswordValidator.validate(req.body);
+    const { error } = tokenValidator.validate(req.body);
 
     if (error) throw error;
     // Find the user by email
@@ -120,9 +124,9 @@ export default class PasswordController {
 
     if (!req.body.secret_key)
       throw new BadUserRequestError("Invalid Password change request");
-    const { error } = resetPasswordValidator.validate(req.body);
-    if (error) throw error;
     if (req.body.secret_key == updatePasswordSecretKey) {
+      const { error } = resetPasswordValidator.validate(req.body);
+      if (error) throw error;
       user.password = req.body.password;
       user.confirmPassword = req.body.confirmPassword;
       await user.save();

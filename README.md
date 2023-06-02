@@ -1,38 +1,36 @@
-# Loan Prediction App (No Debt App)
+# Loan Prediction App (No Debt App - Backend)
+
+Welcome to the Loan Prediction App codebase!
 
 This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
 
-# Loan Prediction App (Backend)
+This repository contains the source code for the Loan Prediction Application. The server itself is implemented in node using express. Follow the instructions below to set up the codebase on your local machine.
 
-Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
-The server itself is implemented in node using express.
-Follow the instructions below to set up the codebase on your local machine.
-
-### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
 # Table of Contents
 
-- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#prerequisites-1)
+- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#prerequisites-1)
 
-- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#installation-1)
+- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#installation-1)
 
-- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#configuration-1)
+- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#configuration-1)
 
-- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#directory-structure-1)
+- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#directory-structure-1)
 
-- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#usage-1)
+- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#usage-1)
 
-- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
-  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#users-routes)
+  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
 
-- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#troubleshooting-1)
+- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
-- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status-1)
+- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
 
-- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license-1)
+- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#license-1)
 
-- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits-1)
+- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#credits-1)
 
 ## Prerequisites
 
@@ -148,7 +146,7 @@ Response
             "email": "buchieze@gmail.com",
             "password": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
             "confirmPassword": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
-            "_id": "646e5ccda8413b6801ef0fca",
+            "user_id": "646e5ccda8413b6801ef0fca",
             "createdAt": "2023-05-24T18:51:57.017Z",
             "updatedAt": "2023-05-24T18:51:57.017Z",
             "__v": 0
@@ -179,7 +177,7 @@ Response
     "data": {
         "name": "Emmanuella Pius",
         "email": "emmanuella@gmail.com",
-        "id": "646e5ef538d114f8b047d379",
+        "user_id": "646e5ef538d114f8b047d379",
         "createdAt": "2023-05-24T19:01:09.582Z",
         "updatedAt": "2023-05-24T19:01:09.582Z"
     }
@@ -263,7 +261,7 @@ curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 Response
 (json)
 {
-    "message": "Password must be more than 8 characters long with at least one number, one alphanumeric character, one uppercase letter",
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
     "status": "Failed",
     "errorType": "ValidationError"
 }
@@ -516,6 +514,242 @@ Response
 (json)
 {
     "message": "Access denied, invalid token.",
+    "status": "Failed"
+}
+```
+
+**GET Method(Reset Password): /password-reset**
+
+Parameters: email
+
+- EXAMPLE: Reset Password Link sent
+
+**_STATUS: 200 OK_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(html)
+password reset link sent to your email account
+```
+
+When the link has been sent successfully, the user gets a mail with a link and a five digit token as seen in the screenshot below.
+
+![Password Request Sent Successfully](./images/PRS.png)
+
+- EXAMPLE: Reset Password Link (When the user requests two times in a row)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "A password reset request has already been made, Try again in 1 hour",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Reset Password Link (Invalid Email Format)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=murdugopsi' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Invalid email format",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email Field Empty)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=' \
+--data ''
+
+Response
+(json)
+{
+    "message": "\"email\" is not allowed to be empty",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email/User Does not Exist)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=peryhigh%40gmail.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User with given email does not exist",
+    "status": "Failed"
+}
+```
+
+**POST Method(Reset Password-Five Digit Token): /password-reset**
+
+Parameters: fiveDigitToken
+
+- EXAMPLE: Reset Password(Token Validated)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65721
+}'
+
+Response
+(html)
+Token Validated
+```
+
+- EXAMPLE: Reset Password(Invalid/Expired Token)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65123
+}'
+
+Response
+(json)
+{
+    "message": "Invalid token link or expired",
+    "status": "Failed"
+}
+```
+
+**PUT Method(Reset Password-Password Change): /password-reset**
+
+Parameters: secret_key, password, confirmPassword
+
+- EXAMPLE: Reset Password(Password Changed Successfully)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}''
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Your password has been changed"
+}
+```
+
+The user gets a mail with a message as seen below.
+
+![Password Request Sent Successfully](./images/PCS.png)
+
+- EXAMPLE: Reset Password(Invalid Password Format)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "secret_key": 12345,
+    "password": "H23"
+}'
+
+Response
+(json)
+{
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Passwords Mismatch-when password and confirmPassword are different)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "H"
+}'
+
+Response
+(json)
+{
+    "message": "\"Passwords\" do not match. Please check again",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Invalid Secret Key)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12347,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}'
+
+Response
+(json)
+{
+    "message": "Invalid Password change request",
     "status": "Failed"
 }
 ```
