@@ -21,6 +21,10 @@ router.get(
   tryCatchHandler(UserController.protectedRoute)
 );
 
+// Route to update the user's information or profile
+router.put("/:id", authMiddleware, tryCatchHandler(UserController.updateUser));
+
+// Image Upload Routes
 upload.single("profileImage");
 
 router.put(
@@ -37,7 +41,5 @@ router.delete(
   authMiddleware,
   tryCatchHandler(ImageController.deleteImage)
 );
-
-router.put("/:id", authMiddleware, tryCatchHandler(UserController.updateUser));
 
 export default router;

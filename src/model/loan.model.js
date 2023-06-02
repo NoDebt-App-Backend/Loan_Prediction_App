@@ -1,6 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 
-const loanSchema = Schema({
+const LoanSchema = new Schema({
   user: {
     type: Types.ObjectId,
     ref: "User",
@@ -215,6 +215,4 @@ const loanSchema = Schema({
   },
 });
 
-const Loan = model("Loan", loanSchema);
-
-export { Loan };
+export default model("Loan", LoanSchema);

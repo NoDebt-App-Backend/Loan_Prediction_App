@@ -20,5 +20,4 @@ export const development = {
   bucket_region: process.env.DEV_BUCKET_REGION,
   access_key: process.env.DEV_ACCESS_KEY,
   secret_access_key: process.env.DEV_SECRET_ACCESS_KEY
-
 };

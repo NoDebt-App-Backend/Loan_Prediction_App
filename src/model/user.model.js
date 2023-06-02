@@ -51,6 +51,7 @@ const UserSchema = new Schema(
     profileImage: {
       type: String,
     },
+    imageName: String,
   }, {timestamps: true}
 );
 
