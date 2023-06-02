@@ -4,5 +4,6 @@ import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 const router = express.Router();
 
 router.post("/create", tryCatchHandler(loanControllers.addBorrower));
+router.get("/", tryCatchHandler(loanControllers.findBorrower));
 
 export default router;
