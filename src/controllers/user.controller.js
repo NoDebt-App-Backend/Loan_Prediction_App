@@ -13,6 +13,8 @@ import {
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import { newToken } from "../utils/jwtHandler.js";
+// import { s3 } from "../utils/s3.js";
+// import { PutObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -73,49 +75,47 @@ export default class UserController {
     });
   }
 
-  // static async updateUser(req, res) {
-  //   const { id } = req.params;
-  //   const { error } = mongoIdValidator.validate(id);
-  //   if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+  static async updateUser(req, res) {
+    const { id } = req.params;
+    const { error } = mongoIdValidator.validate(req.params);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
 
-  //   const updateValidatorResponse = updateUserValidator.validate(req.body);
-  //   const updateUserError = updateValidatorResponse.error;
-  //   if (error) throw updateUserError;
+    const updateValidatorResponse = updateUserValidator.validate(req.body);
+    const updateUserError = updateValidatorResponse.error;
+    if (error) throw updateUserError;
 
-  //   const updatedUser = User.findByIdAndUpdate(
-  //     id,
-  //     {
-  //       name: req.body.name,
-  //       organisationName: req.body.organisationName,
-  //       organisationEmail: req.body.organisationEmail,
-  //       numberOfStaffs: req.body.numberOfStaffs,
-  //       staffID: req.body.staffID,
-  //       organisationType: req.body.organisationType,
-  //       website: req.body.website,
-  //       position: req.body.position,
-  //       phoneNumber: req.body.phoneNumber,
-  //       profileImage: req.body.image,
-  //     },
-  //     { new: true }
-  //   );
-  //   if (req.file) {
-  //     profileImage = req.file.filename;
-  //   }
-  //   if (!updatedUser) throw new InternalServerError("Failed to update profile");
+    const user = await User.findByIdAndUpdate(
+      id,
+      {
+        name: req.body.name,
+        organisationName: req.body.organisationName,
+        organisationEmail: req.body.organisationEmail,
+        numberOfStaffs: req.body.numberOfStaffs,
+        staffID: req.body.staffID,
+        organisationType: req.body.organisationType,
+        website: req.body.website,
+        position: req.body.position,
+        phoneNumber: req.body.phoneNumber,
+      },
+      { new: true }
+    );
 
-  //   // This is to exclude the password property returning in the response object
-  //   // const { _id, createdAt, updatedAt } = updatedUser;
-  //   console.log(updatedUser);
+    if (!user) throw new InternalServerError("Failed to update profile");
 
-  //   // Return a response to the client
-  //   res.status(200).json({
-  //     message: "Profile updated successfully",
-  //     status: "Success",
-  //     data: {
-  //       user: updatedUser,
-  //     },
-  //   });
-  // }
+    // save to mongoose database
+    await user.save();
+
+    console.log(user);
+
+    // Return a response to the client
+    res.status(200).json({
+      message: "Profile updated successfully",
+      status: "Success",
+      data: {
+        user: user,
+      },
+    });
+  }
 
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
