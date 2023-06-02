@@ -31,9 +31,10 @@ const loginUserValidator = Joi.object({
     "string.pattern.base": "Not a valid email address or password",
   }),
   password: Joi.string().required().messages({
-    "string.pattern.base": "Not a valid email address or password",
-  }),
-});
+    "string.pattern.base":
+      "Not a valid email address or password",
+  })
+}).strict();
 
 const updateUserValidator = Joi.object({
   name: Joi.string(),

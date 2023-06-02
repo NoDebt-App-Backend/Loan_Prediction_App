@@ -7,6 +7,9 @@ export const development = {
   bcrypt_saltRound: +process.env.DEV_BCRYPT_SALT_ROUND,
   port: process.env.PORT,
   jwt_access: process.env.DEV_JWT_KEY,
+
+  nodemailerUser: process.env.DEV_NODEMAILER_USER,
+  nodemailerPassword:process.env.DEV_NODEMAILER_PASS,
   nodemailer_host: process.env.DEV_NODEMAILER_HOST,
   nodemailer_user: process.env.DEV_NODEMAILER_USER,
   nodemailer_pass: process.env.DEV_NODEMAILER_PASS,
@@ -17,4 +20,5 @@ export const development = {
   bucket_region: process.env.DEV_BUCKET_REGION,
   access_key: process.env.DEV_ACCESS_KEY,
   secret_access_key: process.env.DEV_SECRET_ACCESS_KEY
+
 };

@@ -26,12 +26,7 @@ export default class PasswordController {
    */
   static async changePassword(req, res) {
     const { email } = req.query;
-    // const passwordSchema = Joi.object({
-    //   email: Joi.string().email().required(),
-    // }).messages({
-    //   "any.required": "Email is required",
-    //   "string.email": "Invalid email format",
-    // });
+
     const { error } = emailValidator.validate(req.query, {
       abortEarly: false,
     });
@@ -82,9 +77,7 @@ export default class PasswordController {
    */
   static async sendToken(req, res) {
     const id = req.params.id;
-    // const schema = Joi.object({
-    //   fiveDigitToken: Joi.number().required(),
-    // });
+
     const { error } = tokenValidator.validate(req.body);
 
     if (error) throw error;
