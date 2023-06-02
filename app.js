@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import dotenv from "dotenv";
 import { config } from "./src/config/index.js";
 import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
-
+import loanRouter from "./src/router/loan.route.js";
 import router from "./src/router/user.route.js";
 
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
@@ -14,7 +15,6 @@ dotenv.config();
 
 const app = express();
 
-mongoose.set("strictQuery", false);
 // Local database connection
 mongoose
   .connect(config.database_url)
@@ -28,7 +28,10 @@ const port = config.port || 5000;
 
 // In-built Middleware to gain access to the body
 app.use(express.json());
+
+// External Middlewares installed
 app.use(logger("tiny"));
+app.use(cors());
 
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");
@@ -36,6 +39,7 @@ app.get("/api", (req, res) => {
 
 // defining the routes
 app.use("/api/users", router);
+app.use("/api/loans", loanRouter);
 
 app.use("/api/password-reset", resetPasswordRouter);
 

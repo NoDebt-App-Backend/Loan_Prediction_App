@@ -29,5 +29,7 @@ class InternalServerError extends Error {
       this.status = 500;
       this.errorType = "InternalServerError";
     }}
+}
+
 
 export { BadUserRequestError, NotFoundError, UnAuthorizedError, InternalServerError };

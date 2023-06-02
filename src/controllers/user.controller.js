@@ -1,13 +1,20 @@
 import bcrypt from "bcrypt";
-import { BadUserRequestError, NotFoundError } from "../error/error.js";
+import {
+  BadUserRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../error/error.js";
 import User from "../model/user.model.js";
 import {
   createUserValidator,
   loginUserValidator,
+  updateUserValidator,
 } from "../validators/user.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import { newToken } from "../utils/jwtHandler.js";
+// import { s3 } from "../utils/s3.js";
+// import { PutObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -70,6 +77,48 @@ export default class UserController {
     });
   }
 
+  static async updateUser(req, res) {
+    const { id } = req.params;
+    const { error } = mongoIdValidator.validate(req.params);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+
+    const updateValidatorResponse = updateUserValidator.validate(req.body);
+    const updateUserError = updateValidatorResponse.error;
+    if (error) throw updateUserError;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      {
+        name: req.body.name,
+        organisationName: req.body.organisationName,
+        organisationEmail: req.body.organisationEmail,
+        numberOfStaffs: req.body.numberOfStaffs,
+        staffID: req.body.staffID,
+        organisationType: req.body.organisationType,
+        website: req.body.website,
+        position: req.body.position,
+        phoneNumber: req.body.phoneNumber,
+      },
+      { new: true }
+    );
+
+    if (!user) throw new InternalServerError("Failed to update profile");
+
+    // save to mongoose database
+    await user.save();
+
+    console.log(user);
+
+    // Return a response to the client
+    res.status(200).json({
+      message: "Profile updated successfully",
+      status: "Success",
+      data: {
+        user: user,
+      },
+    });
+  }
+
   static async Login(req, res) {
     // Catching all the errors and handling them as they are returned in the response body
     const { error } = loginUserValidator.validate(req.body);
@@ -104,7 +153,7 @@ export default class UserController {
       data: {
         name: req.body.name,
         email: req.body.email,
-        id: _id,
+        user_id: _id,
         createdAt: createdAt,
         updatedAt: updatedAt,
         access_token: newToken(user),
