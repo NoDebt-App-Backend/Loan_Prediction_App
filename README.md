@@ -115,125 +115,88 @@ https://nodebt-application.onrender.com/api
 
 We have the Users Route and the Loan Route
 
-#### Users Routes
+#### Admins Routes
 
-**POST Method(Create User): /users/create**
+**POST Method(Register Admin with CompanyID): /admins/signup**
 
-Parameters: name, email, password, confirmPassword
+Parameters: firstName, lastName, email, organisationName, password, confirmPassword
 
-- EXAMPLE: Create User - Successful with all the details included
+- EXAMPLE: Register Admin - Successful
 
 **_STATUS: 200 OK_**
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data-raw '{
-    "name": "Buchi Nwabueze",
-    "email": "buchieze@gmail.com",
-    "password": "Yayi123#@",
-    "confirmPassword": "Yayi123#@"
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "lastName": "Lange",
+    "email": "petroridra@gufum.com",
+    "organisationName": "Patricia Tech",
+    "password": "Patto567%",
+    "confirmPassword":"Patto567%"
 }'
 
 Response
 (json)
 {
-    "message": "Account created successfully",
+    "message": "Company account created successfully",
     "status": "Success",
     "data": {
-        "user": {
-            "name": "Buchi Nwabueze",
-            "email": "buchieze@gmail.com",
-            "password": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
-            "confirmPassword": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
-            "user_id": "646e5ccda8413b6801ef0fca",
-            "createdAt": "2023-05-24T18:51:57.017Z",
-            "updatedAt": "2023-05-24T18:51:57.017Z",
-            "__v": 0
+        "company_profile": {
+            "company": "Patricia Tech",
+            "company_id": "647deebbc24032a06525003e"
+        },
+        "admin": {
+            "firstName": "Patricia",
+            "lastName": "Lange",
+            "email": "petroridra@gufum.com",
+            "AdminId": "647deebbc24032a06525003d",
+            "createdAt": "2023-06-05T14:18:35.258Z",
+            "updatedAt": "2023-06-05T14:18:35.258Z"
         }
     }
 }
 ```
 
-- EXAMPLE: Create User - Successful without the password
 
-**_STATUS: 200 OK_**
+- EXAMPLE: Register Admin - Invalid Password Format
+
+**_STATUS: 400 BAD REQUEST_**
 
 ```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data-raw '{
-    "name": "Emmanuella Pius",
-    "email": "emmanuella@gmail.com",
-    "password": "Chem324#@",
-    "confirmPassword": "Chem324#@"
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "lastName": "Lange",
+    "email": "petroridra@gufum.com",
+    "organisationName": "Patricia Tech",
+    "password": "Patto7%",
+    "confirmPassword":"Patto567%"
 }'
 
 Response
 (json)
 {
-    "message": "Account created successfully",
-    "status": "Success",
-    "data": {
-        "name": "Emmanuella Pius",
-        "email": "emmanuella@gmail.com",
-        "user_id": "646e5ef538d114f8b047d379",
-        "createdAt": "2023-05-24T19:01:09.582Z",
-        "updatedAt": "2023-05-24T19:01:09.582Z"
-    }
-}
-```
-
-- EXAMPLE: Create User - when one or all of the parameters are missing
-
-**_STATUS: 400 BAD REQUEST_**
-
-```json
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data '{}'
-
-Response
-(json)
-{
-    "message": "\"name\" is required",
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
     "status": "Failed",
     "errorType": "ValidationError"
 }
 ```
 
-- EXAMPLE: Create User - when Password and confirm password do not match
+- EXAMPLE: Register Admin - Invalid Email Format
 
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data-raw '{
-    "name": "Buchi Nwabueze",
-    "email": "buchieze@gmail.com",
-    "password": "Yayi123#@",
-    "confirmPassword": "Jay123"
-}'
-
-Response
-(json)
-{
-    "message": "\"Passwords\" do not match. Please check again",
-    "status": "Failed",
-    "errorType": "ValidationError"
-}
-```
-
-- EXAMPLE: Create User - Invalid Email Format
-
-**_STATUS: 400 BAD REQUEST_**
-
-```json
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data-raw '{
-    "name": "Buchi Nwabueze",
-    "email": "buchieze",
-    "password": "Yayi123#@",
-    "confirmPassword": "Yayi123#@"
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "lastName": "Lange",
+    "email": "petroridra@g",
+    "organisationName": "Patricia Tech",
+    "password": "Patto7%",
+    "confirmPassword":"Patto567%"
 }'
 
 Response
@@ -245,27 +208,77 @@ Response
 }
 ```
 
-- EXAMPLE: Create User - Invalid Password Format
+- EXAMPLE: Register Admin - when Password and confirm password do not match
 
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
-curl --location 'https://nodebt-application.onrender.com/api/users/create' \
---data-raw '{
-    "name": "Cameroon Johnson",
-    "email": "camjohnson@gmail.com",
-    "password": "Chem32",
-    "confirmPassword": "Chem32"
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "lastName": "Lange",
+    "email": "petroridra@gufum.com",
+    "organisationName": "Patricia Tech",
+    "password": "Patto567%",
+    "confirmPassword":"Patto57%"
 }'
 
 Response
 (json)
 {
-    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
+    "message": "\"Passwords\" do not match. Please check again",
     "status": "Failed",
     "errorType": "ValidationError"
 }
 ```
+
+- EXAMPLE: Register Admin - When a field or all the fields are empty
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "email": "petroridra@gufum.com",
+    "organisationName": "Patricia Tech",
+    "password": "Patto567%",
+    "confirmPassword":"Patto57%"
+}'
+
+Response
+(json)
+{
+    "message": "\"lastName\" is required",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Register Admin - When the email already exists
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
+--data-raw '{   
+    "firstName": "Patricia",
+    "lastName": "Lange",
+    "email": "petroridra@gufum.com",
+    "organisationName": "Patricia Tech",
+    "password": "Patto567%",
+    "confirmPassword":"Patto567%"
+}'
+
+Response
+(json)
+{
+    "message": "An account with this email already exists",
+    "status": "Failed"
+}
+```
+
+
 
 **GET Method(Search for User): /users?id={mongodbID}**
 

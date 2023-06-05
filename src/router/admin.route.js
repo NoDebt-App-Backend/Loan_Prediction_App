@@ -21,7 +21,7 @@ router.post(
 
 // To retrieve all the admin accounts
 router.get(
-  "/admins",
+  "/all",
   authMiddleWare,
   tryCatchHandler(AdminController.getAllAdmins)
 );
@@ -51,7 +51,11 @@ router.get(
 );
 
 // Route to update the admin's information or profile
-router.put("/:id", authMiddleWare, tryCatchHandler(AdminController.updateAdmin));
+router.put(
+  "/:id",
+  authMiddleWare,
+  tryCatchHandler(AdminController.updateAdmin)
+);
 
 // Route to change password in the application
 router.put(
