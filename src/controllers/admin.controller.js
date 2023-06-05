@@ -238,7 +238,7 @@ export default class AdminController {
       adminId: newAdmin._id,
       organisationId: organisationId,
       organisationName: organisationName,
-      adminFisrtName: firstName,
+      adminFirstName: firstName,
       adminLastName: lastName,
     });
     await newAdminCompanyMap.save();
