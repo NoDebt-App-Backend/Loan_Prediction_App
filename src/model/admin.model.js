@@ -27,7 +27,7 @@ const adminSchema = new mongoose.Schema(
     },
     confirmPassword: {
       type: String,
-      required: true,
+      // required: true,
     },
     organisationEmail: {
       type: String,
@@ -57,7 +57,7 @@ const adminSchema = new mongoose.Schema(
     },
     imageName: String,
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Admin = mongoose.model("Admin", adminSchema);
