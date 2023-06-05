@@ -214,8 +214,8 @@ export default class AdminController {
       );
     }
 
-    const companyId = adminCompanyMap.companyId._id;
-    const companyName = adminCompanyMap.companyId.companyName;
+    const organisationId = adminCompanyMap.organisationId._id;
+    const organisationName = adminCompanyMap.organisationId.organisationName;
 
     const newpassword = generateRandomPassword();
     const saltRounds = config.bcrypt_saltRound;
@@ -229,14 +229,14 @@ export default class AdminController {
       phoneNumber,
       role,
       password: hashedPassword,
-      companyId,
-      companyName,
+      organisationId,
+      organisationName,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
       adminId: newAdmin._id,
-      companyId: companyId,
-      companyName: companyName,
+      organisationId: organisationId,
+      organisationName: organisationName,
       adminFisrtName: firstName,
       adminLastName: lastName,
     });

@@ -29,14 +29,12 @@ router.get(
 // To retrieve all the company accounts
 router.get(
   "/companies",
-  authMiddleWare,
   tryCatchHandler(AdminController.getAllOrganisations)
 );
 
 // To retrieve the relationship between the admin and company
 router.get(
   "/admin-company",
-  authMiddleWare,
   tryCatchHandler(AdminController.getAllAdminCompanies)
 );
 
