@@ -69,7 +69,7 @@ export default class AdminController {
     const { error } = mongoIdValidator.validate(req.query);
     if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
     const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("User not found");
+    if (!admin) throw new NotFoundError("Admin not found");
 
     res.status(200).json({
       message: "Admin found successfully",
@@ -252,7 +252,7 @@ export default class AdminController {
       secure: true,
       auth: {
         user: config.nodemailer_user, //  Gmail email address
-        pass: config.nodemailer_pass, //  Gmail password or an application-specific password
+        pass: config.nodemailer_password, //  Gmail password or an application-specific password
       },
     });
 
@@ -260,7 +260,7 @@ export default class AdminController {
       from: "nodebtapplication@gmail.com",
       to: newAdmin.email,
       subject: "Welcome to Nodebt",
-      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: https://nodebt-application.onrender.com/api/admin/login\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
+      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: https://localhost:4000/api/admin/login\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
     };
 
     await transporter.sendMail(mailOptions);

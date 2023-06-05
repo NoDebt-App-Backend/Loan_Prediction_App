@@ -128,7 +128,7 @@ Parameters: firstName, lastName, email, organisationName, password, confirmPassw
 ```json
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "lastName": "Lange",
     "email": "petroridra@gufum.com",
@@ -159,14 +159,13 @@ Response
 }
 ```
 
-
 - EXAMPLE: Register Admin - Invalid Password Format
 
 **_STATUS: 400 BAD REQUEST_**
 
 ```json
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "lastName": "Lange",
     "email": "petroridra@gufum.com",
@@ -190,7 +189,7 @@ Response
 
 ```json
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "lastName": "Lange",
     "email": "petroridra@g",
@@ -214,7 +213,7 @@ Response
 
 ```json
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "lastName": "Lange",
     "email": "petroridra@gufum.com",
@@ -238,7 +237,7 @@ Response
 
 ```json
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "email": "petroridra@gufum.com",
     "organisationName": "Patricia Tech",
@@ -261,7 +260,7 @@ Response
 
 ```json
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Patricia",
     "lastName": "Lange",
     "email": "petroridra@gufum.com",
@@ -278,89 +277,20 @@ Response
 }
 ```
 
-
-
-**GET Method(Search for User): /users?id={mongodbID}**
-
-Parameters: user's id as a request parameter
-
-- EXAMPLE: Search User - Successful
-
-**_STATUS: 200 OK_**
-
-```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users?id=646fd36c0cbaaeabea3b1381' \
---data ''
-
-Response
-(json)
-{
-    "message": "User found successfully",
-    "status": "Success",
-    "data": {
-        "user": {
-            "_id": "646fd36c0cbaaeabea3b1381",
-            "name": "Karen Nwachukwu",
-            "email": "karen@gmail.com",
-            "password": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
-            "confirmPassword": "$2b$10$zwIdtRE3sRpiI1stOX.UluyHlBd345PnspFQTTxRVybJlJStbcNue",
-            "createdAt": "2023-05-25T21:30:20.766Z",
-            "updatedAt": "2023-05-25T21:30:20.766Z",
-            "__v": 0
-        }
-    }
-}
-```
-
-- EXAMPLE: Search User - Wrong ID
-
-**_STATUS: 400 BAD REQUEST_**
-
-```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d' \
---data ''
-
-Response
-(json)
-{
-    "message": "Please pass in a valid mongoId",
-    "status": "Failed"
-}
-```
-
-- EXAMPLE: Search User - User Not Found
-
-**_STATUS: 400 BAD REQUEST_**
-
-```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users?id=646e5ef538d114f8b047d379' \
---data ''
-
-Response
-(json)
-{
-    "message": "User not found",
-    "status": "Failed"
-}
-```
-
-**POST Method(Login User): /users/login**
+**POST Method(Login Admin): /admins/login**
 
 Parameters: email, password
 
-- EXAMPLE: Login User - Successful with all the details included
+- EXAMPLE: Login Admin - Successful
 
 **_STATUS: 200 OK_**
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
 --data-raw '{
-    "email": "kennedybrown@gmail.com",
-    "password": "Amazing456@"
+    "email": "petroridra@gufum.com",
+    "password": "Patto567%"
 }'
 
 Response
@@ -369,74 +299,41 @@ Response
     "message": "User found successfully",
     "status": "Success",
     "data": {
-        "user": {
-            "_id": "646dbda3f1c20c4075f7fd53",
-            "name": "Kennedy Brown",
-            "email": "kennedybrown@gmail.com",
-            "password": "$2b$10$QWL1dxXNOh7kuGkkP7iC3OiRCNrsdvNScZ3U3pFCSRrm6ekpKSNi.",
-            "confirmPassword": "$2b$10$QWL1dxXNOh7kuGkkP7iC3OiRCNrsdvNScZ3U3pFCSRrm6ekpKSNi.",
-            "createdAt": "2023-05-24T07:32:51.745Z",
-            "updatedAt": "2023-05-24T07:32:51.745Z",
-            "__v": 0
-        },
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJEPpKEYtpkBUyPS-k"
+        "adminId": "647deebbc24032a06525003d",
+        "email": "petroridra@gufum.com",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGVlYmJjMjQwMzJhMDY1MjUwMDNkIiwiZW1haWwiOiJwZXRyb3JpZHJhQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk3NTM5MCwiZXhwIjoxNjg2MDYxNzkwfQ.CceELmq__mqtO6emva-2lZXSNJ3Jpp1ewVEI0_RGNDU"
     }
 }
 ```
 
-- EXAMPLE: Login User - Successful without the password
-
-**_STATUS: 200 OK_**
-
-```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
---data-raw '{
-    "email": "kennedybrown@gmail.com",
-    "password": "Amazing456@"
-}'
-
-Response
-(json)
-{
-    "message": "User found successfully",
-    "status": "Success",
-    "data": {
-        "email": "kennedybrown@gmail.com",
-        "id": "646dbda3f1c20c4075f7fd53",
-        "createdAt": "2023-05-24T07:32:51.745Z",
-        "updatedAt": "2023-05-24T07:32:51.745Z",
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTU2MDIsImV4cCI6MTY4NTA0MjAwMn0.C6_FU4YwpFSK7bwb-0aY1BjHBbyyZ-fSCYSPklTbvU8"
-    }
-}
-```
-
-- EXAMPLE: Login User - when one or all of the parameters are missing
+- EXAMPLE: Login Admin - when one or all of the parameters are missing
   **_STATUS: 400 BAD REQUEST_**
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
---data '{ }'
+curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
+--data-raw '{
+    "email": "petroridra@gufum.com"
+}'
 
 Response
 (json)
 {
-    "message": "\"email\" is required",
+    "message": "\"password\" is required",
     "status": "Failed",
     "errorType": "ValidationError"
 }
 ```
 
-- EXAMPLE: Login User - with wrong Email Address
+- EXAMPLE: Login Admin - with wrong Email Address
   **_STATUS: 400 BAD REQUEST_**
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
-    "password": "Amazing456@"
+    "password": "Patto567%"
 }'
 
 Response
@@ -447,15 +344,15 @@ Response
 }
 ```
 
-- EXAMPLE: Login User - with wrong Password
+- EXAMPLE: Login Admin - with wrong Password
   **_STATUS: 400 BAD REQUEST_**
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
+curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
 --data-raw '{
-    "email": "kennedybrown@gmail.com",
-    "password": "Amazing45"
+    "email": "petroridra@gufum.com",
+    "password": "Pao567%"
 }'
 
 Response
@@ -466,26 +363,7 @@ Response
 }
 ```
 
-- EXAMPLE: Login User - with wrong Password
-  **_STATUS: 400 BAD REQUEST_**
-
-```json
-Request
-curl --location 'https://nodebt-application.onrender.com/api/users/login' \
---data-raw '{
-    "email": "kennedybrown@gmail.com",
-    "password": "Amazing45"
-}'
-
-Response
-(json)
-{
-    "message": "Please provide a valid email address and password before you can login.",
-    "status": "Failed"
-}
-```
-
-**GET Method(Login Authentication/Authorization): /users/protected**
+**GET Method(Login Authentication/Authorization): /admins/protected**
 
 Parameters: email, password, authToken
 
@@ -495,7 +373,7 @@ Parameters: email, password, authToken
 
 ```json
 Request
-curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJEPpKEYtpkBUyPS-k' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
@@ -516,7 +394,7 @@ Response
 
 ```json
 Request
-curl --location --request GET 'https://nodebt-application.onrender.com/api/users/protected' \
+curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/protected' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYmRhM2YxYzIwYzQwNzVmN2ZkNTMiLCJlbWFpbCI6Imtlbm5lZHlicm93bkBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTUwMDEsImV4cCI6MTY4NTA0MTQwMX0.f2iltAVTb3c5413uwb19662vkrJ' \
 --data-raw '{
     "email": "kennybrown@gmail.com",
@@ -549,11 +427,11 @@ Response
 password reset link sent to your email account
 ```
 
-When the link has been sent successfully, the user gets a mail with a link and a five digit token as seen in the screenshot below.
+When the link has been sent successfully, the admin gets a mail with a link and a five digit token as seen in the screenshot below.
 
 ![Password Request Sent Successfully](./images/PRS.png)
 
-- EXAMPLE: Reset Password Link (When the user requests two times in a row)
+- EXAMPLE: Reset Password Link (When the admin requests two times in a row)
 
 **_STATUS: 400 BAD REQUEST_**
 
@@ -618,7 +496,7 @@ curl --location 'https://nodebt-application.onrender.com/api/password-reset?emai
 Response
 (json)
 {
-    "message": "User with given email does not exist",
+    "message": "Admin with given email does not exist",
     "status": "Failed"
 }
 ```
@@ -767,7 +645,174 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile): /users/:id**
+**PUT Method(Update Admin Profile): /admins/:id**
+
+Parameters: id(as a req parameter), optional parameters (firstName, lastName, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber)
+
+- EXAMPLE: Update Admin Profile (success for all the fields)
+
+**_STATUS: 200 OK_**
+
+```json
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
+--data-raw '{
+    "firstName": "Justine",
+    "lastName": "Kennedy",
+    "organisationEmail": "kennedyjay@keren.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003",
+    "organisationType": "Loan App Organisation",
+    "website": "https://www.health-plus.ng",
+    "position": "Head of Finance",
+    "phoneNumber": "09076890980"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "admin": {
+            "_id": "647deebbc24032a06525003d",
+            "firstName": "Justine",
+            "lastName": "Kennedy",
+            "email": "petroridra@gufum.com",
+            "password": "$2b$10$JtyQoJwswLFNe9i.TxKLnOQJAmQXe2pmy0UhHoLFdUt1NzE09mWl6",
+            "confirmPassword": "$2b$10$JtyQoJwswLFNe9i.TxKLnOQJAmQXe2pmy0UhHoLFdUt1NzE09mWl6",
+            "createdAt": "2023-06-05T14:18:35.258Z",
+            "updatedAt": "2023-06-05T14:47:49.115Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "kennedyjay@keren.com",
+            "organisationType": "Loan App Organisation",
+            "phoneNumber": "09076890980",
+            "position": "Head of Finance",
+            "staffID": "HP003",
+            "website": "https://www.health-plus.ng"
+        }
+    }
+}
+```
+
+- EXAMPLE: Update Admin Profile (success for all a few fields)
+
+**_STATUS: 200 OK_**
+
+```json
+curl --location --request PUT 'localhost:4000/api/users/647cbac23b2e9187b575b67d' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--data-raw '{
+    "organisationEmail": "justineobayemi@healthplus.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "647cbac23b2e9187b575b67d",
+            "name": "Katrina Jacobs",
+            "email": "boltehakku@gufum.com",
+            "password": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "confirmPassword": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "createdAt": "2023-06-04T16:24:34.459Z",
+            "updatedAt": "2023-06-04T16:25:08.619Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "justineobayemi@healthplus.com",
+            "staffID": "HP003"
+        }
+    }
+}
+```
+
+**PUT Method(Update Admin Profile Picture): /admins?id={adminID}/profile-picture**
+
+Parameters: admin's id as a request parameter, the name of the image input will be profileImage
+Admin has to be authenticated
+
+- EXAMPLE: Image uploaded to AWS successfully
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Uploaded Successfully",
+    "data": {
+        "adminId": "647deebbc24032a06525003d",
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "profileImage": "\ufffd\ufffd\ufffd\ufffd\u0000\u0010...a very long buffer"
+    }
+}
+```
+
+**GET Method(Download Image from AWS): /admins?id={adminID}/profile-picture**
+
+Parameters: admin's id as a request parameter, the name of the image input will be profileImage
+The admin has to be authenticated
+
+- EXAMPLE: Download Image from AWS
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/IMG-20201121-WA0000.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image Downloaded Successfully",
+    "data": {
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/Screenshot%202021-07-07%20082822.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230605%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230605T161916Z&X-Amz-Expires=3600&X-Amz-Signature=00bc2481f824b2baa8ffbfc10bcaee0f4d3c5e547aaaed6b43ef531266a019cf&X-Amz-SignedHeaders=host&x-id=GetObject"
+    }
+}
+```
+
+This imageURL has the image itself.
+
+**DELETE Method(Delete Image from AWS and the database): /admins?id={adminID}/profile-picture**
+
+Parameters: admin's id as a request parameter, the name of the image input will be profileImage
+The admin has to be authenticated
+
+- EXAMPLE: Delete Image from AWS
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/IMG-20201121-WA0000.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image has been deleted successfully"
+}
+```
+
+**PUT Method(Update Admin Profile): /admins/:id**
 
 Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
 
@@ -854,9 +899,9 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile Picture): /users/:id/profile-picture**
+**PUT Method(Update Admin Profile Picture): /admins/:id/profile-picture**
 
-Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
 - EXAMPLE: Update Admin Profile Profile - (Successfully uploaded to AWS)
 
@@ -881,9 +926,9 @@ Response
 }
 ```
 
-**GET Method(Download Admin Profile Picture): /users/:id/profile-picture**
+**GET Method(Download Admin Profile Picture): /admins/:id/profile-picture**
 
-Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
 - EXAMPLE: Download Admin Profile Picture - (Successfully uploaded to AWS)
 
@@ -906,11 +951,12 @@ Response
     }
 }
 ```
-*Please note that the url is the actual image itself. This is what is being used as the profile picture*
 
-**DELETE Method(Remove Admin Profile Picture): /users/:id/profile-picture**
+_Please note that the url is the actual image itself. This is what is being used as the profile picture_
 
-Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+**DELETE Method(Remove Admin Profile Picture): /admins/:id/profile-picture**
+
+Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
 - EXAMPLE: Delete Admin Profile Picture - (Successfully uploaded to AWS)
 
@@ -927,6 +973,191 @@ Response
 {
     "status": "Success",
     "message": "Profile Image has been deleted successfully"
+}
+```
+
+**PUT Method(Change Password): /admins/:id/change-password**
+
+Parameters: authToken, oldPassword, newPassword, confirmNewPassword
+
+- EXAMPLE: Change Password Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/change-password' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
+--data-raw '{
+    "oldPassword": "Patto567%",
+    "newPassword": "Carry123@",
+    "confirmNewPassword": "Carry123@"
+}'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Password changed successfully"
+}
+```
+
+- EXAMPLE: Change Password (Incorrect old password)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/change-password' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
+--data-raw '{
+    "oldPassword": "Kiki123$",
+    "newPassword": "Carry123@",
+    "confirmNewPassword": "Car123@"
+}'
+
+Response
+(json)
+{
+    "message": "Password incorrect. Please provide a correct password",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Change Password (Password and confirm Password mismatch)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/change-password' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
+--data-raw '{
+    "oldPassword": "Kiki123$",
+    "newPassword": "Carry123@",
+    "confirmNewPassword": "Car123@"
+}'
+
+Response
+(json)
+{
+    "message": "New Password and confirm New Password do not match.",
+    "status": "Failed"
+}
+```
+
+**POST Method(Add Admin): /admins/create**
+
+Parameters: authToken, firstName, lastName, email, phoneNumber, role
+
+- EXAMPLE: Add Admin Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/create' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGVlYmJjMjQwMzJhMDY1MjUwMDNkIiwiZW1haWwiOiJwZXRyb3JpZHJhQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk3NTY2NywiZXhwIjoxNjg2MDYyMDY3fQ.nzIrcWTwYBFd_RNAy1KuPLr6yZaXbZmzKuXjzNR4k6c' \
+--data-raw '{
+       "firstName": "Francis",
+       "lastName": "Makinde",
+        "email": "yorkukiltu@gufum.com",
+        "phoneNumber": "09087654356",
+        "role": "Financial Analyst"
+}'
+
+Response
+(json)
+{
+    "message": "Protected route accessed successfully",
+    "status": "Success",
+    "data": {
+        "newAdmin": {
+            "firstName": "Francis",
+            "lastName": "Makinde",
+            "phoneNumber": "09087654356",
+            "email": "yorkukiltu@gufum.com",
+            "password": "$2b$10$ARc0JaZWJHtBkYVkCjkpwuhQUc/ZM.v7.X7Susc2icXqImNFsnsOu",
+            "role": "Financial Analyst",
+            "_id": "647e3e7de101695c5a8f86e9",
+            "createdAt": "2023-06-05T19:58:53.101Z",
+            "updatedAt": "2023-06-05T19:58:53.101Z",
+            "__v": 0
+        },
+        "newpassword": "uN<6_,Jg"
+    }
+}
+```
+
+The new admin gets a mail with the login password, the login url and the email address as shown in the image below
+![Adding-Admin](./images/ANA.png)
+
+**GET Method(Get A Single Admin): /admins/one/id={adminID}**
+
+Parameters: authToken, id as a req query
+
+- EXAMPLE: Get A Single Admin Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/one?id=647e3e7de101695c5a8f86e9' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZTNlN2RlMTAxNjk1YzVhOGY4NmU5IiwiZW1haWwiOiJ5b3JrdWtpbHR1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk5NTQ3NCwiZXhwIjoxNjg2MDgxODc0fQ.x-2YLsZHbfimhBrXx1WXV0Q6teBG1GRW6sttJbiCsQo'
+
+Response
+(json)
+{
+    "message": "Admin found successfully",
+    "status": "Success",
+    "data": {
+        "admin": {
+            "_id": "647e3e7de101695c5a8f86e9",
+            "firstName": "Francis",
+            "lastName": "Makinde",
+            "phoneNumber": "09087654356",
+            "email": "yorkukiltu@gufum.com",
+            "password": "$2b$10$ARc0JaZWJHtBkYVkCjkpwuhQUc/ZM.v7.X7Susc2icXqImNFsnsOu",
+            "role": "Financial Analyst",
+            "createdAt": "2023-06-05T19:58:53.101Z",
+            "updatedAt": "2023-06-05T19:58:53.101Z",
+            "__v": 0
+        }
+    }
+}
+```
+
+- EXAMPLE: Get A Single Admin - Invalid ID
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/one?id=647e3e7de101695c5a8f86e9' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZTNlN2RlMTAxNjk1YzVhOGY4NmU5IiwiZW1haWwiOiJ5b3JrdWtpbHR1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk5NTQ3NCwiZXhwIjoxNjg2MDgxODc0fQ.x-2YLsZHbfimhBrXx1WXV0Q6teBG1GRW6sttJbiCsQo'
+
+Response
+(json)
+{
+    "message": "Please pass in a valid mongoId",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Get A Single Admin - Invalid Auth Token
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/one?id=647e3e7de101695c5a8f86e9' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZTNlN2RlMTAxNjk1YzVhOGY4NmU5IiwiZW1haWwiOiJ5b3JrdWtpbHR1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk5NTQ3NCwiZXhwIjoxNjg2MDgxODc0fQ.x-2YLsZHbfimhBrXx1WXV0Q6teBG1GRW6sttJbiCsQo'
+
+Response
+(json)
+{
+    "message": "Access denied, invalid token.",
+    "status": "Failed"
 }
 ```
 
