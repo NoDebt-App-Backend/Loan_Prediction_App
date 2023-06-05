@@ -16,8 +16,8 @@ export const production = {
   password_secretkey: process.env.PROD_NODEMAILER_UPDATE_PASSWORD_SECRET_KEY,
 
   // AWS S3-BUCKET CLIENT PARAMETERS/VARIABLES
-  bucket_name: process.env.DEV_BUCKET_NAME,
-  bucket_region: process.env.DEV_BUCKET_REGION,
-  access_key: process.env.DEV_ACCESS_KEY,
-  secret_access_key: process.env.DEV_SECRET_ACCESS_KEY,
+  bucket_name: process.env.PROD_BUCKET_NAME,
+  bucket_region: process.env.PROD_BUCKET_REGION,
+  access_key: process.env.PROD_ACCESS_KEY,
+  secret_access_key: process.env.PROD_SECRET_ACCESS_KEY,
 };
