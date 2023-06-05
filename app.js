@@ -6,7 +6,7 @@ import { config } from "./src/config/index.js";
 import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
 import loanRouter from "./src/router/loan.route.js";
-import router from "./src/router/user.route.js";
+import router from "./src/router/admin.route.js";
 
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
 
@@ -38,7 +38,7 @@ app.get("/api", (req, res) => {
 });
 
 // defining the routes
-app.use("/api/users", router);
+app.use("/api/admins", router);
 app.use("/api/loans", loanRouter);
 
 app.use("/api/password-reset", resetPasswordRouter);

@@ -1,3 +1,6 @@
+import dotenv, { config } from "dotenv";
+dotenv.config();
+
 export const production = {
   database_url: process.env.PROD_MONGODB_CONNECTION_URL,
   bcrypt_saltRound: +process.env.PROD_BCRYPT_SALT_ROUND,
