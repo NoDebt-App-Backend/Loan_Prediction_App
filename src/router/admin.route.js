@@ -41,7 +41,7 @@ router.get(
 );
 
 // To get a single admin account
-router.get("/admin", authMiddleWare, tryCatchHandler(AdminController.getAdmin));
+router.get("/one", authMiddleWare, tryCatchHandler(AdminController.getAdmin));
 
 // To check if the admin is authorized
 router.get(
