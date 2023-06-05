@@ -33,9 +33,12 @@ export default class AdminController {
       });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get all admins
+  //get all admins within a company
   static async getAllAdmins(req, res) {
-    const admin = await Admin.find();
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const admin = await Admin.findById(id);
     res.status(200).json({
       status: 'Success',
       message: 'Admins found successfully',
@@ -66,9 +69,6 @@ export default class AdminController {
     const admin = await Admin.findById(id);
     if (!admin) throw new NotFoundError("User not found");
 
-    // const admin = await Admin.findOne({ email });
-
-    // if (!admin) throw new NotFoundError("Admin not Found");
 
     res.status(200).json({
       message: "Admin found successfully",
