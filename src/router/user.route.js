@@ -1,45 +1,48 @@
-import express from "express";
-const router = express.Router();
-import { tryCatchHandler } from "../utils/tryCatchHandler.js";
-import UserController from "../controllers/user.controller.js";
-import authMiddleware from "../middlewares/auth.js";
-import ImageController from "../controllers/userImage.controller.js";
-import { upload } from "../middlewares/uploadImage.js";
+// import express from "express";
+// const router = express.Router();
+// import { tryCatchHandler } from "../utils/tryCatchHandler.js";
+// import UserController from "../controllers/user.controller.js";
+// import authMiddleware from "../middlewares/auth.js";
+// import ImageController from "../controllers/userImage.controller.js";
+// import { upload } from "../middlewares/uploadImage.js";
 
-// route to create a new user
-router.post("/create", tryCatchHandler(UserController.createUser));
+// // route to create a new user
+// router.post("/create", tryCatchHandler(UserController.createUser));
 
-router.get("/find", tryCatchHandler(UserController.findUser));
+// router.get("/find", tryCatchHandler(UserController.findUser));
 
-//route to login and get jwt token
-router.post("/login", tryCatchHandler(UserController.Login));
+// //route to login and get jwt token
+// router.post("/login", tryCatchHandler(UserController.Login));
 
-//protected route that grant access after successful login
-router.get(
-  "/protected",
-  authMiddleware,
-  tryCatchHandler(UserController.protectedRoute)
-);
+// //protected route that grant access after successful login
+// router.get(
+//   "/protected",
+//   authMiddleware,
+//   tryCatchHandler(UserController.protectedRoute)
+// );
 
-// Route to update the user's information or profile
-router.put("/:id", authMiddleware, tryCatchHandler(UserController.updateUser));
+// // Route to update the user's information or profile
+// router.put("/:id", authMiddleware, tryCatchHandler(UserController.updateUser));
 
-// Image Upload Routes
-upload.single("profileImage");
+// // Route to change password in the application
+// router.put("/:id/change-password", authMiddleware, tryCatchHandler(UserController.changePassword));
 
-router.put(
-  "/:id/profile-picture",
-  authMiddleware,
-  upload.single("profileImage"),
-  tryCatchHandler(ImageController.uploadImage)
-);
+// // Image Upload Routes
+// upload.single("profileImage");
 
-router.get("/:id/profile-picture", authMiddleware, tryCatchHandler(ImageController.downloadImage))
+// router.put(
+//   "/:id/profile-picture",
+//   authMiddleware,
+//   upload.single("profileImage"),
+//   tryCatchHandler(ImageController.uploadImage)
+// );
 
-router.delete(
-  "/:id/profile-picture",
-  authMiddleware,
-  tryCatchHandler(ImageController.deleteImage)
-);
+// router.get("/:id/profile-picture", authMiddleware, tryCatchHandler(ImageController.downloadImage))
 
-export default router;
+// router.delete(
+//   "/:id/profile-picture",
+//   authMiddleware,
+//   tryCatchHandler(ImageController.deleteImage)
+// );
+
+// export default router;

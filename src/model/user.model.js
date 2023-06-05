@@ -15,6 +15,10 @@ const UserSchema = new Schema(
       unique: true,
       immutable: true,
     },
+    organisationName: {
+      type: String,
+      // required: true,
+    },
     password: {
       type: String,
       required: true,
@@ -22,9 +26,6 @@ const UserSchema = new Schema(
     confirmPassword: {
       type: String,
       required: true,
-    },
-    organisationName: {
-      type: String,
     },
     organisationEmail: {
       type: String,

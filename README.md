@@ -754,6 +754,169 @@ Response
 }
 ```
 
+**PUT Method(Update Admin Profile): /users/:id**
+
+Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
+
+- EXAMPLE: Update Admin Profile - Successful (This can be one or more as it is optional)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FIXnbcGKD18' \
+--data-raw '{
+    "name": "Justine Obayemi",
+    "organisationEmail": "justineobayemi@healthplus.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003",
+    "organisationType": "Health Organisation",
+    "website": "https://www.health-plus.ng",
+    "position": "Head of Finance",
+    "phoneNumber": "09076890980"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "647ca411ef44ef3feafdac75",
+            "name": "Justine Obayemi",
+            "email": "katrimalti@gufum.com",
+            "password": "$2b$10$7TQt7KbCi0YMAEWhYSamze5fgOkm8h/.GH2t3ZtAr4yPV2hU/TiYi",
+            "confirmPassword": "$2b$10$RvTXiLeABSf0L7cOAIN6muNUdbfdCJJwKaqRxi0zWES.n3lLr5hWK",
+            "createdAt": "2023-06-04T14:47:45.854Z",
+            "updatedAt": "2023-06-04T16:20:26.776Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "justineobayemi@healthplus.com",
+            "organisationType": "Health Organisation",
+            "phoneNumber": "09076890980",
+            "position": "Head of Finance",
+            "staffID": "HP003",
+            "website": "https://www.health-plus.ng"
+        }
+    }
+}
+```
+
+- EXAMPLE: Update Admin Profile - Successful (for a few fields)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647cbac23b2e9187b575b67d' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--data-raw '{
+    "organisationEmail": "justineobayemi@healthplus.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "647cbac23b2e9187b575b67d",
+            "name": "Katrina Jacobs",
+            "email": "boltehakku@gufum.com",
+            "password": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "confirmPassword": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "createdAt": "2023-06-04T16:24:34.459Z",
+            "updatedAt": "2023-06-04T16:25:08.619Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "justineobayemi@healthplus.com",
+            "staffID": "HP003"
+        }
+    }
+}
+```
+
+**PUT Method(Update Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Update Admin Profile Profile - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Uploaded Successfully",
+    "data": {
+        "user_id": "647ca411ef44ef3feafdac75",
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "profileImage": "\ufffd\ufffd\ufffd\ufffd\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0...very long buffer"
+    }
+}
+```
+
+**GET Method(Download Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Download Admin Profile Picture - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image Downloaded Successfully",
+    "data": {
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/Screenshot%202021-07-07%20082822.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTOWCRXHUC%2F20230604%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230604T163224Z&X-Amz-Expires=3600&X-Amz-Signature=6d6b20221b23967dec24c73d7db8caa7969be8624605f1a41d6c745441d6b152&X-Amz-SignedHeaders=host&x-id=GetObject"
+    }
+}
+```
+*Please note that the url is the actual image itself. This is what is being used as the profile picture*
+
+**DELETE Method(Remove Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Delete Admin Profile Picture - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image has been deleted successfully"
+}
+```
+
 ## Troubleshooting
 
 - If you encounter any issues during the setup process, please ensure that you have the latest versions of Node.js and MongoDB installed.
