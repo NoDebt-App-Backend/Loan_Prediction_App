@@ -1,38 +1,36 @@
-# Loan Prediction App (No Debt App)
+# Loan Prediction App (No Debt App - Backend)
+
+Welcome to the Loan Prediction App codebase!
 
 This is a Software as a Service Provider that helps potential customers predict if an applicant is eligible to take a loan. Please refer to the documentation for further information.
 
-# Loan Prediction App (Backend)
+This repository contains the source code for the Loan Prediction Application. The server itself is implemented in node using express. Follow the instructions below to set up the codebase on your local machine.
 
-Welcome to the Loan Prediction App codebase! This repository contains the source code for the Loan Prediction Application.
-The server itself is implemented in node using express.
-Follow the instructions below to set up the codebase on your local machine.
-
-### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+### Here is the [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
 # Table of Contents
 
-- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#prerequisites-1)
+- ### [Prerequisites](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#prerequisites-1)
 
-- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#installation-1)
+- ### [Installation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#installation-1)
 
-- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#configuration-1)
+- ### [Configuration](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#configuration-1)
 
-- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#directory-structure-1)
+- ### [Directory Structure](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#directory-structure-1)
 
-- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#usage-1)
+- ### [Usage](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#usage-1)
 
-- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#api-documentation-1)
+- ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
-  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#users-routes)
+  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
 
-- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#troubleshooting-1)
+- ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
-- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#project-status-1)
+- ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
 
-- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#license-1)
+- ### [License](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#license-1)
 
-- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/dev#credits-1)
+- ### [Credits](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#credits-1)
 
 ## Prerequisites
 
@@ -148,7 +146,7 @@ Response
             "email": "buchieze@gmail.com",
             "password": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
             "confirmPassword": "$2b$10$RFAsR4rjHNcx.fSRn8CeIeLJUYDV2kuqyNAdKeN3/yD9hk0RQIQqe",
-            "_id": "646e5ccda8413b6801ef0fca",
+            "user_id": "646e5ccda8413b6801ef0fca",
             "createdAt": "2023-05-24T18:51:57.017Z",
             "updatedAt": "2023-05-24T18:51:57.017Z",
             "__v": 0
@@ -179,7 +177,7 @@ Response
     "data": {
         "name": "Emmanuella Pius",
         "email": "emmanuella@gmail.com",
-        "id": "646e5ef538d114f8b047d379",
+        "user_id": "646e5ef538d114f8b047d379",
         "createdAt": "2023-05-24T19:01:09.582Z",
         "updatedAt": "2023-05-24T19:01:09.582Z"
     }
@@ -263,7 +261,7 @@ curl --location 'https://nodebt-application.onrender.com/api/users/create' \
 Response
 (json)
 {
-    "message": "Password must be more than 8 characters long with at least one number, one alphanumeric character, one uppercase letter",
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter and one lowercase letter",
     "status": "Failed",
     "errorType": "ValidationError"
 }
@@ -517,6 +515,405 @@ Response
 {
     "message": "Access denied, invalid token.",
     "status": "Failed"
+}
+```
+
+**GET Method(Reset Password): /password-reset**
+
+Parameters: email
+
+- EXAMPLE: Reset Password Link sent
+
+**_STATUS: 200 OK_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(html)
+password reset link sent to your email account
+```
+
+When the link has been sent successfully, the user gets a mail with a link and a five digit token as seen in the screenshot below.
+
+![Password Request Sent Successfully](./images/PRS.png)
+
+- EXAMPLE: Reset Password Link (When the user requests two times in a row)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=lidreforko%40gufum.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "A password reset request has already been made, Try again in 1 hour",
+    "status": "Failed"
+}
+```
+
+- EXAMPLE: Reset Password Link (Invalid Email Format)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=murdugopsi' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Invalid email format",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email Field Empty)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=' \
+--data ''
+
+Response
+(json)
+{
+    "message": "\"email\" is not allowed to be empty",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password Link (Email/User Does not Exist)
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request Query Params
+curl --location 'https://nodebt-application.onrender.com/api/password-reset?email=peryhigh%40gmail.com' \
+--data ''
+
+Response
+(json)
+{
+    "message": "User with given email does not exist",
+    "status": "Failed"
+}
+```
+
+**POST Method(Reset Password-Five Digit Token): /password-reset**
+
+Parameters: fiveDigitToken
+
+- EXAMPLE: Reset Password(Token Validated)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65721
+}'
+
+Response
+(html)
+Token Validated
+```
+
+- EXAMPLE: Reset Password(Invalid/Expired Token)
+
+The link is a redirect for the user to input the five digit token sent to their mail.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "fiveDigitToken": 65123
+}'
+
+Response
+(json)
+{
+    "message": "Invalid token link or expired",
+    "status": "Failed"
+}
+```
+
+**PUT Method(Reset Password-Password Change): /password-reset**
+
+Parameters: secret_key, password, confirmPassword
+
+- EXAMPLE: Reset Password(Password Changed Successfully)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}''
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Your password has been changed"
+}
+```
+
+The user gets a mail with a message as seen below.
+
+![Password Request Sent Successfully](./images/PCS.png)
+
+- EXAMPLE: Reset Password(Invalid Password Format)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data '{
+    "secret_key": 12345,
+    "password": "H23"
+}'
+
+Response
+(json)
+{
+    "message": "Password must be more than 8 characters long with at least one number, one special character, one uppercase letter",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Passwords Mismatch-when password and confirmPassword are different)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12345,
+    "password": "Helen23@",
+    "confirmPassword": "H"
+}'
+
+Response
+(json)
+{
+    "message": "\"Passwords\" do not match. Please check again",
+    "status": "Failed",
+    "errorType": "ValidationError"
+}
+```
+
+- EXAMPLE: Reset Password(Invalid Secret Key)
+
+The secret_key is passed in, and the user puts in the new password.
+
+**_STATUS: 401 UNAUTHORIZED_**
+
+```json
+Request
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/password-reset/64721eba27f5e945bf191237' \
+--data-raw '{
+    "secret_key": 12347,
+    "password": "Helen23@",
+    "confirmPassword": "Helen23@"
+}'
+
+Response
+(json)
+{
+    "message": "Invalid Password change request",
+    "status": "Failed"
+}
+```
+
+**PUT Method(Update Admin Profile): /users/:id**
+
+Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
+
+- EXAMPLE: Update Admin Profile - Successful (This can be one or more as it is optional)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FIXnbcGKD18' \
+--data-raw '{
+    "name": "Justine Obayemi",
+    "organisationEmail": "justineobayemi@healthplus.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003",
+    "organisationType": "Health Organisation",
+    "website": "https://www.health-plus.ng",
+    "position": "Head of Finance",
+    "phoneNumber": "09076890980"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "647ca411ef44ef3feafdac75",
+            "name": "Justine Obayemi",
+            "email": "katrimalti@gufum.com",
+            "password": "$2b$10$7TQt7KbCi0YMAEWhYSamze5fgOkm8h/.GH2t3ZtAr4yPV2hU/TiYi",
+            "confirmPassword": "$2b$10$RvTXiLeABSf0L7cOAIN6muNUdbfdCJJwKaqRxi0zWES.n3lLr5hWK",
+            "createdAt": "2023-06-04T14:47:45.854Z",
+            "updatedAt": "2023-06-04T16:20:26.776Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "justineobayemi@healthplus.com",
+            "organisationType": "Health Organisation",
+            "phoneNumber": "09076890980",
+            "position": "Head of Finance",
+            "staffID": "HP003",
+            "website": "https://www.health-plus.ng"
+        }
+    }
+}
+```
+
+- EXAMPLE: Update Admin Profile - Successful (for a few fields)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647cbac23b2e9187b575b67d' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--data-raw '{
+    "organisationEmail": "justineobayemi@healthplus.com",
+    "numberOfStaffs": 34,
+    "staffID": "HP003"
+}'
+
+Response
+(json)
+{
+    "message": "Profile updated successfully",
+    "status": "Success",
+    "data": {
+        "user": {
+            "_id": "647cbac23b2e9187b575b67d",
+            "name": "Katrina Jacobs",
+            "email": "boltehakku@gufum.com",
+            "password": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "confirmPassword": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
+            "createdAt": "2023-06-04T16:24:34.459Z",
+            "updatedAt": "2023-06-04T16:25:08.619Z",
+            "__v": 0,
+            "numberOfStaffs": 34,
+            "organisationEmail": "justineobayemi@healthplus.com",
+            "staffID": "HP003"
+        }
+    }
+}
+```
+
+**PUT Method(Update Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Update Admin Profile Profile - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Uploaded Successfully",
+    "data": {
+        "user_id": "647ca411ef44ef3feafdac75",
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "profileImage": "\ufffd\ufffd\ufffd\ufffd\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0...very long buffer"
+    }
+}
+```
+
+**GET Method(Download Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Download Admin Profile Picture - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image Downloaded Successfully",
+    "data": {
+        "imageName": "Screenshot 2021-07-07 082822.jpg",
+        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/Screenshot%202021-07-07%20082822.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTOWCRXHUC%2F20230604%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230604T163224Z&X-Amz-Expires=3600&X-Amz-Signature=6d6b20221b23967dec24c73d7db8caa7969be8624605f1a41d6c745441d6b152&X-Amz-SignedHeaders=host&x-id=GetObject"
+    }
+}
+```
+*Please note that the url is the actual image itself. This is what is being used as the profile picture*
+
+**DELETE Method(Remove Admin Profile Picture): /users/:id/profile-picture**
+
+Parameters: authToken, profileImage - *Note please that profileImage should be the name of the input in the form data*
+
+- EXAMPLE: Delete Admin Profile Picture - (Successfully uploaded to AWS)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
+--form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
+
+Response
+(json)
+{
+    "status": "Success",
+    "message": "Profile Image has been deleted successfully"
 }
 ```
 

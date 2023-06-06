@@ -1,23 +1,25 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-// Setting up our user model
-const UserSchema = new Schema(
+const adminSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
       type: String,
       required: true,
-      min: 3,
-      max: 255,
+    },
+    lastName: {
+      type: String,
+      required: false,
+    },
+    phoneNumber: {
+      type: String,
+      unique: true,
+      sparse: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
       immutable: true,
-    },
-    organisationName: {
-      type: String,
-      // required: true,
     },
     password: {
       type: String,
@@ -29,12 +31,16 @@ const UserSchema = new Schema(
     },
     organisationEmail: {
       type: String,
-      unique: true,
+      unique: false,
+      sparse: true,
     },
     numberOfStaffs: {
       type: Number,
     },
     staffID: {
+      type: String,
+    },
+    role: {
       type: String,
     },
     organisationType: {
@@ -46,14 +52,14 @@ const UserSchema = new Schema(
     position: {
       type: String,
     },
-    phoneNumber: {
-      type: String,
-    },
     profileImage: {
       type: String,
     },
     imageName: String,
-  }, {timestamps: true}
+  },
+  { timestamps: true },
 );
 
-export default model("User", UserSchema);
+const Admin = mongoose.model("Admin", adminSchema);
+
+export default Admin;
