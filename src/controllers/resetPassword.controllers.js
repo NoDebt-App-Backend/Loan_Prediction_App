@@ -45,10 +45,10 @@ export default class PasswordController {
     let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
 
-    if (token)
-      throw new BadUserRequestError(
-        "A password reset request has already been made, Try again in 1 hour"
-      );
+    if (token) token = undefined;
+      // throw new BadUserRequestError(
+      //   "A password reset request has already been made. If you do not get the token, kindly send another request in the next 5 minutes."
+      // );
 
     if (!token) {
       token = await Token.create({
