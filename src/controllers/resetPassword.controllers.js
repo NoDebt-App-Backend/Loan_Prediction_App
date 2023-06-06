@@ -38,13 +38,17 @@ export default class PasswordController {
     // Find the admin by email
     const admin = await Admin.findOne({ email: email });
 
+    const submitURL = await Admin.findByIdAndUpdate(id, { passwordLink: req.body.passwordLink }, {new: true});
+
+    await submitURL.save();
+
     if (!admin)
       throw new NotFoundError("Admin with given email does not exist");
 
     // Generate or retrieve the password reset token
     let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
-    const passwordLink = req.body.passwordLink;
+    const passwordLink = submitURL.passwordLink;
 
     if (token) token = undefined;
 

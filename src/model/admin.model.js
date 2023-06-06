@@ -55,6 +55,7 @@ const adminSchema = new mongoose.Schema(
     profileImage: {
       type: String,
     },
+    passwordLink: String, // This is excluded as the URL from frontend to reset password
     imageName: String,
   },
   { timestamps: true }
