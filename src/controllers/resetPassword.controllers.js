@@ -57,7 +57,7 @@ export default class PasswordController {
       });
     }
     // Generate the password reset link
-    const link = `${config.base_url}/password-reset/${admin._id}`;
+    const link = `${config.reset_password_url}/verify/${admin._id}`;
 
     await sendEmail(
       email,
