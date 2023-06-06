@@ -44,20 +44,19 @@ export default class PasswordController {
     // Generate or retrieve the password reset token
     let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
+    const passwordLink = req.body.passwordLink;
 
     if (token) token = undefined;
-      // throw new BadUserRequestError(
-      //   "A password reset request has already been made. If you do not get the token, kindly send another request in the next 5 minutes."
-      // );
 
     if (!token) {
       token = await Token.create({
         adminId: admin._id,
         fiveDigitToken: fiveDigitToken,
+        passwordLink: passwordLink,
       });
     }
     // Generate the password reset link
-    const link = `${config.reset_password_url}/verify/${admin._id}`;
+    const link = `${passwordLink}/${admin._id}`;
 
     await sendEmail(
       email,
@@ -69,7 +68,7 @@ export default class PasswordController {
       },
       "./template/resetPassword.handlebars"
     );
-    res.status(200).send("password reset link sent to your email account");
+    res.status(200).send("Password reset link sent to your email account");
   }
 
   /**
