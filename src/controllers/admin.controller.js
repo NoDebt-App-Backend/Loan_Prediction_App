@@ -9,6 +9,7 @@ import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer"
+import { NotFoundError } from "../error/error.js";
 dotenv.config();
 
 export default class AdminController {
@@ -76,6 +77,51 @@ export default class AdminController {
       });
     }
   }
+//get an admin by company id
+  static async getAdminsByCompany(req, res) {
+    
+      const companyId = req.query.companyId;
+      const adminCompanyMaps = await AdminCompanyMap.find({ companyId })
+        .populate({
+          path: 'adminId',
+          model: 'Admin',
+          select: 'firstName lastName email phoneNumber role'
+        })
+        .exec();
+  
+      if (!adminCompanyMaps || adminCompanyMaps.length === 0) {
+        throw new NotFoundError('No admins found for the given companyId');
+      }
+  
+      const admins = adminCompanyMaps.map((adminCompanyMap) => adminCompanyMap.adminId);
+
+      res.status(200).json({
+        message: 'Admins found',
+        status: 'Success',
+        data: {
+          admins
+        },
+      });
+  }
+
+    //get company by id
+    static async getCompanyById(req, res){
+        const companyId = req.query.companyId
+        const company = await Company.findById(companyId);
+        if (!company) throw new NotFoundError("company not found") 
+    
+        res.status(200).json({
+          message: 'Company retrieved successfully',
+          status: 'Success',
+          data: {
+            company,
+          },
+        });
+    
+      
+    };
+  
+
   
   //signup a company
   static async createCompany(req, res) {
@@ -191,8 +237,9 @@ export default class AdminController {
         throw new UnAuthorizedError('Admin is not found and cannot perform this operation.');
       }
   
-      const companyId = adminCompanyMap.companyId._id;
-      const companyName = adminCompanyMap.companyId.companyName;
+      const companyId = adminCompanyMap.companyId;
+      const companyName = adminCompanyMap.companyName;
+      console.log(companyId, companyName)
 
 
       const newpassword = generateRandomPassword();
@@ -206,9 +253,7 @@ export default class AdminController {
         email,
         phoneNumber,
         role,
-        password: hashedPassword,
-        companyId,
-        companyName,
+        password: hashedPassword
       });
   
       

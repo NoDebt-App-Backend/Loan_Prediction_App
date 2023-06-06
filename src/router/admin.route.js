@@ -8,10 +8,13 @@ import authMiddleWare from "../middlewares/auth.js";
 router.post('/signup', tryCatchHandler(AdminController.createCompany));
 router.post('/login',tryCatchHandler(AdminController.Login));
 router.post('/create', authMiddleWare, tryCatchHandler(AdminController.addAdmin) );
-router.get("/admins",authMiddleWare, tryCatchHandler(AdminController.getAllAdmins));
+router.get("/admins", tryCatchHandler(AdminController.getAllAdmins));
 router.get("/companies",authMiddleWare, tryCatchHandler(AdminController.getAllCompanies));
-router.get("/admin-company",authMiddleWare, tryCatchHandler(AdminController.getAllAdminCompanies));
-router.get("/admin",authMiddleWare, tryCatchHandler(AdminController.getAdmin))
+router.get("/admin-company", tryCatchHandler(AdminController.getAllAdminCompanies));
+router.get("/",authMiddleWare, tryCatchHandler(AdminController.getAdmin));
+router.get('/admins',authMiddleWare, AdminController.getAdminsByCompany);
+router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );
 
 
-export default router
+
+export default router;
