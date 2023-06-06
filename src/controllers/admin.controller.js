@@ -8,12 +8,14 @@ import {
 import Admin from "../model/admin.model.js";
 import {
   createCompanyValidator,
-  loginAdminValidator, updateAdminValidator, changePasswordValidator
+  loginAdminValidator,
+  updateAdminValidator,
+  changePasswordValidator,
 } from "../validators/admin.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import dotenv from "dotenv";
-import Organisation from "../model/org.model.js"
+import Organisation from "../model/org.model.js";
 import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
@@ -23,25 +25,28 @@ dotenv.config();
 export default class AdminController {
   //get all companies
   static async getAllOrganisations(req, res) {
-      const organisations = await Organisation.find();
-      res.status(200).json({
-        status: 'Success',
-        message: 'Organisations found successfully',
-        data: {
-          organisations: organisations
-        }
-      });
+    const organisations = await Organisation.find();
+    res.status(200).json({
+      status: "Success",
+      message: "Organisations found successfully",
+      data: {
+        organisations: organisations,
+      },
+    });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get all admins
+  //get all admins within a company
   static async getAllAdmins(req, res) {
-    const admin = await Admin.find();
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const admin = await Admin.findById(id);
     res.status(200).json({
-      status: 'Success',
-      message: 'Admins found successfully',
+      status: "Success",
+      message: "Admins found successfully",
       data: {
-        Admins: admin
-      }
+        Admins: admin,
+      },
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
@@ -50,11 +55,11 @@ export default class AdminController {
   static async getAllAdminCompanies(req, res) {
     const adminCompanyMap = await AdminCompanyMap.find();
     res.status(200).json({
-      status: 'Success',
-      message: 'Admin-Companies found successfully',
+      status: "Success",
+      message: "Admin-Companies found successfully",
       data: {
-        AdminCompanies: adminCompanyMap
-      }
+        AdminCompanies: adminCompanyMap,
+      },
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
@@ -64,11 +69,7 @@ export default class AdminController {
     const { error } = mongoIdValidator.validate(req.query);
     if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
     const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("User not found");
-
-    // const admin = await Admin.findOne({ email });
-
-    // if (!admin) throw new NotFoundError("Admin not Found");
+    if (!admin) throw new NotFoundError("Admin not found");
 
     res.status(200).json({
       message: "Admin found successfully",
@@ -132,7 +133,7 @@ export default class AdminController {
     await adminCompanyMap.save();
     // Save company to the Company collection
 
-    const {_id, createdAt, updatedAt } = admin;
+    const { _id, createdAt, updatedAt } = admin;
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -148,7 +149,7 @@ export default class AdminController {
           email: req.body.email,
           AdminId: _id,
           createdAt: createdAt,
-          updatedAt: updatedAt
+          updatedAt: updatedAt,
         },
       },
     });
@@ -206,7 +207,7 @@ export default class AdminController {
 
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -214,8 +215,8 @@ export default class AdminController {
       );
     }
 
-    const companyId = adminCompanyMap.companyId._id;
-    const companyName = adminCompanyMap.companyId.companyName;
+    const organisationId = adminCompanyMap.organisationId._id;
+    const organisationName = adminCompanyMap.organisationId.organisationName;
 
     const newpassword = generateRandomPassword();
     const saltRounds = config.bcrypt_saltRound;
@@ -229,15 +230,15 @@ export default class AdminController {
       phoneNumber,
       role,
       password: hashedPassword,
-      companyId,
-      companyName,
+      organisationId,
+      organisationName,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
       adminId: newAdmin._id,
-      companyId: companyId,
-      companyName: companyName,
-      adminFisrtName: firstName,
+      organisationId: organisationId,
+      organisationName: organisationName,
+      adminFirstName: firstName,
       adminLastName: lastName,
     });
     await newAdminCompanyMap.save();
@@ -250,8 +251,8 @@ export default class AdminController {
       port: 465,
       secure: true,
       auth: {
-        user: config.nodemailerUser, //  Gmail email address
-        pass: config.nodemailerPassword, //  Gmail password or an application-specific password
+        user: config.nodemailer_user, //  Gmail email address
+        pass: config.nodemailer_password, //  Gmail password or an application-specific password
       },
     });
 

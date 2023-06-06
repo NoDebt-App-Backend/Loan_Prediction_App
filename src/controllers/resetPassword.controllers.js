@@ -16,7 +16,6 @@ import {
   UnAuthorizedError,
 } from "../error/error.js";
 
-
 /**
  * Controller class for managing password-related operations.
  */
@@ -39,25 +38,31 @@ export default class PasswordController {
     // Find the admin by email
     const admin = await Admin.findOne({ email: email });
 
-    if (!admin) throw new NotFoundError("Admin with given email does not exist");
+    const { id } = admin;
+
+    const submitURL = await Admin.findByIdAndUpdate(id, { passwordLink: req.body.passwordLink }, {new: true});
+
+    await submitURL.save();
+
+    if (!admin)
+      throw new NotFoundError("Admin with given email does not exist");
 
     // Generate or retrieve the password reset token
     let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
+    const passwordLink = submitURL.passwordLink;
 
-    if (token)
-      throw new BadUserRequestError(
-        "A password reset request has already been made, Try again in 1 hour"
-      );
+    if (token) token = undefined;
 
     if (!token) {
       token = await Token.create({
         adminId: admin._id,
         fiveDigitToken: fiveDigitToken,
+        // passwordLink: passwordLink,
       });
     }
     // Generate the password reset link
-    const link = `${config.base_url}/password-reset/${admin._id}`;
+    const link = `${passwordLink}/${admin._id}`;
 
     await sendEmail(
       email,
@@ -69,7 +74,7 @@ export default class PasswordController {
       },
       "./template/resetPassword.handlebars"
     );
-    res.status(200).send("password reset link sent to your email account");
+    res.status(200).send("Password reset link sent to your email account");
   }
 
   /**
