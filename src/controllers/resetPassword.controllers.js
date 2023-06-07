@@ -1,6 +1,7 @@
-import User from "../model/user.model.js";
+import Admin from "../model/admin.model.js";
 import { Token } from "../model/token.model.js";
 import crypto from "crypto";
+import bcrypt from "bcrypt";
 // import Joi from "joi";
 import sendEmail from "../utils/sendEmail.js";
 import { config } from "../config/index.js";
@@ -34,40 +35,40 @@ export default class PasswordController {
     if (error) {
       throw error;
     }
-    // Find the user by email
-    const user = await User.findOne({ email: email });
+    // Find the admin by email
+    const admin = await Admin.findOne({ email: email });
 
-    if (!user) throw new NotFoundError("User with given email does not exist");
+    if (!admin)
+      throw new NotFoundError("Admin with given email does not exist");
 
     // Generate or retrieve the password reset token
-    let token = await Token.findOne({ userId: user._id });
+    let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
+    const passwordLink = admin.passwordLink;
 
-    if (token)
-      throw new BadUserRequestError(
-        "A password reset request has already been made, Try again in 1 hour"
-      );
+    if (token) token = undefined;
 
     if (!token) {
       token = await Token.create({
-        userId: user._id,
+        adminId: admin._id,
         fiveDigitToken: fiveDigitToken,
+        passwordLink: admin.passwordLink,
       });
     }
     // Generate the password reset link
-    const link = `${config.base_url}/password-reset/${user._id}`;
+    const link = `${passwordLink}/${admin._id}`;
 
     await sendEmail(
       email,
       "Password Reset Request",
       {
-        name: user.name,
+        name: admin.firstName,
         token: fiveDigitToken,
         link: link,
       },
       "./template/resetPassword.handlebars"
     );
-    res.status(200).send("password reset link sent to your email account");
+    res.status(200).send("Password reset link sent to your email account");
   }
 
   /**
@@ -81,13 +82,13 @@ export default class PasswordController {
     const { error } = tokenValidator.validate(req.body);
 
     if (error) throw error;
-    // Find the user by email
-    const user = await User.findById(id);
-    if (!user) throw new NotFoundError("invalid link or expired");
+    // Find the admin by email
+    const admin = await Admin.findById(id);
+    if (!admin) throw new NotFoundError("invalid link or expired");
 
     // Find the token
     const token = await Token.findOne({
-      userId: user._id,
+      adminId: admin._id,
       fiveDigitToken: req.body.fiveDigitToken,
     });
     if (token) {
@@ -107,11 +108,11 @@ export default class PasswordController {
    */
   static async updateNewPassword(req, res) {
     const id = req.params.id;
-    const user = await User.findById(id);
-    if (!user) throw new NotFoundError("invalid link or expired");
+    const admin = await Admin.findById(id);
+    if (!admin) throw new NotFoundError("invalid link or expired");
     if (!req.body.password)
       throw new BadUserRequestError("Password field cannot be empty");
-    let token = await Token.findOne({ userId: user._id });
+    let token = await Token.findOne({ adminId: admin._id });
 
     const updatePasswordSecretKey = config.password_secretkey;
 
@@ -120,15 +121,19 @@ export default class PasswordController {
     if (req.body.secret_key == updatePasswordSecretKey) {
       const { error } = resetPasswordValidator.validate(req.body);
       if (error) throw error;
-      user.password = req.body.password;
-      user.confirmPassword = req.body.confirmPassword;
-      await user.save();
+
+      const saltRounds = config.bcrypt_saltRound;
+      const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
+
+      admin.password = hashedPassword;
+      admin.confirmPassword = hashedPassword;
+      await admin.save();
       await token.deleteOne();
       await sendEmail(
-        user.email,
+        admin.email,
         "Password Change Successful",
         {
-          name: user.name,
+          name: admin.name,
         },
         "./template/passwordUpdated.handlebars"
       );

@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const tokenSchema = new Schema({
-  userId: {
+  adminId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: "Admin",
   },
   fiveDigitToken: {
     type: String,

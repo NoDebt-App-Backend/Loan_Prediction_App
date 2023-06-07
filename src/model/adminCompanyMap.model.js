@@ -2,28 +2,28 @@
 import mongoose from "mongoose";
 
 const adminCompanyMapSchema = new mongoose.Schema({
-    adminFisrtName: {
+    adminFirstName: {
     type: String,
     required: true,
   },
-    adminLastName:{
+  adminLastName:{
       type:String,
       required: false,
-    },
+  },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Admin",
     required: true,
   },
-  companyId: {
+  organisationId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
+    ref: "Organisation",
     required: true,
   },
-  companyName:{
-    type:String,
-    required:false,
-  }
+  // OrganisationName:{
+  //   type:String,
+  //   required:false,
+  // }
 });
 
 const AdminCompanyMap = mongoose.model("AdminCompanyMap", adminCompanyMapSchema);

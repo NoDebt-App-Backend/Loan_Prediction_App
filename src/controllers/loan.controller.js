@@ -1,6 +1,7 @@
 import { Loan } from "../model/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
 import  User  from "../model/user.model.js";
+
 import {
   BadUserRequestError,
   NotFoundError,
@@ -18,17 +19,22 @@ export default class loanControllers {
    */
   static async addBorrower(req, res) {
     const { id } = req.query;
-    if (!id) throw new BadUserRequestError("user does not exist");
+
+    if (!id) throw new NotFoundError("user does not exist");
     const { error } = createLoanValidator.validate(req.body);
     if (error) throw error;
 
-    const user = await User.findById(id);
-    if (!user) throw new NotFoundError("user does not exist");
+    const userExists = await User.findById(id);
+    if (!userExists) throw new NotFoundError("user does not exist");
     const userInCollection = await User.findById(req.body.user);
     if (!userInCollection) throw new NotFoundError("user does not exist");
 
-    const loan = await Loan.create(req.body);
-
+    // Admin value comes from decoded payload
+    const admin = await User.findOne({ email: req.user.email });
+    if (!admin) throw new UnAuthorizedError("Unauthrized user");
+    const loan = await new Loan(req.body);
+    loan.adminInCharge = admin.name;
+    await loan.save();
     res.status(201).json({
       status: "success",
       data: {

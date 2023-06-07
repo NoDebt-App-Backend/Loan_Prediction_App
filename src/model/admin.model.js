@@ -1,39 +1,64 @@
 import mongoose from "mongoose";
 
-const adminSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-
-  lastName: {
-    type: String,
-    required: false,
-  },
-
-  phoneNumber: { 
-     type: String,
-     unique: true, 
-     sparse: true 
+const adminSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
     },
-
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+    lastName: {
+      type: String,
+      required: false,
+    },
+    phoneNumber: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      immutable: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    confirmPassword: {
+      type: String,
+      // required: true,
+    },
+    organisationEmail: {
+      type: String,
+      unique: false,
+      sparse: true,
+    },
+    numberOfStaffs: {
+      type: Number,
+    },
+    staffID: {
+      type: String,
+    },
+    role: {
+      type: String,
+    },
+    organisationType: {
+      type: String,
+    },
+    website: {
+      type: String,
+    },
+    position: {
+      type: String,
+    },
+    profileImage: {
+      type: String,
+    },
+    passwordLink: String, // This is excluded as the URL from frontend to reset password
+    imageName: String,
   },
-
-  role: {
-    type: String,
-    required: false,
-  },
-  
-  password: {
-    type: String,
-    required: true,
-  },
-  
-}
+  { timestamps: true }
 );
 
 const Admin = mongoose.model("Admin", adminSchema);
