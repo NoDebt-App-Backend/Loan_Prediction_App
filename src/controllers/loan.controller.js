@@ -121,9 +121,11 @@ export default class loanControllers {
     const loans = await Loan.find({
       companyId: adminCompanyMap.companyId._id,
       eligibility: true,
-    }).select(
-      "fullname email address createdAt eligibility creditScore loanAmount"
-    );
+    })
+      .select(
+        "fullname email address createdAt eligibility creditScore loanAmount"
+      )
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
@@ -151,9 +153,11 @@ export default class loanControllers {
     const loans = await Loan.find({
       companyId: adminCompanyMap.companyId._id,
       eligibility: false,
-    }).select(
-      "fullname email address createdAt eligibility creditScore loanAmount"
-    );
+    })
+      .select(
+        "fullname email address createdAt eligibility creditScore loanAmount"
+      )
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
