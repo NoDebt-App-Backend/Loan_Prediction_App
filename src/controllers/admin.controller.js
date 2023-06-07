@@ -108,6 +108,7 @@ export default class AdminController {
       email: req.body.email,
       password: hashedPassword,
       confirmPassword: hashedPassword,
+      passwordLink: req.body.passwordLink
     });
 
     // Create a new company document
@@ -302,6 +303,7 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
+        // passwordLink: req.body.passwordLink
       },
       { new: true }
     );
