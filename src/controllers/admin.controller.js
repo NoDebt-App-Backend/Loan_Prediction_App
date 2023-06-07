@@ -19,7 +19,10 @@ import Organisation from "../model/org.model.js";
 import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
+import nodemailer from "nodemailer"
+import { NotFoundError } from "../error/error.js";
 import nodemailer from "nodemailer";
+
 dotenv.config();
 
 export default class AdminController {
@@ -35,7 +38,7 @@ export default class AdminController {
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get all admins within a company
+
   static async getAllAdmins(req, res) {
     const { id } = req.query;
     const { error } = mongoIdValidator.validate(req.query);
@@ -81,6 +84,50 @@ export default class AdminController {
     if (error) throw new InternalServerError("Internal Server Error");
   }
 
+//get admins by company id
+  static async getAdminsByCompany(req, res) {
+    
+      const companyId = req.query.companyId;
+      const adminCompanyMaps = await AdminCompanyMap.find({ companyId })
+        .populate({
+          path: 'adminId',
+          model: 'Admin',
+          select: 'firstName lastName email phoneNumber role'
+        })
+        .exec();
+  
+      if (!adminCompanyMaps || adminCompanyMaps.length === 0) {
+        throw new NotFoundError('No admins found for the given companyId');
+      }
+  
+      const admins = adminCompanyMaps.map((adminCompanyMap) => adminCompanyMap.adminId);
+
+      res.status(200).json({
+        message: 'Admins found successfully',
+        status: 'Success',
+        data: {
+          admins
+        },
+      });
+  }
+
+    //get company by id
+    static async getCompanyById(req, res){
+        const companyId = req.query.companyId
+        const company = await Company.findById(companyId);
+        if (!company) throw new NotFoundError("company not found") 
+    
+        res.status(200).json({
+          message: 'Company retrieved successfully',
+          status: 'Success',
+          data: {
+            company,
+          },
+        });
+    
+      
+    };
+  
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
@@ -205,6 +252,57 @@ export default class AdminController {
   }
 
   static async addAdmin(req, res) {
+      const { firstName, lastName, email, phoneNumber, role } = req.body;
+  
+      const adminCompanyMap = await AdminCompanyMap.findOne({ adminId: req.admin.adminId }).populate('companyId', ' companyName');
+  
+      if (!adminCompanyMap) {
+        throw new UnAuthorizedError('Admin is not found and cannot perform this operation.');
+      }
+  
+      const companyId = adminCompanyMap.companyId;
+      const companyName = adminCompanyMap.companyName;
+      console.log(companyId, companyName)
+
+
+      const newpassword = generateRandomPassword();
+      const saltRounds = config.bcrypt_saltRound;
+      const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
+      console.log(newpassword)
+  
+      const newAdmin = new Admin({
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        role,
+        password: hashedPassword
+      });
+  
+      
+
+      const newAdminCompanyMap = new AdminCompanyMap(
+        {
+        adminId: newAdmin._id,
+        companyId: companyId,
+        companyName: companyName,
+        adminFisrtName: firstName,
+        adminLastName:lastName
+        }
+      )
+      await newAdminCompanyMap.save();
+      await newAdmin.save();
+
+ // Send email to new admin
+  // Configurations for email
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, 
+    auth: {
+      user: config.nodemailerUser, //  Gmail email address
+      pass: config.nodemailerPassword //  Gmail password or an application-specific password
+
     const { firstName, lastName, email, phoneNumber, role } = req.body;
 
     const adminCompanyMap = await AdminCompanyMap.findOne({
