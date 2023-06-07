@@ -10,7 +10,7 @@ import { upload } from "../middlewares/uploadImage.js";
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
 // To get all the admins within a company
-router.get('/admins',authMiddleWare, AdminController.getAdminsByCompany);
+router.get('/',authMiddleWare, AdminController.getAdminsByCompany);
 
 // To retrieve a single company from the database
 router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );

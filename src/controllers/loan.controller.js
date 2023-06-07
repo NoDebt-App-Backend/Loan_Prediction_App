@@ -1,6 +1,6 @@
-import { Loan } from "../model/loan.model.js";
+import Loan from "../model/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
-import  User  from "../model/user.model.js";
+import User from "../model/user.model.js";
 
 import {
   BadUserRequestError,
