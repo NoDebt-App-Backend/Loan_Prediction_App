@@ -7,7 +7,7 @@ function decodeAuth(req, res, next) {
   try {
     if (!token) throw new UnAuthorizedError("Unauthorized request");
 
-    req.user = parseJwt(token);
+    req.admin = parseJwt(token);
     next();
   } catch (err) {
     console.log(err);
