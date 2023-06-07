@@ -2,7 +2,6 @@ import express from "express";
 import loanControllers from "../controllers/loan.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 const router = express.Router();
-import { decodeAuth } from "../middlewares/decodeAuth.js";
 import authMiddleWare from "../middlewares/auth.js";
 /*Description: Add a new loan request */
 router.post(
@@ -11,7 +10,11 @@ router.post(
   tryCatchHandler(loanControllers.addBorrower)
 );
 /*Description: find a loan or borrower by its Id */
-router.get("/", tryCatchHandler(loanControllers.findBorrower));
+router.get(
+  "/",
+  authMiddleWare,
+  tryCatchHandler(loanControllers.showFullBorrowersData)
+);
 
 // GET ALL COMPANY LOANS
 router.get("/company-loans", authMiddleWare, loanControllers.findAllUserLoans);
