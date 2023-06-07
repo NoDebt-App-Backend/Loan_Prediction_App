@@ -234,6 +234,7 @@ export default class AdminController {
       password: hashedPassword,
       organisationId,
       organisationName,
+      loginURL: req.body.loginURL,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
@@ -258,11 +259,13 @@ export default class AdminController {
       },
     });
 
+    const loginURL = newAdmin.loginURL;
+
     const mailOptions = {
       from: "nodebtapplication@gmail.com",
       to: newAdmin.email,
       subject: "Welcome to Nodebt",
-      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: https://localhost:4000/api/admin/login\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
+      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: ${loginURL}\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
     };
 
     await transporter.sendMail(mailOptions);

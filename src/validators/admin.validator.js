@@ -27,6 +27,7 @@ const createCompanyValidator = Joi.object({
     .messages({ "any.only": "{{#label}} do not match. Please check again" }),
   organisationName: Joi.string().required(),
   passwordLink: Joi.string(),
+  loginURL: Joi.string(),
 }).strict();
 
 const loginAdminValidator = Joi.object({
