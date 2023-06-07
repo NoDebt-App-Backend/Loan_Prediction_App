@@ -134,13 +134,16 @@ const LoanSchema = new Schema({
   creditScore: {
     type: Number,
     default: undefined,
-    required: true,
   },
   reasonForEligibilityStatusResult: {
     type: String,
   },
   financialAdvise: {
     type: String,
+  },
+  adminInCharge: {
+    type: String,
+    required: true,
   },
   guarantor: {
     fullname: {
