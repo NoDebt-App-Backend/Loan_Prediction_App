@@ -134,7 +134,7 @@ export default class AdminController {
     await adminCompanyMap.save();
     // Save company to the Company collection
 
-    const { _id, createdAt, updatedAt } = admin;
+    const { _id, createdAt, updatedAt, passwordLink } = admin;
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -151,6 +151,7 @@ export default class AdminController {
           AdminId: _id,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          passwordLink: passwordLink
         },
       },
     });
