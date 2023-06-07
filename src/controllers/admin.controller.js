@@ -254,7 +254,7 @@ export default class AdminController {
       secure: true,
       auth: {
         user: config.nodemailer_user, //  Gmail email address
-        pass: config.nodemailer_password, //  Gmail password or an application-specific password
+        pass: config.nodemailer_pass, //  Gmail password or an application-specific password
       },
     });
 
