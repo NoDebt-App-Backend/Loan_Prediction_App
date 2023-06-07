@@ -50,7 +50,7 @@ export default class PasswordController {
     // Generate or retrieve the password reset token
     let token = await Token.findOne({ adminId: admin._id });
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
-    const passwordLink = submitURL.passwordLink;
+    const passwordLink = admin.passwordLink;
 
     if (token) token = undefined;
 
@@ -58,7 +58,7 @@ export default class PasswordController {
       token = await Token.create({
         adminId: admin._id,
         fiveDigitToken: fiveDigitToken,
-        // passwordLink: passwordLink,
+        passwordLink: admin.passwordLink,
       });
     }
     // Generate the password reset link

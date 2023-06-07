@@ -108,6 +108,7 @@ export default class AdminController {
       email: req.body.email,
       password: hashedPassword,
       confirmPassword: hashedPassword,
+      passwordLink: req.body.passwordLink
     });
 
     // Create a new company document
