@@ -19,7 +19,8 @@ import Organisation from "../model/org.model.js";
 import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"
+
 dotenv.config();
 
 export default class AdminController {
@@ -35,7 +36,7 @@ export default class AdminController {
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get all admins within a company
+
   static async getAllAdmins(req, res) {
     const { id } = req.query;
     const { error } = mongoIdValidator.validate(req.query);
@@ -81,6 +82,47 @@ export default class AdminController {
     if (error) throw new InternalServerError("Internal Server Error");
   }
 
+//get admins by company id
+  static async getAdminsByCompany(req, res) {
+      const organisationId = req.query.organisationId;
+      const adminCompanyMaps = await AdminCompanyMap.find({ organisationId })
+        .populate({
+          path: 'adminId',
+          model: 'Admin',
+          select: 'firstName lastName email phoneNumber role'
+        })
+        .exec();
+  
+      if (!adminCompanyMaps || adminCompanyMaps.length === 0) {
+        throw new NotFoundError('No admins found for the given companyId');
+      }
+  
+      const admins = adminCompanyMaps.map((adminCompanyMap) => adminCompanyMap.adminId);
+
+      res.status(200).json({
+        message: 'Admins found successfully',
+        status: 'Success',
+        data: {
+          admins
+        },
+      });
+  }
+
+    //get company by id
+    static async getCompanyById(req, res){
+        const organisationId = req.query.organisationId
+        const organisation = await Organisation.findById(organisationId);
+        if (!organisation) throw new NotFoundError("organisation not found") 
+    
+        res.status(200).json({
+          message: 'organisation retrieved successfully',
+          status: 'Success',
+          data: {
+            organisation,
+          },
+        });      
+    };
+  
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
@@ -151,7 +193,7 @@ export default class AdminController {
           AdminId: _id,
           createdAt: createdAt,
           updatedAt: updatedAt,
-          passwordLink: passwordLink,
+          passwordLink: passwordLink
         },
       },
     });
@@ -182,15 +224,17 @@ export default class AdminController {
         "Please provide a valid email address and password before you can login."
       );
 
-    const { _id, email, name } = admin;
+    const { _id, email, firstName, lastName, imageUrl } = admin;
     // Returning a response to the client
     res.status(200).json({
       message: "User found successfully",
       status: "Success",
       data: {
         adminId: _id,
-        adminName: name,
         email: email,
+        firstName: firstName,
+        lastName: lastName,
+        imageUrl: imageUrl,
         access_token: newToken(admin),
       },
     });
@@ -307,6 +351,7 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
+        // passwordLink: req.body.passwordLink
       },
       { new: true }
     );

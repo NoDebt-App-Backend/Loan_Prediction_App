@@ -20,5 +20,4 @@ export const production = {
   bucket_region: process.env.PROD_BUCKET_REGION,
   access_key: process.env.PROD_ACCESS_KEY,
   secret_access_key: process.env.PROD_SECRET_ACCESS_KEY,
-  reset_password_url: process.env.PROD_RESET_PASSWORD_URL
 };
