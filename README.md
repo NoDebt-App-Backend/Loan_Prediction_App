@@ -22,7 +22,27 @@ This repository contains the source code for the Loan Prediction Application. Th
 
 - ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
-  - [Admin Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
+  - [Admin Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#admins-routes)
+
+    - [Register Admin with Company ID](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodregister-admin-with-companyid-adminssignup)
+
+    - [Login Admin](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodlogin-admin-adminslogin)
+
+    - [Login Authentication](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodlogin-authenticationauthorization-adminsprotected)
+
+    - [Reset Password](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodreset-password-password-reset)
+
+    - [Reset Password(Token)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodreset-password-five-digit-token-password-reset)
+
+    - [Reset Password(Password Change)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodreset-password-password-change-password-reset)
+
+    - [Update Admin Profile](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-adminsid)
+
+    - [Update Admin Profile Picture(Uploading Image to AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-picture-adminsidadminidprofile-picture)
+
+    - [Update Admin Profile Picture(Downloading Image from AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methoddownload-image-from-aws-adminsidadminidprofile-picture)
+
+    - [Deleting Admin Profile Picture)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#delete-methoddelete-image-from-aws-and-the-database-adminsidadminidprofile-picture)
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
@@ -696,41 +716,6 @@ Response
 }
 ```
 
-- EXAMPLE: Update Admin Profile (success for all a few fields)
-
-**_STATUS: 200 OK_**
-
-```json
-curl --location --request PUT 'localhost:4000/api/users/647cbac23b2e9187b575b67d' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
---data-raw '{
-    "organisationEmail": "justineobayemi@healthplus.com",
-    "numberOfStaffs": 34,
-    "staffID": "HP003"
-}'
-
-Response
-(json)
-{
-    "message": "Profile updated successfully",
-    "status": "Success",
-    "data": {
-        "user": {
-            "_id": "647cbac23b2e9187b575b67d",
-            "name": "Katrina Jacobs",
-            "email": "boltehakku@gufum.com",
-            "password": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
-            "confirmPassword": "$2b$10$51eq.gUGi..uvejrfSE7FOfzQZYtXOPqhiX9OcLi5.HOPWju3kJum",
-            "createdAt": "2023-06-04T16:24:34.459Z",
-            "updatedAt": "2023-06-04T16:25:08.619Z",
-            "__v": 0,
-            "numberOfStaffs": 34,
-            "organisationEmail": "justineobayemi@healthplus.com",
-            "staffID": "HP003"
-        }
-    }
-}
-```
 
 #### PUT Method(Update Admin Profile Picture): /admins?id={adminID}/profile-picture
 
