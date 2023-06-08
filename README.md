@@ -36,13 +36,21 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Reset Password(Password Change)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodreset-password-password-change-password-reset)
 
-    - [Update Admin Profile Picture(Uploading Image to AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-picture-adminsidadminidprofile-picture)
-
-    - [Update Admin Profile Picture(Downloading Image from AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methoddownload-image-from-aws-adminsidadminidprofile-picture)
-
-    - [Deleting Admin Profile Picture)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#delete-methoddelete-image-from-aws-and-the-database-adminsidadminidprofile-picture)
-
     - [Update Admin Profile](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-adminsid-1)
+
+    - [Update Admin Profile Picture(Uploading Image to AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-picture-adminsidprofile-picture)
+
+    - [Update Admin Profile Picture(Downloading Image from AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methoddownload-admin-profile-picture-adminsidprofile-picture)
+
+    - [Deleting Admin Profile Picture)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#delete-methodremove-admin-profile-picture-adminsidprofile-picture)
+
+    - [Change Password](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodchange-password-adminsidchange-password)
+
+    - [Add Admin](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodadd-admin-adminscreate)
+
+    - [Get An Admin](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-a-single-admin-adminsoneidadminid)
+
+    - 
 
     
 
@@ -1067,6 +1075,76 @@ Response
     "status": "Failed"
 }
 ```
+
+#### GET Method(Get All Admins in a Company): /admins/?organisationId={organisationId}
+
+Parameters: authToken, organisation id as a req query
+
+- EXAMPLE: Get A Single Admin Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'localhost:5000/api/admins/?organisationId=64807952def9edf471baf836' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MDc5NTJkZWY5ZWRmNDcxYmFmODM1IiwiZW1haWwiOiJuZXJ6YXNvbHR1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NjE0NjUzNywiZXhwIjoxNjg2MjMyOTM3fQ.WnnEnLE8YSDRzVgBt6bBhsXWXFDaFztgXxg0sN1-rao'
+
+Response
+(json)
+{
+    "message": "Admins found successfully",
+    "status": "Success",
+    "data": {
+        "admins": [
+            {
+                "_id": "64808c01f73efa6b84de2364",
+                "firstName": "Cameroon",
+                "lastName": "Jones",
+                "phoneNumber": "07087987847",
+                "email": "viltasiydu@gufum.com",
+                "role": "Federal Agent"
+            },
+            {
+                "_id": "64808c6be4d2ee4981b564cf",
+                "firstName": "Casey",
+                "lastName": "Jay",
+                "phoneNumber": "08076895678",
+                "email": "jayduholme@gufum.com",
+                "role": "Federal Agent"
+            }
+        ]
+    }
+}
+```
+
+#### GET Method(Get A Single Company): /admins/company?organisationId={organisationId}
+
+Parameters: authToken, organisation id as a req query
+
+- EXAMPLE: Get A Single Admin Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'localhost:5000/api/admins/company?organisationId=648090907b25206154ea6c87' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MDkwOTA3YjI1MjA2MTU0ZWE2Yzg2IiwiZW1haWwiOiJydXJ0ZWRlbG1vQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjE0NzI5MiwiZXhwIjoxNjg2MjMzNjkyfQ.n0YN_E7j6Jf0ACLSQTH5kPBRbzPyGAer47yo-106o1M'
+
+Response
+(json)
+{
+    "message": "organisation retrieved successfully",
+    "status": "Success",
+    "data": {
+        "organisation": {
+            "_id": "648090907b25206154ea6c87",
+            "organisationName": "Render Profits",
+            "__v": 0
+        }
+    }
+}
+```
+
 
 ## Troubleshooting
 
