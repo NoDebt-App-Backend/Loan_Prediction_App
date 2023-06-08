@@ -36,13 +36,15 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Reset Password(Password Change)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodreset-password-password-change-password-reset)
 
-    - [Update Admin Profile](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-adminsid)
-
     - [Update Admin Profile Picture(Uploading Image to AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-picture-adminsidadminidprofile-picture)
 
     - [Update Admin Profile Picture(Downloading Image from AWS)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methoddownload-image-from-aws-adminsidadminidprofile-picture)
 
     - [Deleting Admin Profile Picture)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#delete-methoddelete-image-from-aws-and-the-database-adminsidadminidprofile-picture)
+
+    - [Update Admin Profile](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodupdate-admin-profile-adminsid-1)
+
+    
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
@@ -716,86 +718,6 @@ Response
 }
 ```
 
-
-#### PUT Method(Update Admin Profile Picture): /admins?id={adminID}/profile-picture
-
-Parameters: admin's id as a request parameter, the name of the image input will be profileImage
-Admin has to be authenticated
-
-- EXAMPLE: Image uploaded to AWS successfully
-
-**_STATUS: 200 OK_**
-
-```json
-Request
-curl --location --request PUT 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGEyZGVhOTZkNzVlYmI0MmI0ZDkyIiwiZW1haWwiOiJub3JkZWppc3R1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk1NTUzNywiZXhwIjoxNjg2MDQxOTM3fQ.--7d4q3S8DCp0puv7Om7Vf8kZ8SGWmid36Z-TzPH3KY' \
---form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
-
-Response
-(json)
-{
-    "status": "Success",
-    "message": "Profile Uploaded Successfully",
-    "data": {
-        "adminId": "647deebbc24032a06525003d",
-        "imageName": "Screenshot 2021-07-07 082822.jpg",
-        "profileImage": "\ufffd\ufffd\ufffd\ufffd\u0000\u0010...a very long buffer"
-    }
-}
-```
-
-#### GET Method(Download Image from AWS): /admins?id={adminID}/profile-picture
-
-Parameters: admin's id as a request parameter, the name of the image input will be profileImage
-The admin has to be authenticated
-
-- EXAMPLE: Download Image from AWS
-
-**_STATUS: 200 OK_**
-
-```json
-Request
-curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
---form 'profileImage=@"/C:/Users/USER/Desktop/PICS/IMG-20201121-WA0000.jpg"'
-
-Response
-(json)
-{
-    "status": "Success",
-    "message": "Profile Image Downloaded Successfully",
-    "data": {
-        "imageName": "Screenshot 2021-07-07 082822.jpg",
-        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/Screenshot%202021-07-07%20082822.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230605%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230605T161916Z&X-Amz-Expires=3600&X-Amz-Signature=00bc2481f824b2baa8ffbfc10bcaee0f4d3c5e547aaaed6b43ef531266a019cf&X-Amz-SignedHeaders=host&x-id=GetObject"
-    }
-}
-```
-
-This imageURL has the image itself.
-
-#### DELETE Method(Delete Image from AWS and the database): /admins?id={adminID}/profile-picture
-
-Parameters: admin's id as a request parameter, the name of the image input will be profileImage
-The admin has to be authenticated
-
-- EXAMPLE: Delete Image from AWS
-
-**_STATUS: 200 OK_**
-
-```json
-Request
-curl --location --request GET 'https://nodebt-application.onrender.com/api/admins/647deebbc24032a06525003d/profile-picture' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
---form 'profileImage=@"/C:/Users/USER/Desktop/PICS/IMG-20201121-WA0000.jpg"'
-
-Response
-(json)
-{
-    "status": "Success",
-    "message": "Profile Image has been deleted successfully"
-}
-```
 
 #### PUT Method(Update Admin Profile): /admins/:id
 
