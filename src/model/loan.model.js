@@ -1,12 +1,13 @@
 import { Schema, model, Types } from "mongoose";
 
 const LoanSchema = new Schema({
-  user: {
+  company: {
     type: Types.ObjectId,
-    ref: "User",
+    ref: "AdminCompanyMap",
     required: true,
   },
-  userId: String,
+  companyId: String,
+  companyName: String,
   eligibility: {
     type: Boolean,
     default: false,
@@ -16,7 +17,7 @@ const LoanSchema = new Schema({
     type: String,
     required: true,
     match: [
-      /^\w+\s\w+$/,
+      /^[\w\s\S]{3,}$/,
       "Fullname must have at least two words in the fullname path",
     ],
     required: true,
@@ -28,7 +29,6 @@ const LoanSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     lowercase: true,
     match: [
@@ -67,7 +67,6 @@ const LoanSchema = new Schema({
   nationalIdentityNumber: {
     type: String,
     required: true,
-    unique: true,
     validate: {
       validator: function (value) {
         // Customize the validation logic for NIN
@@ -150,7 +149,7 @@ const LoanSchema = new Schema({
       type: String,
       required: true,
       match: [
-        /^\w+\s\w+$/,
+        /^[\w\s\S]{3,}$/,
         "Fullname must have at least two words in the fullname path",
       ],
       required: true,
@@ -218,4 +217,6 @@ const LoanSchema = new Schema({
   },
 });
 
-export default model("Loan", LoanSchema);
+const Loan = model("Loan", LoanSchema);
+
+export { Loan };

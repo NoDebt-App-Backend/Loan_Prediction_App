@@ -26,8 +26,9 @@ const createLoanValidator = Joi.object({
   purposeOfLoan: Joi.string().min(100).required(),
   collateralType: Joi.string().required(),
   collateralValue: Joi.number().required(),
+  eligibility: Joi.string().optional(),
   collateralInformation: Joi.string().required(),
-  creditScore: Joi.number(),
+  creditScore: Joi.number().optional(),
   guarantor: Joi.object({
     fullname: Joi.string().required(),
     phoneNumber: Joi.string()
