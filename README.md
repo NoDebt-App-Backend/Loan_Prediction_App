@@ -50,9 +50,9 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get An Admin](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-a-single-admin-adminsoneidadminid)
 
-    - 
+    - [Get All Admins in a Company](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-admins-in-a-company-adminsorganisationidorganisationid)
 
-    
+    - [Get A Single Company](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-a-single-company-adminscompanyorganisationidorganisationid)
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
@@ -726,7 +726,6 @@ Response
 }
 ```
 
-
 #### PUT Method(Update Admin Profile): /admins/:id
 
 Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
@@ -1144,7 +1143,6 @@ Response
     }
 }
 ```
-
 
 ## Troubleshooting
 
