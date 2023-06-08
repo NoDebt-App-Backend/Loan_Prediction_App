@@ -22,7 +22,7 @@ This repository contains the source code for the Loan Prediction Application. Th
 
 - ### [API Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#api-documentation-1)
 
-  - [Users Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
+  - [Admin Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#users-routes)
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
@@ -117,7 +117,7 @@ We have the Users Route and the Loan Route
 
 #### Admins Routes
 
-**POST Method(Register Admin with CompanyID): /admins/signup**
+#### POST Method(Register Admin with CompanyID): /admins/signup
 
 Parameters: firstName, lastName, email, organisationName, password, confirmPassword
 
@@ -277,7 +277,7 @@ Response
 }
 ```
 
-**POST Method(Login Admin): /admins/login**
+#### POST Method(Login Admin): /admins/login
 
 Parameters: email, password
 
@@ -363,7 +363,7 @@ Response
 }
 ```
 
-**GET Method(Login Authentication/Authorization): /admins/protected**
+#### GET Method(Login Authentication/Authorization): /admins/protected
 
 Parameters: email, password, authToken
 
@@ -409,7 +409,7 @@ Response
 }
 ```
 
-**GET Method(Reset Password): /password-reset**
+#### GET Method(Reset Password): /password-reset
 
 Parameters: email
 
@@ -501,7 +501,7 @@ Response
 }
 ```
 
-**POST Method(Reset Password-Five Digit Token): /password-reset**
+#### POST Method(Reset Password-Five Digit Token): /password-reset
 
 Parameters: fiveDigitToken
 
@@ -544,7 +544,7 @@ Response
 }
 ```
 
-**PUT Method(Reset Password-Password Change): /password-reset**
+#### PUT Method(Reset Password-Password Change): /password-reset
 
 Parameters: secret_key, password, confirmPassword
 
@@ -645,7 +645,7 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile): /admins/:id**
+#### PUT Method(Update Admin Profile): /admins/:id
 
 Parameters: id(as a req parameter), optional parameters (firstName, lastName, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber)
 
@@ -732,7 +732,7 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile Picture): /admins?id={adminID}/profile-picture**
+#### PUT Method(Update Admin Profile Picture): /admins?id={adminID}/profile-picture
 
 Parameters: admin's id as a request parameter, the name of the image input will be profileImage
 Admin has to be authenticated
@@ -760,7 +760,7 @@ Response
 }
 ```
 
-**GET Method(Download Image from AWS): /admins?id={adminID}/profile-picture**
+#### GET Method(Download Image from AWS): /admins?id={adminID}/profile-picture
 
 Parameters: admin's id as a request parameter, the name of the image input will be profileImage
 The admin has to be authenticated
@@ -789,7 +789,7 @@ Response
 
 This imageURL has the image itself.
 
-**DELETE Method(Delete Image from AWS and the database): /admins?id={adminID}/profile-picture**
+#### DELETE Method(Delete Image from AWS and the database): /admins?id={adminID}/profile-picture
 
 Parameters: admin's id as a request parameter, the name of the image input will be profileImage
 The admin has to be authenticated
@@ -812,7 +812,7 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile): /admins/:id**
+#### PUT Method(Update Admin Profile): /admins/:id
 
 Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
 
@@ -899,7 +899,7 @@ Response
 }
 ```
 
-**PUT Method(Update Admin Profile Picture): /admins/:id/profile-picture**
+#### PUT Method(Update Admin Profile Picture): /admins/:id/profile-picture
 
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
@@ -926,7 +926,7 @@ Response
 }
 ```
 
-**GET Method(Download Admin Profile Picture): /admins/:id/profile-picture**
+#### GET Method(Download Admin Profile Picture): /admins/:id/profile-picture
 
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
@@ -954,7 +954,7 @@ Response
 
 _Please note that the url is the actual image itself. This is what is being used as the profile picture_
 
-**DELETE Method(Remove Admin Profile Picture): /admins/:id/profile-picture**
+#### DELETE Method(Remove Admin Profile Picture): /admins/:id/profile-picture
 
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
@@ -976,7 +976,7 @@ Response
 }
 ```
 
-**PUT Method(Change Password): /admins/:id/change-password**
+#### PUT Method(Change Password): /admins/:id/change-password
 
 Parameters: authToken, oldPassword, newPassword, confirmNewPassword
 
@@ -1046,7 +1046,7 @@ Response
 }
 ```
 
-**POST Method(Add Admin): /admins/create**
+#### POST Method(Add Admin): /admins/create
 
 Parameters: authToken, firstName, lastName, email, phoneNumber, role
 
@@ -1092,7 +1092,7 @@ Response
 The new admin gets a mail with the login password, the login url and the email address as shown in the image below
 ![Adding-Admin](./images/ANA.png)
 
-**GET Method(Get A Single Admin): /admins/one/id={adminID}**
+#### GET Method(Get A Single Admin): /admins/one/id={adminID}
 
 Parameters: authToken, id as a req query
 
