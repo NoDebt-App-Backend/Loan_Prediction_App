@@ -9,6 +9,12 @@ import { upload } from "../middlewares/uploadImage.js";
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
+// To get all the admins within a company
+router.get('/',authMiddleWare, AdminController.getAdminsByCompany);
+
+// To retrieve a single company from the database
+router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );
+
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
 

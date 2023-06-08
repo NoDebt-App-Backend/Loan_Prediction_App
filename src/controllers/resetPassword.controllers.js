@@ -38,12 +38,6 @@ export default class PasswordController {
     // Find the admin by email
     const admin = await Admin.findOne({ email: email });
 
-    const { id } = admin;
-
-    const submitURL = await Admin.findByIdAndUpdate(id, { passwordLink: req.body.passwordLink }, {new: true});
-
-    await submitURL.save();
-
     if (!admin)
       throw new NotFoundError("Admin with given email does not exist");
 

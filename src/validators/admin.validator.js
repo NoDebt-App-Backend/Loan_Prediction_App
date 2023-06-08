@@ -77,6 +77,7 @@ const updateAdminValidator = Joi.object({
   phoneNumber: Joi.string(),
   role: Joi.string(),
   profileImage: Joi.string(),
+  imageUrl: Joi.string(),
 });
 
 export {
