@@ -27,5 +27,10 @@ export const development = {
   // FACEBOOK DEV SOCIAL AUTH PARAMETERS
   facebook_id: process.env.DEV_FACEBOOK_APP_ID,
   facebook_secret: process.env.DEV_FACEBOOK_APP_SECRET,
-  facebook_callback: process.env.DEV_CALLBACK_URL
+  facebook_callback: process.env.DEV_CALLBACK_URL,
+
+  // GOOGLE DEV SOCIAL AUTH PARAMS
+  google_id: process.env.DEV_GOOGLE_ID,
+  google_secret: process.env.DEV_GOOGLE_SECRET,
+  google_callback: process.env.DEV_GOOGLE_CALLBACK,
 };

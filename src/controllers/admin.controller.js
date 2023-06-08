@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import passport from "passport";
-import FacebookStrategy from "passport-facebook";
+import { Strategy as FacebookStrategy } from "passport-facebook";
+import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+// import GoogleStrategy from ( 'passport-google-oauth2' ).Strategy;
 import {
   BadUserRequestError,
   InternalServerError,
@@ -83,6 +85,202 @@ export default class AdminController {
     if (error) throw new InternalServerError("Internal Server Error");
   }
 
+  static async facebookCreateAdmin(req, res) {
+    passport.use(
+      new FacebookStrategy.Strategy(
+        {
+          clientID: config.facebook_id,
+          clientSecret: config.facebook_secret,
+          callbackURL: config.facebook_callback,
+        },
+        async function (accessToken, refreshToken, profile, cb) {
+          const adminFacebook = Admin.findOne({
+            facebookId: profile.id,
+            provider: "facebook",
+          });
+
+          if (!adminFacebook) {
+            const adminFacebook = new Admin({
+              facebookId: profile.id,
+              firstName: profile.givenName,
+              lastName: profile.familyName,
+              profileImage: profile.picture,
+              email: profile.emails[0].value,
+              accessToken: accessToken,
+              provider: profile.provider,
+              passwordLink: req.body.passwordLink,
+            });
+            // Create a new company document
+            const company = new Organisation({
+              organisationName: req.body.organisationName,
+            });
+
+            const { facebookId, firstName, lastName, email } = adminFacebook;
+
+            // Create a new adminCompanyMap document
+            const adminCompanyMap = new AdminCompanyMap({
+              adminId: facebookId,
+              organisationId: company._id,
+              organisationName: req.body.organisationName,
+              adminFirstName: firstName,
+            });
+
+            // Save admin to the Admin collection
+            await adminFacebook.save();
+
+            //save company document
+            await company.save();
+
+            // Save adminCompanyMap to the AdminCompanyMap collection
+            await adminCompanyMap.save();
+            // Save company to the Company collection
+
+            const { createdAt, updatedAt, passwordLink } = adminFacebook;
+            // Return a response to the client
+            res.status(200).json({
+              message: "Company account created successfully",
+              status: "Success",
+              data: {
+                company_profile: {
+                  company: req.body.organisationName,
+                  company_id: company._id,
+                },
+                admin: {
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  AdminId: facebookId,
+                  createdAt: createdAt,
+                  updatedAt: updatedAt,
+                  passwordLink: passwordLink,
+                },
+              },
+            });
+
+            if (error) {
+              console.log(error);
+            }
+            return cb(
+              req,
+              res.status(200).json({
+                status: "Success",
+                message: "Facebook User signed up successfully",
+                admin: adminFacebook,
+              })
+            );
+          } else {
+            return cb(
+              req,
+              res.status(200).json({
+                status: "Success",
+                message: "Facebook User already exists",
+              })
+            );
+          }
+        }
+      )
+    );
+  }
+
+  static async googleCreateAdmin(req, res) {
+    passport.use(
+      new GoogleStrategy(
+        {
+          clientID: config.google_id,
+          clientSecret: config.google_secret,
+          callbackURL: "http://yourdomain:3000/auth/google/callback",
+          passReqToCallback: false,
+        },
+        async function (accessToken, refreshToken, profile, cb) {
+          console.log(profile);
+          const adminFacebook = Admin.findOne({
+            googleId: profile.id,
+            provider: "Google",
+          });
+
+          if (!adminFacebook) {
+            const adminFacebook = new Admin({
+              googleId: profile.id,
+              // firstName: profile.givenName,
+              // lastName: profile.familyName,
+              // profileImage: profile.picture,
+              // email: profile.emails[0].value,
+              // accessToken: accessToken,
+              // provider: profile.provider,
+              // passwordLink: req.body.passwordLink,
+            });
+            // Create a new company document
+            const company = new Organisation({
+              organisationName: req.body.organisationName,
+            });
+
+            // const { facebookId, firstName, lastName, email } = adminFacebook;
+
+            // Create a new adminCompanyMap document
+            const adminCompanyMap = new AdminCompanyMap({
+              adminId: facebookId,
+              organisationId: company._id,
+              organisationName: req.body.organisationName,
+              // adminFirstName: firstName,
+            });
+
+            // Save admin to the Admin collection
+            await adminFacebook.save();
+
+            //save company document
+            await company.save();
+
+            // Save adminCompanyMap to the AdminCompanyMap collection
+            await adminCompanyMap.save();
+            // Save company to the Company collection
+
+            const { createdAt, updatedAt, passwordLink } = adminFacebook;
+            // Return a response to the client
+            res.status(200).json({
+              message: "Company account created successfully",
+              status: "Success",
+              data: {
+                company_profile: {
+                  company: req.body.organisationName,
+                  company_id: company._id,
+                },
+                admin: {
+                  // firstName: firstName,
+                  // lastName: lastName,
+                  // email: email,
+                  AdminId: googleId,
+                  // createdAt: createdAt,
+                  // updatedAt: updatedAt,
+                  // passwordLink: passwordLink,
+                },
+              },
+            });
+
+            if (error) {
+              console.log(error);
+            }
+            return cb(
+              req,
+              res.status(200).json({
+                status: "Success",
+                message: "Facebook User signed up successfully",
+                admin: adminFacebook,
+              })
+            );
+          } else {
+            return cb(
+              req,
+              res.status(200).json({
+                status: "Success",
+                message: "Facebook User already exists",
+              })
+            );
+          }
+        }
+      )
+    );
+  }
+
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
@@ -102,46 +300,6 @@ export default class AdminController {
     });
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
-
-    passport.use(
-      new FacebookStrategy(
-        {
-          clientID: config.facebook_id,
-          clientSecret: config.facebook_secret,
-          callbackURL: config.facebook_callback,
-        },
-        async function (accessToken, refreshToken, profile, cb) {
-          const admin = Admin.findOne({
-            facebookId: profile.id,
-            provider: "facebook",
-          });
-
-          if (!admin) {
-            const admin = new Admin({
-              facebookId: profile.id,
-              firstName: profile.first_name,
-              lastName: profile.last_name,
-              profileImage: profile.picture,
-              email: profile.email,
-              accessToken: accessToken,
-              provider: profile.provider,
-              passwordLink: req.body.passwordLink,
-            });
-            await admin.save();
-            return cb(req, res.status(200).json({
-              status: "Success",
-              message: "Facebook User signed up successfully",
-              admin: profile
-            })) 
-          } else {
-            return cb(req, res.status(200).json({
-              status: "Success",
-              message: "Facebook User already exists",
-            }))
-          }
-        }
-      )
-    );
 
     // Create new admin account
     const admin = new Admin({

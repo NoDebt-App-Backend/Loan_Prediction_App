@@ -11,7 +11,19 @@ import { upload } from "../middlewares/uploadImage.js";
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
 router.get('/auth/facebook',
-  passport.authenticate('facebook'), AdminController.createCompany);
+  passport.authenticate('facebook', {scope: 'email'}), AdminController.facebookCreateAdmin);
+
+  router.get('/auth/google',
+  passport.authenticate('google', {scope: ['email', 'profile']}), tryCatchHandler(AdminController.googleCreateAdmin));
+
+  router.get( '/auth/google/callback',
+  passport.authenticate( 'google', {
+      successRedirect: '/auth/google/success',
+      failureRedirect: '/auth/google/failure'
+}));
+
+router.get('/auth/facebook/secret',
+  passport.authenticate('facebook', { successRedirect : '/signup', failureRedirect : '/signup' }));
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
