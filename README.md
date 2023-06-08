@@ -149,6 +149,8 @@ We have the Users Route and the Loan Route
 
 #### POST Method(Register Admin with CompanyID): /admins/signup
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: firstName, lastName, email, organisationName, password, confirmPassword
 
 - EXAMPLE: Register Admin - Successful
@@ -309,6 +311,8 @@ Response
 
 #### POST Method(Login Admin): /admins/login
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: email, password
 
 - EXAMPLE: Login Admin - Successful
@@ -395,6 +399,8 @@ Response
 
 #### GET Method(Login Authentication/Authorization): /admins/protected
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: email, password, authToken
 
 - EXAMPLE: Login Auth - Successful
@@ -440,6 +446,8 @@ Response
 ```
 
 #### GET Method(Reset Password): /password-reset
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: email
 
@@ -533,6 +541,8 @@ Response
 
 #### POST Method(Reset Password-Five Digit Token): /password-reset
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: fiveDigitToken
 
 - EXAMPLE: Reset Password(Token Validated)
@@ -575,6 +585,8 @@ Response
 ```
 
 #### PUT Method(Reset Password-Password Change): /password-reset
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: secret_key, password, confirmPassword
 
@@ -677,6 +689,8 @@ Response
 
 #### PUT Method(Update Admin Profile): /admins/:id
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: id(as a req parameter), optional parameters (firstName, lastName, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber)
 
 - EXAMPLE: Update Admin Profile (success for all the fields)
@@ -727,6 +741,8 @@ Response
 ```
 
 #### PUT Method(Update Admin Profile): /admins/:id
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organisationType, website, position and phoneNumber (only authToken is required)
 
@@ -815,6 +831,8 @@ Response
 
 #### PUT Method(Update Admin Profile Picture): /admins/:id/profile-picture
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
 - EXAMPLE: Update Admin Profile Profile - (Successfully uploaded to AWS)
@@ -841,6 +859,8 @@ Response
 ```
 
 #### GET Method(Download Admin Profile Picture): /admins/:id/profile-picture
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
@@ -870,6 +890,8 @@ _Please note that the url is the actual image itself. This is what is being used
 
 #### DELETE Method(Remove Admin Profile Picture): /admins/:id/profile-picture
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: authToken, profileImage - _Note please that profileImage should be the name of the input in the form data_
 
 - EXAMPLE: Delete Admin Profile Picture - (Successfully uploaded to AWS)
@@ -891,6 +913,8 @@ Response
 ```
 
 #### PUT Method(Change Password): /admins/:id/change-password
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: authToken, oldPassword, newPassword, confirmNewPassword
 
@@ -962,6 +986,8 @@ Response
 
 #### POST Method(Add Admin): /admins/create
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: authToken, firstName, lastName, email, phoneNumber, role
 
 - EXAMPLE: Add Admin Successful
@@ -1007,6 +1033,8 @@ The new admin gets a mail with the login password, the login url and the email a
 ![Adding-Admin](./images/ANA.png)
 
 #### GET Method(Get A Single Admin): /admins/one/id={adminID}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: authToken, id as a req query
 
@@ -1077,6 +1105,8 @@ Response
 
 #### GET Method(Get All Admins in a Company): /admins/?organisationId={organisationId}
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Parameters: authToken, organisation id as a req query
 
 - EXAMPLE: Get A Single Admin Successful
@@ -1117,6 +1147,8 @@ Response
 ```
 
 #### GET Method(Get A Single Company): /admins/company?organisationId={organisationId}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 Parameters: authToken, organisation id as a req query
 
