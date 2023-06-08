@@ -78,6 +78,10 @@ export default class ImageController {
 
     await s3.send(command);
 
+    const adminProfileURL = await Admin.findByIdAndUpdate(id, {imageUrl: url}, {new: true});
+
+    await adminProfileURL.save();
+
     res.status(200).json({
       status: "Success",
       message: "Profile Image Downloaded Successfully",

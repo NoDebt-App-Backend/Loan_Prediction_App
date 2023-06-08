@@ -9,6 +9,12 @@ import { upload } from "../middlewares/uploadImage.js";
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
+// To get all the admins within a company
+router.get('/',authMiddleWare, AdminController.getAdminsByCompany);
+
+// To retrieve a single company from the database
+router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );
+
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
 
@@ -21,7 +27,7 @@ router.post(
 
 // To retrieve all the admin accounts
 router.get(
-  "/admins",
+  "/all",
   authMiddleWare,
   tryCatchHandler(AdminController.getAllAdmins)
 );
@@ -29,19 +35,17 @@ router.get(
 // To retrieve all the company accounts
 router.get(
   "/companies",
-  authMiddleWare,
   tryCatchHandler(AdminController.getAllOrganisations)
 );
 
 // To retrieve the relationship between the admin and company
 router.get(
   "/admin-company",
-  authMiddleWare,
   tryCatchHandler(AdminController.getAllAdminCompanies)
 );
 
 // To get a single admin account
-router.get("/admin", authMiddleWare, tryCatchHandler(AdminController.getAdmin));
+router.get("/one", authMiddleWare, tryCatchHandler(AdminController.getAdmin));
 
 // To check if the admin is authorized
 router.get(
@@ -51,7 +55,11 @@ router.get(
 );
 
 // Route to update the admin's information or profile
-router.put("/:id", authMiddleWare, tryCatchHandler(AdminController.updateAdmin));
+router.put(
+  "/:id",
+  authMiddleWare,
+  tryCatchHandler(AdminController.updateAdmin)
+);
 
 // Route to change password in the application
 router.put(

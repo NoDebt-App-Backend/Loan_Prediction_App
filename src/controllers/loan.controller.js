@@ -1,8 +1,7 @@
-import { Loan } from "../model/loan.model.js";
-import { createLoanValidator } from "../validators/loan.validator.js";
-import User from "../model/user.model.js";
 import Admin from "../model/admin.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
+import Loan from "../model/loan.model.js";
+import { createLoanValidator } from "../validators/loan.validator.js";
 import {
   BadUserRequestError,
   NotFoundError,
@@ -21,6 +20,7 @@ export default class loanControllers {
    * @param {Object} res - The response object
    */
   static async addBorrower(req, res) {
+
     const admin = await Admin.findOne({ email: req.admin.email });
     if (!admin) throw new NotFoundError("user does not exist");
 
@@ -48,6 +48,11 @@ export default class loanControllers {
     loan.companyId = adminCompanyMap.companyId._id;
     loan.company = adminCompanyMap.companyId._id;
     loan.companyName = adminCompanyMap.companyId.companyName;
+
+    // Admin value comes from decoded payload
+    const admin = await User.findOne({ email: req.user.email });
+    if (!admin) throw new UnAuthorizedError("Unauthorized user");
+    const loan = await new Loan(req.body);
 
     await loan.save();
     res.status(201).json({

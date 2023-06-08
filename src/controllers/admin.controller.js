@@ -19,7 +19,8 @@ import Organisation from "../model/org.model.js";
 import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"
+
 dotenv.config();
 
 export default class AdminController {
@@ -35,9 +36,12 @@ export default class AdminController {
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get all admins
+
   static async getAllAdmins(req, res) {
-    const admin = await Admin.find();
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const admin = await Admin.findById(id);
     res.status(200).json({
       status: "Success",
       message: "Admins found successfully",
@@ -66,11 +70,7 @@ export default class AdminController {
     const { error } = mongoIdValidator.validate(req.query);
     if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
     const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("User not found");
-
-    // const admin = await Admin.findOne({ email });
-
-    // if (!admin) throw new NotFoundError("Admin not Found");
+    if (!admin) throw new NotFoundError("Admin not found");
 
     res.status(200).json({
       message: "Admin found successfully",
@@ -82,6 +82,47 @@ export default class AdminController {
     if (error) throw new InternalServerError("Internal Server Error");
   }
 
+//get admins by company id
+  static async getAdminsByCompany(req, res) {
+      const organisationId = req.query.organisationId;
+      const adminCompanyMaps = await AdminCompanyMap.find({ organisationId })
+        .populate({
+          path: 'adminId',
+          model: 'Admin',
+          select: 'firstName lastName email phoneNumber role'
+        })
+        .exec();
+  
+      if (!adminCompanyMaps || adminCompanyMaps.length === 0) {
+        throw new NotFoundError('No admins found for the given companyId');
+      }
+  
+      const admins = adminCompanyMaps.map((adminCompanyMap) => adminCompanyMap.adminId);
+
+      res.status(200).json({
+        message: 'Admins found successfully',
+        status: 'Success',
+        data: {
+          admins
+        },
+      });
+  }
+
+    //get company by id
+    static async getCompanyById(req, res){
+        const organisationId = req.query.organisationId
+        const organisation = await Organisation.findById(organisationId);
+        if (!organisation) throw new NotFoundError("organisation not found") 
+    
+        res.status(200).json({
+          message: 'organisation retrieved successfully',
+          status: 'Success',
+          data: {
+            organisation,
+          },
+        });      
+    };
+  
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
@@ -109,6 +150,7 @@ export default class AdminController {
       email: req.body.email,
       password: hashedPassword,
       confirmPassword: hashedPassword,
+      passwordLink: req.body.passwordLink
     });
 
     // Create a new company document
@@ -133,8 +175,9 @@ export default class AdminController {
     // Save adminCompanyMap to the AdminCompanyMap collection
     await adminCompanyMap.save();
     // Save company to the Company collection
+    
+    const { _id, createdAt, updatedAt, passwordLink } = admin;
 
-    const { _id, createdAt, updatedAt } = admin;
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -151,6 +194,7 @@ export default class AdminController {
           AdminId: _id,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          passwordLink: passwordLink
         },
       },
     });
@@ -181,15 +225,17 @@ export default class AdminController {
         "Please provide a valid email address and password before you can login."
       );
 
-    const { _id, email, name } = admin;
+    const { _id, email, firstName, lastName, imageUrl } = admin;
     // Returning a response to the client
     res.status(200).json({
       message: "User found successfully",
       status: "Success",
       data: {
         adminId: _id,
-        adminName: name,
         email: email,
+        firstName: firstName,
+        lastName: lastName,
+        imageUrl: imageUrl,
         access_token: newToken(admin),
       },
     });
@@ -208,7 +254,7 @@ export default class AdminController {
 
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -216,8 +262,8 @@ export default class AdminController {
       );
     }
 
-    const companyId = adminCompanyMap.companyId._id;
-    const companyName = adminCompanyMap.companyId.companyName;
+    const organisationId = adminCompanyMap.organisationId._id;
+    const organisationName = adminCompanyMap.organisationId.organisationName;
 
     const newpassword = generateRandomPassword();
     const saltRounds = config.bcrypt_saltRound;
@@ -231,15 +277,16 @@ export default class AdminController {
       phoneNumber,
       role,
       password: hashedPassword,
-      companyId,
-      companyName,
+      organisationId,
+      organisationName,
+      loginURL: req.body.loginURL,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
       adminId: newAdmin._id,
-      companyId: companyId,
-      companyName: companyName,
-      adminFisrtName: firstName,
+      organisationId: organisationId,
+      organisationName: organisationName,
+      adminFirstName: firstName,
       adminLastName: lastName,
     });
     await newAdminCompanyMap.save();
@@ -252,16 +299,18 @@ export default class AdminController {
       port: 465,
       secure: true,
       auth: {
-        user: config.nodemailerUser, //  Gmail email address
-        pass: config.nodemailerPassword, //  Gmail password or an application-specific password
+        user: config.nodemailer_user, //  Gmail email address
+        pass: config.nodemailer_pass, //  Gmail password or an application-specific password
       },
     });
+
+    const loginURL = newAdmin.loginURL;
 
     const mailOptions = {
       from: "nodebtapplication@gmail.com",
       to: newAdmin.email,
       subject: "Welcome to Nodebt",
-      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: https://localhost:4000/api/admin/login\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
+      text: `Hello ${newAdmin.firstName},\n\nWelcome to No Debt!\n\nYour login details are as follows:\nEmail: ${newAdmin.email}\nPassword: ${newpassword}\n\nPlease use the following link to access the login page: ${loginURL}\n\nIf you have any questions, feel free to contact us.\n\nBest regards,\nNodebt`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -303,6 +352,7 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
+        // passwordLink: req.body.passwordLink
       },
       { new: true }
     );

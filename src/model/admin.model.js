@@ -27,7 +27,7 @@ const adminSchema = new mongoose.Schema(
     },
     confirmPassword: {
       type: String,
-      required: true,
+      // required: true,
     },
     organisationEmail: {
       type: String,
@@ -55,9 +55,12 @@ const adminSchema = new mongoose.Schema(
     profileImage: {
       type: String,
     },
+    passwordLink: String, // This is excluded as the URL from frontend to reset password
     imageName: String,
+    imageUrl: String,
+    loginURL: String,
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Admin = mongoose.model("Admin", adminSchema);

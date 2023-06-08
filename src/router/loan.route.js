@@ -23,6 +23,17 @@ router.get(
   loanControllers.findBorrowersEligibilityStatus
 );
 
+import { decodeAuth } from "../middlewares/decodeAuth.js";
+
+/*Description: Add a new loan request */
+router.post(
+  "/create",
+  decodeAuth,
+  tryCatchHandler(loanControllers.addBorrower)
+);
+/*Description: find a loan or borrower by its Id */
+router.get("/", tryCatchHandler(loanControllers.findBorrower));
+
 // SEND A BORROWERS ELIGIBILITY STATUS BY ADDING THE ID TO REQ.QUERY
 router.get(
   "/send-eligibility-status",
