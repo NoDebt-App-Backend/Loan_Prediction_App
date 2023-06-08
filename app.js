@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import passport from "passport";
 import { config } from "./src/config/index.js";
 import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";

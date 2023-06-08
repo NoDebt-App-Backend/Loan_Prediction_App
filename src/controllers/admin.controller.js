@@ -1,4 +1,6 @@
 import bcrypt from "bcrypt";
+import passport from "passport";
+import FacebookStrategy from "passport-facebook";
 import {
   BadUserRequestError,
   InternalServerError,
@@ -101,6 +103,46 @@ export default class AdminController {
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
 
+    passport.use(
+      new FacebookStrategy(
+        {
+          clientID: config.facebook_id,
+          clientSecret: config.facebook_secret,
+          callbackURL: config.facebook_callback,
+        },
+        async function (accessToken, refreshToken, profile, cb) {
+          const admin = Admin.findOne({
+            facebookId: profile.id,
+            provider: "facebook",
+          });
+
+          if (!admin) {
+            const admin = new Admin({
+              facebookId: profile.id,
+              firstName: profile.first_name,
+              lastName: profile.last_name,
+              profileImage: profile.picture,
+              email: profile.email,
+              accessToken: accessToken,
+              provider: profile.provider,
+              passwordLink: req.body.passwordLink,
+            });
+            await admin.save();
+            return cb(req, res.status(200).json({
+              status: "Success",
+              message: "Facebook User signed up successfully",
+              admin: profile
+            })) 
+          } else {
+            return cb(req, res.status(200).json({
+              status: "Success",
+              message: "Facebook User already exists",
+            }))
+          }
+        }
+      )
+    );
+
     // Create new admin account
     const admin = new Admin({
       firstName: req.body.firstName,
@@ -108,7 +150,7 @@ export default class AdminController {
       email: req.body.email,
       password: hashedPassword,
       confirmPassword: hashedPassword,
-      passwordLink: req.body.passwordLink
+      passwordLink: req.body.passwordLink,
     });
 
     // Create a new company document
@@ -151,7 +193,7 @@ export default class AdminController {
           AdminId: _id,
           createdAt: createdAt,
           updatedAt: updatedAt,
-          passwordLink: passwordLink
+          passwordLink: passwordLink,
         },
       },
     });

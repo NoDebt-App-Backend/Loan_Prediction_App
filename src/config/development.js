@@ -22,5 +22,10 @@ export const development = {
   bucket_name: process.env.DEV_BUCKET_NAME,
   bucket_region: process.env.DEV_BUCKET_REGION,
   access_key: process.env.DEV_ACCESS_KEY,
-  secret_access_key: process.env.DEV_SECRET_ACCESS_KEY
+  secret_access_key: process.env.DEV_SECRET_ACCESS_KEY,
+
+  // FACEBOOK DEV SOCIAL AUTH PARAMETERS
+  facebook_id: process.env.DEV_FACEBOOK_APP_ID,
+  facebook_secret: process.env.DEV_FACEBOOK_APP_SECRET,
+  facebook_callback: process.env.DEV_CALLBACK_URL
 };

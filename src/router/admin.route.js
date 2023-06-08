@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 const router = express.Router();
 import AdminController from "../controllers/admin.controller.js";
 import ImageController from "../controllers/adminImage.controller.js";
@@ -8,6 +9,9 @@ import { upload } from "../middlewares/uploadImage.js";
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
+
+router.get('/auth/facebook',
+  passport.authenticate('facebook'), AdminController.createCompany);
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
