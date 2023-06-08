@@ -4,8 +4,9 @@ import JoiMongoId from "joi-objectid";
 Joi.objectId = JoiMongoId(Joi);
 
 const createLoanValidator = Joi.object({
-  user: Joi.objectId().required(),
-  userId: Joi.objectId().required(),
+  organisation: Joi.objectId().optional(),
+  organisationId: Joi.objectId().optional(),
+  organisationName: Joi.objectId().optional(),
   fullname: Joi.string().required(),
   email: Joi.string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)

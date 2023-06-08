@@ -1,12 +1,13 @@
 import Admin from "../model/admin.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
-import Loan from "../model/loan.model.js";
+import { Loan } from "../model/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
 import {
   BadUserRequestError,
   NotFoundError,
   UnAuthorizedError,
 } from "../error/error.js";
+import sendEmail from "../utils/sendEmail.js";
 
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 
@@ -20,13 +21,12 @@ export default class loanControllers {
    * @param {Object} res - The response object
    */
   static async addBorrower(req, res) {
-
     const admin = await Admin.findOne({ email: req.admin.email });
     if (!admin) throw new NotFoundError("user does not exist");
 
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -34,25 +34,25 @@ export default class loanControllers {
       );
     }
 
-    const { error } = createLoanValidator.validate(req.body);
-    if (error) throw error;
+    // const { error } = createLoanValidator.validate(req.body);
+    // if (error) throw error;
 
-    const userExists = await User.findById(id);
-    if (!userExists) throw new NotFoundError("user does not exist");
-    const userInCollection = await User.findById(req.body.user);
-    if (!userInCollection) throw new NotFoundError("user does not exist");
+    // const userExists = await User.findById(id);
+    // if (!userExists) throw new NotFoundError("user does not exist");
+    // const userInCollection = await User.findById(req.body.user);
+    // if (!userInCollection) throw new NotFoundError("user does not exist");
 
-    const loan = await new Loan(req.body);
+    const loan = new Loan(req.body);
 
-    loan.adminInCharge = admin.name;
-    loan.companyId = adminCompanyMap.companyId._id;
-    loan.company = adminCompanyMap.companyId._id;
-    loan.companyName = adminCompanyMap.companyId.companyName;
+    loan.adminInCharge = `${admin.firstName} ${admin.lastName}`;
+    loan.organisationId = adminCompanyMap.organisationId._id;
+    loan.organisation = adminCompanyMap.organisationId._id;
+    loan.organisationName = adminCompanyMap.organisationId.organisationName;
 
     // Admin value comes from decoded payload
-    const admin = await User.findOne({ email: req.user.email });
-    if (!admin) throw new UnAuthorizedError("Unauthorized user");
-    const loan = await new Loan(req.body);
+    // const admin = await User.findOne({ email: req.user.email });
+    // // if (!admin) throw new UnAuthorizedError("Unauthorized user");
+    // const loan = await new Loan(req.body);
 
     await loan.save();
     res.status(201).json({
@@ -109,11 +109,12 @@ export default class loanControllers {
     // Get company name
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!id) throw new UnAuthorizedError("Unauthorized user");
     const borrower = await Loan.findById(id);
     if (!borrower) throw new NotFoundError("Invalid link or details");
+
     // SEND EMAILTO BORROWER BASED ON ELIGIBILITY STATUS
     if (borrower.eligibility === true) {
       await sendEmail(
@@ -122,7 +123,7 @@ export default class loanControllers {
         {
           name: borrower.fullname,
           loanAmount: borrower.loanAmount,
-          companyName: adminCompanyMap.companyId.companyName,
+          organisationName: adminCompanyMap.organisationId.organisationName,
         },
         "./template/eligible.handlebars"
       );
@@ -137,7 +138,7 @@ export default class loanControllers {
         {
           name: borrower.fullname,
           loanAmount: borrower.loanAmount,
-          companyName: adminCompanyMap.companyId.companyName,
+          organisationName: adminCompanyMap.organisationId.organisationName,
         },
         "./template/notEligible.handlebars"
       );
@@ -153,7 +154,7 @@ export default class loanControllers {
   static async findAllCompanyLoans(req, res) {
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -166,7 +167,7 @@ export default class loanControllers {
     const skip = (page - 1) * limit;
 
     const loans = await Loan.find({
-      companyId: adminCompanyMap.companyId._id,
+      organisationId: adminCompanyMap.organisationId._id,
     })
       .select(
         "fullname email address createdAt eligibility creditScore loanAmount"
@@ -191,7 +192,7 @@ export default class loanControllers {
   static async findAllSuccessfulCompanyLoansInDescendingOrder(req, res) {
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -206,7 +207,7 @@ export default class loanControllers {
 
     // FIND AND FILTER ALL SUCCESSFUL COMPANY LOANS
     const loans = await Loan.find({
-      companyId: adminCompanyMap.companyId._id,
+      organisationId: adminCompanyMap.organisationId._id,
       eligibility: true,
     })
       .select(
@@ -219,7 +220,7 @@ export default class loanControllers {
     // CALCULATE THE SUM OF ALL SUCCESSFUL LOANS GENERATED BY A COMPANY
     const loansGeneratedSum = await Loan.aggregate([
       {
-        $match: { company: adminCompanyMap.companyId._id, eligibility: true },
+        $match: { organisation: adminCompanyMap.organisationId._id, eligibility: true },
       },
       {
         $group: {
@@ -228,6 +229,7 @@ export default class loanControllers {
         },
       },
     ]);
+    console.log(adminCompanyMap.organisationId._id);
 
     const totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
 
@@ -248,7 +250,7 @@ export default class loanControllers {
   static async findAllSuccessfulCompanyLoansInAscendingOrder(req, res) {
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -263,7 +265,7 @@ export default class loanControllers {
 
     // FIND AND FILTER ALL SUCCESSFUL COMPANY LOANS
     const loans = await Loan.find({
-      companyId: adminCompanyMap.companyId._id,
+      organisationId: adminCompanyMap.organisationId._id,
       eligibility: true,
     })
       .select(
@@ -276,7 +278,7 @@ export default class loanControllers {
     // CALCULATE THE SUM OF ALL SUCCESSFUL LOANS GENERATED BY A COMPANY
     const loansGeneratedSum = await Loan.aggregate([
       {
-        $match: { company: adminCompanyMap.companyId._id, eligibility: true },
+        $match: { organisation: adminCompanyMap.organisationId._id, eligibility: true },
       },
       {
         $group: {
@@ -305,7 +307,7 @@ export default class loanControllers {
   static async findAllRejectedCompanyLoansInDescendingOrder(req, res) {
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -319,7 +321,7 @@ export default class loanControllers {
 
     // FIND AND FILTER REJECTED COMPANY LOANS
     const loans = await Loan.find({
-      companyId: adminCompanyMap.companyId._id,
+      organisation: adminCompanyMap.organisationId._id,
       eligibility: false,
     })
       .select(
@@ -332,7 +334,7 @@ export default class loanControllers {
     // CALCULATE THE SUM OF ALL REJECTED LOANS GENERATED BY A COMPANY
     const loansRejectedSum = await Loan.aggregate([
       {
-        $match: { company: adminCompanyMap.companyId.id, eligibility: false },
+        $match: { organisation: adminCompanyMap.organisationId.id, eligibility: false },
       },
       {
         $group: {
@@ -361,7 +363,7 @@ export default class loanControllers {
   static async findAllRejectedCompanyLoansInAscendingOrder(req, res) {
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("companyId", " companyName");
+    }).populate("organisationId", " organisationName");
 
     if (!adminCompanyMap) {
       throw new UnAuthorizedError(
@@ -375,7 +377,7 @@ export default class loanControllers {
 
     // FIND AND FILTER REJECTED COMPANY LOANS
     const loans = await Loan.find({
-      companyId: adminCompanyMap.companyId._id,
+      organisationId: adminCompanyMap.organisationId._id,
       eligibility: false,
     })
       .select(
@@ -388,7 +390,7 @@ export default class loanControllers {
     // CALCULATE THE SUM OF ALL REJECTED LOANS GENERATED BY A COMPANY
     const loansRejectedSum = await Loan.aggregate([
       {
-        $match: { company: adminCompanyMap.companyId.id, eligibility: false },
+        $match: { organisation: adminCompanyMap.organisationId.id, eligibility: false },
       },
       {
         $group: {

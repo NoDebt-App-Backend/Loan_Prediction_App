@@ -3,6 +3,7 @@ import loanControllers from "../controllers/loan.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 const router = express.Router();
 import authMiddleWare from "../middlewares/auth.js";
+
 /*Description: Add a new loan request */
 router.post(
   "/create",

@@ -1,13 +1,13 @@
 import { Schema, model, Types } from "mongoose";
 
 const LoanSchema = new Schema({
-  company: {
+  organisation: {
     type: Types.ObjectId,
     ref: "AdminCompanyMap",
-    required: true,
+    // required: false,
   },
-  companyId: String,
-  companyName: String,
+  organisationId: String,
+  organisationName: String,
   eligibility: {
     type: Boolean,
     default: false,
@@ -35,7 +35,6 @@ const LoanSchema = new Schema({
       /^\S+@\S+\.\S+$/,
       "Please enter a valid email address to the address path",
     ],
-    required: true,
   },
   address: {
     type: String,
@@ -142,7 +141,7 @@ const LoanSchema = new Schema({
   },
   adminInCharge: {
     type: String,
-    required: true,
+    // required: true,
   },
   guarantor: {
     fullname: {
@@ -171,7 +170,6 @@ const LoanSchema = new Schema({
         /^\S+@\S+\.\S+$/,
         "Please enter a valid email address to the address path",
       ],
-      required: true,
     },
     dateOfBirth: {
       type: Date,
