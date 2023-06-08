@@ -17,7 +17,7 @@ const LoanSchema = new Schema({
     type: String,
     required: true,
     match: [
-      /^\w+\s\w+$/,
+      /^[\w\s\S]{3,}$/,
       "Fullname must have at least two words in the fullname path",
     ],
     required: true,
@@ -149,7 +149,7 @@ const LoanSchema = new Schema({
       type: String,
       required: true,
       match: [
-        /^\w+\s\w+$/,
+        /^[\w\s\S]{3,}$/,
         "Fullname must have at least two words in the fullname path",
       ],
       required: true,
