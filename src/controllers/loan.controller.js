@@ -232,7 +232,6 @@ export default class loanControllers {
         },
       },
     ]);
-    console.log(adminCompanyMap.organisationId._id);
 
     const totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
 
@@ -241,7 +240,7 @@ export default class loanControllers {
       title: "Loans Generated",
       status: "Success",
       results: loans.length,
-      totalSuccessLoansFigure,
+      // totalSuccessLoansFigure,
       data: {
         loans: loans,
       },
@@ -283,7 +282,7 @@ export default class loanControllers {
       {
         $match: {
           organisation: adminCompanyMap.organisationId._id,
-          eligibility: true,
+          eligibility: false,
         },
       },
       {
@@ -293,7 +292,7 @@ export default class loanControllers {
         },
       },
     ]);
-
+    
     const totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
 
     return res.status(200).json({
