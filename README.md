@@ -54,6 +54,38 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get A Single Company](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-a-single-company-adminscompanyorganisationidorganisationid)
 
+  - [Loans Routes](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#loans-routes---base-url---httpsnodebtdevonrendercomapi)
+
+    - [Create New Loan](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodcreate-new-loan-loanscreate)
+
+    - [Get A Single Loan](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-a-single-loan-loansidloanid)
+
+    - [Check For Eligibility](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodcheck-for-eligibility-loanseligibilityidloanid)
+
+    - [Send Eligibility via Email](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodsend-eligibity-status-via-email-loanssend-eligibility-statusidloanid)
+
+    - [Get All Loans](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-loanscompany-loans)
+
+    - [Get All Loans Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-page-2-loanscompany-loanspage2)
+
+    - [Get All Successful Loans - Ascending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-ascending-order-loanssuccess-loansascending)
+
+    - [Get All Successful Loans - Ascending Order - Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-ascending-order---page-2-loanssuccess-loansascendingpage2)
+
+    - [Get All Rejected Loans - Ascending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-rejected-company-loans-in-ascending-order-loansrejected-loansascending)
+
+    - [Get All Rejected Loans - Ascending Order - Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-rejected-company-loans-in-ascending-order-page-2-loansrejected-loansascendingpage2)
+
+    - [Get All Successful Loans - Descending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-descending-order-loanssuccess-loansdescending)
+
+    - [Get All Successful Loans - Descending Order - Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-descending-order---page-2-loanssuccess-loansdescendingpage2)
+
+    - [Get All Rejected Loans - Descending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-rejected-company-loans-in-descending-order-loansrejected-loansdescending)
+
+    - [Get All Rejected Loans - Descending Order - Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-rejected-company-loans-in-descending-order-page-2-loansrejected-loansdescendingpage2)
+
+    = [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
+
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
 - ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
