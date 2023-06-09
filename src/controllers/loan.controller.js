@@ -232,15 +232,17 @@ export default class loanControllers {
         },
       },
     ]);
-
-    const totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
+    let totalSuccessLoansFigure;
+    if (loansGeneratedSum.length > 0) {
+      totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
+    }
 
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
       title: "Loans Generated",
       status: "Success",
       results: loans.length,
-      // totalSuccessLoansFigure,
+      totalSuccessLoansFigure: totalSuccessLoansFigure,
       data: {
         loans: loans,
       },
@@ -282,7 +284,7 @@ export default class loanControllers {
       {
         $match: {
           organisation: adminCompanyMap.organisationId._id,
-          eligibility: false,
+          eligibility: true,
         },
       },
       {
@@ -292,15 +294,17 @@ export default class loanControllers {
         },
       },
     ]);
-    
-    const totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
 
+    let totalSuccessLoansFigure;
+    if (loansGeneratedSum.length > 0) {
+      totalSuccessLoansFigure = loansGeneratedSum[0].sumLoansGenerated;
+    }
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
       title: "Loans Generated",
       status: "Success",
       results: loans.length,
-      totalSuccessLoansFigure,
+      totalSuccessLoansFigure: totalSuccessLoansFigure,
       data: {
         loans: loans,
       },
@@ -352,8 +356,10 @@ export default class loanControllers {
       },
     ]);
 
-    const totalRejectedLoansFigure = loansRejectedSum[0].sumLoansRejected;
-
+    let totalRejectedLoansFigure;
+    if (loansRejectedSum.length > 0) {
+      totalRejectedLoansFigure = loansRejectedSum[0].sumLoansRejected;
+    }
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
       title: "Loans Declined",
@@ -411,8 +417,10 @@ export default class loanControllers {
       },
     ]);
 
-    const totalRejectedLoansFigure = loansRejectedSum[0].sumLoansRejected;
-
+    let totalRejectedLoansFigure;
+    if (loansRejectedSum.length > 0) {
+      totalRejectedLoansFigure = loansRejectedSum[0].sumLoansRejected;
+    }
     return res.status(200).json({
       message: loans.length < 1 ? "No loans found" : "Loans found successfully",
       title: "Loans Declined",
