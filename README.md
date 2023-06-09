@@ -143,7 +143,7 @@ https://nodebt-application.onrender.com/api
 
 ### ROUTES
 
-We have the Users Route and the Loan Route
+We have the Admins Route and the Loan Route
 
 #### Admins Routes
 
@@ -1175,6 +1175,1292 @@ Response
     }
 }
 ```
+
+#### Loans Routes - BASE URL - https://nodebtdev.onrender.com/api
+
+#### POST Method(Create New Loan): /loans/create
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken, loanAmount, fullname, email, address, employmentType, phoneNumber, dateOfBirth, nationalIdentityNumber, incomePerMonth, loanType, repaymentType, purposeOfLoan, collateralType, collateralValue, collateralInformation, guarantor details (fullname, phoneNumber, dateOfBirth, email, address, socialSecurityNumber, relationship, employment, incomePerMonth, otherSourcesOfIncome)
+
+- EXAMPLE: Create A New Loan Successful
+
+**_STATUS: 201 CREATED_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/create' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MWE2MDQyNTliYjA5MGMyOTc3ODY1IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI1NTU0MywiZXhwIjoxNjg2MzQxOTQzfQ.dd7dNexT48r4CcYV8DpIcxRND2UgNJquuIChs63FOt4' \
+--data-raw '{
+            "guarantor": {
+                "fullname": "Victor Okpomfon",
+                "phoneNumber": "+34529394500",
+                "email": "cultihirze@gufum.com",
+                "dateOfBirth": "1997-04-08",
+                "address": "Anantigha Calabar South",
+                "socialSecurityNumber": "43438487579",
+                "relationship": "Mother",
+                "employment": "Civil Servant",
+                "incomePerMonth": 88900,
+                "otherSourcesOfIncome": "none"
+            },
+            "loanAmount":50000,
+            "fullname": "Stephanie Okpo-mfon",
+            "email": "cultihirze@gufum.com",
+            "address": "Anantigha Calabar South",
+            "employmentType": "part-time",
+            "phoneNumber": "09163426103",
+            "dateOfBirth": "2003-09-07T00:00:00.000Z",
+            "nationalIdentityNumber": "34589790070",
+            "incomePerMonth": 100000,
+            "loanType": "student-loan",
+            "repaymentType": "principal-and-intrest",
+            "purposeOfLoan": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "collateralType": "real-estate",
+            "collateralValue": 55000,
+            "collateralInformation": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success."
+        }'
+
+Response
+(json)
+{
+    "status": "success",
+    "data": {
+        "loan": {
+            "eligibility": false,
+            "fullname": "Stephanie Okpo-mfon",
+            "loanAmount": 50000,
+            "email": "cultihirze@gufum.com",
+            "address": "Anantigha Calabar South",
+            "employmentType": "part-time",
+            "phoneNumber": "09163426103",
+            "dateOfBirth": "2003-09-07T00:00:00.000Z",
+            "nationalIdentityNumber": "34589790070",
+            "incomePerMonth": 100000,
+            "loanType": "student-loan",
+            "repaymentType": "principal-and-intrest",
+            "purposeOfLoan": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "collateralType": "real-estate",
+            "collateralValue": 55000,
+            "collateralInformation": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "guarantor": {
+                "fullname": "Victor Okpomfon",
+                "phoneNumber": "+34529394500",
+                "email": "cultihirze@gufum.com",
+                "dateOfBirth": "1997-04-08T00:00:00.000Z",
+                "address": "Anantigha Calabar South",
+                "socialSecurityNumber": "43438487579",
+                "relationship": "Mother",
+                "employment": "Civil Servant",
+                "incomePerMonth": 88900,
+                "otherSourcesOfIncome": "none"
+            },
+            "_id": "648246967bfd5752f2a19d4a",
+            "adminInCharge": "Karen Chukwu",
+            "organisationId": "6481a604259bb090c2977866",
+            "organisation": "6481a604259bb090c2977866",
+            "organisationName": "Manymillions Tech",
+            "__v": 0
+        }
+    }
+}
+```
+
+
+#### GET Method(Get A Single Loan): /loans?id={loanId}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken, loanid as req query
+
+- EXAMPLE: Get A Single Loan Successfully
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request GET 'https://nodebtdev.onrender.com/api/loans?id=6483574dd
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MWE2MDQyNTliYjA5MGMyOTc3ODY1IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI1NTU0MywiZXhwIjoxNjg2MzQxOTQzfQ.dd7dNexT48r4CcYV8DpIcxRND2UgNJquuIChs63FOt4' \
+--data ''
+
+Response
+(json)
+{
+    "status": "success",
+    "data": {
+        "borrower": {
+            "guarantor": {
+                "fullname": "Victor Okpomfon",
+                "phoneNumber": "+34529394500",
+                "email": "cultihirze@gufum.com",
+                "dateOfBirth": "1997-04-08T00:00:00.000Z",
+                "address": "Anantigha Calabar South",
+                "socialSecurityNumber": "43438487579",
+                "relationship": "Mother",
+                "employment": "Civil Servant",
+                "incomePerMonth": 88900,
+                "otherSourcesOfIncome": "none"
+            },
+            "_id": "648246967bfd5752f2a19d4a",
+            "eligibility": false,
+            "fullname": "Stephanie Okpo-mfon",
+            "loanAmount": 50000,
+            "email": "cultihirze@gufum.com",
+            "address": "Anantigha Calabar South",
+            "employmentType": "part-time",
+            "phoneNumber": "09163426103",
+            "dateOfBirth": "2003-09-07T00:00:00.000Z",
+            "nationalIdentityNumber": "34589790070",
+            "incomePerMonth": 100000,
+            "loanType": "student-loan",
+            "repaymentType": "principal-and-intrest",
+            "purposeOfLoan": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "collateralType": "real-estate",
+            "collateralValue": 55000,
+            "collateralInformation": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "adminInCharge": "Karen Chukwu",
+            "organisationId": "6481a604259bb090c2977866",
+            "organisation": "6481a604259bb090c2977866",
+            "organisationName": "Manymillions Tech",
+            "__v": 0
+        }
+    }
+}
+```
+
+#### GET Method(Check for Eligibility): /loans/eligibility?id={loanId}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken, loanid as req query
+
+- EXAMPLE: Check for Eligibility Success
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/eligibility?id=6483574dd79d9330ffc5df36' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MWE2MDQyNTliYjA5MGMyOTc3ODY1IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI1NTU0MywiZXhwIjoxNjg2MzQxOTQzfQ.dd7dNexT48r4CcYV8DpIcxRND2UgNJquuIChs63FOt4' \
+--data ''
+
+Response
+(json)
+{
+    "status": "success",
+    "data": {
+        "eligibility": false
+    }
+}
+```
+
+#### GET Method(Send Eligibity Status via Email): /loans/send-eligibility-status?id={loanId}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken, loanid as req query
+
+- EXAMPLE: Send Eligibity Status via Email
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'localhost:5000/api/loans/send-eligibility-status?id=64824b0162da99fe3060d5a3' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "status": "success",
+    "message": "eligibility status successfully sent to borrowers mail"
+}
+```
+The supposed borrower gets mail with the message as shown in the example below depending on his/her eligibility status (the one shown in the example is declined)
+
+![Loan Declined Borrower](./images/loanimg.png)
+
+
+#### GET Method(Get All Loans in A Company): /loans/company-loans
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Loans in a Company
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/company-loans' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loan Applications",
+    "status": "Success",
+    "results": 10,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d796e02db3bfc780496e",
+                "eligibility": true,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:41:10.900Z"
+            },
+            {
+                "_id": "6482d773e02db3bfc7804969",
+                "eligibility": true,
+                "fullname": "Clinton Ayanchukwu",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:35.309Z"
+            },
+            {
+                "_id": "6482d760e02db3bfc7804964",
+                "eligibility": true,
+                "fullname": "Ifunada Kenneth",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:16.471Z"
+            },
+            {
+                "_id": "6482d74ce02db3bfc780495f",
+                "eligibility": true,
+                "fullname": "Samuel Eze",
+                "loanAmount": 3000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:56.971Z"
+            },
+            {
+                "_id": "6482d737e02db3bfc780495a",
+                "eligibility": true,
+                "fullname": "Okoli Bolade",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:35.832Z"
+            },
+            {
+                "_id": "6482d72be02db3bfc7804955",
+                "eligibility": true,
+                "fullname": "Harry Ezechukwu",
+                "loanAmount": 40000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:23.473Z"
+            },
+            {
+                "_id": "6482d715e02db3bfc7804950",
+                "eligibility": true,
+                "fullname": "Zainab Kayode",
+                "loanAmount": 6000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:01.255Z"
+            },
+            {
+                "_id": "6482d700e02db3bfc780494b",
+                "eligibility": true,
+                "fullname": "Godspower Miracle",
+                "loanAmount": 12000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:40.920Z"
+            },
+            {
+                "_id": "6482d6ede02db3bfc7804946",
+                "eligibility": true,
+                "fullname": "Ifunaya Christopher",
+                "loanAmount": 10000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:21.679Z"
+            },
+            {
+                "_id": "6482d692e02db3bfc7804941",
+                "eligibility": true,
+                "fullname": "Omoniyi Femi",
+                "loanAmount": 9000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:50.337Z"
+            }
+        ]
+    }
+}
+```
+This has pagination with each page listing 10 per page.
+
+
+#### GET Method(Get All Loans in A Company-Page 2): /loans/company-loans?page=2
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken and the page as a req query
+
+- EXAMPLE: Get All Loans in a Company (Page 2)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'localhost:5000/api/loans/company-loans?page=2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loan Applications",
+    "status": "Success",
+    "results": 10,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d67ce02db3bfc780493c",
+                "eligibility": true,
+                "fullname": "Kayode Joshua",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:28.176Z"
+            },
+            {
+                "_id": "6482d64de02db3bfc7804937",
+                "eligibility": true,
+                "fullname": "Sandra Funanya",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:41.491Z"
+            },
+            {
+                "_id": "6482d63fe02db3bfc7804932",
+                "eligibility": true,
+                "fullname": "Mercy Justice",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:27.331Z"
+            },
+            {
+                "_id": "6482d629e02db3bfc780492d",
+                "eligibility": true,
+                "fullname": "King Onuche",
+                "loanAmount": 50000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:05.314Z"
+            },
+            {
+                "_id": "6482d60fe02db3bfc7804928",
+                "eligibility": true,
+                "fullname": "Precious Chinedu",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:34:39.082Z"
+            },
+            {
+                "_id": "6482d3c13a7f9d872a6d1167",
+                "eligibility": false,
+                "fullname": "Korede Israel",
+                "loanAmount": 35000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:49.508Z"
+            },
+            {
+                "_id": "6482d39e3a7f9d872a6d1162",
+                "eligibility": false,
+                "fullname": "Ebenezer Jasu",
+                "loanAmount": 65000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:14.660Z"
+            },
+            {
+                "_id": "6482d26c3a7f9d872a6d115d",
+                "eligibility": false,
+                "fullname": "Bello Yusuf",
+                "loanAmount": 42000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:19:08.727Z"
+            },
+            {
+                "_id": "6482d1ee3a7f9d872a6d1158",
+                "eligibility": false,
+                "fullname": "Emily Olaniyi",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:17:02.912Z"
+            },
+            {
+                "_id": "6482d1d13a7f9d872a6d1153",
+                "eligibility": false,
+                "fullname": "Kay James",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:16:33.035Z"
+            }
+        ]
+    }
+}
+```
+This has pagination with each page listing 10 per page.
+
+
+#### GET Method(Get All Successful Company Loans In Ascending Order): /loans/success-loans/ascending
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Successful Company Loans In Ascending Order
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Generated",
+    "status": "Success",
+    "results": 10,
+    "totalSuccessLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d60fe02db3bfc7804928",
+                "eligibility": true,
+                "fullname": "Precious Chinedu",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:34:39.082Z"
+            },
+            {
+                "_id": "6482d629e02db3bfc780492d",
+                "eligibility": true,
+                "fullname": "King Onuche",
+                "loanAmount": 50000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:05.314Z"
+            },
+            {
+                "_id": "6482d63fe02db3bfc7804932",
+                "eligibility": true,
+                "fullname": "Mercy Justice",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:27.331Z"
+            },
+            {
+                "_id": "6482d64de02db3bfc7804937",
+                "eligibility": true,
+                "fullname": "Sandra Funanya",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:41.491Z"
+            },
+            {
+                "_id": "6482d67ce02db3bfc780493c",
+                "eligibility": true,
+                "fullname": "Kayode Joshua",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:28.176Z"
+            },
+            {
+                "_id": "6482d692e02db3bfc7804941",
+                "eligibility": true,
+                "fullname": "Omoniyi Femi",
+                "loanAmount": 9000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:50.337Z"
+            },
+            {
+                "_id": "6482d6ede02db3bfc7804946",
+                "eligibility": true,
+                "fullname": "Ifunaya Christopher",
+                "loanAmount": 10000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:21.679Z"
+            },
+            {
+                "_id": "6482d700e02db3bfc780494b",
+                "eligibility": true,
+                "fullname": "Godspower Miracle",
+                "loanAmount": 12000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:40.920Z"
+            },
+            {
+                "_id": "6482d715e02db3bfc7804950",
+                "eligibility": true,
+                "fullname": "Zainab Kayode",
+                "loanAmount": 6000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:01.255Z"
+            },
+            {
+                "_id": "6482d72be02db3bfc7804955",
+                "eligibility": true,
+                "fullname": "Harry Ezechukwu",
+                "loanAmount": 40000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:23.473Z"
+            }
+        ]
+    }
+}
+```
+This also works with pagination with each page in rows of 10.
+
+
+#### GET Method(Get All Successful Company Loans In Ascending Order - Page 2): /loans/success-loans/ascending?page=2
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Successful Company Loans In Ascending Order (Part 2)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending?page=2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    {
+    "message": "Loans found successfully",
+    "title": "Loans Generated",
+    "status": "Success",
+    "results": 5,
+    "totalSuccessLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d737e02db3bfc780495a",
+                "eligibility": true,
+                "fullname": "Okoli Bolade",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:35.832Z"
+            },
+            {
+                "_id": "6482d74ce02db3bfc780495f",
+                "eligibility": true,
+                "fullname": "Samuel Eze",
+                "loanAmount": 3000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:56.971Z"
+            },
+            {
+                "_id": "6482d760e02db3bfc7804964",
+                "eligibility": true,
+                "fullname": "Ifunada Kenneth",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:16.471Z"
+            },
+            {
+                "_id": "6482d773e02db3bfc7804969",
+                "eligibility": true,
+                "fullname": "Clinton Ayanchukwu",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:35.309Z"
+            },
+            {
+                "_id": "6482d796e02db3bfc780496e",
+                "eligibility": true,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:41:10.900Z"
+            }
+        ]
+    }
+}
+```
+
+
+
+#### GET Method(Get All Rejected Company Loans In Ascending Order): /loans/rejected-loans/ascending
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Rejected Company Loans In Ascending Order
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Declined",
+    "status": "Success",
+    "results": 10,
+    "totalRejectedLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482cf391c7ba914df55965c",
+                "eligibility": false,
+                "fullname": "Elijah Haruna",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:05:29.815Z"
+            },
+            {
+                "_id": "6482d0a93a7f9d872a6d1126",
+                "eligibility": false,
+                "fullname": "Elijah Haruna",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:11:37.406Z"
+            },
+            {
+                "_id": "6482d0ca3a7f9d872a6d112b",
+                "eligibility": false,
+                "fullname": "Kehinde Bamidele",
+                "loanAmount": 25000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:10.956Z"
+            },
+            {
+                "_id": "6482d0e33a7f9d872a6d1130",
+                "eligibility": false,
+                "fullname": "James Ferrer",
+                "loanAmount": 76000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:35.015Z"
+            },
+            {
+                "_id": "6482d0f93a7f9d872a6d1135",
+                "eligibility": false,
+                "fullname": "Abayomi Haruna",
+                "loanAmount": 54000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:57.662Z"
+            },
+            {
+                "_id": "6482d10e3a7f9d872a6d113a",
+                "eligibility": false,
+                "fullname": "Love Adebisi",
+                "loanAmount": 32000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:13:18.835Z"
+            },
+            {
+                "_id": "6482d1603a7f9d872a6d113f",
+                "eligibility": false,
+                "fullname": "Love Adebisi",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:14:40.678Z"
+            },
+            {
+                "_id": "6482d16d3a7f9d872a6d1144",
+                "eligibility": false,
+                "fullname": "Bisola Adesi",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:14:53.747Z"
+            },
+            {
+                "_id": "6482d1823a7f9d872a6d1149",
+                "eligibility": false,
+                "fullname": "Chinedu Emezua",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:15:14.391Z"
+            },
+            {
+                "_id": "6482d1923a7f9d872a6d114e",
+                "eligibility": false,
+                "fullname": "Izuchi Ozumba",
+                "loanAmount": 65000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:15:30.516Z"
+            }
+        ]
+    }
+}
+```
+This also works with pagination with each page in rows of 10.
+
+
+#### GET Method(Get All Rejected Company Loans In Ascending Order (Page 2)): /loans/rejected-loans/ascending?page=2
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Rejected Company Loans In Ascending Order (Page 2)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending?page=2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Declined",
+    "status": "Success",
+    "results": 5,
+    "totalRejectedLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d1d13a7f9d872a6d1153",
+                "eligibility": false,
+                "fullname": "Kay James",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:16:33.035Z"
+            },
+            {
+                "_id": "6482d1ee3a7f9d872a6d1158",
+                "eligibility": false,
+                "fullname": "Emily Olaniyi",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:17:02.912Z"
+            },
+            {
+                "_id": "6482d26c3a7f9d872a6d115d",
+                "eligibility": false,
+                "fullname": "Bello Yusuf",
+                "loanAmount": 42000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:19:08.727Z"
+            },
+            {
+                "_id": "6482d39e3a7f9d872a6d1162",
+                "eligibility": false,
+                "fullname": "Ebenezer Jasu",
+                "loanAmount": 65000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:14.660Z"
+            },
+            {
+                "_id": "6482d3c13a7f9d872a6d1167",
+                "eligibility": false,
+                "fullname": "Korede Israel",
+                "loanAmount": 35000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:49.508Z"
+            }
+        ]
+    }
+}
+```
+
+
+#### GET Method(Get All Successful Company Loans In Descending Order): /loans/success-loans/descending
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Successful Company Loans In Descending Order
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Generated",
+    "status": "Success",
+    "results": 10,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d796e02db3bfc780496e",
+                "eligibility": true,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:41:10.900Z"
+            },
+            {
+                "_id": "6482d773e02db3bfc7804969",
+                "eligibility": true,
+                "fullname": "Clinton Ayanchukwu",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:35.309Z"
+            },
+            {
+                "_id": "6482d760e02db3bfc7804964",
+                "eligibility": true,
+                "fullname": "Ifunada Kenneth",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:40:16.471Z"
+            },
+            {
+                "_id": "6482d74ce02db3bfc780495f",
+                "eligibility": true,
+                "fullname": "Samuel Eze",
+                "loanAmount": 3000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:56.971Z"
+            },
+            {
+                "_id": "6482d737e02db3bfc780495a",
+                "eligibility": true,
+                "fullname": "Okoli Bolade",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:35.832Z"
+            },
+            {
+                "_id": "6482d72be02db3bfc7804955",
+                "eligibility": true,
+                "fullname": "Harry Ezechukwu",
+                "loanAmount": 40000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:23.473Z"
+            },
+            {
+                "_id": "6482d715e02db3bfc7804950",
+                "eligibility": true,
+                "fullname": "Zainab Kayode",
+                "loanAmount": 6000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:39:01.255Z"
+            },
+            {
+                "_id": "6482d700e02db3bfc780494b",
+                "eligibility": true,
+                "fullname": "Godspower Miracle",
+                "loanAmount": 12000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:40.920Z"
+            },
+            {
+                "_id": "6482d6ede02db3bfc7804946",
+                "eligibility": true,
+                "fullname": "Ifunaya Christopher",
+                "loanAmount": 10000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:38:21.679Z"
+            },
+            {
+                "_id": "6482d692e02db3bfc7804941",
+                "eligibility": true,
+                "fullname": "Omoniyi Femi",
+                "loanAmount": 9000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:50.337Z"
+            }
+        ]
+    }
+}
+```
+This also works with pagination with each page in rows of 10.
+
+
+#### GET Method(Get All Successful Company Loans In Descending Order - Page 2): /loans/success-loans/descending?page=2
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Successful Company Loans In Descending Order (Page 2)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending?page=2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Generated",
+    "status": "Success",
+    "results": 5,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d67ce02db3bfc780493c",
+                "eligibility": true,
+                "fullname": "Kayode Joshua",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:36:28.176Z"
+            },
+            {
+                "_id": "6482d64de02db3bfc7804937",
+                "eligibility": true,
+                "fullname": "Sandra Funanya",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:41.491Z"
+            },
+            {
+                "_id": "6482d63fe02db3bfc7804932",
+                "eligibility": true,
+                "fullname": "Mercy Justice",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:27.331Z"
+            },
+            {
+                "_id": "6482d629e02db3bfc780492d",
+                "eligibility": true,
+                "fullname": "King Onuche",
+                "loanAmount": 50000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:35:05.314Z"
+            },
+            {
+                "_id": "6482d60fe02db3bfc7804928",
+                "eligibility": true,
+                "fullname": "Precious Chinedu",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:34:39.082Z"
+            }
+        ]
+    }
+}
+```
+
+
+
+#### GET Method(Get All Rejected Company Loans In Descending Order): /loans/rejected-loans/descending
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Rejected Company Loans In Descending Order
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Declined",
+    "status": "Success",
+    "results": 10,
+    "totalRejectedLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d3c13a7f9d872a6d1167",
+                "eligibility": false,
+                "fullname": "Korede Israel",
+                "loanAmount": 35000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:49.508Z"
+            },
+            {
+                "_id": "6482d39e3a7f9d872a6d1162",
+                "eligibility": false,
+                "fullname": "Ebenezer Jasu",
+                "loanAmount": 65000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:24:14.660Z"
+            },
+            {
+                "_id": "6482d26c3a7f9d872a6d115d",
+                "eligibility": false,
+                "fullname": "Bello Yusuf",
+                "loanAmount": 42000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:19:08.727Z"
+            },
+            {
+                "_id": "6482d1ee3a7f9d872a6d1158",
+                "eligibility": false,
+                "fullname": "Emily Olaniyi",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:17:02.912Z"
+            },
+            {
+                "_id": "6482d1d13a7f9d872a6d1153",
+                "eligibility": false,
+                "fullname": "Kay James",
+                "loanAmount": 20000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:16:33.035Z"
+            },
+            {
+                "_id": "6482d1923a7f9d872a6d114e",
+                "eligibility": false,
+                "fullname": "Izuchi Ozumba",
+                "loanAmount": 65000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:15:30.516Z"
+            },
+            {
+                "_id": "6482d1823a7f9d872a6d1149",
+                "eligibility": false,
+                "fullname": "Chinedu Emezua",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:15:14.391Z"
+            },
+            {
+                "_id": "6482d16d3a7f9d872a6d1144",
+                "eligibility": false,
+                "fullname": "Bisola Adesi",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:14:53.747Z"
+            },
+            {
+                "_id": "6482d1603a7f9d872a6d113f",
+                "eligibility": false,
+                "fullname": "Love Adebisi",
+                "loanAmount": 75000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:14:40.678Z"
+            },
+            {
+                "_id": "6482d10e3a7f9d872a6d113a",
+                "eligibility": false,
+                "fullname": "Love Adebisi",
+                "loanAmount": 32000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:13:18.835Z"
+            }
+        ]
+    }
+}
+```
+This also works with pagination with each page in rows of 10.
+
+
+#### GET Method(Get All Rejected Company Loans In Descending Order (Page 2)): /loans/rejected-loans/descending?page=2
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Rejected Company Loans In Ascending Order (Page 2)
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/success-loans/ascending?page=2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loans Declined",
+    "status": "Success",
+    "results": 5,
+    "totalRejectedLoansFigure": 829000,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482d0f93a7f9d872a6d1135",
+                "eligibility": false,
+                "fullname": "Abayomi Haruna",
+                "loanAmount": 54000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:57.662Z"
+            },
+            {
+                "_id": "6482d0e33a7f9d872a6d1130",
+                "eligibility": false,
+                "fullname": "James Ferrer",
+                "loanAmount": 76000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:35.015Z"
+            },
+            {
+                "_id": "6482d0ca3a7f9d872a6d112b",
+                "eligibility": false,
+                "fullname": "Kehinde Bamidele",
+                "loanAmount": 25000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:12:10.956Z"
+            },
+            {
+                "_id": "6482d0a93a7f9d872a6d1126",
+                "eligibility": false,
+                "fullname": "Elijah Haruna",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:11:37.406Z"
+            },
+            {
+                "_id": "6482cf391c7ba914df55965c",
+                "eligibility": false,
+                "fullname": "Elijah Haruna",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T07:05:29.815Z"
+            }
+        ]
+    }
+}
+```
+
+
+#### GET Method(Get Loan By Name): /loans/getloan/{fullname}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get Loan By Name
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/getloan/Kelvin Hart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "results": 1,
+    "loans": [
+        {
+            "_id": "64825405b06bb5a0d38a9b50",
+            "eligibility": false,
+            "fullname": "Kelvin Hart",
+            "loanAmount": 50000,
+            "email": "cultihirze@gufum.com",
+            "address": "Anantigha Calabar South"
+        }
+    ]
+}
+```
+
 
 ## Troubleshooting
 
