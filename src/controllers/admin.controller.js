@@ -354,7 +354,6 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
-        // passwordLink: req.body.passwordLink
       },
       { new: true }
     );
