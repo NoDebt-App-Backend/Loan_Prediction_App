@@ -11,6 +11,7 @@ import {
   loginAdminValidator,
   updateAdminValidator,
   changePasswordValidator,
+  addAdminValidator,
 } from "../validators/admin.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
@@ -252,8 +253,8 @@ export default class AdminController {
   }
 
   static async addAdmin(req, res) {
-    const { firstName, lastName, email, phoneNumber, role } = req.body;
-
+    const { value, error} = addAdminValidator.req.body;
+    if (error) throw error
     const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
     }).populate("organisationId", " organisationName");
@@ -264,8 +265,18 @@ export default class AdminController {
       );
     }
 
-    const organisationId = adminCompanyMap.organisationId._id;
-    const organisationName = adminCompanyMap.organisationId.organisationName;
+    const organisationId = adminCompanyMap.organisationId;
+    const organisationName = adminCompanyMap.organisationName;
+
+    const existingEmail = await Admin.findOne({email: req.body.email});
+    if (existingEmail){
+      throw new BadUserRequestError("Email already exists")
+    };
+
+    const existingPhoneNumber = await Admin.findOne({phoneNumber:req.body.phoneNumber});
+    if(existingPhoneNumber){
+      throw new BadUserRequestError("Phone number already exists")
+    };
 
     const newpassword = generateRandomPassword();
     const saltRounds = config.bcrypt_saltRound;
