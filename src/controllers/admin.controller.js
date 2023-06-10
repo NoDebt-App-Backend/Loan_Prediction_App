@@ -223,10 +223,12 @@ export default class AdminController {
       throw new BadUserRequestError(
         "Please provide a valid email address and password before you can login."
       );
-      const adminCompany = await AdminCompanyMap.findOne({ id: admin._id });
-      const { organisationName, organisationId } = adminCompany;
 
     const { _id, email, firstName, lastName, imageUrl } = admin;
+
+    const adminCompany = await AdminCompanyMap.findOne(admin._id);
+    const { organisationName, organisationId } = adminCompany;
+
     // Returning a response to the client
     res.status(200).json({
       message: "User found successfully",
