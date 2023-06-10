@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import passport from "passport";
-import { Strategy as FacebookStrategy } from "passport-facebook";
+import FacebookStrategy from "passport-facebook";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 // import GoogleStrategy from ( 'passport-google-oauth2' ).Strategy;
 import {
@@ -87,7 +87,7 @@ export default class AdminController {
 
   static async facebookCreateAdmin(req, res) {
     passport.use(
-      new FacebookStrategy.Strategy(
+      new FacebookStrategy(
         {
           clientID: config.facebook_id,
           clientSecret: config.facebook_secret,

@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-// import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
 import passport from "passport";
@@ -13,6 +12,7 @@ import router from "./src/router/admin.route.js";
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
 
 // configuring environment variables
+
 dotenv.config();
 
 const app = express();

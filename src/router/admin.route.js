@@ -10,20 +10,33 @@ import { upload } from "../middlewares/uploadImage.js";
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
-router.get('/auth/facebook',
-  passport.authenticate('facebook', {scope: 'email'}), AdminController.facebookCreateAdmin);
+router.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { scope: "email" }),
+  AdminController.facebookCreateAdmin
+);
 
-  router.get('/auth/google',
-  passport.authenticate('google', {scope: ['email', 'profile']}), tryCatchHandler(AdminController.googleCreateAdmin));
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] }),
+  tryCatchHandler(AdminController.googleCreateAdmin)
+);
 
-  router.get( '/auth/google/callback',
-  passport.authenticate( 'google', {
-      successRedirect: '/auth/google/success',
-      failureRedirect: '/auth/google/failure'
-}));
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/auth/google/success",
+    failureRedirect: "/auth/google/failure",
+  })
+);
 
-router.get('/auth/facebook/secret',
-  passport.authenticate('facebook', { successRedirect : '/signup', failureRedirect : '/signup' }));
+router.get(
+  "/auth/facebook/secret",
+  passport.authenticate("facebook", {
+    successRedirect: "/profile",
+    failureRedirect: "/",
+  })
+);
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
@@ -43,10 +56,7 @@ router.get(
 );
 
 // To retrieve all the company accounts
-router.get(
-  "/companies",
-  tryCatchHandler(AdminController.getAllOrganisations)
-);
+router.get("/companies", tryCatchHandler(AdminController.getAllOrganisations));
 
 // To retrieve the relationship between the admin and company
 router.get(
