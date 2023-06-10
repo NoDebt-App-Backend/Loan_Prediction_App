@@ -183,7 +183,7 @@ We have the Admins Route and the Loan Route
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
-Parameters: firstName, lastName, email, organisationName, password, confirmPassword
+Parameters: firstName, lastName, email, organisationName, password, confirmPassword, passwordURL(optional - this would be passed in for admins to reroute to login when they want to verify five digit token)
 
 - EXAMPLE: Register Admin - Successful
 
@@ -193,12 +193,13 @@ Parameters: firstName, lastName, email, organisationName, password, confirmPassw
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
 --data-raw '{
-    "firstName": "Patricia",
-    "lastName": "Lange",
-    "email": "petroridra@gufum.com",
-    "organisationName": "Patricia Tech",
-    "password": "Patto567%",
-    "confirmPassword":"Patto567%"
+    "firstName": "Eben",
+    "lastName": "Shefu",
+    "email": "ebenshefu@gmail.com",
+    "organisationName": "My Name Tech",
+    "password": "Lakun134$",
+    "confirmPassword":"Lakun134$",
+    "passwordLink": "https://nodebt-application.onrender.com/api"
 }'
 
 Response
@@ -208,16 +209,17 @@ Response
     "status": "Success",
     "data": {
         "company_profile": {
-            "company": "Patricia Tech",
-            "company_id": "647deebbc24032a06525003e"
+            "company": "My Name Tech",
+            "company_id": "6484c46e6af91b817aaae8b8"
         },
         "admin": {
-            "firstName": "Patricia",
-            "lastName": "Lange",
-            "email": "petroridra@gufum.com",
-            "AdminId": "647deebbc24032a06525003d",
-            "createdAt": "2023-06-05T14:18:35.258Z",
-            "updatedAt": "2023-06-05T14:18:35.258Z"
+            "firstName": "Eben",
+            "lastName": "Shefu",
+            "email": "ebenshefu@gmail.com",
+            "AdminId": "6484c46e6af91b817aaae8b7",
+            "createdAt": "2023-06-10T18:43:58.532Z",
+            "updatedAt": "2023-06-10T18:43:58.532Z",
+            "passwordLink": "https://nodebt-application.onrender.com/api"
         }
     }
 }
@@ -355,8 +357,8 @@ Parameters: email, password
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
 --data-raw '{
-    "email": "petroridra@gufum.com",
-    "password": "Patto567%"
+    "email": "mitronarzo@gufum.com",
+    "password": "Lakun134$"
 }'
 
 Response
@@ -365,9 +367,15 @@ Response
     "message": "User found successfully",
     "status": "Success",
     "data": {
-        "adminId": "647deebbc24032a06525003d",
-        "email": "petroridra@gufum.com",
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGVlYmJjMjQwMzJhMDY1MjUwMDNkIiwiZW1haWwiOiJwZXRyb3JpZHJhQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk3NTM5MCwiZXhwIjoxNjg2MDYxNzkwfQ.CceELmq__mqtO6emva-2lZXSNJ3Jpp1ewVEI0_RGNDU"
+        "adminId": "648212385c5cef8a3fba48d4",
+        "email": "mitronarzo@gufum.com",
+        "firstName": "Karen",
+        "lastName": "Chukwu",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjEyMzg1YzVjZWY4YTNmYmE0OGQ0IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjQyMjI3NiwiZXhwIjoxNjg2NTA4Njc2fQ.gty9f8Kuf9EFBBk5iMhdrEIdGBEW930WbRZ-I34FsB4",
+        "organisationId": {
+            "_id": "648212385c5cef8a3fba48d5",
+            "organisationName": "Manymillions Tech"
+        }
     }
 }
 ```
@@ -1020,7 +1028,7 @@ Response
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
-Parameters: authToken, firstName, lastName, email, phoneNumber, role
+Parameters: authToken, firstName, lastName, email, phoneNumber, role, loginURL(optional - passed in as the URL the new admin gets as a mail to login directly along with their email and password)
 
 - EXAMPLE: Add Admin Successful
 
@@ -1031,11 +1039,13 @@ Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/create' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGVlYmJjMjQwMzJhMDY1MjUwMDNkIiwiZW1haWwiOiJwZXRyb3JpZHJhQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk3NTY2NywiZXhwIjoxNjg2MDYyMDY3fQ.nzIrcWTwYBFd_RNAy1KuPLr6yZaXbZmzKuXjzNR4k6c' \
 --data-raw '{
-       "firstName": "Francis",
-       "lastName": "Makinde",
-        "email": "yorkukiltu@gufum.com",
-        "phoneNumber": "09087654356",
-        "role": "Financial Analyst"
+       "firstName": "Abede",
+       "lastName": "Abraham",
+        "email": "abedeabram@gufum.com",
+        "phoneNumber": "09087997689",
+        "role": "Financial Analyst",
+        "loginURL": "http:omega.com/login"
+
 }'
 
 Response
@@ -1045,18 +1055,19 @@ Response
     "status": "Success",
     "data": {
         "newAdmin": {
-            "firstName": "Francis",
-            "lastName": "Makinde",
-            "phoneNumber": "09087654356",
-            "email": "yorkukiltu@gufum.com",
-            "password": "$2b$10$ARc0JaZWJHtBkYVkCjkpwuhQUc/ZM.v7.X7Susc2icXqImNFsnsOu",
+            "firstName": "Abede",
+            "lastName": "Abraham",
+            "phoneNumber": "09087997689",
+            "email": "abedeabram@gufum.com",
+            "password": "$2b$10$iwTqMqMmqQglEuN7AfPrv.54nFocaMuA/WWSHhRKNi5T2hP9oBrT.",
             "role": "Financial Analyst",
-            "_id": "647e3e7de101695c5a8f86e9",
-            "createdAt": "2023-06-05T19:58:53.101Z",
-            "updatedAt": "2023-06-05T19:58:53.101Z",
+            "loginURL": "http:omega.com/login",
+            "_id": "6484c6206af91b817aaae8cc",
+            "createdAt": "2023-06-10T18:51:12.637Z",
+            "updatedAt": "2023-06-10T18:51:12.637Z",
             "__v": 0
         },
-        "newpassword": "uN<6_,Jg"
+        "newpassword": "iD(2f#A`"
     }
 }
 ```
