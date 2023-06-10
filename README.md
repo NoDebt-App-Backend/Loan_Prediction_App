@@ -1437,9 +1437,46 @@ Response
     "message": "Loans found successfully",
     "title": "Loan Applications",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "data": {
         "loans": [
+            {
+                "_id": "6482f1bf9195100a71dfd93f",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "filtameltu@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T09:32:47.047Z"
+            },
+            {
+                "_id": "6482f10a9195100a71dfd937",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T09:29:46.624Z"
+            },
+            {
+                "_id": "6482eba89195100a71dfd909",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T09:06:48.782Z"
+            },
+            {
+                "_id": "6482ea0fa25399c42a5c1491",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "createdAt": "2023-06-09T08:59:59.339Z"
+            },
             {
                 "_id": "6482d796e02db3bfc780496e",
                 "eligibility": true,
@@ -1493,42 +1530,6 @@ Response
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
                 "createdAt": "2023-06-09T07:39:23.473Z"
-            },
-            {
-                "_id": "6482d715e02db3bfc7804950",
-                "eligibility": true,
-                "fullname": "Zainab Kayode",
-                "loanAmount": 6000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:39:01.255Z"
-            },
-            {
-                "_id": "6482d700e02db3bfc780494b",
-                "eligibility": true,
-                "fullname": "Godspower Miracle",
-                "loanAmount": 12000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:38:40.920Z"
-            },
-            {
-                "_id": "6482d6ede02db3bfc7804946",
-                "eligibility": true,
-                "fullname": "Ifunaya Christopher",
-                "loanAmount": 10000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:38:21.679Z"
-            },
-            {
-                "_id": "6482d692e02db3bfc7804941",
-                "eligibility": true,
-                "fullname": "Omoniyi Femi",
-                "loanAmount": 9000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:36:50.337Z"
             }
         ]
     }
@@ -1559,6 +1560,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loan Applications",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "data": {
         "loans": [
@@ -1681,6 +1683,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Generated",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "totalSuccessLoansFigure": 829000,
     "data": {
@@ -1805,6 +1808,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Generated",
     "status": "Success",
+    "totalPages": 4,
     "results": 5,
     "totalSuccessLoansFigure": 829000,
     "data": {
@@ -1883,6 +1887,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Declined",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "totalRejectedLoansFigure": 829000,
     "data": {
@@ -2006,6 +2011,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Declined",
     "status": "Success",
+    "totalPages": 4,
     "results": 5,
     "totalRejectedLoansFigure": 829000,
     "data": {
@@ -2083,6 +2089,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Generated",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "data": {
         "loans": [
@@ -2205,6 +2212,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Generated",
     "status": "Success",
+    "totalPages": 4,
     "results": 5,
     "data": {
         "loans": [
@@ -2282,6 +2290,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Declined",
     "status": "Success",
+    "totalPages": 4,
     "results": 10,
     "totalRejectedLoansFigure": 829000,
     "data": {
@@ -2405,6 +2414,7 @@ Response
     "message": "Loans found successfully",
     "title": "Loans Declined",
     "status": "Success",
+    "totalPages": 4,
     "results": 5,
     "totalRejectedLoansFigure": 829000,
     "data": {
