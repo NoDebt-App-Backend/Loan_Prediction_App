@@ -225,9 +225,12 @@ export default class AdminController {
       );
 
     const { _id, email, firstName, lastName, imageUrl } = admin;
+    // console.log(admin);
 
-    const adminCompany = await AdminCompanyMap.findOne(admin._id);
-    const { organisationName, organisationId } = adminCompany;
+    const adminCompany = AdminCompanyMap.findById({ _id });
+    console.log(adminCompany);
+    // const { organisationName, organisationId } = adminCompany;
+    // console.log(organisationName, organisationId);
 
     // Returning a response to the client
     res.status(200).json({
@@ -240,8 +243,8 @@ export default class AdminController {
         lastName: lastName,
         imageUrl: imageUrl,
         access_token: newToken(admin),
-        organisationId: organisationId,
-        organisationName: organisationName
+        // organisationId: organisationId,
+        // organisationName: organisationName
       },
     });
   }
