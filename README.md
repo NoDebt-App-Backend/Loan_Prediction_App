@@ -84,7 +84,7 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get All Rejected Loans - Descending Order - Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-rejected-company-loans-in-descending-order-page-2-loansrejected-loansdescendingpage2)
 
-    = [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
+    - [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
@@ -784,7 +784,7 @@ Parameters: authToken, name, organisationEmail, numberOfStaffs, staffID, organis
 
 ```json
 Request
-curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75' \
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/users/647ca411ef44ef3feafdac75' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FIXnbcGKD18' \
 --data-raw '{
     "name": "Justine Obayemi",
@@ -830,7 +830,7 @@ Response
 
 ```json
 Request
-curl --location --request PUT 'localhost:4000/api/users/647cbac23b2e9187b575b67d' \
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/users/647cbac23b2e9187b575b67d' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
 --data-raw '{
     "organisationEmail": "justineobayemi@healthplus.com",
@@ -873,7 +873,7 @@ Parameters: authToken, profileImage - _Note please that profileImage should be t
 
 ```json
 Request
-curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/users/647ca411ef44ef3feafdac75/profile-picture' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
 --form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
 
@@ -902,7 +902,7 @@ Parameters: authToken, profileImage - _Note please that profileImage should be t
 
 ```json
 Request
-curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/users/647ca411ef44ef3feafdac75/profile-picture' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
 --form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
 
@@ -932,7 +932,7 @@ Parameters: authToken, profileImage - _Note please that profileImage should be t
 
 ```json
 Request
-curl --location --request PUT 'localhost:4000/api/users/647ca411ef44ef3feafdac75/profile-picture' \
+curl --location --request PUT 'https://nodebt-application.onrender.com/api/users/647ca411ef44ef3feafdac75/profile-picture' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3Y2E0MTFlZjQ0ZWYzZmVhZmRhYzc1IiwiZW1haWwiOiJrYXRyaW1hbHRpQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTg5MTc0OSwiZXhwIjoxNjg1OTc4MTQ5fQ.0PBh0-dOi9MeoWH72zMqzqe_f27Y9FPR8IXnbcGKD18' \
 --form 'profileImage=@"/C:/Users/USER/Desktop/PICS/Screenshot 2021-07-07 082822.jpg"'
 
@@ -1147,7 +1147,7 @@ Parameters: authToken, organisation id as a req query
 
 ```json
 Request
-curl --location 'localhost:5000/api/admins/?organisationId=64807952def9edf471baf836' \
+curl --location 'https://nodebt-application.onrender.com/api/admins/?organisationId=64807952def9edf471baf836' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MDc5NTJkZWY5ZWRmNDcxYmFmODM1IiwiZW1haWwiOiJuZXJ6YXNvbHR1QGd1ZnVtLmNvbSIsImlhdCI6MTY4NjE0NjUzNywiZXhwIjoxNjg2MjMyOTM3fQ.WnnEnLE8YSDRzVgBt6bBhsXWXFDaFztgXxg0sN1-rao'
 
 Response
@@ -1190,7 +1190,7 @@ Parameters: authToken, organisation id as a req query
 
 ```json
 Request
-curl --location 'localhost:5000/api/admins/company?organisationId=648090907b25206154ea6c87' \
+curl --location 'https://nodebt-application.onrender.com/api/admins/company?organisationId=648090907b25206154ea6c87' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MDkwOTA3YjI1MjA2MTU0ZWE2Yzg2IiwiZW1haWwiOiJydXJ0ZWRlbG1vQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjE0NzI5MiwiZXhwIjoxNjg2MjMzNjkyfQ.n0YN_E7j6Jf0ACLSQTH5kPBRbzPyGAer47yo-106o1M'
 
 Response
@@ -1399,7 +1399,7 @@ Parameters: authToken, loanid as req query
 
 ```json
 Request
-curl --location 'localhost:5000/api/loans/send-eligibility-status?id=64824b0162da99fe3060d5a3' \
+curl --location 'https://nodebt-application.onrender.com/api/loans/send-eligibility-status?id=64824b0162da99fe3060d5a3' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
 --data ''
 
@@ -1549,7 +1549,7 @@ Parameters: authToken and the page as a req query
 
 ```json
 Request
-curl --location 'localhost:5000/api/loans/company-loans?page=2' \
+curl --location 'https://nodebt-application.onrender.com/api/loans/company-loans?page=2' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
 --data ''
 
