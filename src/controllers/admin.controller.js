@@ -224,6 +224,8 @@ export default class AdminController {
         "Please provide a valid email address and password before you can login."
       );
 
+      const { organisationName, organisationId } = AdminCompanyMap;
+
     const { _id, email, firstName, lastName, imageUrl } = admin;
     // Returning a response to the client
     res.status(200).json({
@@ -236,6 +238,8 @@ export default class AdminController {
         lastName: lastName,
         imageUrl: imageUrl,
         access_token: newToken(admin),
+        organisationId: organisationId,
+        organisationName: organisationName
       },
     });
   }
