@@ -34,7 +34,7 @@ app.use(express.json());
 // External Middlewares installed
 app.use(logger("tiny"));
 app.use(cors());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");

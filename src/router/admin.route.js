@@ -6,37 +6,31 @@ import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
+import authController from "../controllers/socialAuth.controller.js";
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
-router.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", { scope: "email" }),
-  AdminController.facebookCreateAdmin
-);
+// router.get(
+//   "/auth/facebook",
+//   passport.authenticate("facebook", { scope: "email" }),
+//   AdminController.facebookCreateAdmin
+// );
+
+router.get("/auth/google", authController.googleAuth);
 
 router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] }),
-  tryCatchHandler(AdminController.googleCreateAdmin)
+  "/auth/signup/google",
+  passport.authenticate("google", authController.googleAuthCallback)
 );
 
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/auth/google/success",
-    failureRedirect: "/auth/google/failure",
-  })
-);
-
-router.get(
-  "/auth/facebook/secret",
-  passport.authenticate("facebook", {
-    successRedirect: "/profile",
-    failureRedirect: "/",
-  })
-);
+// router.get(
+//   "/auth/facebook/secret",
+//   passport.authenticate("facebook", {
+//     successRedirect: "/profile",
+//     failureRedirect: "/",
+//   })
+// );
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
