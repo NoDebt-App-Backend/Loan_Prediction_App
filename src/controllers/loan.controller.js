@@ -37,7 +37,9 @@ export default class loanControllers {
 
     const loan = new Loan(req.body);
 
-    if (req.body.email === loan.email) {
+    const loanExists = Loan.findOne({ email: req.body.email });
+
+    if (loanExists) {
       throw new BadUserRequestError("This email address is already in use");
     }
 
