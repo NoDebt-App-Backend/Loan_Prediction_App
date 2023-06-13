@@ -114,7 +114,7 @@ const LoanSchema = new Schema(
     loanType: {
       type: String,
       enum: [
-        "Bussiness Loan",
+        "Business Loan",
         "Student Loan",
         "Agricultural Loan",
         "Housing Loan",
