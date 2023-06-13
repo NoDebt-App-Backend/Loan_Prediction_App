@@ -140,7 +140,7 @@ const LoanSchema = new Schema(
       type: String,
       enum: [
         "Real Estate",
-        "Bussiness Equipment",
+        "Business Equipment",
         "Inventory",
         "Invoices",
         "Cash",
