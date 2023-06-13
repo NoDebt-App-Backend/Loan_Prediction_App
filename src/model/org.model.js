@@ -4,7 +4,7 @@ const OrganisationSchema = new mongoose.Schema({
   organisationName: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
 });
 
