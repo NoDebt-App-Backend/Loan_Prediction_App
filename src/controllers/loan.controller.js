@@ -42,27 +42,27 @@ export default class loanControllers {
     loan.organisation = adminCompanyMap.organisationId._id;
     loan.organisationName = adminCompanyMap.organisationId.organisationName;
 
-    const response = await axios.post(
-      "https://fastapiproject-production.up.railway.app/loan_default_prediction",
-      {
-        gender: loan.gender,
-        marital_status: loan.maritalStatus,
-        employment: loan.employmentType,
-        income_per_month: loan.incomePerMonth,
-        loan_type: loan.loanType,
-        collateral_type: loan.collateralType,
-        collateral_value: loan.collateralValue,
-        guarantor_relationship: loan.guarantor.relationship,
-        guarantor_employment: loan.guarantor.employmentType,
-        guarantor_other_sources_of_income: loan.guarantor.otherSourcesOfIncome,
-        guarantor_income_per_month: loan.guarantor.incomePerMonth,
-        loan_amount: loan.loanAmount,
-        applicant_job_role: loan.jobRole,
-        applicant_job_sector: loan.jobSector,
-        age: loan.age,
-        guarantor_age: loan.guarantor.age,
-      }
-    );
+    // const response = await axios.post(
+    //   "https://fastapiproject-production.up.railway.app/loan_default_prediction",
+    //   {
+    //     gender: loan.gender,
+    //     marital_status: loan.maritalStatus,
+    //     employment: loan.employmentType,
+    //     income_per_month: loan.incomePerMonth,
+    //     loan_type: loan.loanType,
+    //     collateral_type: loan.collateralType,
+    //     collateral_value: loan.collateralValue,
+    //     guarantor_relationship: loan.guarantor.relationship,
+    //     guarantor_employment: loan.guarantor.employmentType,
+    //     guarantor_other_sources_of_income: loan.guarantor.otherSourcesOfIncome,
+    //     guarantor_income_per_month: loan.guarantor.incomePerMonth,
+    //     loan_amount: loan.loanAmount,
+    //     applicant_job_role: loan.jobRole,
+    //     applicant_job_sector: loan.jobSector,
+    //     age: loan.age,
+    //     guarantor_age: loan.guarantor.age,
+    //   }
+    // );
 
 if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)){
   loan.eligibility=response.data.loanEligibility
