@@ -35,11 +35,11 @@ export default class loanControllers {
     const { error } = createLoanValidator.validate(req.body);
     if (error) throw error;
     
-    const loanExists = Loan.findOne({ email: req.body.email });
+    // const loanExists = Loan.findOne({ email: req.body.email });
 
-    if (loanExists) {
-      throw new BadUserRequestError("This email address is already in use");
-    }
+    // if (loanExists) {
+    //   throw new BadUserRequestError("This email address is already in use");
+    // }
 
     const loan = new Loan(req.body);
 
