@@ -128,7 +128,7 @@ export default class PasswordController {
       admin.password = hashedPassword;
       admin.confirmPassword = hashedPassword;
       await admin.save();
-      // await token.deleteOne();
+      await token.deleteOne();
       await sendEmail(
         admin.email,
         "Password Change Successful",
