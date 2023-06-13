@@ -65,6 +65,11 @@ export default class loanControllers {
     );
 
     loan.eligibility = response.data.loanEligibility;
+if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)){
+  loan.eligibility=response.data.loanEligibility
+}else{
+  loan.eligibility=false
+}
 
     await loan.save();
 
