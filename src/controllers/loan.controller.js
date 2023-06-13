@@ -1,12 +1,9 @@
+import axios from "axios";
 import Admin from "../model/admin.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import { Loan } from "../model/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
-import {
-  BadUserRequestError,
-  NotFoundError,
-  UnAuthorizedError,
-} from "../error/error.js";
+import { NotFoundError, UnAuthorizedError } from "../error/error.js";
 import sendEmail from "../utils/sendEmail.js";
 
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
@@ -34,13 +31,8 @@ export default class loanControllers {
       );
     }
 
-    // const { error } = createLoanValidator.validate(req.body);
-    // if (error) throw error;
-
-    // const userExists = await User.findById(id);
-    // if (!userExists) throw new NotFoundError("user does not exist");
-    // const userInCollection = await User.findById(req.body.user);
-    // if (!userInCollection) throw new NotFoundError("user does not exist");
+    const { error } = createLoanValidator.validate(req.body);
+    if (error) throw error;
 
     const loan = new Loan(req.body);
 
@@ -49,12 +41,32 @@ export default class loanControllers {
     loan.organisation = adminCompanyMap.organisationId._id;
     loan.organisationName = adminCompanyMap.organisationId.organisationName;
 
-    // Admin value comes from decoded payload
-    // const admin = await User.findOne({ email: req.user.email });
-    // // if (!admin) throw new UnAuthorizedError("Unauthorized user");
-    // const loan = await new Loan(req.body);
+    const response = await axios.post(
+      "https://fastapiproject-production.up.railway.app/loan_default_prediction",
+      {
+        gender: loan.gender,
+        marital_status: loan.maritalStatus,
+        employment: loan.employmentType,
+        income_per_month: loan.incomePerMonth,
+        loan_type: loan.loanType,
+        collateral_type: loan.collateralType,
+        collateral_value: loan.collateralValue,
+        guarantor_relationship: loan.guarantor.relationship,
+        guarantor_employment: loan.guarantor.employmentType,
+        guarantor_other_sources_of_income: loan.guarantor.otherSourcesOfIncome,
+        guarantor_income_per_month: loan.guarantor.incomePerMonth,
+        loan_amount: loan.loanAmount,
+        applicant_job_role: loan.jobRole,
+        applicant_job_sector: loan.jobSector,
+        age: loan.age,
+        guarantor_age: loan.guarantor.age,
+      }
+    );
+
+    loan.eligibility = response.data.loanEligibility;
 
     await loan.save();
+
     res.status(201).json({
       status: "success",
       data: {

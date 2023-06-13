@@ -5,7 +5,6 @@ const LoanSchema = new Schema(
     organisation: {
       type: Types.ObjectId,
       ref: "AdminCompanyMap",
-      // required: false,
     },
     organisationId: String,
     organisationName: String,
@@ -13,6 +12,38 @@ const LoanSchema = new Schema(
       type: Boolean,
       default: false,
       required: true,
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female"],
+      required: true,
+    },
+    maritalStatus: {
+      type: String,
+      enum: ["Single", "Married", "Widowed", "Divorced", "Separated"],
+      required: true,
+    },
+    jobRole: {
+      type: String,
+      required: true,
+    },
+    jobSector: {
+      type: String,
+      required: true,
+      enum: [
+        "Sales and Customer Service",
+        "Education and Training",
+        "Information Technology",
+        "Operations and Logistics",
+        "Accounting and Finance",
+        "Human Resources",
+        "Engineering",
+        "Marketing and Advertising",
+        "Legal",
+        "Healthcare",
+        "Project Management",
+        "Others",
+      ],
     },
     fullname: {
       type: String,
@@ -43,14 +74,14 @@ const LoanSchema = new Schema(
     },
     employmentType: {
       type: String,
-      enum: [
-        "part-time",
-        "full-time",
-        "contract",
-        "self-employed",
-        "unemployed",
-      ],
       required: true,
+      enum: [
+        "Contract",
+        "Self-Employed",
+        "Full-Time",
+        "Part-Time",
+        "Unemployed",
+      ],
     },
     phoneNumber: {
       type: String,
@@ -60,15 +91,9 @@ const LoanSchema = new Schema(
       ],
       required: true,
     },
-    dateOfBirth: {
-      type: Date,
-      validate: {
-        validator: function (value) {
-          // Validate that the date is in the past
-          return value < new Date();
-        },
-        message: "Date of birth must be in the past.",
-      },
+    age: {
+      type: Number,
+      required: true,
     },
     nationalIdentityNumber: {
       type: String,
@@ -89,23 +114,23 @@ const LoanSchema = new Schema(
     loanType: {
       type: String,
       enum: [
-        "bussiness-loan",
-        "student-loan",
-        "agricultural-loan",
-        "housing-loan",
-        "others",
+        "Bussiness Loan",
+        "Student Loan",
+        "Agricultural Loan",
+        "Housing Loan",
+        "Others",
       ],
     },
     repaymentType: {
       type: String,
-      default: "principal-and-interest",
+      default: "Principal and Interest",
       required: true,
     },
     purposeOfLoan: {
       type: String,
       validate: {
         validator: function (value) {
-          return value.length >= 100;
+          return value.length >= 50;
         },
         message: "Field must have a minimum of 100 characters.",
       },
@@ -114,11 +139,11 @@ const LoanSchema = new Schema(
     collateralType: {
       type: String,
       enum: [
-        "real-estate",
-        "bussiness-equipment",
-        "inventory",
-        "invoices",
-        "cash",
+        "Real Estate",
+        "Bussiness Equipment",
+        "Inventory",
+        "Invoices",
+        "Cash",
       ],
       required: true,
     },
@@ -130,7 +155,7 @@ const LoanSchema = new Schema(
       type: String,
       validate: {
         validator: function (value) {
-          return value.length >= 100;
+          return value.length >= 50;
         },
         message: "Field must have a minimum of 100 characters.",
       },
@@ -143,12 +168,11 @@ const LoanSchema = new Schema(
     reasonForEligibilityStatusResult: {
       type: String,
     },
-    financialAdvise: {
+    financialAdvice: {
       type: String,
     },
     adminInCharge: {
       type: String,
-      // required: true,
     },
     guarantor: {
       fullname: {
@@ -178,15 +202,9 @@ const LoanSchema = new Schema(
           "Please enter a valid email address to the address path",
         ],
       },
-      dateOfBirth: {
-        type: Date,
-        validate: {
-          validator: function (value) {
-            // Validate that the date is in the past
-            return value < new Date();
-          },
-          message: "Date of birth must be in the past.",
-        },
+      age: {
+        type: Number,
+        required: true,
       },
       address: {
         type: String,
@@ -207,10 +225,18 @@ const LoanSchema = new Schema(
       relationship: {
         type: String,
         required: true,
+        enum: ["Sister", "Brother", "Parent", "Friend", "Spouse"],
       },
-      employment: {
+      employmentType: {
         type: String,
         required: true,
+        enum: [
+          "Contract",
+          "Self-Employed",
+          "Full-Time",
+          "Part-Time",
+          "Unemployed",
+        ],
       },
       incomePerMonth: {
         type: Number,
@@ -218,6 +244,7 @@ const LoanSchema = new Schema(
       },
       otherSourcesOfIncome: {
         type: String,
+        required: true,
       },
     },
   },
