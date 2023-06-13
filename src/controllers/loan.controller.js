@@ -34,12 +34,6 @@ export default class loanControllers {
 
     const { error } = createLoanValidator.validate(req.body);
     if (error) throw error;
-    
-    // const loanExists = Loan.findOne({ email: req.body.email });
-
-    // if (loanExists) {
-    //   throw new BadUserRequestError("This email address is already in use");
-    // }
 
     const loan = new Loan(req.body);
 
@@ -71,6 +65,7 @@ export default class loanControllers {
     );
 
     loan.eligibility = response.data.loanEligibility;
+    ((loan.income_per_month * 12) + loan.collateral_value) !== 2 * loan.loan_amount ? loan.eligibility === false : loan.eligibility === response.data.loanEligibility;;
 
     await loan.save();
 
