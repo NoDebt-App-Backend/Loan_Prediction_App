@@ -65,7 +65,7 @@ export default class loanControllers {
     // );
 
     // loan.eligibility = response.data.loanEligibility;
-    ((loan.income_per_month * 12) + loan.collateral_value) !== 2 * loan.loan_amount ? loan.eligibility === false : loan.eligibility === true;
+    ((loan.income_per_month * 12) + loan.collateral_value) >=  2 * loan.loan_amount ? loan.eligibility === true : loan.eligibility === false;
 
     await loan.save();
 
