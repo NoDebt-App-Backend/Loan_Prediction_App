@@ -7,19 +7,29 @@ const createLoanValidator = Joi.object({
   organisation: Joi.objectId().optional(),
   organisationId: Joi.objectId().optional(),
   organisationName: Joi.objectId().optional(),
-  fullname: Joi.string().required(),
+  eligibility: Joi.boolean().optional(),
+  fullname: Joi.string()
+    .regex(/^(?!.*\d)[^\d\s]+\s+[^\d\s]+.*$/)
+    .required()
+    .messages({
+      "string.pattern.base": "Full name is required",
+    }),
+  gender: Joi.string().required(),
   email: Joi.string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .required()
     .messages({
       "string.pattern.base": "Email is not a valid email format/address",
     }),
+  maritalStatus: Joi.string().required(),
   address: Joi.string().required(),
   employmentType: Joi.string().required(),
+  jobRole: Joi.string().required(),
+  jobSector: Joi.string().required(),
   phoneNumber: Joi.string()
     .pattern(/^(\+\d{1,})?\d{10,}$/)
     .required(),
-  dateOfBirth: Joi.string().required(),
+  age: Joi.number().required(),
   nationalIdentityNumber: Joi.string().required(),
   incomePerMonth: Joi.number().required(),
   loanType: Joi.string().required(),
@@ -30,8 +40,17 @@ const createLoanValidator = Joi.object({
   eligibility: Joi.string().optional(),
   collateralInformation: Joi.string().required(),
   creditScore: Joi.number().optional(),
+  loanAmount: Joi.number().required(),
+  reasonForEligibilityStatusResult: Joi.string().optional(),
+  financialAdvice: Joi.string().optional(),
+  adminInCharge: Joi.string().optional(),
   guarantor: Joi.object({
-    fullname: Joi.string().required(),
+    fullname: Joi.string()
+      .regex(/^(?!.*\d)[^\d\s]+\s+[^\d\s]+.*$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Full name is required",
+      }),
     phoneNumber: Joi.string()
       .pattern(/^(\+\d{1,})?\d{10,}$/)
       .required(),
@@ -41,13 +60,13 @@ const createLoanValidator = Joi.object({
       .messages({
         "string.pattern.base": "Email is not a valid email format/address",
       }),
-    dateOfBirth: Joi.string().required(),
+    age: Joi.number().required(),
     address: Joi.string().required(),
     socialSecurityNumber: Joi.string().required(),
     relationship: Joi.string().required(),
-    employment: Joi.string().required(),
+    employmentType: Joi.string().required(),
     incomePerMonth: Joi.number().required(),
-    otherSourcesOfIncome: Joi.string().optional(),
+    otherSourcesOfIncome: Joi.string().required(),
   }).required(),
 }).strict();
 
