@@ -110,7 +110,7 @@ export default class ImageController {
 
     await s3.send(command);
 
-    admin.profileImage = undefined;
+    // admin.imageUrl = undefined;
     await admin.save();
 
     res.status(200).json({
