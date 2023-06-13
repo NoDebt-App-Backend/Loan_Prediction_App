@@ -5,6 +5,7 @@ import { Loan } from "../model/loan.model.js";
 import { createLoanValidator } from "../validators/loan.validator.js";
 import { NotFoundError, UnAuthorizedError } from "../error/error.js";
 import sendEmail from "../utils/sendEmail.js";
+import { BadUserRequestError } from "../error/error.js";
 
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 
@@ -35,6 +36,10 @@ export default class loanControllers {
     if (error) throw error;
 
     const loan = new Loan(req.body);
+
+    if (req.body.email === loan.email) {
+      throw new BadUserRequestError("This email address is already in use");
+    }
 
     loan.adminInCharge = `${admin.firstName} ${admin.lastName}`;
     loan.organisationId = adminCompanyMap.organisationId._id;
