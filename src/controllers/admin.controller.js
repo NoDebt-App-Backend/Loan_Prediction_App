@@ -20,8 +20,15 @@ import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
+import cloudinary from "cloudinary";
 
 dotenv.config();
+
+cloudinary.config({ 
+  cloud_name: config.cloud_name, 
+  api_key: config.api_key,  
+  api_secret: config.api_secret, 
+});
 
 export default class AdminController {
   //get all companies
@@ -144,8 +151,12 @@ export default class AdminController {
     });
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
+    
+     const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      { public_id: "dummy_image" } 
+    );
 
-    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T202711Z&X-Amz-Expires=518400&X-Amz-Signature=a329ba6a7136fc143d6e7760ea9a54fb7fe18978519d77e23f3134de7df59578&X-Amz-SignedHeaders=host&x-id=GetObject"
+    const imageDefaultUrl = result.url;
 
     // Create new admin account
     const admin = new Admin({
@@ -285,7 +296,11 @@ export default class AdminController {
     const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
     console.log(newpassword);
 
-    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T202711Z&X-Amz-Expires=518400&X-Amz-Signature=a329ba6a7136fc143d6e7760ea9a54fb7fe18978519d77e23f3134de7df59578&X-Amz-SignedHeaders=host&x-id=GetObject"
+    const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+    { public_id: "dummy_image" } 
+  );
+
+  const imageDefaultUrl = result.url;
 
     const newAdmin = new Admin({
       firstName,
