@@ -155,7 +155,7 @@ export default class AdminController {
       password: hashedPassword,
       confirmPassword: hashedPassword,
       passwordLink: req.body.passwordLink,
-      imageUrl: req.body.imageUrl,
+      imageUrl: imageUrl,
     });
 
     // Create a new company document
@@ -181,7 +181,7 @@ export default class AdminController {
     await adminCompanyMap.save();
     // Save company to the Company collection
 
-    const { _id, createdAt, updatedAt, passwordLink } = admin;
+    const { _id, createdAt, updatedAt, passwordLink, imageUrl } = admin;
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -199,6 +199,7 @@ export default class AdminController {
           createdAt: createdAt,
           updatedAt: updatedAt,
           passwordLink: passwordLink,
+          imageUrl: imageUrl,
         },
       },
     });
