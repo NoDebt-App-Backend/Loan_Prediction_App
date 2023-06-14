@@ -153,6 +153,7 @@ export default class AdminController {
       password: hashedPassword,
       confirmPassword: hashedPassword,
       passwordLink: req.body.passwordLink,
+      imageUrl: imageUrl,
     });
 
     // Create a new company document
