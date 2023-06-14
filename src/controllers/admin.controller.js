@@ -145,7 +145,7 @@ export default class AdminController {
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
 
-    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject"
+    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T185125Z&X-Amz-Expires=3600&X-Amz-Signature=b31c937f5b1f26179c6ad82de1813ce0d377ee5ce4b3c83295b92019bd79fbb7&X-Amz-SignedHeaders=host&x-id=GetObject"
 
     // Create new admin account
     const admin = new Admin({
@@ -285,7 +285,7 @@ export default class AdminController {
     const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
     console.log(newpassword);
 
-    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject"
+    const imageDefaultUrl = "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T185125Z&X-Amz-Expires=3600&X-Amz-Signature=b31c937f5b1f26179c6ad82de1813ce0d377ee5ce4b3c83295b92019bd79fbb7&X-Amz-SignedHeaders=host&x-id=GetObject"
 
     const newAdmin = new Admin({
       firstName,
