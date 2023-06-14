@@ -297,7 +297,7 @@ export default class AdminController {
       organisationId,
       organisationName,
       loginURL: req.body.loginURL,
-      imageUrl: imageDefaultUrl,
+      imageUrl: req.body.url || imageDefaultUrl,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
@@ -357,6 +357,10 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
+    const adminUser = await Admin.findById(id);
+
+    const { imageDefaultUrl } = adminUser;
+
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
@@ -370,7 +374,7 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
-        imageUrl: req.body.imageUrl,
+        imageUrl: req.body.imageUrl || imageDefaultUrl,
       },
       { new: true }
     );
