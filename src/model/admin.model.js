@@ -60,7 +60,7 @@ const adminSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
       default:
-        "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T202711Z&X-Amz-Expires=518400&X-Amz-Signature=a329ba6a7136fc143d6e7760ea9a54fb7fe18978519d77e23f3134de7df59578&X-Amz-SignedHeaders=host&x-id=GetObject",
+        "http://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
     },
     loginURL: String,
   },
