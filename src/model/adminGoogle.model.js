@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const adminGoogleSchema = new mongoose.Schema(
   {
+    googleId: {
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: true,
@@ -10,12 +14,15 @@ const adminGoogleSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    email: {
+    // email: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    //   immutable: true,
+    // },
+    image: {
       type: String,
-      required: true,
-      unique: true,
-      immutable: true,
-    },
+    }
   },
   { timestamps: true }
 );

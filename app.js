@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import passport from "passport";
+import session from "express-session";
 import { config } from "./src/config/index.js";
 import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
@@ -10,6 +11,7 @@ import loanRouter from "./src/router/loan.route.js";
 import router from "./src/router/admin.route.js";
 
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
+import passportConfig from './src/config/passport.js';
 
 // configuring environment variables
 
@@ -34,7 +36,14 @@ app.use(express.json());
 // External Middlewares installed
 app.use(logger("tiny"));
 app.use(cors());
-// app.use(passport.initialize());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(session({
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");
