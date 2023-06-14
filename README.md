@@ -192,11 +192,11 @@ Parameters: firstName, lastName, email, organisationName, password, confirmPassw
 ```json
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{
-    "firstName": "Eben",
-    "lastName": "Shefu",
-    "email": "ebenshefu@gmail.com",
-    "organisationName": "My Name Tech",
+--data-raw '{   
+    "firstName": "Kayode",
+    "lastName": "Joshua",
+    "email": "bortizamle@gufum.com",
+    "organisationName": "Josh and Sons Associates",
     "password": "Lakun134$",
     "confirmPassword":"Lakun134$",
     "passwordLink": "https://nodebt-application.onrender.com/api"
@@ -209,17 +209,18 @@ Response
     "status": "Success",
     "data": {
         "company_profile": {
-            "company": "My Name Tech",
-            "company_id": "6484c46e6af91b817aaae8b8"
+            "company": "Josh and Sons Associates",
+            "company_id": "64896fef5f8e622fe5e50a6b"
         },
         "admin": {
-            "firstName": "Eben",
-            "lastName": "Shefu",
-            "email": "ebenshefu@gmail.com",
-            "AdminId": "6484c46e6af91b817aaae8b7",
-            "createdAt": "2023-06-10T18:43:58.532Z",
-            "updatedAt": "2023-06-10T18:43:58.532Z",
-            "passwordLink": "https://nodebt-application.onrender.com/api"
+            "firstName": "Kayode",
+            "lastName": "Joshua",
+            "email": "bortizamle@gufum.com",
+            "AdminId": "64896fef5f8e622fe5e50a6a",
+            "createdAt": "2023-06-14T07:44:47.698Z",
+            "updatedAt": "2023-06-14T07:44:47.698Z",
+            "passwordLink": "https://nodebt-application.onrender.com/api",
+            "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject"
         }
     }
 }
@@ -357,7 +358,7 @@ Parameters: email, password
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
 --data-raw '{
-    "email": "mitronarzo@gufum.com",
+    "email": "bortizamle@gufum.com",
     "password": "Lakun134$"
 }'
 
@@ -367,14 +368,15 @@ Response
     "message": "User found successfully",
     "status": "Success",
     "data": {
-        "adminId": "648212385c5cef8a3fba48d4",
-        "email": "mitronarzo@gufum.com",
-        "firstName": "Karen",
-        "lastName": "Chukwu",
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjEyMzg1YzVjZWY4YTNmYmE0OGQ0IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjQyMjI3NiwiZXhwIjoxNjg2NTA4Njc2fQ.gty9f8Kuf9EFBBk5iMhdrEIdGBEW930WbRZ-I34FsB4",
+        "adminId": "64896fef5f8e622fe5e50a6a",
+        "email": "bortizamle@gufum.com",
+        "firstName": "Kayode",
+        "lastName": "Joshua",
+        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4OTZmZWY1ZjhlNjIyZmU1ZTUwYTZhIiwiZW1haWwiOiJib3J0aXphbWxlQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjcyOTgwMCwiZXhwIjoxNjg2ODE2MjAwfQ.TLTvaEOGH6Ev3z4vHDFHCWlIipG4uXwu-z1jhRu4a-0",
         "organisationId": {
-            "_id": "648212385c5cef8a3fba48d5",
-            "organisationName": "Manymillions Tech"
+            "_id": "64896fef5f8e622fe5e50a6b",
+            "organisationName": "Josh and Sons Associates"
         }
     }
 }
