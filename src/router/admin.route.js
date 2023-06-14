@@ -6,7 +6,7 @@ import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
-import authController from "../controllers/socialAuth.controller.js";
+import authController from "../config/passport.js";
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
@@ -20,7 +20,7 @@ router.post("/signup", tryCatchHandler(AdminController.createCompany));
 router.get("/auth/google", authController.googleAuth);
 
 router.get(
-  "/auth/signup/google",
+  "/auth/google/callback",
   passport.authenticate("google", authController.googleAuthCallback)
 );
 

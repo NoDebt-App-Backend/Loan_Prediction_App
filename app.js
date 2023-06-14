@@ -11,7 +11,7 @@ import loanRouter from "./src/router/loan.route.js";
 import router from "./src/router/admin.route.js";
 
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
-import passportConfig from './src/config/passport.js';
+import {passportConfig} from "./src/config/passport.js";
 
 // configuring environment variables
 
@@ -19,6 +19,7 @@ dotenv.config();
 
 const app = express();
 
+passportConfig(passport)
 // Local database connection
 mongoose
   .connect(config.database_url)
@@ -34,16 +35,18 @@ const port = config.port || 5000;
 app.use(express.json());
 
 // External Middlewares installed
+app.use(
+  session({
+    secret: "mysecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(logger("tiny"));
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(session({
-  secret: 'mysecret',
-  resave: false,
-  saveUninitialized: true,
-}))
 
 app.get("/api", (req, res) => {
   res.send("Welcome to NoDebt App");

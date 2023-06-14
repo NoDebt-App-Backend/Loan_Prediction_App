@@ -4,7 +4,7 @@ import { config } from "../config/index.js";
 import AdminGoogle from "../model/adminGoogle.model.js"
 
 // Google OAuth strategy configuration
-function passportConfig(passport) {
+export function passportConfig(passport) {
     passport.use(
         new GoogleStrategy(
           {
