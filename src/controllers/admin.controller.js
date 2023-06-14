@@ -89,7 +89,7 @@ export default class AdminController {
       .populate({
         path: "adminId",
         model: "Admin",
-        select: "firstName lastName email phoneNumber role",
+        select: "firstName lastName email imageUrl phoneNumber role",
       })
       .exec();
 
