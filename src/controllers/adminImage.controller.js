@@ -74,7 +74,7 @@ export default class ImageController {
     };
 
     const command = new GetObjectCommand(getObjectParams);
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    const url = await getSignedUrl(s3, command);
 
     await s3.send(command);
 
