@@ -86,6 +86,8 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
 
+- ### [Postman Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#PostmanDocumentation-1)
+
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
 - ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
@@ -220,7 +222,7 @@ Response
             "createdAt": "2023-06-14T07:44:47.698Z",
             "updatedAt": "2023-06-14T07:44:47.698Z",
             "passwordLink": "https://nodebt-application.onrender.com/api",
-            "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject"
+            "imageUrl": "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png"
         }
     }
 }
@@ -372,7 +374,7 @@ Response
         "email": "bortizamle@gufum.com",
         "firstName": "Kayode",
         "lastName": "Joshua",
-        "imageUrl": "https://nodebt-photosbucket.s3.us-east-1.amazonaws.com/User-Icon-Grey-300x300.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2PPOPHMTJ73UG25L%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T201841Z&X-Amz-Expires=3600&X-Amz-Signature=d72e1dd2227f011987a4a8f94ec969e0fd686102b0053c89dca433d23184b201&X-Amz-SignedHeaders=host&x-id=GetObject",
+        "imageUrl": "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
         "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4OTZmZWY1ZjhlNjIyZmU1ZTUwYTZhIiwiZW1haWwiOiJib3J0aXphbWxlQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjcyOTgwMCwiZXhwIjoxNjg2ODE2MjAwfQ.TLTvaEOGH6Ev3z4vHDFHCWlIipG4uXwu-z1jhRu4a-0",
         "organisationId": {
             "_id": "64896fef5f8e622fe5e50a6b",
@@ -2516,6 +2518,9 @@ Response
 }
 ```
 
+## Postman Documentation
+
+- If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
 
 ## Troubleshooting
 
