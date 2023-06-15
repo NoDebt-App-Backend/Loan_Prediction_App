@@ -1,166 +1,61 @@
 import { Schema, model, Types } from "mongoose";
 
-const LoanSchema = new Schema({
-  user: {
-    type: Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  userId: String,
-  eligibility: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  fullname: {
-    type: String,
-    required: true,
-    match: [
-      /^\w+\s\w+$/,
-      "Fullname must have at least two words in the fullname path",
-    ],
-    required: true,
-  },
-  loanAmount: {
-    type: Number,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    match: [
-      /^\S+@\S+\.\S+$/,
-      "Please enter a valid email address to the address path",
-    ],
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  employmentType: {
-    type: String,
-    enum: ["part-time", "full-time", "contract", "self-employed", "unemployed"],
-    required: true,
-  },
-  phoneNumber: {
-    type: String,
-    match: [
-      /^(\+\d{1,3}\s?)?(\d{3,})$/,
-      "Please enter a valid phone number to the path",
-    ],
-    required: true,
-  },
-  dateOfBirth: {
-    type: Date,
-    validate: {
-      validator: function (value) {
-        // Validate that the date is in the past
-        return value < new Date();
-      },
-      message: "Date of birth must be in the past.",
+const LoanSchema = new Schema(
+  {
+    organisation: {
+      type: Types.ObjectId,
+      ref: "AdminCompanyMap",
     },
-  },
-  nationalIdentityNumber: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: {
-      validator: function (value) {
-        // Customize the validation logic for NIN
-        const regex = /^\d{11}$/;
-        return regex.test(value);
-      },
-      message: "Invalid NIN format.",
+    organisationId: String,
+    organisationName: String,
+    eligibility: {
+      type: Boolean,
+      default: false,
+      required: true,
     },
-  },
-  incomePerMonth: {
-    type: Number,
-    required: true,
-  },
-  loanType: {
-    type: String,
-    enum: [
-      "bussiness-loan",
-      "student-loan",
-      "agricultural-loan",
-      "housing-loan",
-      "others",
-    ],
-  },
-  repaymentType: {
-    type: String,
-    default: "principal-and-interest",
-    required: true,
-  },
-  purposeOfLoan: {
-    type: String,
-    validate: {
-      validator: function (value) {
-        return value.length >= 100;
-      },
-      message: "Field must have a minimum of 100 characters.",
+    gender: {
+      type: String,
+      enum: ["Male", "Female"],
+      required: true,
     },
-    required: true,
-  },
-  collateralType: {
-    type: String,
-    enum: [
-      "real-estate",
-      "bussiness-equipment",
-      "inventory",
-      "invoices",
-      "cash",
-    ],
-    required: true,
-  },
-  collateralValue: {
-    type: Number,
-    required: true,
-  },
-  collateralInformation: {
-    type: String,
-    validate: {
-      validator: function (value) {
-        return value.length >= 100;
-      },
-      message: "Field must have a minimum of 100 characters.",
+    maritalStatus: {
+      type: String,
+      enum: ["Single", "Married", "Widowed", "Divorced", "Separated"],
+      required: true,
     },
-    required: true,
-  },
-  creditScore: {
-    type: Number,
-    default: undefined,
-  },
-  reasonForEligibilityStatusResult: {
-    type: String,
-  },
-  financialAdvise: {
-    type: String,
-  },
-  adminInCharge: {
-    type: String,
-    required: true,
-  },
-  guarantor: {
+    jobRole: {
+      type: String,
+      required: true,
+    },
+    jobSector: {
+      type: String,
+      required: true,
+      enum: [
+        "Sales and Customer Service",
+        "Education and Training",
+        "Information Technology",
+        "Operations and Logistics",
+        "Accounting and Finance",
+        "Human Resources",
+        "Engineering",
+        "Marketing and Advertising",
+        "Legal",
+        "Healthcare",
+        "Project Management",
+        "Others",
+      ],
+    },
     fullname: {
       type: String,
       required: true,
       match: [
-        /^\w+\s\w+$/,
+        /^[\w\s\S]{3,}$/,
         "Fullname must have at least two words in the fullname path",
       ],
       required: true,
     },
-    phoneNumber: {
-      type: String,
-      match: [
-        /^(\+\d{1,3}\s?)?(\d{3,})$/,
-        "Please enter a valid phone number to the path",
-      ],
+    loanAmount: {
+      type: Number,
       required: true,
     },
     email: {
@@ -172,23 +67,35 @@ const LoanSchema = new Schema({
         /^\S+@\S+\.\S+$/,
         "Please enter a valid email address to the address path",
       ],
-      required: true,
-    },
-    dateOfBirth: {
-      type: Date,
-      validate: {
-        validator: function (value) {
-          // Validate that the date is in the past
-          return value < new Date();
-        },
-        message: "Date of birth must be in the past.",
-      },
     },
     address: {
       type: String,
       required: true,
     },
-    socialSecurityNumber: {
+    employmentType: {
+      type: String,
+      required: true,
+      enum: [
+        "Contract",
+        "Self-Employed",
+        "Full-Time",
+        "Part-Time",
+        "Unemployed",
+      ],
+    },
+    phoneNumber: {
+      type: String,
+      match: [
+        /^(\+\d{1,3}\s?)?(\d{3,})$/,
+        "Please enter a valid phone number to the path",
+      ],
+      required: true,
+    },
+    age: {
+      type: Number,
+      required: true,
+    },
+    nationalIdentityNumber: {
       type: String,
       required: true,
       validate: {
@@ -200,22 +107,150 @@ const LoanSchema = new Schema({
         message: "Invalid NIN format.",
       },
     },
-    relationship: {
-      type: String,
-      required: true,
-    },
-    employment: {
-      type: String,
-      required: true,
-    },
     incomePerMonth: {
       type: Number,
       required: true,
     },
-    otherSourcesOfIncome: {
+    loanType: {
+      type: String,
+      enum: [
+        "Business Loan",
+        "Student Loan",
+        "Agricultural Loan",
+        "Housing Loan",
+        "Others",
+      ],
+    },
+    repaymentType: {
+      type: String,
+      default: "Principal and Interest",
+      required: true,
+    },
+    purposeOfLoan: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return value.length >= 50;
+        },
+        message: "Field must have a minimum of 100 characters.",
+      },
+      required: true,
+    },
+    collateralType: {
+      type: String,
+      enum: [
+        "Real Estate",
+        "Business Equipment",
+        "Inventory",
+        "Invoices",
+        "Cash",
+      ],
+      required: true,
+    },
+    collateralValue: {
+      type: Number,
+      required: true,
+    },
+    collateralInformation: {
+      type: String,
+      validate: {
+        validator: function (value) {
+          return value.length >= 50;
+        },
+        message: "Field must have a minimum of 100 characters.",
+      },
+      required: true,
+    },
+    creditScore: {
+      type: Number,
+      default: undefined,
+    },
+    reasonForEligibilityStatusResult: {
       type: String,
     },
+    financialAdvice: {
+      type: String,
+    },
+    adminInCharge: {
+      type: String,
+    },
+    guarantor: {
+      fullname: {
+        type: String,
+        required: true,
+        match: [
+          /^[\w\s\S]{3,}$/,
+          "Fullname must have at least two words in the fullname path",
+        ],
+        required: true,
+      },
+      phoneNumber: {
+        type: String,
+        match: [
+          /^(\+\d{1,3}\s?)?(\d{3,})$/,
+          "Please enter a valid phone number to the path",
+        ],
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
+        match: [
+          /^\S+@\S+\.\S+$/,
+          "Please enter a valid email address to the address path",
+        ],
+      },
+      age: {
+        type: Number,
+        required: true,
+      },
+      address: {
+        type: String,
+        required: true,
+      },
+      socialSecurityNumber: {
+        type: String,
+        required: true,
+        validate: {
+          validator: function (value) {
+            // Customize the validation logic for NIN
+            const regex = /^\d{11}$/;
+            return regex.test(value);
+          },
+          message: "Invalid NIN format.",
+        },
+      },
+      relationship: {
+        type: String,
+        required: true,
+        enum: ["Sister", "Brother", "Parent", "Friend", "Spouse"],
+      },
+      employmentType: {
+        type: String,
+        required: true,
+        enum: [
+          "Contract",
+          "Self-Employed",
+          "Full-Time",
+          "Part-Time",
+          "Unemployed",
+        ],
+      },
+      incomePerMonth: {
+        type: Number,
+        required: true,
+      },
+      otherSourcesOfIncome: {
+        type: String,
+        required: true,
+      },
+    },
   },
-});
+  { timestamps: true }
+);
 
-export default model("Loan", LoanSchema);
+const Loan = model("Loan", LoanSchema);
+
+export { Loan };
