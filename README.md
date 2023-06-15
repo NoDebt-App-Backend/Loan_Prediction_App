@@ -168,7 +168,11 @@ Visit `http://localhost:PORT` in your web browser to access the application.
 API Documentation for NoDebt App (Loan Prediction application)
 
 **Base URL**
+Main URL for main branch
 https://nodebt-application.onrender.com/api
+
+Main URL for dev branch
+https://nodebtdev.onrender.com/api
 
 **NOTE**
 
@@ -1223,7 +1227,7 @@ Response
 }
 ```
 
-#### Loans Routes - BASE URL - https://nodebtdev.onrender.com/api
+#### Loans Routes 
 
 #### POST Method(Create New Loan): /loans/create
 
