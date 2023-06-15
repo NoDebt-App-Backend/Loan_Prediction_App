@@ -12,8 +12,15 @@ import {
   getSignedUrl
 } from "@aws-sdk/s3-request-presigner";
 import { BadUserRequestError } from "../error/error.js";
+import cloudinary from "cloudinary";
 
 dotenv.config();
+
+cloudinary.config({ 
+  cloud_name: config.cloud_name, 
+  api_key: config.api_key,  
+  api_secret: config.api_secret, 
+});
 
 export default class ImageController {
   static async uploadImage(req, res) {
@@ -110,7 +117,13 @@ export default class ImageController {
 
     await s3.send(command);
 
-    // admin.imageUrl = undefined;
+    const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+    { public_id: "dummy_image" } 
+  );
+
+  const imageDefaultUrl = result.url;
+
+    admin.imageUrl = imageDefaultUrl;
     await admin.save();
 
     res.status(200).json({
