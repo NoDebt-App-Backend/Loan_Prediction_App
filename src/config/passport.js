@@ -64,9 +64,7 @@ const authController = {
   googleAuthCallback: passport.authenticate("google", {
       failureRedirect: "/",
   }, (req, res) => {
-    res.status(200).json({
-        status: "success",
-    })
+    res.redirect("/signup")
   }),
 };
 
