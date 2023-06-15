@@ -74,7 +74,7 @@ export default class ImageController {
     };
 
     const command = new GetObjectCommand(getObjectParams);
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    const url = await getSignedUrl(s3, command, { expiresIn: 518400 });
 
     await s3.send(command);
 
@@ -110,7 +110,7 @@ export default class ImageController {
 
     await s3.send(command);
 
-    admin.profileImage = undefined;
+    // admin.imageUrl = undefined;
     await admin.save();
 
     res.status(200).json({

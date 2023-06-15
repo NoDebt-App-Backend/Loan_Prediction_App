@@ -6,7 +6,6 @@ import { createLoanValidator } from "../validators/loan.validator.js";
 import { NotFoundError, UnAuthorizedError } from "../error/error.js";
 import sendEmail from "../utils/sendEmail.js";
 import { BadUserRequestError } from "../error/error.js";
-
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
 
 /**

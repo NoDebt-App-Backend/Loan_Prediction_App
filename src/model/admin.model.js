@@ -57,7 +57,11 @@ const adminSchema = new mongoose.Schema(
     },
     passwordLink: String, // This is excluded as the URL from frontend to reset password
     imageName: String,
-    imageUrl: String,
+    imageUrl: {
+      type: String,
+      default:
+        "http://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
+    },
     loginURL: String,
   },
   { timestamps: true }

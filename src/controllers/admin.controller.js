@@ -21,8 +21,16 @@ import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
+import cloudinary from "cloudinary";
+
 
 dotenv.config();
+
+cloudinary.config({ 
+  cloud_name: config.cloud_name, 
+  api_key: config.api_key,  
+  api_secret: config.api_secret, 
+});
 
 export default class AdminController {
   //get all companies
@@ -90,7 +98,7 @@ export default class AdminController {
       .populate({
         path: "adminId",
         model: "Admin",
-        select: "firstName lastName email phoneNumber role",
+        select: "firstName lastName email imageUrl phoneNumber role",
       })
       .exec();
 
@@ -145,6 +153,12 @@ export default class AdminController {
     });
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
+    
+     const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      { public_id: "dummy_image" } 
+    );
+
+    const imageDefaultUrl = result.url;
 
     // Create new admin account
     const admin = new Admin({
@@ -154,6 +168,7 @@ export default class AdminController {
       password: hashedPassword,
       confirmPassword: hashedPassword,
       passwordLink: req.body.passwordLink,
+      imageUrl: imageDefaultUrl,
     });
 
     // Create a new company document
@@ -177,10 +192,10 @@ export default class AdminController {
 
     // Save adminCompanyMap to the AdminCompanyMap collection
     await adminCompanyMap.save();
+    
     // Save company to the Company collection
-
-    const { _id, createdAt, updatedAt, passwordLink } = admin;
-
+    const { _id, createdAt, updatedAt, passwordLink, imageUrl } = admin;
+    
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -198,6 +213,7 @@ export default class AdminController {
           createdAt: createdAt,
           updatedAt: updatedAt,
           passwordLink: passwordLink,
+          imageUrl: imageUrl,
         },
       },
     });
@@ -229,6 +245,14 @@ export default class AdminController {
       );
 
     const { _id, email, firstName, lastName, imageUrl } = admin;
+    // console.log(admin);
+
+    const adminCompany = await AdminCompanyMap.findOne({
+      adminId: _id,
+    }).populate("organisationId", " organisationName");
+
+    const { organisationName, organisationId } = adminCompany;
+
     // Returning a response to the client
     res.status(200).json({
       message: "User found successfully",
@@ -240,6 +264,8 @@ export default class AdminController {
         lastName: lastName,
         imageUrl: imageUrl,
         access_token: newToken(admin),
+        organisationId: organisationId,
+        organisationName: organisationName,
       },
     });
   }
@@ -283,6 +309,12 @@ export default class AdminController {
     const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
     console.log(newpassword);
 
+    const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+    { public_id: "dummy_image" } 
+  );
+
+  const imageDefaultUrl = result.url;
+
     const newAdmin = new Admin({
       firstName,
       lastName,
@@ -293,6 +325,7 @@ export default class AdminController {
       organisationId,
       organisationName,
       loginURL: req.body.loginURL,
+      imageUrl: req.body.url || imageDefaultUrl,
     });
 
     const newAdminCompanyMap = new AdminCompanyMap({
@@ -352,6 +385,10 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
+    const adminUser = await Admin.findById(id);
+
+    const { imageDefaultUrl } = adminUser;
+
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
@@ -365,6 +402,7 @@ export default class AdminController {
         website: req.body.website,
         position: req.body.position,
         phoneNumber: req.body.phoneNumber,
+        imageUrl: req.body.imageUrl || imageDefaultUrl,
       },
       { new: true }
     );

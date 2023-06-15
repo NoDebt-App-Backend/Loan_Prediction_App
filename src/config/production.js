@@ -20,4 +20,9 @@ export const production = {
   bucket_region: process.env.PROD_BUCKET_REGION,
   access_key: process.env.PROD_ACCESS_KEY,
   secret_access_key: process.env.PROD_SECRET_ACCESS_KEY,
+
+  // CLOUDINARY PARAMETERS/VARIABLES
+  cloud_name: process.env.PROD_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.PROD_CLOUDINARY_API_KEY,
+  api_secret: process.env.PROD_CLOUDINARY_API_SECRET
 };
