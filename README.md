@@ -198,7 +198,7 @@ Parameters: firstName, lastName, email, organisationName, password, confirmPassw
 ```json
 Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/signup' \
---data-raw '{   
+--data-raw '{
     "firstName": "Kayode",
     "lastName": "Joshua",
     "email": "bortizamle@gufum.com",
@@ -1047,13 +1047,12 @@ Request
 curl --location 'https://nodebt-application.onrender.com/api/admins/create' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ3ZGVlYmJjMjQwMzJhMDY1MjUwMDNkIiwiZW1haWwiOiJwZXRyb3JpZHJhQGd1ZnVtLmNvbSIsImlhdCI6MTY4NTk3NTY2NywiZXhwIjoxNjg2MDYyMDY3fQ.nzIrcWTwYBFd_RNAy1KuPLr6yZaXbZmzKuXjzNR4k6c' \
 --data-raw '{
-       "firstName": "Abede",
-       "lastName": "Abraham",
-        "email": "abedeabram@gufum.com",
-        "phoneNumber": "09087997689",
-        "role": "Financial Analyst",
+       "firstName": "Oghene",
+       "lastName": "Maro",
+        "email": "nifyumilme@gufum.com",
+        "phoneNumber": "+2348078906780",
+        "role": "Financial Advisor",
         "loginURL": "http:omega.com/login"
-
 }'
 
 Response
@@ -1063,19 +1062,20 @@ Response
     "status": "Success",
     "data": {
         "newAdmin": {
-            "firstName": "Abede",
-            "lastName": "Abraham",
-            "phoneNumber": "09087997689",
-            "email": "abedeabram@gufum.com",
-            "password": "$2b$10$iwTqMqMmqQglEuN7AfPrv.54nFocaMuA/WWSHhRKNi5T2hP9oBrT.",
-            "role": "Financial Analyst",
+            "firstName": "Oghene",
+            "lastName": "Maro",
+            "phoneNumber": "+2348078906780",
+            "email": "nifyumilme@gufum.com",
+            "password": "$2b$10$T/gqRuYQ.peOJ6czd/GVo.Czu83dS.dyzqSKkNphI1JuM3JQHsiBW",
+            "role": "Financial Advisor",
+            "imageUrl": "http://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
             "loginURL": "http:omega.com/login",
-            "_id": "6484c6206af91b817aaae8cc",
-            "createdAt": "2023-06-10T18:51:12.637Z",
-            "updatedAt": "2023-06-10T18:51:12.637Z",
+            "_id": "648be3f83d21551684f39fe4",
+            "createdAt": "2023-06-16T04:24:24.834Z",
+            "updatedAt": "2023-06-16T04:24:24.834Z",
             "__v": 0
         },
-        "newpassword": "iD(2f#A`"
+        "newpassword": "jI:30dEE"
     }
 }
 ```
@@ -1227,7 +1227,7 @@ Response
 }
 ```
 
-#### Loans Routes 
+#### Loans Routes
 
 #### POST Method(Create New Loan): /loans/create
 
@@ -1318,7 +1318,6 @@ Response
 }
 ```
 
-
 #### GET Method(Get A Single Loan): /loans?id={loanId}
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
@@ -1342,38 +1341,44 @@ Response
     "data": {
         "borrower": {
             "guarantor": {
-                "fullname": "Victor Okpomfon",
+                "fullname": "Victor Okpo-mfon",
                 "phoneNumber": "+34529394500",
-                "email": "cultihirze@gufum.com",
-                "dateOfBirth": "1997-04-08T00:00:00.000Z",
+                "email": "victor8@email.com",
+                "age": 50,
                 "address": "Anantigha Calabar South",
                 "socialSecurityNumber": "43438487579",
-                "relationship": "Mother",
-                "employment": "Civil Servant",
-                "incomePerMonth": 88900,
+                "relationship": "Sister",
+                "employmentType": "Part-Time",
+                "incomePerMonth": 5000,
                 "otherSourcesOfIncome": "none"
             },
-            "_id": "648246967bfd5752f2a19d4a",
+            "_id": "648bcf8f0766561263bcc410",
             "eligibility": false,
-            "fullname": "Stephanie Okpo-mfon",
+            "gender": "Female",
+            "maritalStatus": "Single",
+            "jobRole": "Teacher",
+            "jobSector": "Engineering",
+            "fullname": "Badmus Okpo",
             "loanAmount": 50000,
-            "email": "cultihirze@gufum.com",
+            "email": "balmuziydi@gufum.com",
             "address": "Anantigha Calabar South",
-            "employmentType": "part-time",
-            "phoneNumber": "09163426103",
-            "dateOfBirth": "2003-09-07T00:00:00.000Z",
-            "nationalIdentityNumber": "34589790070",
-            "incomePerMonth": 100000,
-            "loanType": "student-loan",
+            "employmentType": "Part-Time",
+            "phoneNumber": "09090675542",
+            "age": 44,
+            "nationalIdentityNumber": "20087689546",
+            "incomePerMonth": 1000,
+            "loanType": "Student Loan",
             "repaymentType": "principal-and-intrest",
-            "purposeOfLoan": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
-            "collateralType": "real-estate",
-            "collateralValue": 55000,
-            "collateralInformation": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth, creating employment opportunities, and contributing to the local economy. This financial support will enable me to invest in cutting-edge technology, enhance operational efficiency, and propel my business to new heights. By accessing this loan, I will lay the foundation for a prosperous future, ensuring long-term sustainability and success.",
+            "purposeOfLoan": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth.",
+            "collateralType": "Real Estate",
+            "collateralValue": 5000,
+            "collateralInformation": "Securing a loan is a crucial step towards realizing my aspirations. With determination and unwavering commitment, I aim to utilize the funds to expand my business, fostering growth.",
             "adminInCharge": "Karen Chukwu",
-            "organisationId": "6481a604259bb090c2977866",
-            "organisation": "6481a604259bb090c2977866",
+            "organisationId": "648212385c5cef8a3fba48d5",
+            "organisation": "648212385c5cef8a3fba48d5",
             "organisationName": "Manymillions Tech",
+            "createdAt": "2023-06-16T02:57:19.861Z",
+            "updatedAt": "2023-06-16T02:57:19.861Z",
             "__v": 0
         }
     }
@@ -1429,10 +1434,10 @@ Response
     "message": "eligibility status successfully sent to borrowers mail"
 }
 ```
+
 The supposed borrower gets mail with the message as shown in the example below depending on his/her eligibility status (the one shown in the example is declined)
 
 ![Loan Declined Borrower](./images/loanimg.png)
-
 
 #### GET Method(Get All Loans in A Company): /loans/company-loans
 
@@ -1467,6 +1472,7 @@ Response
                 "loanAmount": 43000,
                 "email": "filtameltu@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T09:32:47.047Z"
             },
             {
@@ -1476,6 +1482,7 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T09:29:46.624Z"
             },
             {
@@ -1485,6 +1492,7 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T09:06:48.782Z"
             },
             {
@@ -1494,6 +1502,7 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T08:59:59.339Z"
             },
             {
@@ -1503,6 +1512,7 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:41:10.900Z"
             },
             {
@@ -1512,6 +1522,7 @@ Response
                 "loanAmount": 60000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:35.309Z"
             },
             {
@@ -1521,6 +1532,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:16.471Z"
             },
             {
@@ -1530,6 +1542,7 @@ Response
                 "loanAmount": 3000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:56.971Z"
             },
             {
@@ -1539,6 +1552,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:35.832Z"
             },
             {
@@ -1548,14 +1562,15 @@ Response
                 "loanAmount": 40000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:23.473Z"
             }
         ]
     }
 }
 ```
-This has pagination with each page listing 10 per page.
 
+This has pagination with each page listing 10 per page.
 
 #### GET Method(Get All Loans in A Company-Page 2): /loans/company-loans?page=2
 
@@ -1579,106 +1594,126 @@ Response
     "message": "Loans found successfully",
     "title": "Loan Applications",
     "status": "Success",
-    "totalPages": 4,
+    "totalPages": 3,
     "results": 10,
     "data": {
         "loans": [
             {
-                "_id": "6482d67ce02db3bfc780493c",
-                "eligibility": true,
-                "fullname": "Kayode Joshua",
-                "loanAmount": 60000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:36:28.176Z"
-            },
-            {
-                "_id": "6482d64de02db3bfc7804937",
-                "eligibility": true,
-                "fullname": "Sandra Funanya",
-                "loanAmount": 20000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:35:41.491Z"
-            },
-            {
-                "_id": "6482d63fe02db3bfc7804932",
-                "eligibility": true,
-                "fullname": "Mercy Justice",
-                "loanAmount": 80000,
-                "email": "cultihirze@gufum.com",
-                "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:35:27.331Z"
-            },
-            {
-                "_id": "6482d629e02db3bfc780492d",
-                "eligibility": true,
-                "fullname": "King Onuche",
+                "_id": "648bd331ad2e2f5db22e4ac9",
+                "eligibility": false,
+                "fullname": "Chris Jane",
                 "loanAmount": 50000,
-                "email": "cultihirze@gufum.com",
+                "email": "temlucalti@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:35:05.314Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-16T03:12:49.852Z"
             },
             {
-                "_id": "6482d60fe02db3bfc7804928",
+                "_id": "648bcf8f0766561263bcc410",
+                "eligibility": false,
+                "fullname": "Badmus Okpo",
+                "loanAmount": 50000,
+                "email": "balmuziydi@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-16T02:57:19.861Z"
+            },
+            {
+                "_id": "64882755b67b95983a6ae10b",
+                "eligibility": false,
+                "fullname": "Nonso Ebulem",
+                "loanAmount": 40000,
+                "email": "firtuvulte@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T08:22:45.217Z"
+            },
+            {
+                "_id": "6488259b3d04596f24f126fc",
                 "eligibility": true,
-                "fullname": "Precious Chinedu",
-                "loanAmount": 30000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Jibola Kayode",
+                "loanAmount": 3000,
+                "email": "nepsinomlo@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:34:39.082Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T08:15:24.094Z"
             },
             {
-                "_id": "6482d3c13a7f9d872a6d1167",
+                "_id": "648820067cd97f4bc729dac7",
                 "eligibility": false,
-                "fullname": "Korede Israel",
-                "loanAmount": 35000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Jibola Kayode",
+                "loanAmount": 3000,
+                "email": "jakkibisti@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:24:49.508Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:51:34.461Z"
             },
             {
-                "_id": "6482d39e3a7f9d872a6d1162",
+                "_id": "64881f968f204ac32eed2627",
                 "eligibility": false,
-                "fullname": "Ebenezer Jasu",
-                "loanAmount": 65000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Justine Kayode",
+                "loanAmount": 3000,
+                "email": "jispuhalte@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:24:14.660Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:49:42.278Z"
             },
             {
-                "_id": "6482d26c3a7f9d872a6d115d",
+                "_id": "64881e1fb4f8b1eb8532056a",
                 "eligibility": false,
-                "fullname": "Bello Yusuf",
-                "loanAmount": 42000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Pascal Ariyo",
+                "loanAmount": 3000,
+                "email": "parkezugnu@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:19:08.727Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:43:28.023Z"
             },
             {
-                "_id": "6482d1ee3a7f9d872a6d1158",
+                "_id": "64881ca8e81cf7b2349a1d4e",
                 "eligibility": false,
-                "fullname": "Emily Olaniyi",
-                "loanAmount": 30000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Tolulope Ariyo",
+                "loanAmount": 3000,
+                "email": "jarkuhimlu@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:17:02.912Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:37:12.483Z"
             },
             {
-                "_id": "6482d1d13a7f9d872a6d1153",
+                "_id": "648817282e605ad8b41c68c3",
                 "eligibility": false,
-                "fullname": "Kay James",
-                "loanAmount": 20000,
-                "email": "cultihirze@gufum.com",
+                "fullname": "Tolulope Ariyo",
+                "loanAmount": 3000,
+                "email": "tatrabidri@gufum.com",
                 "address": "Anantigha Calabar South",
-                "createdAt": "2023-06-09T07:16:33.035Z"
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:13:44.816Z"
+            },
+            {
+                "_id": "648815d27b2a521818d41f71",
+                "eligibility": false,
+                "fullname": "Monachi Caro",
+                "loanAmount": 3000,
+                "email": "modranemle@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-13T07:08:02.206Z"
             }
         ]
     }
 }
 ```
-This has pagination with each page listing 10 per page.
 
+This has pagination with each page listing 10 per page.
 
 #### GET Method(Get All Successful Company Loans In Ascending Order): /loans/success-loans/ascending
 
@@ -1714,6 +1749,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:34:39.082Z"
             },
             {
@@ -1723,6 +1759,7 @@ Response
                 "loanAmount": 50000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:05.314Z"
             },
             {
@@ -1732,6 +1769,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:27.331Z"
             },
             {
@@ -1741,6 +1779,7 @@ Response
                 "loanAmount": 20000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:41.491Z"
             },
             {
@@ -1750,6 +1789,7 @@ Response
                 "loanAmount": 60000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:36:28.176Z"
             },
             {
@@ -1759,6 +1799,7 @@ Response
                 "loanAmount": 9000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:36:50.337Z"
             },
             {
@@ -1768,6 +1809,7 @@ Response
                 "loanAmount": 10000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:38:21.679Z"
             },
             {
@@ -1777,6 +1819,7 @@ Response
                 "loanAmount": 12000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:38:40.920Z"
             },
             {
@@ -1786,6 +1829,7 @@ Response
                 "loanAmount": 6000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:01.255Z"
             },
             {
@@ -1795,14 +1839,15 @@ Response
                 "loanAmount": 40000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:23.473Z"
             }
         ]
     }
 }
 ```
-This also works with pagination with each page in rows of 10.
 
+This also works with pagination with each page in rows of 10.
 
 #### GET Method(Get All Successful Company Loans In Ascending Order - Page 2): /loans/success-loans/ascending?page=2
 
@@ -1839,6 +1884,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:35.832Z"
             },
             {
@@ -1848,6 +1894,7 @@ Response
                 "loanAmount": 3000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:56.971Z"
             },
             {
@@ -1857,6 +1904,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:16.471Z"
             },
             {
@@ -1866,6 +1914,7 @@ Response
                 "loanAmount": 60000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:35.309Z"
             },
             {
@@ -1875,14 +1924,13 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:41:10.900Z"
             }
         ]
     }
 }
 ```
-
-
 
 #### GET Method(Get All Rejected Company Loans In Ascending Order): /loans/rejected-loans/ascending
 
@@ -1918,6 +1966,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:05:29.815Z"
             },
             {
@@ -1927,6 +1976,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:11:37.406Z"
             },
             {
@@ -1936,6 +1986,7 @@ Response
                 "loanAmount": 25000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:10.956Z"
             },
             {
@@ -1945,6 +1996,7 @@ Response
                 "loanAmount": 76000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:35.015Z"
             },
             {
@@ -1954,6 +2006,7 @@ Response
                 "loanAmount": 54000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:57.662Z"
             },
             {
@@ -1963,6 +2016,7 @@ Response
                 "loanAmount": 32000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:13:18.835Z"
             },
             {
@@ -1972,6 +2026,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:14:40.678Z"
             },
             {
@@ -1981,6 +2036,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:14:53.747Z"
             },
             {
@@ -1990,6 +2046,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:15:14.391Z"
             },
             {
@@ -1999,14 +2056,15 @@ Response
                 "loanAmount": 65000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:15:30.516Z"
             }
         ]
     }
 }
 ```
-This also works with pagination with each page in rows of 10.
 
+This also works with pagination with each page in rows of 10.
 
 #### GET Method(Get All Rejected Company Loans In Ascending Order (Page 2)): /loans/rejected-loans/ascending?page=2
 
@@ -2042,6 +2100,7 @@ Response
                 "loanAmount": 20000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:16:33.035Z"
             },
             {
@@ -2051,6 +2110,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:17:02.912Z"
             },
             {
@@ -2060,6 +2120,7 @@ Response
                 "loanAmount": 42000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:19:08.727Z"
             },
             {
@@ -2069,6 +2130,7 @@ Response
                 "loanAmount": 65000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:24:14.660Z"
             },
             {
@@ -2078,13 +2140,13 @@ Response
                 "loanAmount": 35000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:24:49.508Z"
             }
         ]
     }
 }
 ```
-
 
 #### GET Method(Get All Successful Company Loans In Descending Order): /loans/success-loans/descending
 
@@ -2119,6 +2181,7 @@ Response
                 "loanAmount": 43000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:41:10.900Z"
             },
             {
@@ -2128,6 +2191,7 @@ Response
                 "loanAmount": 60000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:35.309Z"
             },
             {
@@ -2137,6 +2201,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:40:16.471Z"
             },
             {
@@ -2146,6 +2211,7 @@ Response
                 "loanAmount": 3000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:56.971Z"
             },
             {
@@ -2155,6 +2221,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:35.832Z"
             },
             {
@@ -2164,6 +2231,7 @@ Response
                 "loanAmount": 40000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:23.473Z"
             },
             {
@@ -2173,6 +2241,7 @@ Response
                 "loanAmount": 6000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:39:01.255Z"
             },
             {
@@ -2182,6 +2251,7 @@ Response
                 "loanAmount": 12000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:38:40.920Z"
             },
             {
@@ -2191,6 +2261,7 @@ Response
                 "loanAmount": 10000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:38:21.679Z"
             },
             {
@@ -2200,14 +2271,15 @@ Response
                 "loanAmount": 9000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:36:50.337Z"
             }
         ]
     }
 }
 ```
-This also works with pagination with each page in rows of 10.
 
+This also works with pagination with each page in rows of 10.
 
 #### GET Method(Get All Successful Company Loans In Descending Order - Page 2): /loans/success-loans/descending?page=2
 
@@ -2242,6 +2314,7 @@ Response
                 "loanAmount": 60000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:36:28.176Z"
             },
             {
@@ -2251,6 +2324,7 @@ Response
                 "loanAmount": 20000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:41.491Z"
             },
             {
@@ -2260,6 +2334,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:27.331Z"
             },
             {
@@ -2269,6 +2344,7 @@ Response
                 "loanAmount": 50000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:35:05.314Z"
             },
             {
@@ -2278,14 +2354,13 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:34:39.082Z"
             }
         ]
     }
 }
 ```
-
-
 
 #### GET Method(Get All Rejected Company Loans In Descending Order): /loans/rejected-loans/descending
 
@@ -2321,6 +2396,7 @@ Response
                 "loanAmount": 35000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:24:49.508Z"
             },
             {
@@ -2330,6 +2406,7 @@ Response
                 "loanAmount": 65000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:24:14.660Z"
             },
             {
@@ -2339,6 +2416,7 @@ Response
                 "loanAmount": 42000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:19:08.727Z"
             },
             {
@@ -2348,6 +2426,7 @@ Response
                 "loanAmount": 30000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:17:02.912Z"
             },
             {
@@ -2357,6 +2436,7 @@ Response
                 "loanAmount": 20000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:16:33.035Z"
             },
             {
@@ -2366,6 +2446,7 @@ Response
                 "loanAmount": 65000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:15:30.516Z"
             },
             {
@@ -2375,6 +2456,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:15:14.391Z"
             },
             {
@@ -2384,6 +2466,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:14:53.747Z"
             },
             {
@@ -2393,6 +2476,7 @@ Response
                 "loanAmount": 75000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:14:40.678Z"
             },
             {
@@ -2402,14 +2486,15 @@ Response
                 "loanAmount": 32000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:13:18.835Z"
             }
         ]
     }
 }
 ```
-This also works with pagination with each page in rows of 10.
 
+This also works with pagination with each page in rows of 10.
 
 #### GET Method(Get All Rejected Company Loans In Descending Order (Page 2)): /loans/rejected-loans/descending?page=2
 
@@ -2445,6 +2530,7 @@ Response
                 "loanAmount": 54000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:57.662Z"
             },
             {
@@ -2454,6 +2540,7 @@ Response
                 "loanAmount": 76000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:35.015Z"
             },
             {
@@ -2463,6 +2550,7 @@ Response
                 "loanAmount": 25000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:12:10.956Z"
             },
             {
@@ -2472,6 +2560,7 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:11:37.406Z"
             },
             {
@@ -2481,13 +2570,13 @@ Response
                 "loanAmount": 80000,
                 "email": "cultihirze@gufum.com",
                 "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-09T07:05:29.815Z"
             }
         ]
     }
 }
 ```
-
 
 #### GET Method(Get Loan By Name): /loans/getloan/{fullname}
 

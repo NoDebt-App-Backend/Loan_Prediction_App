@@ -79,6 +79,7 @@ const updateAdminValidator = Joi.object({
   profileImage: Joi.string(),
   imageUrl: Joi.string(),
 });
+
 const addAdminValidator = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
