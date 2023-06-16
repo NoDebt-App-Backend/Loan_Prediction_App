@@ -22,14 +22,14 @@ import { newToken } from "../utils/jwtHandler.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
-
+import { request } from "express";
 
 dotenv.config();
 
-cloudinary.config({ 
-  cloud_name: config.cloud_name, 
-  api_key: config.api_key,  
-  api_secret: config.api_secret, 
+cloudinary.config({
+  cloud_name: config.cloud_name,
+  api_key: config.api_key,
+  api_secret: config.api_secret,
 });
 
 export default class AdminController {
@@ -153,9 +153,10 @@ export default class AdminController {
     });
     if (existingCompany)
       throw new BadUserRequestError("Company name already exists");
-    
-     const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
-      { public_id: "dummy_image" } 
+
+    const result = await cloudinary.v2.uploader.upload(
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      { public_id: "dummy_image" }
     );
 
     const imageDefaultUrl = result.url;
@@ -182,6 +183,7 @@ export default class AdminController {
       organisationId: company._id,
       organisationName: req.body.organisationName,
       adminFirstName: req.body.firstName,
+      adminLastName: req.body.lastName,
     });
 
     // Save admin to the Admin collection
@@ -192,10 +194,10 @@ export default class AdminController {
 
     // Save adminCompanyMap to the AdminCompanyMap collection
     await adminCompanyMap.save();
-    
+
     // Save company to the Company collection
     const { _id, createdAt, updatedAt, passwordLink, imageUrl } = admin;
-    
+
     // Return a response to the client
     res.status(200).json({
       message: "Company account created successfully",
@@ -279,51 +281,58 @@ export default class AdminController {
   }
 
   static async addAdmin(req, res) {
-    const { value, error} = addAdminValidator.req.body;
-    if (error) throw error
-    const org = await Organisation.findOne({
+    const { value, error } = addAdminValidator.validate(req.body);
+    if (error) throw error;
+    const adminCompanyMap = await AdminCompanyMap.findOne({
       adminId: req.admin.adminId,
-    }).populate("_id", " organisationName");
+    }).populate("organisationId");
 
-    if (!org) {
+    if (!adminCompanyMap) {
       throw new UnAuthorizedError(
         "Admin is not found and cannot perform this operation."
       );
     }
 
-    const organisationId = org._id;
+    const organisationId = adminCompanyMap.organisationId;
+
+    // const org = await Organisation.findOne({ organisationId: req.organisation._id }).populate("organisationName");
+    const org = await Organisation.findById(organisationId);
+
     const organisationName = org.organisationName;
 
-    const existingEmail = await Admin.findOne({email: req.body.email});
-    if (existingEmail){
-      throw new BadUserRequestError("Email already exists")
-    };
+    const existingEmail = await Admin.findOne({ email: req.body.email });
+    if (existingEmail) {
+      throw new BadUserRequestError("Email already exists");
+    }
 
-    const existingPhoneNumber = await Admin.findOne({phoneNumber:req.body.phoneNumber});
-    if(existingPhoneNumber){
-      throw new BadUserRequestError("Phone number already exists")
-    };
+    const existingPhoneNumber = await Admin.findOne({
+      phoneNumber: req.body.phoneNumber,
+    });
+    if (existingPhoneNumber) {
+      throw new BadUserRequestError("Phone number already exists");
+    }
 
     const newpassword = generateRandomPassword();
     const saltRounds = config.bcrypt_saltRound;
     const hashedPassword = bcrypt.hashSync(newpassword, saltRounds);
     console.log(newpassword);
 
-    const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
-    { public_id: "dummy_image" } 
-  );
+    const result = await cloudinary.v2.uploader.upload(
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      { public_id: "dummy_image" }
+    );
 
-  const imageDefaultUrl = result.url;
+    const imageDefaultUrl = result.url;
 
     const newAdmin = new Admin({
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      role,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      role: req.body.role,
       password: hashedPassword,
-      organisationId,
-      organisationName,
+      organisationId: organisationId,
+      organisationName: organisationName,
       loginURL: req.body.loginURL,
       imageUrl: req.body.url || imageDefaultUrl,
     });
@@ -332,8 +341,8 @@ export default class AdminController {
       adminId: newAdmin._id,
       organisationId: organisationId,
       organisationName: organisationName,
-      adminFirstName: firstName,
-      adminLastName: lastName,
+      adminFirstName: req.body.firstName,
+      adminLastName: req.body.lastName,
     });
     await newAdminCompanyMap.save();
     await newAdmin.save();
