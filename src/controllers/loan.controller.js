@@ -201,8 +201,8 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
       status: "Success",
       totalPages: Math.ceil(loansCount.length / 10),
       results: loans.length,
-      adminInCharge: admin.adminInCharge,
       data: {
+        adminInCharge: admin.adminInCharge,
         loans: loans,
       },
     });
@@ -266,8 +266,8 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
       status: "Success",
       results: loans.length,
       totalSuccessLoansFigure: totalSuccessLoansFigure,
-      adminInCharge: admin.adminInCharge,
       data: {
+        adminInCharge: admin.adminInCharge,
         loans: loans,
       },
     });
@@ -330,8 +330,8 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
       totalPages: Math.ceil(loansCount.length / 10),
       results: loans.length,
       totalSuccessLoansFigure: totalSuccessLoansFigure,
-      adminInCharge: admin.adminInCharge,
       data: {
+        adminInCharge: admin.adminInCharge,
         loans: loans,
       },
     });
@@ -394,8 +394,8 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
       totalPages: Math.ceil(loansCount.length / 10),
       results: loans.length,
       totalRejectedLoansFigure,
-      adminInCharge: admin.adminInCharge,
       data: {
+        adminInCharge: admin.adminInCharge,
         loans: loans,
       },
     });
@@ -458,8 +458,8 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
       totalPages: Math.ceil(loansCount.length / 10),
       results: loans.length,
       totalRejectedLoansFigure,
-      adminInCharge: admin.adminInCharge,
       data: {
+        adminInCharge: admin.adminInCharge,
         loans: loans,
       },
     });
