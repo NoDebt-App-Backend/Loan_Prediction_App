@@ -11,26 +11,11 @@ import authController from "../config/passport.js";
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
-// router.get(
-//   "/auth/facebook",
-//   passport.authenticate("facebook", { scope: "email" }),
-//   AdminController.facebookCreateAdmin
-// );
+// To get all the admins within a company
+router.get('/',authMiddleWare, AdminController.getAdminsByCompany);
 
-router.get("/auth/google", authController.googleAuth);
-
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", authController.googleAuthCallback)
-);
-
-// router.get(
-//   "/auth/facebook/secret",
-//   passport.authenticate("facebook", {
-//     successRedirect: "/profile",
-//     failureRedirect: "/",
-//   })
-// );
+// To retrieve a single company from the database
+router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));

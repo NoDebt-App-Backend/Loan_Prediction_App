@@ -9,7 +9,6 @@ import logger from "morgan";
 import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
 import loanRouter from "./src/router/loan.route.js";
 import router from "./src/router/admin.route.js";
-
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
 import {passportConfig} from "./src/config/passport.js";
 

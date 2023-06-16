@@ -28,6 +28,8 @@ const createCompanyValidator = Joi.object({
   organisationName: Joi.string().required(),
   password: Joi.string(),
   facebookId: Joi.string(),
+  passwordLink: Joi.string(),
+  loginURL: Joi.string(),
 }).strict();
 
 const loginAdminValidator = Joi.object({
@@ -74,14 +76,35 @@ const updateAdminValidator = Joi.object({
   organisationType: Joi.string(),
   website: Joi.string(),
   position: Joi.string(),
-  phoneNumber: Joi.string(),
+  phoneNumber: Joi.string().regex(/^\+\d{1,3}\d{6,14}$/).messages({
+    "string.pattern.base": "Phone number format invalid e.g +2348000000000",
+  }),
   role: Joi.string(),
   profileImage: Joi.string(),
+  imageUrl: Joi.string(),
 });
+
+const addAdminValidator = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  email: Joi.string()
+  .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+  .required()
+  .messages({
+    "string.pattern.base":
+      "Not a valid email address. Please input a valid email address.",
+  }),
+  phoneNumber: Joi.string().regex(/^\+\d{1,3}\d{6,14}$/).required().messages({
+    "string.pattern.base": "Phone number format invalid e.g +2348000000000",
+  }),
+  role: Joi.string().required(),
+  loginURL: Joi.string().optional()
+}).strict();
 
 export {
   createCompanyValidator,
   loginAdminValidator,
   updateAdminValidator,
   changePasswordValidator,
+  addAdminValidator
 };
