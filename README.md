@@ -2701,6 +2701,46 @@ You install using
 npm i handlebars
 ```
 
+- **morgan** - Morgan is an HTTP request logger middleware for node.js. This was used in the application for logging out our responses in real time.
+
+You install using
+```bash
+npm i morgan
+```
+
+- **multer** - Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. This was used in our application to handle uploading images to cloudinary and AWS S3 bucket.
+
+You install using
+```bash
+npm i multer
+```
+
+- **nodemailer** - Nodemailer is a module for Node.js applications to allow easy as cake email sending. This was used in our application to send emails to users.
+
+You install using
+```bash
+npm i nodemailer
+```
+
+## DevDependencies
+
+The following development dependencies were used to build the application:
+
+- **dotenv** - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. This was used in our application to store sensitive information and prevent them from being exposed.
+
+You install using
+```bash
+npm i dotenv
+```
+
+- **nodemailer** - nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. This was used in the application to prevent restarting the server on every change made.
+
+You install using
+```bash
+npm i nodemailer
+```
+
+
 ## Postman Documentation
 
 - If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
