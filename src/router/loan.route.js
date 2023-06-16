@@ -48,7 +48,7 @@ router.get(
   authMiddleWare,
   loanControllers.findAllCompanyLoans
 );
-// GET ALL COMPANY LOANS
+// GET ALL COMPANY LOANS PAGINATED
 router.get(
   "/paginated-company-loans",
   authMiddleWare,
