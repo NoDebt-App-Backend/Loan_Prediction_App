@@ -27,7 +27,7 @@ const createLoanValidator = Joi.object({
   jobRole: Joi.string().required(),
   jobSector: Joi.string().required(),
   phoneNumber: Joi.string()
-    .pattern(/^(\+\d{1,})?\d{10,}$/)
+    .pattern(/^\+\d{1,3}\d{6,14}$/)
     .required(),
   age: Joi.number().required(),
   nationalIdentityNumber: Joi.string().required(),
