@@ -66,7 +66,9 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get All Loans](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-loanscompany-loans)
 
-    - [Get All Loans Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-page-2-loanscompany-loanspage2)
+    - [Get All Loans Paginated](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company---paginated-loanspaginated-company-loans)
+
+    - [Get All Loans Paginated Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-paginated---page-2-loanspaginated-company-loanspage2)
 
     - [Get All Successful Loans - Ascending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-ascending-order-loanssuccess-loansascending)
 
