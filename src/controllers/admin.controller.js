@@ -334,6 +334,7 @@ export default class AdminController {
       organisationId: organisationId,
       organisationName: organisationName,
       loginURL: req.body.loginURL,
+      passwordLink: req.body.passwordLink,
       imageUrl: req.body.url || imageDefaultUrl,
     });
 
