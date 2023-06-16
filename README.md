@@ -88,7 +88,7 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
 
-  - [Contact Us Route](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#contact-us-routes)
+  - [Contact Us Route](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#contact-us-route)
 
     - [Contact Page](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#post-methodcontact-us-page-contact)
 
