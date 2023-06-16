@@ -19,7 +19,6 @@ import dotenv from "dotenv";
 import Organisation from "../model/org.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import { newToken } from "../utils/jwtHandler.js";
-import Organisation from "../model/org.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
