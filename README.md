@@ -2611,6 +2611,24 @@ Response
 }
 ```
 
+## Dependencies
+
+The following dependencies were used to build the application:
+
+- **Express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
+
+You install using
+```bash
+npm i express
+```
+
+- **Express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
+
+You install using
+```bash
+npm i express
+```
+
 ## Postman Documentation
 
 - If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
