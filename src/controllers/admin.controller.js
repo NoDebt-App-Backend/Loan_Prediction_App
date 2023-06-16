@@ -17,8 +17,9 @@ import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import { config } from "../config/index.js";
 import dotenv from "dotenv";
 import Organisation from "../model/org.model.js";
-import { newToken } from "../utils/jwtHandler.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
+import { newToken } from "../utils/jwtHandler.js";
+import Organisation from "../model/org.model.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
@@ -281,18 +282,18 @@ export default class AdminController {
   static async addAdmin(req, res) {
     const { value, error} = addAdminValidator.req.body;
     if (error) throw error
-    const adminCompanyMap = await AdminCompanyMap.findOne({
+    const org = await Organisation.findOne({
       adminId: req.admin.adminId,
-    }).populate("organisationId", " organisationName");
+    }).populate("_id", " organisationName");
 
-    if (!adminCompanyMap) {
+    if (!org) {
       throw new UnAuthorizedError(
         "Admin is not found and cannot perform this operation."
       );
     }
 
-    const organisationId = adminCompanyMap.organisationId;
-    const organisationName = adminCompanyMap.organisationName;
+    const organisationId = org._id;
+    const organisationName = org.organisationName;
 
     const existingEmail = await Admin.findOne({email: req.body.email});
     if (existingEmail){
