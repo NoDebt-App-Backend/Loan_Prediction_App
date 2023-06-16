@@ -61,7 +61,7 @@ export default class ImageController {
       data: {
         adminId: _id,
         imageName: imageName,
-        profileImage: profileImage,
+        // profileImage: profileImage,
       },
     });
   }

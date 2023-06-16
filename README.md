@@ -2615,18 +2615,90 @@ Response
 
 The following dependencies were used to build the application:
 
-- **Express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
+- **express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
 
 You install using
 ```bash
 npm i express
 ```
 
-- **Express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
+- **joi** - This is a data validator for JavaScript. This was used in the application to validate the data before it gets to the database.
 
 You install using
 ```bash
-npm i express
+npm i joi
+```
+
+- **joi-objectid** - This is a A MongoDB ObjectId validator for Joi. This was used in the application to validate the object id from mongodb.
+
+You install using
+```bash
+npm i joi-objectid
+```
+
+- **jsonwebtoken** - JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties.  The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted. 
+
+This was used in the application to generate tokens to authorize users to access certain services in the application.
+
+You install using
+```bash
+npm i jsonwebtoken
+```
+
+- **bcrypt** - bcrypt is a pasword-hashing function used to encrypt and decrypt passwords or other credentials.This was used in the application to encrypt and decrypt passwords of users.
+
+You install using
+```bash
+npm i bcrypt
+```
+
+- **@aws-sdk/client-s3** - This is a AWS SDK for JavaScript S3 Client for Node.js used to access S3 client bucket and objects. This was used in the application to store and retrieve images.
+
+You install using
+```bash
+npm i @aws-sdk/client-s3
+```
+
+- **@aws-sdk/s3-request-presigner** - This package provides a presigner based on signature V4 that will attempt to generate signed url for S3. This was used in the application to download and gain access to the objects stored in s3 buckets.
+
+You install using
+```bash
+npm i @aws-sdk/s3-request-presigner
+```
+
+- **cloudinary** - The Cloudinary Node SDK allows you to quickly and easily integrate your application with Cloudinary. Effortlessly optimize, transform, upload and manage your cloud's assets. This was used in the application to create the dummy image used as a default for the users.
+
+You install using
+```bash
+npm i cloudinary
+```
+
+- **axios** - This is a promise based HTTP client for the browser and node.js. This was used in the application to access and integrate the API built from the model of the data science team for predictability.
+
+You install using
+```bash
+npm i axios
+```
+
+- **cors** - CORS is a node.js package for providing a Connect/Express middleware that can be used to enable cross origin resource sharing with various options. This was used in the application to enable cross origin resource sharing.
+
+You install using
+```bash
+npm i cors
+```
+
+- **mongoose** - Mongoose provides a straight-forward, schema-based solution to model your application data. This was used in the application to create schemas and models.
+
+You install using
+```bash
+npm i mongoose
+```
+
+- **handlebars** - Handlebars are logicless templating languages that keep the view and the code separated like we all know they should be. This was used in the application to create templating for emails.
+
+You install using
+```bash
+npm i handlebars
 ```
 
 ## Postman Documentation
