@@ -351,7 +351,7 @@ export default class AdminController {
     // Send email to new admin
     // Configurations for email
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: config.nodemailer_host,
       port: 465,
       secure: true,
       auth: {
