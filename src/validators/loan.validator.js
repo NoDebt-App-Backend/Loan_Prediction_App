@@ -52,7 +52,7 @@ const createLoanValidator = Joi.object({
         "string.pattern.base": "Full name is required",
       }),
     phoneNumber: Joi.string()
-      .pattern(/^(\+\d{1,})?\d{10,}$/)
+      .pattern(/^\+\d{1,3}\d{6,14}$/)
       .required(),
     email: Joi.string()
       .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)

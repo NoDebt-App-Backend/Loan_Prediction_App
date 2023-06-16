@@ -74,7 +74,9 @@ const updateAdminValidator = Joi.object({
   organisationType: Joi.string(),
   website: Joi.string(),
   position: Joi.string(),
-  phoneNumber: Joi.string(),
+  phoneNumber: Joi.string().regex(/^\+\d{1,3}\d{6,14}$/).messages({
+    "string.pattern.base": "Phone number format invalid e.g +2348000000000",
+  }),
   role: Joi.string(),
   profileImage: Joi.string(),
   imageUrl: Joi.string(),
