@@ -102,6 +102,8 @@ This repository contains the source code for the Loan Prediction Application. Th
 
 ## Prerequisites
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Before setting up the codebase, make sure you have the following prerequisites installed:
 
 - Node.js (version 12 or above)
@@ -109,6 +111,8 @@ Before setting up the codebase, make sure you have the following prerequisites i
 - Git
 
 ## Installation
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 1. Clone the repository using Git:
    ```bash
@@ -128,6 +132,8 @@ Before setting up the codebase, make sure you have the following prerequisites i
 
 ## Configuration
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 The codebase requires the following environment configurations:
 
 1. Create a `.env` file in the root directory of the project.
@@ -140,6 +146,8 @@ The codebase requires the following environment configurations:
 ```
 
 ## Directory Structure
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 The codebase follows the following directory structure:
 
@@ -161,6 +169,8 @@ NoDebt-App-Backend/Loan_Prediction_App/
 
 ## Usage
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 To start the Loan_Prediction_App application on your local environment, run the following command:
 
 npm start
@@ -168,6 +178,8 @@ npm start
 Visit `http://localhost:PORT` in your web browser to access the application.
 
 ## API Documentation
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 API Documentation for NoDebt App (Loan Prediction application)
 
@@ -2617,6 +2629,8 @@ Response
 
 ## Dependencies
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 The following dependencies were used to build the application:
 
 - **express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
@@ -2743,6 +2757,8 @@ npm i nodemailer
 
 ## DevDependencies
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 The following development dependencies were used to build the application:
 
 - **dotenv** - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. This was used in our application to store sensitive information and prevent them from being exposed.
@@ -2763,22 +2779,32 @@ npm i nodemailer
 
 ## Postman Documentation
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 - If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
 
 ## Troubleshooting
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 - If you encounter any issues during the setup process, please ensure that you have the latest versions of Node.js and MongoDB installed.
 - If the application fails to start, make sure the MongoDB server is running and accessible.
 
 ## Project Status
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 This app is currently developed and maintained by the Stutern 1.4 Cohort Group 5 intertrack Backend Dev team. At this time, we do not accept external contributions or pull requests. The project is primarily for personal use or demonstration purposes.
 
 ## License
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 This codebase is released under the GNU General Public License(GPL). Please see the LICENSE.md file for more details.
 
 ## Credits
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 The Loan Prediction App codebase is being developed by the following individuals:
 
