@@ -132,7 +132,7 @@ const LoanSchema = new Schema(
         validator: function (value) {
           return value.length >= 50;
         },
-        message: "Field must have a minimum of 100 characters.",
+        message: "Field must have a minimum of fifty characters.",
       },
       required: true,
     },
@@ -157,7 +157,7 @@ const LoanSchema = new Schema(
         validator: function (value) {
           return value.length >= 50;
         },
-        message: "Field must have a minimum of 100 characters.",
+        message: "Field must have a minimum of fifty characters.",
       },
       required: true,
     },
