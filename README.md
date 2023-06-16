@@ -1586,6 +1586,7 @@ Response
     }
 }
 ```
+
 This has no pagination with all the loans in a page.
 
 #### GET Method(Get All Loans in A Company - Paginated): /loans/paginated-company-loans
@@ -1849,8 +1850,8 @@ Response
     }
 }
 ```
-This has pagination with each page listing 10 per page.
 
+This has pagination with each page listing 10 per page.
 
 #### GET Method(Get All Successful Company Loans In Ascending Order): /loans/success-loans/ascending
 
@@ -2747,6 +2748,44 @@ Response
     ]
 }
 ```
+
+#### POST Method(Contact Us Page): /contact
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: fullName, email, message and loginURL
+
+- EXAMPLE: Contact Us Page
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/contact' \
+--data-raw '{
+    "fullName": "Pelumi James",
+    "email": "peydofirzi@gufum.com",
+    "message": "Hello, please I would like to find out the services you are rendering on this application as I need a service to helps with monitoring and maintaining our loan clients and checking if they are eligible.",
+    "loginURL": "https://omega-prediction-app.netlify.app/login"
+}'
+
+Response
+(json)
+{
+    "message": "Email has been sent successfully to contact",
+    "status": "Success",
+    "data": {
+        "contactId": "648ccea32839b17fcf51e6cd",
+        "fullName": "Pelumi James",
+        "email": "peydofirzi@gufum.com",
+        "message": "Hello, please I would like to find out the services you are rendering on this application as I need a service to helps with monitoring and maintaining our loan clients and checking if they are eligible.",
+        "createdAt": "2023-06-16T21:05:39.695Z"
+    }
+}
+```
+
+The user gets a mail notification that the message has been recieved as shown below:
+![Contact Us Mail](./images/contactus.png)
 
 ## Dependencies
 
