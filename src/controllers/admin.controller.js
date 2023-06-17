@@ -80,12 +80,24 @@ export default class AdminController {
     if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
     const admin = await Admin.findById(id);
     if (!admin) throw new NotFoundError("Admin not found");
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId");
 
+    const organisationId = adminCompanyMap.organisationId;
+
+    const org = await Organisation.findById(organisationId);
+
+    const organisationName = org.organisationName;
+
+    const { _id, organisationEmail, numberOfStaffs, organisationType, website, firstName, lastName, imageName, email, imageUrl, position, phoneNumber } = admin
     res.status(200).json({
       message: "Admin found successfully",
       status: "Success",
       data: {
-        admin,
+        staffID: _id,
+        organisationName: organisationName,
+        organisationEmail, numberOfStaffs, organisationType, website, firstName, lastName, imageName, email, imageUrl, position, phoneNumber
       },
     });
     if (error) throw new InternalServerError("Internal Server Error");
@@ -292,7 +304,7 @@ export default class AdminController {
         "Admin is not found and cannot perform this operation."
       );
     }
-
+    
     const organisationId = adminCompanyMap.organisationId;
 
     // const org = await Organisation.findOne({ organisationId: req.organisation._id }).populate("organisationName");
@@ -327,7 +339,8 @@ export default class AdminController {
     const newAdmin = new Admin({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email,
+      organisationEmail: req.body.organisationEmail,
+      organisationType: req.body.organisationType,
       phoneNumber: req.body.phoneNumber,
       role: req.body.role,
       password: hashedPassword,
