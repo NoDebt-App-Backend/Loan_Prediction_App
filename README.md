@@ -92,9 +92,9 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Contact Page](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#post-methodcontact-us-page-contact)
 
-- ### [Dependencies](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#dependencies)
+- ### [Dependencies](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#dependencies-1)
 
-- ### [DevDependencies (Development Dependdencies)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#devdependencies)
+- ### [DevDependencies (Development Dependencies)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#devdependencies)
 
 - ### [Postman Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#postman-documentation-1)
 
