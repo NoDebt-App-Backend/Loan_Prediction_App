@@ -106,7 +106,7 @@ export default class ImageController {
 
     const admin = await Admin.findById(id);
 
-    const { imageName, imageUrl } = admin;
+    const { imageName } = admin;
     
     const deleteObjectParams = {
       Bucket: config.bucket_name,
@@ -123,7 +123,7 @@ export default class ImageController {
 
   const imageDefaultUrl = result.url;
 
-    imageUrl = imageDefaultUrl;
+    admin.imageUrl = imageDefaultUrl;
     await admin.save();
 
     res.status(200).json({
