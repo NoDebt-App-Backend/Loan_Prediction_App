@@ -8,6 +8,10 @@ import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
 import authController from "../config/passport.js";
 
+router.get('/auth/google', authController.googleAuth, () => {});
+
+router.get('/auth/google/callback', authController.googleAuthCallback, authController.oauth);
+
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
