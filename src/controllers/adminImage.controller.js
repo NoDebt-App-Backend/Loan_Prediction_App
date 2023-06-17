@@ -4,22 +4,21 @@ import Admin from "../model/admin.model.js";
 import { s3 } from "../utils/s3.js";
 import { updateAdminValidator } from "../validators/admin.validator.js";
 import { mongoIdValidator } from "../validators/mongoId.validator.js";
-import { PutObjectCommand,
+import {
+  PutObjectCommand,
   DeleteObjectCommand,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
-import {
-  getSignedUrl
-} from "@aws-sdk/s3-request-presigner";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { BadUserRequestError } from "../error/error.js";
 import cloudinary from "cloudinary";
 
 dotenv.config();
 
-cloudinary.config({ 
-  cloud_name: config.cloud_name, 
-  api_key: config.api_key,  
-  api_secret: config.api_secret, 
+cloudinary.config({
+  cloud_name: config.cloud_name,
+  api_key: config.api_key,
+  api_secret: config.api_secret,
 });
 
 export default class ImageController {
@@ -43,10 +42,14 @@ export default class ImageController {
 
     await s3.send(command);
 
-    const admin = await Admin.findByIdAndUpdate(id, {
-      profileImage: req.file.buffer,
-      imageName: req.file.originalname
-    }, {new: true});
+    const admin = await Admin.findByIdAndUpdate(
+      id,
+      {
+        profileImage: req.file.buffer,
+        imageName: req.file.originalname,
+      },
+      { new: true }
+    );
 
     await admin.save();
 
@@ -74,7 +77,7 @@ export default class ImageController {
     const admin = await Admin.findById(id);
 
     const { imageName } = admin;
-    
+
     const getObjectParams = {
       Bucket: config.bucket_name,
       Key: imageName,
@@ -85,7 +88,11 @@ export default class ImageController {
 
     await s3.send(command);
 
-    const adminProfileURL = await Admin.findByIdAndUpdate(id, {imageUrl: url});
+    const adminProfileURL = await Admin.findByIdAndUpdate(
+      id,
+      { imageUrl: url },
+      { new: true }
+    );
 
     await adminProfileURL.save();
 
@@ -94,8 +101,8 @@ export default class ImageController {
       message: "Profile Image Downloaded Successfully",
       data: {
         imageName: imageName,
-        imageUrl: url
-      }
+        imageUrl: url,
+      },
     });
   }
 
@@ -107,21 +114,22 @@ export default class ImageController {
     const admin = await Admin.findById(id);
 
     const { imageName } = admin;
-    
+
     const deleteObjectParams = {
       Bucket: config.bucket_name,
       Key: imageName,
     };
-    
+
     const command = new DeleteObjectCommand(deleteObjectParams);
 
     await s3.send(command);
 
-    const result = await cloudinary.v2.uploader.upload("https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
-    { public_id: "dummy_image" } 
-  );
+    const result = await cloudinary.v2.uploader.upload(
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      { public_id: "dummy_image" }
+    );
 
-  const imageDefaultUrl = result.url;
+    const imageDefaultUrl = result.url;
 
     admin.imageUrl = imageDefaultUrl;
     await admin.save();
