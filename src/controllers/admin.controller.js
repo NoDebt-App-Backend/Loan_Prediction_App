@@ -90,14 +90,35 @@ export default class AdminController {
 
     const organisationName = org.organisationName;
 
-    const { _id, organisationEmail, numberOfStaffs, organisationType, website, firstName, lastName, imageName, email, imageUrl, position, phoneNumber } = admin
+    const {
+      _id,
+      organisationEmail,
+      numberOfStaffs,
+      organisationType,
+      website,
+      firstName,
+      lastName,
+      imageName,
+      email,
+      position,
+      phoneNumber,
+    } = admin;
     res.status(200).json({
       message: "Admin found successfully",
       status: "Success",
       data: {
         staffID: _id,
         organisationName: organisationName,
-        organisationEmail, numberOfStaffs, organisationType, website, firstName, lastName, imageName, email, imageUrl, position, phoneNumber
+        organisationEmail,
+        numberOfStaffs,
+        organisationType,
+        website,
+        firstName,
+        lastName,
+        imageName,
+        email,
+        position,
+        phoneNumber,
       },
     });
     if (error) throw new InternalServerError("Internal Server Error");
@@ -304,7 +325,7 @@ export default class AdminController {
         "Admin is not found and cannot perform this operation."
       );
     }
-    
+
     const organisationId = adminCompanyMap.organisationId;
 
     // const org = await Organisation.findOne({ organisationId: req.organisation._id }).populate("organisationName");
