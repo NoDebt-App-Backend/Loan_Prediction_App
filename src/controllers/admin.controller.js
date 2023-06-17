@@ -73,56 +73,6 @@ export default class AdminController {
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get an admin
-  static async getAdmin(req, res) {
-    const { id } = req.query;
-    const { error } = mongoIdValidator.validate(req.query);
-    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
-    const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("Admin not found");
-    const adminCompanyMap = await AdminCompanyMap.findOne({
-      adminId: req.admin.adminId,
-    }).populate("organisationId");
-
-    const organisationId = adminCompanyMap.organisationId;
-
-    const org = await Organisation.findById(organisationId);
-
-    const organisationName = org.organisationName;
-
-    const {
-      _id,
-      organisationEmail,
-      numberOfStaffs,
-      organisationType,
-      website,
-      firstName,
-      lastName,
-      imageName,
-      email,
-      position,
-      phoneNumber,
-    } = admin;
-    res.status(200).json({
-      message: "Admin found successfully",
-      status: "Success",
-      data: {
-        staffID: _id,
-        organisationName: organisationName,
-        organisationEmail,
-        numberOfStaffs,
-        organisationType,
-        website,
-        firstName,
-        lastName,
-        imageName,
-        email,
-        position,
-        phoneNumber,
-      },
-    });
-    if (error) throw new InternalServerError("Internal Server Error");
-  }
 
   //get admins by company id
   static async getAdminsByCompany(req, res) {
@@ -440,7 +390,6 @@ export default class AdminController {
         lastName: req.body.lastName,
         organisationEmail: req.body.organisationEmail,
         numberOfStaffs: req.body.numberOfStaffs,
-        staffID: req.body.staffID,
         organisationType: req.body.organisationType,
         role: req.body.role,
         website: req.body.website,
@@ -465,6 +414,55 @@ export default class AdminController {
       },
     });
   }
+
+    //get an admin
+    static async getAdmin(req, res) {
+      const { id } = req.query;
+      const { error } = mongoIdValidator.validate(req.query);
+      if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+      const admin = await Admin.findById(id);
+      if (!admin) throw new NotFoundError("Admin not found");
+      const adminCompanyMap = await AdminCompanyMap.findOne({
+        adminId: req.admin.adminId,
+      }).populate("organisationId");
+  
+      const organisationId = adminCompanyMap.organisationId;
+  
+      const org = await Organisation.findById(organisationId);
+  
+      const organisationName = org.organisationName;
+  
+      const {
+        _id,
+        organisationEmail,
+        numberOfStaffs,
+        organisationType,
+        website,
+        firstName,
+        lastName,
+        email,
+        position,
+        phoneNumber,
+      } = admin;
+      res.status(200).json({
+        message: "Admin found successfully",
+        status: "Success",
+        data: {
+          staffID: _id,
+          organisationName: organisationName,
+          organisationEmail: organisationEmail,
+          numberOfStaffs,
+          organisationType: organisationType,
+          website,
+          firstName,
+          lastName,
+          email,
+          position,
+          phoneNumber,
+        },
+      });
+      if (error) throw new InternalServerError("Internal Server Error");
+    }
 
   static async changePassword(req, res) {
     const { id } = req.params;
