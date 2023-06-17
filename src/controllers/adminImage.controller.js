@@ -85,7 +85,7 @@ export default class ImageController {
 
     await s3.send(command);
 
-    const adminProfileURL = await Admin.findByIdAndUpdate(id, {imageUrl: url}, {new: true});
+    const adminProfileURL = await Admin.findByIdAndUpdate(id, {imageUrl: url});
 
     await adminProfileURL.save();
 
