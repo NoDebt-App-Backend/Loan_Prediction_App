@@ -10,7 +10,7 @@ import { globalErrorHandler } from "./src/utils/globalErrHandler.js";
 import loanRouter from "./src/router/loan.route.js";
 import router from "./src/router/admin.route.js";
 import { router as resetPasswordRouter } from "./src/router/passwordReset.route.js";
-import {passportConfig} from "./src/config/passport.js";
+// import {passportConfig} from "./src/config/passport.js";
 
 // configuring environment variables
 
@@ -18,7 +18,7 @@ dotenv.config();
 
 const app = express();
 
-passportConfig(passport)
+// passportConfig(passport)
 // Local database connection
 mongoose
   .connect(config.database_url)

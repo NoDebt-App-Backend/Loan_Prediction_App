@@ -18,7 +18,7 @@
 //       });
 
 //       if (adminGoogle) {
-//         done(null, adminGoogle)
+//         return done(null, adminGoogle)
 //       } else {
 //         if (req.body.email && req.body.password) {
 //           const email = profile.email[0].value;
@@ -33,7 +33,7 @@
 
 //           adminGoogle = await admin.save();
 
-//           done(null, adminGoogle);
+//           return done(null, adminGoogle);
 //         } else {
 //           done(null, false, {
 //             message: 'Please signup with Google or your email address'

@@ -6,11 +6,17 @@ import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
-import authController from "../config/passport.js";
+import { passport as passportSetup } from "../config/passport.js";
+// import authController from "../config/passport.js";
 
-router.get('/auth/google', authController.googleAuth, () => {});
+router.get("/auth/google", passport.authenticate('google', { scope:
+  [ 'email', 'profile' ] }, (req, res) => {
 
-router.get('/google-dashboard', authController.googleAuthCallback);
+}));
+
+router.get("/auth/google/callback", passport.authenticate('google', {  session: false }), (req, res) => {
+  console.log("Google Authentication")
+});
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
