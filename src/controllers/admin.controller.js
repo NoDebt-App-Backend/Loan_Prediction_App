@@ -379,10 +379,7 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
-    const adminUser = await Admin.findById(id);
-
-    const { imageUrl } = adminUser;
-
+    
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
@@ -396,11 +393,11 @@ export default class AdminController {
           website: req.body.website,
           phoneNumber: req.body.phoneNumber,
           position: req.body.position,
-          imageUrl: imageUrl,
+          imageUrl: req.body.imageUrl
         },
       },
       { new: true }
-    );
+      );
 
     if (!admin) throw new InternalServerError("Failed to update profile");
 
