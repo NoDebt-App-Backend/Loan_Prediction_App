@@ -386,16 +386,18 @@ export default class AdminController {
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        organisationEmail: req.body.organisationEmail,
-        numberOfStaffs: req.body.numberOfStaffs,
-        organisationType: req.body.organisationType,
-        role: req.body.role,
-        website: req.body.website,
-        position: req.body.position,
-        phoneNumber: req.body.phoneNumber,
-        imageUrl: req.body.imageUrl || imageDefaultUrl,
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          organisationEmail: req.body.organisationEmail,
+          numberOfStaffs: req.body.numberOfStaffs,
+          organisationType: req.body.organisationType,
+          role: req.body.role,
+          website: req.body.website,
+          position: req.body.position,
+          phoneNumber: req.body.phoneNumber,
+          imageUrl: req.body.imageUrl || imageDefaultUrl,
+        },
       },
       { new: true }
     );
@@ -415,54 +417,54 @@ export default class AdminController {
     });
   }
 
-    //get an admin
-    static async getAdmin(req, res) {
-      const { id } = req.query;
-      const { error } = mongoIdValidator.validate(req.query);
-      if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
-      const admin = await Admin.findById(id);
-      if (!admin) throw new NotFoundError("Admin not found");
-      const adminCompanyMap = await AdminCompanyMap.findOne({
-        adminId: req.admin.adminId,
-      }).populate("organisationId");
-  
-      const organisationId = adminCompanyMap.organisationId;
-  
-      const org = await Organisation.findById(organisationId);
-  
-      const organisationName = org.organisationName;
-  
-      const {
-        _id,
-        organisationEmail,
+  //get an admin
+  static async getAdmin(req, res) {
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const admin = await Admin.findById(id);
+    if (!admin) throw new NotFoundError("Admin not found");
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId");
+
+    const organisationId = adminCompanyMap.organisationId;
+
+    const org = await Organisation.findById(organisationId);
+
+    const organisationName = org.organisationName;
+
+    const {
+      _id,
+      organisationEmail,
+      numberOfStaffs,
+      organisationType,
+      website,
+      firstName,
+      lastName,
+      email,
+      position,
+      phoneNumber,
+    } = admin;
+    res.status(200).json({
+      message: "Admin found successfully",
+      status: "Success",
+      data: {
+        staffID: _id,
+        organisationName: organisationName,
+        organisationEmail: organisationEmail,
         numberOfStaffs,
-        organisationType,
+        organisationType: organisationType,
         website,
         firstName,
         lastName,
         email,
         position,
         phoneNumber,
-      } = admin;
-      res.status(200).json({
-        message: "Admin found successfully",
-        status: "Success",
-        data: {
-          staffID: _id,
-          organisationName: organisationName,
-          organisationEmail: organisationEmail,
-          numberOfStaffs,
-          organisationType: organisationType,
-          website,
-          firstName,
-          lastName,
-          email,
-          position,
-          phoneNumber,
-        },
-      });
-      if (error) throw new InternalServerError("Internal Server Error");
-    }
+      },
+    });
+    if (error) throw new InternalServerError("Internal Server Error");
+  }
 
   static async changePassword(req, res) {
     const { id } = req.params;
