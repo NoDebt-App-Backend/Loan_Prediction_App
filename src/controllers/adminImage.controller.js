@@ -125,17 +125,15 @@ export default class ImageController {
     await s3.send(command);
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
       { public_id: "dummy_image" }
     );
 
     const imageDefaultUrl = result.url;
 
-    const adminImage = Admin.findByIdAndUpdate(id, {
-      imageUrl: imageDefaultUrl,
-    }, {new: true});
-    // admin.imageUrl = imageDefaultUrl;
-    await adminImage.save();
+    admin.imageUrl = imageDefaultUrl;
+    
+    await admin.save();
 
     res.status(200).json({
       status: "Success",
