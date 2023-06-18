@@ -12,7 +12,7 @@ const adminSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      unique: true,
+      unique: false,
       sparse: true,
     },
     email: {
