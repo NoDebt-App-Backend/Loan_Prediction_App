@@ -383,6 +383,12 @@ export default class AdminController {
 
     const { imageDefaultUrl } = adminUser; 
 
+    if (admin.phoneNumber !== "") {
+      admin.phoneNumber = req.body.phoneNumber;
+    } else {
+      admin.phoneNumber = req.body.phoneNumber || undefined;
+    }
+
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
@@ -395,7 +401,6 @@ export default class AdminController {
           role: req.body.role,
           website: req.body.website,
           position: req.body.position,
-          phoneNumber: req.body.phoneNumber,
           imageUrl: req.body.imageUrl || imageDefaultUrl,
         },
       },
@@ -404,11 +409,6 @@ export default class AdminController {
 
     if (!admin) throw new InternalServerError("Failed to update profile");
 
-    if (admin.phoneNumber !== "") {
-      admin.phoneNumber = req.body.phoneNumber;
-    } else {
-      admin.phoneNumber = req.body.phoneNumber
-    }
 
     // save to mongoose database
     await admin.save();
