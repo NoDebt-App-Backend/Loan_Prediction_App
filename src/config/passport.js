@@ -34,10 +34,10 @@ const authController = {
 
   googleAuthCallback: passport.authenticate("google", { session: false }),
 
-  async oauth(req, res) {
-    console.log(req);
-    res.redirect(200);
-  },
+  // async oauth(req, res) {
+  //   console.log(req);
+  //   res.redirect(200);
+  // },
 };
 
 export default authController;

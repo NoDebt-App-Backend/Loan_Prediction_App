@@ -10,7 +10,7 @@ import authController from "../config/passport.js";
 
 router.get('/auth/google', authController.googleAuth, () => {});
 
-router.get('/auth/google/callback', authController.googleAuthCallback, authController.oauth);
+router.get('/google-dashboard', authController.googleAuthCallback);
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));

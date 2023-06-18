@@ -123,8 +123,9 @@ export default class ImageController {
 
   const imageDefaultUrl = result.url;
 
-    admin.imageUrl = imageDefaultUrl;
-    await admin.save();
+    const adminImage = await Admin.findByIdAndUpdate(id, { imageUrl: imageDefaultUrl})
+    // admin.imageUrl = imageDefaultUrl;
+    await adminImage.save();
 
     res.status(200).json({
       status: "Success",
