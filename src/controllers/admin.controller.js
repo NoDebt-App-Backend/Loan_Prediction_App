@@ -138,7 +138,7 @@ export default class AdminController {
       throw new BadUserRequestError("Company name already exists");
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
       { public_id: "dummy_image" }
     );
 
@@ -301,7 +301,7 @@ export default class AdminController {
     console.log(newpassword);
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
       { public_id: "dummy_image" }
     );
 

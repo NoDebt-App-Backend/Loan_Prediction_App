@@ -125,7 +125,7 @@ export default class ImageController {
     await s3.send(command);
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
       { public_id: "dummy_image" }
     );
 
