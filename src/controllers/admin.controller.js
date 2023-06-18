@@ -379,6 +379,10 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
+    const adminUser = await Admin.findById(id);
+
+    const { imageUrl } = adminUser;
+
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
@@ -392,7 +396,7 @@ export default class AdminController {
           website: req.body.website,
           phoneNumber: req.body.phoneNumber,
           position: req.body.position,
-          imageUrl: req.body.imageUrl,
+          imageUrl: imageUrl,
         },
       },
       { new: true }
