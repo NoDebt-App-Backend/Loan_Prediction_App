@@ -379,10 +379,6 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
-    const adminUser = await Admin.findById(id);
-
-    const { imageDefaultUrl } = adminUser;
-
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
