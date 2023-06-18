@@ -133,7 +133,7 @@ export default class ImageController {
 
     const adminImage = Admin.findByIdAndUpdate(id, {
       imageUrl: imageDefaultUrl,
-    });
+    }, {new: true});
     // admin.imageUrl = imageDefaultUrl;
     await adminImage.save();
 
