@@ -396,7 +396,7 @@ export default class AdminController {
           website: req.body.website,
           phoneNumber: req.body.phoneNumber,
           position: req.body.position,
-          imageUrl: req.body.imageUrl || imageDefaultUrl,
+          imageUrl: req.body.imageUrl,
         },
       },
       { new: true }
