@@ -12,10 +12,6 @@ const adminSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      match: [
-        /^(\+\d{1,3}\s?)?(\d{3,})$/,
-        "Please enter a valid phone number e.g. +2349000000000",
-      ],
     },
     email: {
       type: String,
