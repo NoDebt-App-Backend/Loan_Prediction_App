@@ -52,7 +52,6 @@ const LoanSchema = new Schema(
         /^[\w\s\S]{3,}$/,
         "Fullname must have at least two words in the fullname path",
       ],
-      required: true,
     },
     loanAmount: {
       type: Number,
