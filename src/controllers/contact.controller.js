@@ -14,14 +14,12 @@ export default class ContactController {
     try {
     // Create a new contact 
        const contact = new Contact({
-        fullName: req.body.fullName,
-        email: req.body.email,
+        contactName: req.body.contactName,
+        contactEmail: req.body.contactEmail,
         message: req.body.message,
         loginURL: req.body.loginURL
        })
     
-
-
     // Save contact to the Contact collection
     await contact.save();
 

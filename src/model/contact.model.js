@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const ContactSchema = new mongoose.Schema({
-  fullName: {
+  contactName: {
     type: String,
     required: true,
     unique: true,
   },
-  email: {
+  contactEmail: {
     type: String,
     required: true,
   },
