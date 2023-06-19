@@ -491,12 +491,23 @@ export default class loanControllers {
 
   // SEARCH FOR LOAN BY NAME
   static async searchForLoanByname(req, res) {
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId", " organisationName");
+
+    if (!adminCompanyMap) {
+      throw new UnAuthorizedError(
+        "Admin is not found and cannot perform this operation."
+      );
+    }
+
     try {
       const name = req.params.name;
       const loans = await Loan.find({
         fullname: { $regex: new RegExp(".*" + name + ".*", "i") },
+        organisationId: adminCompanyMap.organisationId._id,
       }).select(
-        "fullname email address createdAt eligibility creditScore loanAmount"
+        "fullname email address createdAt eligibility creditScore loanAmount organisationName"
       );
       res.status(200).json({
         results: loans.length,
