@@ -85,5 +85,9 @@ router.get(
 );
 
 // SEARCH FOR LOAN BY FULL NAME
-router.get("/getloan/:name", decodeAuth, loanControllers.searchForLoanByname);
+router.get(
+  "/getloan/:name",
+  authMiddleWare,
+  loanControllers.searchForLoanByname
+);
 export default router;
