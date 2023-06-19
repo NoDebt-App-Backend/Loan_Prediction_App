@@ -14,12 +14,15 @@ const adminGoogleSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    // email: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    //   immutable: true,
-    // },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      immutable: true,
+    },
+    provider: {
+      type: String,
+    },
     image: {
       type: String,
     }
