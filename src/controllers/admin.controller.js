@@ -310,8 +310,7 @@ export default class AdminController {
     const newAdmin = new Admin({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      organisationEmail: req.body.organisationEmail,
-      organisationType: req.body.organisationType,
+      email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       role: req.body.role,
       password: hashedPassword,
