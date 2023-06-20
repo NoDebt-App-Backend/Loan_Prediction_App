@@ -79,7 +79,7 @@ async function googleAuthController(req, res) {
         firstName,
         lastName,
         email,
-        id,
+        googleId,
         createdAt,
         updatedAt,
         passwordLink,
