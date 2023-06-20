@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import FacebookStrategy from "passport-facebook";
 import {
   BadUserRequestError,
   InternalServerError,
@@ -23,6 +24,9 @@ import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
 import { request } from "express";
+import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import passport from "passport";
+import AdminGoogle from "../model/adminGoogle.model.js";
 
 dotenv.config();
 
@@ -120,6 +124,7 @@ export default class AdminController {
   //signup a company
   static async createCompany(req, res) {
     // Validation with Joi before it gets to the database
+
     const { error } = createCompanyValidator.validate(req.body);
     if (error) throw error;
     const existingEmail = await Admin.findOne({ email: req.body.email });
@@ -127,15 +132,16 @@ export default class AdminController {
       throw new BadUserRequestError(
         "An account with this email already exists"
       );
+
     const saltRounds = config.bcrypt_saltRound;
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
 
     // Check if the company name already exists
-    const existingCompany = await Organisation.findOne({
-      name: req.body.organisationName,
-    });
-    if (existingCompany)
-      throw new BadUserRequestError("Company name already exists");
+    // const existingCompany = await Organisation.findOne({
+    //   name: req.body.organisationName,
+    // });
+    // if (existingCompany)
+    //   throw new BadUserRequestError("Company name already exists");
 
     const result = await cloudinary.v2.uploader.upload(
       "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",

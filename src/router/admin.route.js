@@ -1,19 +1,37 @@
 import express from "express";
+import passport from "passport";
 const router = express.Router();
 import AdminController from "../controllers/admin.controller.js";
 import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
+import { passport as passportSetup } from "../config/passport.js";
+// import authController from "../config/passport.js";
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { session: false }),
+  (req, res) => {}
+);
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
 // To get all the admins within a company
-router.get('/',authMiddleWare, AdminController.getAdminsByCompany);
+router.get("/", authMiddleWare, AdminController.getAdminsByCompany);
 
 // To retrieve a single company from the database
-router.get("/company",authMiddleWare, tryCatchHandler(AdminController.getCompanyById) );
+router.get(
+  "/company",
+  authMiddleWare,
+  tryCatchHandler(AdminController.getCompanyById)
+);
 
 // To log into admin account
 router.post("/login", tryCatchHandler(AdminController.Login));
@@ -33,10 +51,7 @@ router.get(
 );
 
 // To retrieve all the company accounts
-router.get(
-  "/companies",
-  tryCatchHandler(AdminController.getAllOrganisations)
-);
+router.get("/companies", tryCatchHandler(AdminController.getAllOrganisations));
 
 // To retrieve the relationship between the admin and company
 router.get(
