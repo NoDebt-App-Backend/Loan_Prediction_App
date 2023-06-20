@@ -7,22 +7,6 @@ import { BadUserRequestError } from "../error/error.js";
 
 const client = new OAuth2Client(config.google_id);
 
-// server.post("/api/v1/auth/google", async (req, res) => {
-//   const { token } = req.body;
-//   const ticket = await client.verifyIdToken({
-//     idToken: token,
-//     audience: process.env.CLIENT_ID,
-//   });
-//   const { name, email, picture } = ticket.getPayload();
-//   const user = await db.user.upsert({
-//     where: { email: email },
-//     update: { name, picture },
-//     create: { name, email, picture },
-//   });
-//   res.status(201);
-//   res.json(user);
-// });
-
 async function googleAuthController(req, res) {
   const { token } = req.body;
 
@@ -33,7 +17,6 @@ async function googleAuthController(req, res) {
 
   const { givenName, familyName, id, provider, email, picture } =
     ticket.getPayload();
-  const googleId = id;
 
   const existingEmail = await Admin.findOne({ email: email });
   if (existingEmail)
@@ -42,6 +25,7 @@ async function googleAuthController(req, res) {
     if (!adminGoogle) {
 
       const adminGoogle = new Admin({
+        googleId: id,
         provider: provider,
         email: email,
         googleId: googleId,
@@ -79,7 +63,7 @@ async function googleAuthController(req, res) {
         firstName,
         lastName,
         email,
-        id,
+        googleId,
         createdAt,
         updatedAt,
         passwordLink,
@@ -97,7 +81,7 @@ async function googleAuthController(req, res) {
             firstName,
             lastName,
             email,
-            AdminId: googleId,
+            googleId,
             createdAt,
             updatedAt,
             passwordLink,
