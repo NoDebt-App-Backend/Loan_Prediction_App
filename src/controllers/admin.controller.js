@@ -77,23 +77,6 @@ export default class AdminController {
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
-  //get an admin
-  static async getAdmin(req, res) {
-    const { id } = req.query;
-    const { error } = mongoIdValidator.validate(req.query);
-    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
-    const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("Admin not found");
-
-    res.status(200).json({
-      message: "Admin found successfully",
-      status: "Success",
-      data: {
-        admin,
-      },
-    });
-    if (error) throw new InternalServerError("Internal Server Error");
-  }
 
   //get admins by company id
   static async getAdminsByCompany(req, res) {
@@ -161,7 +144,7 @@ export default class AdminController {
     //   throw new BadUserRequestError("Company name already exists");
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
       { public_id: "dummy_image" }
     );
 
@@ -324,7 +307,7 @@ export default class AdminController {
     console.log(newpassword);
 
     const result = await cloudinary.v2.uploader.upload(
-      "https://res.cloudinary.com/dondeickl/image/upload/v1686776416/User-Icon-Grey-300x300_rv58hh.png",
+      "https://res.cloudinary.com/dondeickl/image/upload/v1686778622/dummy_image.png",
       { public_id: "dummy_image" }
     );
 
@@ -340,6 +323,7 @@ export default class AdminController {
       organisationId: organisationId,
       organisationName: organisationName,
       loginURL: req.body.loginURL,
+      passwordLink: req.body.passwordLink,
       imageUrl: req.body.url || imageDefaultUrl,
     });
 
@@ -356,7 +340,7 @@ export default class AdminController {
     // Send email to new admin
     // Configurations for email
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: config.nodemailer_host,
       port: 465,
       secure: true,
       auth: {
@@ -400,27 +384,25 @@ export default class AdminController {
     const updateAdminError = updateValidatorResponse.error;
     if (error) throw updateAdminError;
 
-    const adminUser = await Admin.findById(id);
-
-    const { imageDefaultUrl } = adminUser;
-
+    
     const admin = await Admin.findByIdAndUpdate(
       id,
       {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        organisationEmail: req.body.organisationEmail,
-        numberOfStaffs: req.body.numberOfStaffs,
-        staffID: req.body.staffID,
-        organisationType: req.body.organisationType,
-        role: req.body.role,
-        website: req.body.website,
-        position: req.body.position,
-        phoneNumber: req.body.phoneNumber,
-        imageUrl: req.body.imageUrl || imageDefaultUrl,
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          organisationEmail: req.body.organisationEmail,
+          numberOfStaffs: req.body.numberOfStaffs,
+          organisationType: req.body.organisationType,
+          role: req.body.role,
+          website: req.body.website,
+          phoneNumber: req.body.phoneNumber,
+          position: req.body.position,
+          imageUrl: req.body.imageUrl
+        },
       },
       { new: true }
-    );
+      );
 
     if (!admin) throw new InternalServerError("Failed to update profile");
 
@@ -435,6 +417,55 @@ export default class AdminController {
         admin: admin,
       },
     });
+  }
+
+  //get an admin
+  static async getAdmin(req, res) {
+    const { id } = req.query;
+    const { error } = mongoIdValidator.validate(req.query);
+    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
+    const admin = await Admin.findById(id);
+    if (!admin) throw new NotFoundError("Admin not found");
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId");
+
+    const organisationId = adminCompanyMap.organisationId;
+
+    const org = await Organisation.findById(organisationId);
+
+    const organisationName = org.organisationName;
+
+    const {
+      _id,
+      organisationEmail,
+      numberOfStaffs,
+      organisationType,
+      website,
+      firstName,
+      lastName,
+      email,
+      position,
+      phoneNumber,
+    } = admin;
+    res.status(200).json({
+      message: "Admin found successfully",
+      status: "Success",
+      data: {
+        staffID: _id,
+        organisationName: organisationName,
+        organisationEmail: organisationEmail,
+        numberOfStaffs,
+        organisationType: organisationType,
+        website,
+        firstName,
+        lastName,
+        email,
+        position,
+        phoneNumber,
+      },
+    });
+    if (error) throw new InternalServerError("Internal Server Error");
   }
 
   static async changePassword(req, res) {

@@ -66,7 +66,9 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get All Loans](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-loanscompany-loans)
 
-    - [Get All Loans Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-page-2-loanscompany-loanspage2)
+    - [Get All Loans Paginated](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company---paginated-loanspaginated-company-loans)
+
+    - [Get All Loans Paginated Page 2](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-loans-in-a-company-paginated---page-2-loanspaginated-company-loanspage2)
 
     - [Get All Successful Loans - Ascending Order](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-all-successful-company-loans-in-ascending-order-loanssuccess-loansascending)
 
@@ -86,6 +88,14 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Get Loan By Name](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodget-loan-by-name-loansgetloanfullname)
 
+  - [Contact Us Route](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#contact-us-route)
+
+    - [Contact Page](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#post-methodcontact-us-page-contact)
+
+- ### [Dependencies](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#dependencies-1)
+
+- ### [DevDependencies (Development Dependencies)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#devdependencies)
+
 - ### [Postman Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#postman-documentation-1)
 
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
@@ -98,6 +108,8 @@ This repository contains the source code for the Loan Prediction Application. Th
 
 ## Prerequisites
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 Before setting up the codebase, make sure you have the following prerequisites installed:
 
 - Node.js (version 12 or above)
@@ -105,6 +117,8 @@ Before setting up the codebase, make sure you have the following prerequisites i
 - Git
 
 ## Installation
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 1. Clone the repository using Git:
    ```bash
@@ -124,6 +138,8 @@ Before setting up the codebase, make sure you have the following prerequisites i
 
 ## Configuration
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 The codebase requires the following environment configurations:
 
 1. Create a `.env` file in the root directory of the project.
@@ -136,6 +152,8 @@ The codebase requires the following environment configurations:
 ```
 
 ## Directory Structure
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 The codebase follows the following directory structure:
 
@@ -157,6 +175,8 @@ NoDebt-App-Backend/Loan_Prediction_App/
 
 ## Usage
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 To start the Loan_Prediction_App application on your local environment, run the following command:
 
 npm start
@@ -164,6 +184,8 @@ npm start
 Visit `http://localhost:PORT` in your web browser to access the application.
 
 ## API Documentation
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 API Documentation for NoDebt App (Loan Prediction application)
 
@@ -1461,7 +1483,6 @@ Response
     "message": "Loans found successfully",
     "title": "Loan Applications",
     "status": "Success",
-    "totalPages": 4,
     "results": 10,
     "data": {
         "loans": [
@@ -1570,9 +1591,140 @@ Response
 }
 ```
 
-This has pagination with each page listing 10 per page.
+This has no pagination with all the loans in a page.
 
-#### GET Method(Get All Loans in A Company-Page 2): /loans/company-loans?page=2
+#### GET Method(Get All Loans in A Company - Paginated): /loans/paginated-company-loans
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: authToken
+
+- EXAMPLE: Get All Loans in a Company
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebtdev.onrender.com/api/loans/paginated-company-loans' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Loans found successfully",
+    "title": "Loan Applications",
+    "status": "Success",
+    "totalPages": 3,
+    "results": 10,
+    "data": {
+        "loans": [
+            {
+                "_id": "6482f1bf9195100a71dfd93f",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "filtameltu@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T09:32:47.047Z"
+            },
+            {
+                "_id": "6482f10a9195100a71dfd937",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T09:29:46.624Z"
+            },
+            {
+                "_id": "6482eba89195100a71dfd909",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T09:06:48.782Z"
+            },
+            {
+                "_id": "6482ea0fa25399c42a5c1491",
+                "eligibility": false,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T08:59:59.339Z"
+            },
+            {
+                "_id": "6482d796e02db3bfc780496e",
+                "eligibility": true,
+                "fullname": "David Adeleke",
+                "loanAmount": 43000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:41:10.900Z"
+            },
+            {
+                "_id": "6482d773e02db3bfc7804969",
+                "eligibility": true,
+                "fullname": "Clinton Ayanchukwu",
+                "loanAmount": 60000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:40:35.309Z"
+            },
+            {
+                "_id": "6482d760e02db3bfc7804964",
+                "eligibility": true,
+                "fullname": "Ifunada Kenneth",
+                "loanAmount": 80000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:40:16.471Z"
+            },
+            {
+                "_id": "6482d74ce02db3bfc780495f",
+                "eligibility": true,
+                "fullname": "Samuel Eze",
+                "loanAmount": 3000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:39:56.971Z"
+            },
+            {
+                "_id": "6482d737e02db3bfc780495a",
+                "eligibility": true,
+                "fullname": "Okoli Bolade",
+                "loanAmount": 30000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:39:35.832Z"
+            },
+            {
+                "_id": "6482d72be02db3bfc7804955",
+                "eligibility": true,
+                "fullname": "Harry Ezechukwu",
+                "loanAmount": 40000,
+                "email": "cultihirze@gufum.com",
+                "address": "Anantigha Calabar South",
+                "adminInCharge": "Karen Chukwu",
+                "createdAt": "2023-06-09T07:39:23.473Z"
+            }
+        ]
+    }
+}
+```
+
+#### GET Method(Get All Loans in A Company-Paginated - Page 2): /loans/paginated-company-loans?page=2
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
@@ -1584,7 +1736,7 @@ Parameters: authToken and the page as a req query
 
 ```json
 Request
-curl --location 'https://nodebt-application.onrender.com/api/loans/company-loans?page=2' \
+curl --location 'https://nodebt-application.onrender.com/api/loans/paginated-company-loans?page=2' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ4MjRhYjQ2MmRhOTlmZTMwNjBkNTk5IiwiZW1haWwiOiJtaXRyb25hcnpvQGd1ZnVtLmNvbSIsImlhdCI6MTY4NjI2MDQxNywiZXhwIjoxNjg2MzQ2ODE3fQ.Z4kRnkACtjdt2T0DjpS_WZ5PHBmpgsXSPHPn72TCX4E' \
 --data ''
 
@@ -1606,7 +1758,6 @@ Response
                 "email": "temlucalti@gufum.com",
                 "address": "Anantigha Calabar South",
                 "adminInCharge": "Karen Chukwu",
-                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-16T03:12:49.852Z"
             },
             {
@@ -1616,7 +1767,6 @@ Response
                 "loanAmount": 50000,
                 "email": "balmuziydi@gufum.com",
                 "address": "Anantigha Calabar South",
-                "adminInCharge": "Karen Chukwu",
                 "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-16T02:57:19.861Z"
             },
@@ -1628,7 +1778,6 @@ Response
                 "email": "firtuvulte@gufum.com",
                 "address": "Anantigha Calabar South",
                 "adminInCharge": "Karen Chukwu",
-                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T08:22:45.217Z"
             },
             {
@@ -1638,7 +1787,6 @@ Response
                 "loanAmount": 3000,
                 "email": "nepsinomlo@gufum.com",
                 "address": "Anantigha Calabar South",
-                "adminInCharge": "Karen Chukwu",
                 "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T08:15:24.094Z"
             },
@@ -1650,7 +1798,6 @@ Response
                 "email": "jakkibisti@gufum.com",
                 "address": "Anantigha Calabar South",
                 "adminInCharge": "Karen Chukwu",
-                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:51:34.461Z"
             },
             {
@@ -1660,7 +1807,6 @@ Response
                 "loanAmount": 3000,
                 "email": "jispuhalte@gufum.com",
                 "address": "Anantigha Calabar South",
-                "adminInCharge": "Karen Chukwu",
                 "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:49:42.278Z"
             },
@@ -1672,7 +1818,6 @@ Response
                 "email": "parkezugnu@gufum.com",
                 "address": "Anantigha Calabar South",
                 "adminInCharge": "Karen Chukwu",
-                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:43:28.023Z"
             },
             {
@@ -1682,7 +1827,6 @@ Response
                 "loanAmount": 3000,
                 "email": "jarkuhimlu@gufum.com",
                 "address": "Anantigha Calabar South",
-                "adminInCharge": "Karen Chukwu",
                 "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:37:12.483Z"
             },
@@ -1694,7 +1838,6 @@ Response
                 "email": "tatrabidri@gufum.com",
                 "address": "Anantigha Calabar South",
                 "adminInCharge": "Karen Chukwu",
-                "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:13:44.816Z"
             },
             {
@@ -1704,7 +1847,6 @@ Response
                 "loanAmount": 3000,
                 "email": "modranemle@gufum.com",
                 "address": "Anantigha Calabar South",
-                "adminInCharge": "Karen Chukwu",
                 "adminInCharge": "Karen Chukwu",
                 "createdAt": "2023-06-13T07:08:02.206Z"
             }
@@ -2611,24 +2753,224 @@ Response
 }
 ```
 
+#### Contact Us Route
+
+#### POST Method(Contact Us Page): /contact
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: fullName, email, message and loginURL
+
+- EXAMPLE: Contact Us Page
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/contact' \
+--data-raw '{
+    "fullName": "Pelumi James",
+    "email": "peydofirzi@gufum.com",
+    "message": "Hello, please I would like to find out the services you are rendering on this application as I need a service to helps with monitoring and maintaining our loan clients and checking if they are eligible.",
+    "loginURL": "https://omega-prediction-app.netlify.app/login"
+}'
+
+Response
+(json)
+{
+    "message": "Email has been sent successfully to contact",
+    "status": "Success",
+    "data": {
+        "contactId": "648ccea32839b17fcf51e6cd",
+        "fullName": "Pelumi James",
+        "email": "peydofirzi@gufum.com",
+        "message": "Hello, please I would like to find out the services you are rendering on this application as I need a service to helps with monitoring and maintaining our loan clients and checking if they are eligible.",
+        "createdAt": "2023-06-16T21:05:39.695Z"
+    }
+}
+```
+
+The user gets a mail notification that the message has been recieved as shown below:
+![Contact Us Mail](./images/contactus.png)
+
+## Dependencies
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+The following dependencies were used to build the application:
+
+- **express** - This is an npm package built on node that serves as a HTTP server tool, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.
+
+You install using
+
+```bash
+npm i express
+```
+
+- **joi** - This is a data validator for JavaScript. This was used in the application to validate the data before it gets to the database.
+
+You install using
+
+```bash
+npm i joi
+```
+
+- **joi-objectid** - This is a A MongoDB ObjectId validator for Joi. This was used in the application to validate the object id from mongodb.
+
+You install using
+
+```bash
+npm i joi-objectid
+```
+
+- **jsonwebtoken** - JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties. The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted.
+
+This was used in the application to generate tokens to authorize users to access certain services in the application.
+
+You install using
+
+```bash
+npm i jsonwebtoken
+```
+
+- **bcrypt** - bcrypt is a pasword-hashing function used to encrypt and decrypt passwords or other credentials.This was used in the application to encrypt and decrypt passwords of users.
+
+You install using
+
+```bash
+npm i bcrypt
+```
+
+- **@aws-sdk/client-s3** - This is a AWS SDK for JavaScript S3 Client for Node.js used to access S3 client bucket and objects. This was used in the application to store and retrieve images.
+
+You install using
+
+```bash
+npm i @aws-sdk/client-s3
+```
+
+- **@aws-sdk/s3-request-presigner** - This package provides a presigner based on signature V4 that will attempt to generate signed url for S3. This was used in the application to download and gain access to the objects stored in s3 buckets.
+
+You install using
+
+```bash
+npm i @aws-sdk/s3-request-presigner
+```
+
+- **cloudinary** - The Cloudinary Node SDK allows you to quickly and easily integrate your application with Cloudinary. Effortlessly optimize, transform, upload and manage your cloud's assets. This was used in the application to create the dummy image used as a default for the users.
+
+You install using
+
+```bash
+npm i cloudinary
+```
+
+- **axios** - This is a promise based HTTP client for the browser and node.js. This was used in the application to access and integrate the API built from the model of the data science team for predictability.
+
+You install using
+
+```bash
+npm i axios
+```
+
+- **cors** - CORS is a node.js package for providing a Connect/Express middleware that can be used to enable cross origin resource sharing with various options. This was used in the application to enable cross origin resource sharing.
+
+You install using
+
+```bash
+npm i cors
+```
+
+- **mongoose** - Mongoose provides a straight-forward, schema-based solution to model your application data. This was used in the application to create schemas and models.
+
+You install using
+
+```bash
+npm i mongoose
+```
+
+- **handlebars** - Handlebars are logicless templating languages that keep the view and the code separated like we all know they should be. This was used in the application to create templating for emails.
+
+You install using
+
+```bash
+npm i handlebars
+```
+
+- **morgan** - Morgan is an HTTP request logger middleware for node.js. This was used in the application for logging out our responses in real time.
+
+You install using
+
+```bash
+npm i morgan
+```
+
+- **multer** - Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. This was used in our application to handle uploading images to cloudinary and AWS S3 bucket.
+
+You install using
+
+```bash
+npm i multer
+```
+
+- **nodemailer** - Nodemailer is a module for Node.js applications to allow easy as cake email sending. This was used in our application to send emails to users.
+
+You install using
+
+```bash
+npm i nodemailer
+```
+
+## DevDependencies
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+The following development dependencies were used to build the application:
+
+- **dotenv** - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. This was used in our application to store sensitive information and prevent them from being exposed.
+
+You install using
+
+```bash
+npm i dotenv
+```
+
+- **nodemailer** - nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. This was used in the application to prevent restarting the server on every change made.
+
+You install using
+
+```bash
+npm i nodemailer
+```
+
 ## Postman Documentation
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 - If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
 
 ## Troubleshooting
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 - If you encounter any issues during the setup process, please ensure that you have the latest versions of Node.js and MongoDB installed.
 - If the application fails to start, make sure the MongoDB server is running and accessible.
 
 ## Project Status
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 This app is currently developed and maintained by the Stutern 1.4 Cohort Group 5 intertrack Backend Dev team. At this time, we do not accept external contributions or pull requests. The project is primarily for personal use or demonstration purposes.
 
 ## License
 
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
 This codebase is released under the GNU General Public License(GPL). Please see the LICENSE.md file for more details.
 
 ## Credits
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
 
 The Loan Prediction App codebase is being developed by the following individuals:
 

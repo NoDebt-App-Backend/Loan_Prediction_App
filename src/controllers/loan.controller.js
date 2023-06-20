@@ -64,12 +64,12 @@ export default class loanControllers {
       }
     );
 
-    loan.eligibility = response.data.loanEligibility;
-if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)){
-  loan.eligibility=response.data.loanEligibility
-}else{
-  loan.eligibility=false
-}
+    loan.creditScore = response.data.creditScore;
+    if (loan.incomePerMonth * 12 + loan.collateralValue > 2 * loan.loanAmount) {
+      loan.eligibility = response.data.loanEligibility;
+    } else {
+      loan.eligibility = false;
+    }
 
     await loan.save();
 
@@ -134,7 +134,7 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
     const borrower = await Loan.findById(id);
     if (!borrower) throw new NotFoundError("Invalid link or details");
 
-    // SEND EMAILTO BORROWER BASED ON ELIGIBILITY STATUS
+    // SEND EMAIL TO BORROWER BASED ON ELIGIBILITY STATUS
     if (borrower.eligibility === true) {
       await sendEmail(
         borrower.email,
@@ -180,7 +180,41 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
         "Admin is not found and cannot perform this operation."
       );
     }
-    // FIND ALL COMPANY LOANS
+    //QUERY  TO FIND ALL COMPANY LOANS
+    const loansCount = await Loan.find({
+      organisationId: adminCompanyMap.organisationId._id,
+    });
+    const loans = await Loan.find({
+      organisationId: adminCompanyMap.organisationId._id,
+    }).select(
+      "fullname email address createdAt eligibility creditScore loanAmount adminInCharge"
+    );
+
+    return res.status(200).json({
+      message: loans.length < 1 ? "No loans found" : "Loans found successfully",
+      title: "Loan Applications",
+      status: "Success",
+      results: loans.length,
+      data: {
+        loans: loans,
+      },
+    });
+  }
+
+  // FIND BORROWERS UNDER A PARTICULAR COMPANY CONTROLLER(PAGINATED)
+
+  static async findAllCompanyLoansPaginated(req, res) {
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId", " organisationName");
+
+    if (!adminCompanyMap) {
+      throw new UnAuthorizedError(
+        "Admin is not found and cannot perform this operation."
+      );
+    }
+
+    //QUERY TO FIND ALL COMPANY LOANS
     const loansCount = await Loan.find({
       organisationId: adminCompanyMap.organisationId._id,
     });
@@ -457,12 +491,23 @@ if(  ((loan.incomePerMonth * 12) + loan.collateralValue) > (2 * loan.loanAmount)
 
   // SEARCH FOR LOAN BY NAME
   static async searchForLoanByname(req, res) {
+    const adminCompanyMap = await AdminCompanyMap.findOne({
+      adminId: req.admin.adminId,
+    }).populate("organisationId", " organisationName");
+
+    if (!adminCompanyMap) {
+      throw new UnAuthorizedError(
+        "Admin is not found and cannot perform this operation."
+      );
+    }
+
     try {
       const name = req.params.name;
       const loans = await Loan.find({
         fullname: { $regex: new RegExp(".*" + name + ".*", "i") },
+        organisationId: adminCompanyMap.organisationId._id,
       }).select(
-        "fullname email address createdAt eligibility creditScore loanAmount"
+        "fullname email address createdAt eligibility creditScore loanAmount organisationName"
       );
       res.status(200).json({
         results: loans.length,

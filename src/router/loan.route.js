@@ -48,6 +48,12 @@ router.get(
   authMiddleWare,
   loanControllers.findAllCompanyLoans
 );
+// GET ALL COMPANY LOANS PAGINATED
+router.get(
+  "/paginated-company-loans",
+  authMiddleWare,
+  loanControllers.findAllCompanyLoansPaginated
+);
 
 // ROUTE TO SUCCESSFUL COMPANY LOANS IN DESCENDING ORDER
 router.get(
@@ -79,5 +85,9 @@ router.get(
 );
 
 // SEARCH FOR LOAN BY FULL NAME
-router.get("/getloan/:name", decodeAuth, loanControllers.searchForLoanByname);
+router.get(
+  "/getloan/:name",
+  authMiddleWare,
+  loanControllers.searchForLoanByname
+);
 export default router;

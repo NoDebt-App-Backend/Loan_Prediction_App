@@ -98,7 +98,8 @@ const addAdminValidator = Joi.object({
     "string.pattern.base": "Phone number format invalid e.g +2348000000000",
   }),
   role: Joi.string().required(),
-  loginURL: Joi.string().optional()
+  loginURL: Joi.string(),
+  passwordLink: Joi.string(),
 }).strict();
 
 export {

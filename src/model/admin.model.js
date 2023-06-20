@@ -12,8 +12,6 @@ const adminSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      unique: true,
-      sparse: true,
     },
     email: {
       type: String,
@@ -31,8 +29,6 @@ const adminSchema = new mongoose.Schema(
     },
     organisationEmail: {
       type: String,
-      unique: false,
-      sparse: true,
     },
     numberOfStaffs: {
       type: Number,
