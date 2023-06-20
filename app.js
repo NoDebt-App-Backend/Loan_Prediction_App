@@ -22,7 +22,7 @@ const app = express();
 // Local database connection
 mongoose
   .connect(config.database_url)
-  .then(() => console.log("Database connected successfully")) // logging "Database connected successfully" to the console
+  .then(() => console.log("Database connected successfully".yellow.bold)) // logging "Database connected successfully" to the console
   .catch((err) => {
     console.log(err.message);
   });
@@ -61,4 +61,4 @@ app.use("/api/password-reset", resetPasswordRouter);
 app.use(globalErrorHandler);
 
 // Listening for the express server
-app.listen(port, () => console.log(`Listening on port ${port}`)); // logging "Listening on port 4000" to the console.
+app.listen(port, () => console.log(`Listening on port ${port}`.bold.green)); // logging "Listening on port 4000" to the console.
