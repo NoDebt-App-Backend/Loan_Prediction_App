@@ -7,6 +7,14 @@ import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
 import { getGoogleToken } from "../controllers/googleAuth.controller.js";
+import { passport } from "../controllers/socialAuth.controller.js"
+
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }), (req, res) => {});
+
+router.get('/auth/google/callback', 
+  passport.authenticate('google'),
+  function(req, res) {});
 
 router.get('/auth-token', getGoogleToken)
 // To create a new admin acccount
