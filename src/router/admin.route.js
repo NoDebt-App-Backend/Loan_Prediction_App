@@ -9,7 +9,7 @@ import { upload } from "../middlewares/uploadImage.js";
 import { getGoogleToken } from "../controllers/googleAuth.controller.js";
 
 // Social authentication for signup/signin
-router.post('/auth-token', getGoogleToken)
+router.post('/auth-token', tryCatchHandler(getGoogleToken))
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));

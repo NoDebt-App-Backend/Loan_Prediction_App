@@ -15,20 +15,16 @@ const adminCompanyMapSchema = new mongoose.Schema({
     ref: "Admin",
     required: true,
   },
-  adminGoogleId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "AdminGoogle",
-    required: false,
-  },
+  // adminGoogleId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "AdminGoogle",
+  //   required: true,
+  // },
   organisationId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Organisation",
     required: true,
   },
-  // OrganisationName:{
-  //   type:String,
-  //   required:false,
-  // }
 });
 
 const AdminCompanyMap = mongoose.model("AdminCompanyMap", adminCompanyMapSchema);

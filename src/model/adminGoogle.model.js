@@ -26,12 +26,15 @@ const adminGoogleSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
     },
-    access_token: String,
-    organisationId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Organisation",
-      required: true,
+    access_token: { 
+      type: String, 
+      required: true 
     },
+    // organisationId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Organisation",
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );
