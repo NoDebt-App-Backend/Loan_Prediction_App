@@ -3,7 +3,7 @@ import AdminGoogle from "../model/adminGoogle.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import Organisation from "../model/org.model.js";
 import { BadUserRequestError } from "../error/error.js";
-
+import { newToken } from "../utils/jwtHandler.js";
 export async function getGoogleToken(req, res) {
   const existingEmail = await AdminGoogle.findOne({ email: req.body.email });
   if (existingEmail)
@@ -11,7 +11,6 @@ export async function getGoogleToken(req, res) {
 
   const admin = new AdminGoogle(req.body);
 
-  const { createdAt } = admin;
 
   const company = new Organisation({
     organisationName: req.body.organisationName,
@@ -34,20 +33,21 @@ export async function getGoogleToken(req, res) {
   // Save adminCompanyMap to the AdminCompanyMap collection
   await adminCompanyMap.save();
 
-  const { organisationName, _id } = company;
 
   res.status(200).json({
+    //mine
+    message: "User found successfully",
     status: "Success",
-    message: "Account registered successfully",
     data: {
-      company_profile: {
-        company: organisationName,
-        company_id: _id,
-      },
-      admin: admin,
-      createdAt,
-    },
-  });
+      adminId: admin.googleId,
+      email: admin.email,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      imageUrl: admin.imageUrl,
+      access_token: newToken(admin),
+      organisationId: company._id,
+      organisationName: company.organisationName
+}});
 }
 
 // loan.creditScore = response.data.creditScore;
