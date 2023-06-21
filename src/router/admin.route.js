@@ -1,31 +1,14 @@
 import express from "express";
-import passport from "passport";
+// import passport from "passport";
 const router = express.Router();
 import AdminController from "../controllers/admin.controller.js";
 import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
-import { googleAuthController } from "../controllers/socialAuth.controller.js";
-// import { passport as passportSetup } from "../config/passport.js";
-// import authController from "../config/passport.js";
+import { getGoogleToken } from "../controllers/googleAuth.controller.js";
 
-// router.get(
-//   "/auth/google",
-//   passport.authenticate("google", { scope: ["email", "profile"] })
-// );
-
-// router.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", { session: false }),
-//   (req, res) => {}
-// );
-
-
-// To create Google Authentication
-router.post('/auth/google', tryCatchHandler(googleAuthController))
-
-
+router.get('/auth-token', getGoogleToken)
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 

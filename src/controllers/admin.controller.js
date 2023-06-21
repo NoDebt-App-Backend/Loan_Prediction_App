@@ -24,7 +24,7 @@ import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
 import { request } from "express";
-import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+// import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import passport from "passport";
 import AdminGoogle from "../model/adminGoogle.model.js";
 

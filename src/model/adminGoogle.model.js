@@ -23,9 +23,10 @@ const adminGoogleSchema = new mongoose.Schema(
     provider: {
       type: String,
     },
-    image: {
+    imageUrl: {
       type: String,
-    }
+    },
+    accessToken: String,
   },
   { timestamps: true }
 );
