@@ -2,32 +2,41 @@ import axios from "axios";
 import AdminGoogle from "../model/adminGoogle.model.js";
 
 export async function getGoogleToken(req, res) {
-//   const token = req.body.token;
-
-//   const response = await axios.get(
-//     "https://www.googleapis.com/oauth2/v3/userinfo",
-//     {
-//       headers: { Authorization: `Bearer ${token}` },
-//     }
-//   );
-
   const admin = new AdminGoogle(req.body);
-
-//   admin.provider = response.data.provider;
-//   admin.email = response.data.email;
-//   admin.googleId = response.data.id;
-//   admin.firstName = response.data.givenName;
-//   admin.lastName = response.data.familyName;
-//   admin.imageUrl = response.data.picture;
 
   const { createdAt } = admin;
 
+  const company = new Organisation({
+    organisationName: req.body.organisationName,
+  });
+
+  // Create a new adminCompanyMap document
+  const adminCompanyMap = new AdminCompanyMap({
+    adminId: profile.id,
+    organisationId: company._id,
+    organisationName: req.body.organisationName,
+    adminFirstName: req.body.firstName,
+    adminLastName: req.body.lastName,
+  });
+
   await admin.save();
+
+  //save company document
+  await company.save();
+
+  // Save adminCompanyMap to the AdminCompanyMap collection
+  await adminCompanyMap.save();
+
+  const { organisationName, _id } = company;
 
   res.status(200).json({
     status: "Success",
     message: "Account registered successfully",
     data: {
+      company_profile: {
+        company: organisationName,
+        company_id: _id,
+      },
       admin: admin,
       createdAt,
     },
