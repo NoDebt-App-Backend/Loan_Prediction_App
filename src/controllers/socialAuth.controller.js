@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { OAuth2Client } from "google-auth-library";
+// import { OAuth2Client } from "google-auth-library";
 import { config } from "../config/index.js";
 import Admin from "../model/admin.model.js";
 import AdminGoogle from "../model/adminGoogle.model.js";

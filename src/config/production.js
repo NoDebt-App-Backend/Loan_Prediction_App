@@ -24,5 +24,10 @@ export const production = {
   // CLOUDINARY PARAMETERS/VARIABLES
   cloud_name: process.env.PROD_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.PROD_CLOUDINARY_API_KEY,
-  api_secret: process.env.PROD_CLOUDINARY_API_SECRET
+  api_secret: process.env.PROD_CLOUDINARY_API_SECRET,
+
+  // GOOGLE DEV SOCIAL AUTH PARAMS
+  google_id: process.env.PROD_GOOGLE_ID,
+  google_secret: process.env.PROD_GOOGLE_SECRET,
+  google_callback: process.env.PROD_GOOGLE_CALLBACK,
 };
