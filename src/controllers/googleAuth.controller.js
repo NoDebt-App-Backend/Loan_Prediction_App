@@ -1,5 +1,7 @@
 import axios from "axios";
 import AdminGoogle from "../model/adminGoogle.model.js";
+import AdminCompanyMap from "../model/adminCompanyMap.model.js";
+import Organisation from "../model/org.model.js";
 
 export async function getGoogleToken(req, res) {
   const admin = new AdminGoogle(req.body);
@@ -12,7 +14,7 @@ export async function getGoogleToken(req, res) {
 
   // Create a new adminCompanyMap document
   const adminCompanyMap = new AdminCompanyMap({
-    adminId: profile.id,
+    adminId: admin._id,
     organisationId: company._id,
     organisationName: req.body.organisationName,
     adminFirstName: req.body.firstName,
