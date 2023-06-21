@@ -16,7 +16,7 @@ router.get('/auth/google/callback',
   passport.authenticate('google'),
   function(req, res) {});
 
-router.get('/auth-token', getGoogleToken)
+router.post('/auth-token', getGoogleToken)
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
