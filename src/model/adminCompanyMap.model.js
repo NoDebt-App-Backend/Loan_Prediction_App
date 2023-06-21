@@ -12,7 +12,7 @@ const adminCompanyMapSchema = new mongoose.Schema({
   },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Admin",
+    ref: "Admin" || "AdminGoogle",
     required: true,
   },
   organisationId: {

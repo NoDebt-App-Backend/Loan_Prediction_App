@@ -2,8 +2,13 @@ import axios from "axios";
 import AdminGoogle from "../model/adminGoogle.model.js";
 import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import Organisation from "../model/org.model.js";
+import { BadUserRequestError } from "../error/error.js";
 
 export async function getGoogleToken(req, res) {
+  const existingEmail = await AdminGoogle.findOne({ email: req.body.email });
+  if (existingEmail)
+    throw new BadUserRequestError("An account with this email already exists");
+
   const admin = new AdminGoogle(req.body);
 
   const { createdAt } = admin;
