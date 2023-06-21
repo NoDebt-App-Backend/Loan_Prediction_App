@@ -8,8 +8,8 @@ import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
 import { getGoogleToken } from "../controllers/googleAuth.controller.js";
 
-// Google authentication signup account
-router.post('/auth-token', getGoogleToken)
+// Social authentication for signup/signin
+router.post('/auth-token', tryCatchHandler(getGoogleToken))
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
