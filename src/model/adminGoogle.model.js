@@ -28,7 +28,6 @@ const adminGoogleSchema = new mongoose.Schema(
     },
     access_token: { 
       type: String, 
-      required: true 
     },
     // organisationId: {
     //   type: mongoose.Schema.Types.ObjectId,

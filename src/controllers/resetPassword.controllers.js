@@ -95,7 +95,32 @@ export default class PasswordController {
       res.status(200).send("Token Validated");
     }
 
-    if (!token) throw new UnAuthorizedError("Invalid token link or expired");
+    // if (!token) throw new UnAuthorizedError("Invalid token link or expired");
+
+    if (req.body.fiveDigitToken !== token.fiveDigitToken)
+      throw new UnAuthorizedError("Invalid token link or expired");
+  }
+
+  static async resendToken(req, res) {
+    const id = req.params.id;
+
+    const { error } = tokenValidator.validate(req.body);
+
+    if (error) throw error;
+    // Find the admin by email
+    const admin = await Admin.findById(id);
+    if (!admin) throw new NotFoundError("Admin not found");
+
+    // Find the token
+    const token = await Token.findOne({
+      adminId: admin._id,
+      fiveDigitToken: req.body.fiveDigitToken,
+    });
+    if (token) {
+      res.status(200).send("Token Validated");
+    }
+
+    // if (!token) throw new UnAuthorizedError("Invalid token link or expired");
 
     if (req.body.fiveDigitToken !== token.fiveDigitToken)
       throw new UnAuthorizedError("Invalid token link or expired");

@@ -4,6 +4,8 @@ import AdminCompanyMap from "../model/adminCompanyMap.model.js";
 import Organisation from "../model/org.model.js";
 import { BadUserRequestError } from "../error/error.js";
 import { newToken } from "../utils/jwtHandler.js";
+
+
 export async function getGoogleToken(req, res) {
   const existingEmail = await AdminGoogle.findOne({ email: req.body.email });
   if (existingEmail)
@@ -39,7 +41,8 @@ export async function getGoogleToken(req, res) {
     message: "User found successfully",
     status: "Success",
     data: {
-      adminId: admin.googleId,
+      googleId: admin.googleId,
+      adminId: admin._id,
       email: admin.email,
       firstName: admin.firstName,
       lastName: admin.lastName,
@@ -49,21 +52,3 @@ export async function getGoogleToken(req, res) {
       organisationName: company.organisationName
 }});
 }
-
-// loan.creditScore = response.data.creditScore;
-
-// const userInfo = await axios
-//   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-//     headers: { Authorization: `Bearer ${token}` },
-//   })
-//   .then((res) => res.data);
-
-// console.log(userInfo);
-
-// await axios
-// .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-//   headers: { Authorization: `Bearer ${token}` },
-// })
-// .then((res) => res.data);
-
-// console.log(userInfo);
