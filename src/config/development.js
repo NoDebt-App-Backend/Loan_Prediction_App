@@ -33,4 +33,9 @@ export const development = {
   google_id: process.env.DEV_GOOGLE_ID,
   google_secret: process.env.DEV_GOOGLE_SECRET,
   google_callback: process.env.DEV_GOOGLE_CALLBACK,
+
+  // CLOUDINARY PARAMETERS/VARIABLES
+     cloud_name: process.env.DEV_CLOUDINARY_CLOUD_NAME,
+     api_key: process.env.DEV_CLOUDINARY_API_KEY,
+     api_secret: process.env.DEV_CLOUDINARY_API_SECRET,
 };
