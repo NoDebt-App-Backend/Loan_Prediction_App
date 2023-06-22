@@ -46,8 +46,8 @@ export async function getGoogleToken(req, res) {
         lastName: admin.lastName,
         imageUrl: admin.imageUrl,
         access_token: newToken(admin),
-        organisation: {
-          organisationId: company._id,
+        organisationId: {
+          _id: company._id,
           organisationName: company.organisationName,
         },
       },
