@@ -71,7 +71,7 @@ export default class PasswordController {
     res.status(200).send("Password reset link sent to your email account");
   }
 
-  /**
+      /**
    * Handles the validate token request.
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
@@ -104,26 +104,35 @@ export default class PasswordController {
   static async resendToken(req, res) {
     const id = req.params.id;
 
-    const { error } = tokenValidator.validate(req.body);
+    const admin = await Admin.findById({ adminId: id });
 
-    if (error) throw error;
-    // Find the admin by email
-    const admin = await Admin.findById(id);
-    if (!admin) throw new NotFoundError("Admin not found");
+    let token = await Token.findOne({ adminId: id });
+    const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
+    const passwordLink = admin.passwordLink;
 
-    // Find the token
-    const token = await Token.findOne({
-      adminId: admin._id,
-      fiveDigitToken: req.body.fiveDigitToken,
-    });
-    if (token) {
-      res.status(200).send("Token Validated");
+    if (token) token = undefined;
+
+    if (!token) {
+      token = await Token.create({
+        adminId: admin._id,
+        fiveDigitToken: fiveDigitToken,
+        passwordLink: admin.passwordLink,
+      });
     }
+    // Generate the password reset link
+    const link = `${passwordLink}/${admin._id}`;
 
-    // if (!token) throw new UnAuthorizedError("Invalid token link or expired");
-
-    if (req.body.fiveDigitToken !== token.fiveDigitToken)
-      throw new UnAuthorizedError("Invalid token link or expired");
+    await sendEmail(
+      admin.email,
+      "Password Reset Request",
+      {
+        name: admin.firstName,
+        token: fiveDigitToken,
+        link: link,
+      },
+      "./template/resetPassword.handlebars"
+    );
+    res.status(200).send("Password reset link sent to your email account");
   }
 
   /**
