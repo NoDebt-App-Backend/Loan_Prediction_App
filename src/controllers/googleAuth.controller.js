@@ -40,7 +40,7 @@ export async function getGoogleToken(req, res) {
     data: {
       admin: {
         googleId: admin.googleId,
-        adminId: admin._id,
+        AdminId: admin._id,
         email: admin.email,
         firstName: admin.firstName,
         lastName: admin.lastName,

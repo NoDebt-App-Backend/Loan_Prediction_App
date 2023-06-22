@@ -102,11 +102,11 @@ export default class PasswordController {
   }
 
   static async resendToken(req, res) {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const admin = await Admin.findById({ adminId: id });
+    const admin = await Admin.findById(id);
 
-    let token = await Token.findOne({ adminId: id });
+    let token = await Token.findById(id);
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
     const passwordLink = admin.passwordLink;
 
