@@ -6,10 +6,13 @@ import ImageController from "../controllers/adminImage.controller.js";
 import { tryCatchHandler } from "../utils/tryCatchHandler.js";
 import authMiddleWare from "../middlewares/auth.js";
 import { upload } from "../middlewares/uploadImage.js";
-import { getGoogleToken } from "../controllers/googleAuth.controller.js";
+import GoogleAdminController from "../controllers/googleAuth.controller.js";
 
 // Social authentication for signup/signin
-router.post('/auth-token', tryCatchHandler(getGoogleToken))
+router.post('/auth-token', tryCatchHandler(GoogleAdminController.createGoogle));
+
+// login for social authentication
+router.post('/login-auth-token', tryCatchHandler(GoogleAdminController.loginGoogle));
 
 // To create a new admin acccount
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
