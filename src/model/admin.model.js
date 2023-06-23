@@ -21,7 +21,9 @@ const adminSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return this.synchronizer !== 'AdminGoogle';
+      },
     },
     confirmPassword: {
       type: String,
@@ -61,7 +63,10 @@ const adminSchema = new mongoose.Schema(
     },
     loginURL: String,
   },
-  { timestamps: true }
+  {
+    discriminatorKey:"synchronizer",
+    timestamps: true,
+  }
 );
 
 const Admin = mongoose.model("Admin", adminSchema);

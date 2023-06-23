@@ -44,17 +44,14 @@ export default class AdminController {
       status: "Success",
       message: "Organisations found successfully",
       data: {
-        organisations: organisations,
+        organisations
       },
     });
     if (error) throw new InternalServerError("Internal Server Error");
   }
 
   static async getAllAdmins(req, res) {
-    const { id } = req.query;
-    const { error } = mongoIdValidator.validate(req.query);
-    if (error) throw new BadUserRequestError("Please pass in a valid mongoId");
-    const admin = await Admin.findById(id);
+    const admin = await Admin.find();
     res.status(200).json({
       status: "Success",
       message: "Admins found successfully",
@@ -62,7 +59,6 @@ export default class AdminController {
         Admins: admin,
       },
     });
-    if (error) throw new InternalServerError("Internal Server Error");
   }
 
   //get all companies-admin relationship
@@ -75,12 +71,11 @@ export default class AdminController {
         AdminCompanies: adminCompanyMap,
       },
     });
-    if (error) throw new InternalServerError("Internal Server Error");
   }
 
   //get admins by company id
   static async getAdminsByCompany(req, res) {
-    const organisationId = req.query.organisationId;
+    const organisationId = req.query.organisationId.trim();
     const adminCompanyMaps = await AdminCompanyMap.find({ organisationId })
       .populate({
         path: "adminId",
@@ -105,6 +100,8 @@ export default class AdminController {
       },
     });
   }
+
+  
 
   //get company by id
   static async getCompanyById(req, res) {
