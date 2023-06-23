@@ -38,18 +38,16 @@ export async function getGoogleToken(req, res) {
     message: "User found successfully",
     status: "Success",
     data: {
-      admin: {
-        googleId: admin.googleId,
-        AdminId: admin._id,
-        email: admin.email,
-        firstName: admin.firstName,
-        lastName: admin.lastName,
-        imageUrl: admin.imageUrl,
-        access_token: newToken(admin),
-        organisationId: {
-          _id: company._id,
-          organisationName: company.organisationName,
-        },
+      googleId: admin.googleId,
+      AdminId: admin._id,
+      email: admin.email,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      imageUrl: admin.imageUrl,
+      access_token: newToken(admin),
+      organisationId: {
+        _id: company._id,
+        organisationName: company.organisationName,
       },
     },
   });
