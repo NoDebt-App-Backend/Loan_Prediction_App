@@ -39,7 +39,7 @@ export async function getGoogleToken(req, res) {
     status: "Success",
     data: {
       googleId: admin.googleId,
-      AdminId: admin._id,
+      adminId: admin._id,
       email: admin.email,
       firstName: admin.firstName,
       lastName: admin.lastName,
