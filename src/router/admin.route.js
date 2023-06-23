@@ -15,7 +15,7 @@ router.post('/auth-token', tryCatchHandler(getGoogleToken))
 router.post("/signup", tryCatchHandler(AdminController.createCompany));
 
 // To get all the admins within a company
-router.get("/", authMiddleWare, AdminController.getAdminsByCompany);
+router.get("/", authMiddleWare, tryCatchHandler(AdminController.getAdminsByCompany));
 
 // To retrieve a single company from the database
 router.get(
