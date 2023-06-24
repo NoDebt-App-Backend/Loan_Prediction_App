@@ -10,6 +10,7 @@ import {
   tokenValidator,
   resetPasswordValidator,
 } from "../validators/resetPasswordValidator.js";
+import { mongoIdValidator } from "../validators/mongoId.validator.js";
 import {
   BadUserRequestError,
   NotFoundError,
@@ -103,12 +104,10 @@ export default class PasswordController {
 
   static async resendToken(req, res) {
     const { id } = req.params;
+    const { error } = mongoIdValidator.validate(req.params);
+    if (error) throw new BadUserRequestError("Admin not found")
 
     const admin = await Admin.findById(id);
-
-    if (!admin) {
-      throw new BadUserRequestError("Admin not found");
-    }
 
     let token = await Token.findById(id);
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
