@@ -26,13 +26,19 @@ This repository contains the source code for the Loan Prediction Application. Th
 
     - [Register Admin with Company ID](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodregister-admin-with-companyid-adminssignup)
 
+    - [Register Admin with Google](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodregister-admin-with-google-adminsauth-token)
+
     - [Login Admin](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodlogin-admin-adminslogin)
+
+    - [Login Admin with Google](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodlogin-admin-with-google-adminslogin-auth-token)
 
     - [Login Authentication](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodlogin-authenticationauthorization-adminsprotected)
 
     - [Reset Password](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#get-methodreset-password-password-reset)
 
     - [Reset Password(Token)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodreset-password-five-digit-token-password-reset)
+
+    - [Reset Password-Resend Token](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#post-methodreset-password-resend-token-password-resetresetadminid)
 
     - [Reset Password(Password Change)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#put-methodreset-password-password-change-password-reset)
 
