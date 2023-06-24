@@ -106,6 +106,10 @@ export default class PasswordController {
 
     const admin = await Admin.findById(id);
 
+    if (!admin) {
+      throw new BadUserRequestError("Admin not found");
+    }
+
     let token = await Token.findById(id);
     const fiveDigitToken = crypto.randomInt(10000, 99999).toString();
     const passwordLink = admin.passwordLink;
