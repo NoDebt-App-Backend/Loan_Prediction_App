@@ -372,6 +372,76 @@ Response
 }
 ```
 
+#### POST Method(Register Admin with Google): /admins/auth-token
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: google access token
+
+- EXAMPLE: Register Admin with Google - Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/auth-token' \
+--data-raw '{
+    "googleId": "137494075930",
+    "firstName": "Emma",
+    "lastName": "Jones",
+    "email": "ghefoieojf@gmail.com",
+    "provider": "google",
+    "imageUrl": "httpnirbfinifningitngitngitingtigit",
+    "organisationName": "KadiandSons"
+}'
+
+Response
+(json)
+{
+    "message": "User found successfully",
+    "status": "Success",
+    "data": {
+        "googleId": "137494075930",
+        "adminId": "64968fb7329c06e8e453bb2c",
+        "email": "ghefoieojf@gmail.com",
+        "firstName": "Emma",
+        "lastName": "Jones",
+        "imageUrl": "httpnirbfinifningitngitngitingtigit",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ5NjhmYjczMjljMDZlOGU0NTNiYjJjIiwiZW1haWwiOiJnaGVmb2llb2pmQGdtYWlsLmNvbSIsImlhdCI6MTY4NzU4ODc5MiwiZXhwIjoxNjg3Njc1MTkyfQ.6RjpmyvqGHbZtzwMun_BaPhdEbc_EFvtSHXZFnrbeus",
+        "organisationId": {
+            "_id": "64968fb7329c06e8e453bb2d",
+            "organisationName": "KadiandSons"
+        },
+        "organisationName": "KadiandSons"
+    }
+}
+```
+
+- EXAMPLE: Register Admin with Google - When the email already exists
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/auth-token' \
+--data-raw '{
+    "googleId": "137494075930",
+    "firstName": "Emma",
+    "lastName": "Jones",
+    "email": "ghefoieojf@gmail.com",
+    "provider": "google",
+    "imageUrl": "httpnirbfinifningitngitngitingtigit",
+    "organisationName": "KadiandSons"
+}'
+
+Response
+(json)
+{
+    "message": "An account with this email already exists",
+    "status": "Failed"
+}
+```
+
 #### POST Method(Login Admin): /admins/login
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
@@ -463,6 +533,63 @@ Response
 (json)
 {
     "message": "Please provide a valid email address and password before you can login.",
+    "status": "Failed"
+}
+```
+
+#### POST Method(Login Admin with Google): /admins/login-auth-token
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: google access token
+
+- EXAMPLE: Login Admin with Google - Successful
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/login' \
+--data-raw '{
+    "email": "ghefoieojf@gmail.com",
+}'
+
+Response
+(json)
+{
+    "message": "User found successfully",
+    "status": "Success",
+    "data": {
+        "adminId": "64968fb7329c06e8e453bb2c",
+        "email": "ghefoieojf@gmail.com",
+        "firstName": "Emma",
+        "lastName": "Jones",
+        "imageUrl": "httpnirbfinifningitngitngitingtigit",
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjQ5NjhmYjczMjljMDZlOGU0NTNiYjJjIiwiZW1haWwiOiJnaGVmb2llb2pmQGdtYWlsLmNvbSIsImlhdCI6MTY4NzU4OTA5NywiZXhwIjoxNjg3Njc1NDk3fQ.WW-Yyo7ddW0c0CEybbKQM9kq4_F9OkSV9crP88uD12I",
+        "organisationId": {
+            "_id": "64968fb7329c06e8e453bb2d",
+            "organisationName": "KadiandSons"
+        },
+        "organisationName": "KadiandSons"
+    }
+}
+```
+
+- EXAMPLE: Login Admin with Google - Wrong Email
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location 'https://nodebt-application.onrender.com/api/admins/login-auth-token' \
+--data-raw '{
+    "email": "kennybrown@gmail.com"
+}'
+
+Response
+(json)
+{
+    "message": "An account with this email is not registered. Please signup with google first.",
     "status": "Failed"
 }
 ```
@@ -650,6 +777,47 @@ Response
 (json)
 {
     "message": "Invalid token link or expired",
+    "status": "Failed"
+}
+```
+
+#### POST Method(Reset Password-Resend Token): /password-reset/reset/{adminId}
+
+**[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
+
+Parameters: adminId as a req param
+
+- EXAMPLE: Reset Password - Resend Token
+
+This is for when the user clicks on resend token
+
+**_STATUS: 200 OK_**
+
+```json
+Request
+curl --location --request POST 'https://nodebt-application.onrender.com/api/password-reset/reset/64968fb7329c06e8e453bb2c' \
+--data ''
+
+Response
+(html)
+Password reset link sent to your email account
+```
+
+- EXAMPLE: Reset Password - Wrong Admin Id
+
+This is for when the user clicks on resend token
+
+**_STATUS: 400 BAD REQUEST_**
+
+```json
+Request
+curl --location --request POST 'https://nodebt-application.onrender.com/api/password-reset/reset/649687329c06e8e453bb2c' \
+--data ''
+
+Response
+(json)
+{
+    "message": "Admin not found",
     "status": "Failed"
 }
 ```
