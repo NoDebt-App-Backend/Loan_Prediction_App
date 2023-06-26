@@ -65,8 +65,12 @@ app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRoute);
 // Handling errors sent to the response body
 app.use(globalErrorHandler);
+//Starting new socket.io server
+const server = app.listen(port, () =>
+  console.log(`Listening on port ${port}`.bold.green)
+); // logging "Listening on port 4000" to the console.
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
@@ -77,35 +81,51 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
 
-  socket.on("setup", (userData) => {
-    socket.join(userData._id);
-    console.log(userData._id);
+  // SETUP
+  socket.on("setup", (adminData, callback) => {
+    socket.join(adminData._id);
+    console.log(adminData._id);
+    callback({
+      status: "success",
+      message: `User has joined Personal room ${adminData._id}`,
+    });
     socket.emit("connected");
   });
 
-  socket.on("join chat", (room) => {
+  //JOIN CHAT
+  socket.on("join chat", (room, callback) => {
     socket.join(room);
-    console.log("User Joined Room: " + room);
+    console.log("Admin Joined Room: " + room);
+    callback({ status: "success", message: "Admin has joined a chat room" });
   });
 
-  socket.on("new message", (newMessageReceived) => {
+  //NEW MESSAGE
+  socket.on("new message", (newMessageReceived, callback) => {
     let chat = newMessageReceived.chat;
 
-    if (!chat.users) {
-      console.log("chat.users not defined");
+    if (!chat.admins) {
+      console.log("chat.admins not defined");
       return;
     }
+    callback({ status: "success", message: "A new message has come in" });
 
-    chat.users.forEach((user) => {
-      if (user._id === newMessageReceived.sender._id) return;
+    chat.admins.forEach((admin) => {
+      if (admin._id === newMessageReceived.sender._id) return;
 
-      socket.in(user._id).emit("message received", newMessageReceived);
+      socket.in(admin._id).emit("message received", newMessageReceived, () => {
+        console.log("Message sent to recipient");
+      });
     });
   });
 
   socket.on("disconnect", () => {
     console.log("User Disconnected");
   });
+
+  io.engine.on("connection_error", (err) => {
+    console.log(err.req);
+    console.log(err.code);
+    console.log(err.message);
+    console.log(err.context);
+  });
 });
-// Listening for the express server
-app.listen(port, () => console.log(`Listening on port ${port}`.bold.green)); // logging "Listening on port 4000" to the console.
