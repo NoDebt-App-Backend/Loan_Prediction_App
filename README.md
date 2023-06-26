@@ -104,6 +104,8 @@ This repository contains the source code for the Loan Prediction Application. Th
 
 - ### [Postman Documentation](https://github.com/NoDebt-App-Backend/Loan_Prediction_App#postman-documentation-1)
 
+- ### [Loan Prediction Application(Deployed)](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/blob/main/README.md#loan-predicton-application)
+
 - ### [Troubleshooting](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#troubleshooting-1)
 
 - ### [Project Status](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#project-status-1)
@@ -3125,7 +3127,8 @@ npm i nodemailer
 
 ## Loan Predicton Application
 
-This is the link of the deployed application on the frontend. [Omega-NoDebt-App](https://omega-prediction-app.netlify.app)
+- This is the link of the deployed application on the frontend. 
+[Omega-NoDebt-App](https://omega-prediction-app.netlify.app)
 
 ![Screenshot of Omega App](./images/omega-app.png)
 
