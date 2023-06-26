@@ -3123,6 +3123,12 @@ npm i nodemailer
 
 - If you would rather use the postman documentation and find it easier to read and understand, here is the [PostmanDocs](https://documenter.getpostman.com/view/26756602/2s93m7X29s)
 
+## Loan Predicton Application
+
+This is the link of the deployed application on the frontend. [Omega-NoDebt-App](https://omega-prediction-app.netlify.app)
+
+![Screenshot of Omega App](./images/omega-app.png)
+
 ## Troubleshooting
 
 **[Back to Table of Contents](https://github.com/NoDebt-App-Backend/Loan_Prediction_App/tree/main#table-of-contents)**
