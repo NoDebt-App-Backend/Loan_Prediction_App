@@ -16,7 +16,6 @@ import { router as chatRouter } from "./src/router/chatRoute.js";
 import { router as messageRoute } from "./src/router/messageRoute.js";
 import { Server } from "socket.io";
 // configuring environment variables
-import http from "http";
 
 dotenv.config();
 
@@ -84,7 +83,7 @@ io.on("connection", (socket) => {
   // SETUP
   socket.on("setup", (adminData, callback) => {
     socket.join(adminData._id);
-    console.log(adminData._id);
+    console.log(`Admin has joined personal room ${adminData._id}`);
     callback({
       status: "success",
       message: `User has joined Personal room ${adminData._id}`,
