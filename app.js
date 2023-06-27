@@ -62,9 +62,11 @@ app.use("/api/password-reset", resetPasswordRouter);
 app.use("/api", contactRouter);
 app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRoute);
+
 // Handling errors sent to the response body
 app.use(globalErrorHandler);
 //Starting new socket.io server
+
 const server = app.listen(port, () =>
   console.log(`Listening on port ${port}`.bold.green)
 ); // logging "Listening on port 4000" to the console.
