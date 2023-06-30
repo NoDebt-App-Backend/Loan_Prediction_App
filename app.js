@@ -86,10 +86,6 @@ io.on("connection", (socket) => {
   socket.on("setup", (adminData, callback) => {
     socket.join(adminData._id);
     console.log(`Admin has joined personal room ${adminData._id}`);
-    callback({
-      status: "success",
-      message: `User has joined Personal room ${adminData._id}`,
-    });
     socket.emit("connected");
   });
 
@@ -97,7 +93,6 @@ io.on("connection", (socket) => {
   socket.on("join chat", (room, callback) => {
     socket.join(room);
     console.log("Admin Joined Room: " + room);
-    callback({ status: "success", message: "Admin has joined a chat room" });
   });
   // TYPING
   socket.on("typing", (room) => {
@@ -116,7 +111,6 @@ io.on("connection", (socket) => {
       console.log("chat.admins not defined");
       return;
     }
-    callback({ status: "success", message: "A new message has come in" });
 
     chat.admins.forEach((admin) => {
       if (admin._id === newMessageReceived.sender._id) return;
