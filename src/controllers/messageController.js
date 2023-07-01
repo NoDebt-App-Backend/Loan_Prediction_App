@@ -4,7 +4,7 @@ import Admin from "../model/admin.model.js";
 
 export default class MessageController {
   static async sendMessage(req, res) {
-    const { content, chatId } = req.body;
+    const { content, chatId, temporaryId } = req.body;
 
     if (!content || !chatId) {
       console.log("invalid data passed into request");
@@ -14,6 +14,7 @@ export default class MessageController {
       sender: req.admin._id,
       content: content,
       chat: chatId,
+      temporaryId: temporaryId,
     };
 
     try {

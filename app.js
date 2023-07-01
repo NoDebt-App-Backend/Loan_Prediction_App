@@ -86,7 +86,15 @@ io.on("connection", (socket) => {
     console.log("Admin Joined Room: " + room);
     callback({ status: "success", message: "Admin has joined a chat room" });
   });
-
+  // TYPING
+  socket.on("typing", (room) => {
+    socket.to(room).emit("typing", { message: "User is typing" });
+    console.log("typing");
+  });
+  // STOP TYPING
+  socket.on("stop typing", (room) => {
+    socket.in(room).emit("stop typing", { message: "User has stopped typing" });
+  });
   //NEW MESSAGE
   socket.on("new message", (newMessageReceived, callback) => {
     let chat = newMessageReceived.chat;
@@ -106,6 +114,10 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.off("setup", () => {
+    console.log("User Disconnected");
+    socket.leave(userData._id);
+  });
   socket.on("disconnect", () => {
     console.log("User Disconnected");
   });
