@@ -8,7 +8,6 @@ function authMiddleWare(req, res, next) {
   const tokenArray = req.headers?.authorization?.split(" ");
   const bearer = tokenArray?.[0];
   const tokenValue = tokenArray?.[1];
-  console.log(tokenArray);
   try {
     if (!tokenValue) {
         throw new UnAuthorizedError("You must provide an authorization token.");

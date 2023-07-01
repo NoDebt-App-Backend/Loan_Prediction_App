@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import FacebookStrategy from "passport-facebook";
 import {
   BadUserRequestError,
   InternalServerError,
@@ -23,10 +22,6 @@ import { newToken } from "../utils/jwtHandler.js";
 import generateRandomPassword from "../utils/generateRandomPassword.js";
 import nodemailer from "nodemailer";
 import cloudinary from "cloudinary";
-import { request } from "express";
-// import { Strategy as GoogleStrategy } from "passport-google-oauth2";
-import passport from "passport";
-import AdminGoogle from "../model/adminGoogle.model.js";
 
 dotenv.config();
 

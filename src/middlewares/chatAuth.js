@@ -12,7 +12,7 @@ async function chatAuth(req, res, next) {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.DEV_JWT_KEY);
+      const decoded = jwt.verify(token, process.env.PROD_JWT_KEY);
       req.admin = await Admin.findById(decoded.adminId).select("-password");
       next();
     } catch (err) {

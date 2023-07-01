@@ -10,7 +10,7 @@ export const development = {
 
   // NODEMAILER ENV PARAMETERS/VARIABLES
   nodemailerUser: process.env.DEV_NODEMAILER_USER,
-  nodemailerPassword:process.env.DEV_NODEMAILER_PASS,
+  nodemailerPassword: process.env.DEV_NODEMAILER_PASS,
   nodemailer_host: process.env.DEV_NODEMAILER_HOST,
   nodemailer_user: process.env.DEV_NODEMAILER_USER,
   nodemailer_pass: process.env.DEV_NODEMAILER_PASS,
@@ -35,7 +35,7 @@ export const development = {
   google_callback: process.env.DEV_GOOGLE_CALLBACK,
 
   // CLOUDINARY PARAMETERS/VARIABLES
-     cloud_name: process.env.DEV_CLOUDINARY_CLOUD_NAME,
-     api_key: process.env.DEV_CLOUDINARY_API_KEY,
-     api_secret: process.env.DEV_CLOUDINARY_API_SECRET,
+  cloud_name: process.env.DEV_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.DEV_CLOUDINARY_API_KEY,
+  api_secret: process.env.DEV_CLOUDINARY_API_SECRET,
 };
