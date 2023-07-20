@@ -64,7 +64,7 @@ export default class loanControllers {
     //   }
     // );
 
-    // loan.creditScore = response.data.creditScore;
+    loan.creditScore = 300;
     if (loan.incomePerMonth * 12 + loan.collateralValue > 2 * loan.loanAmount) {
       loan.eligibility = true;
     } else {
